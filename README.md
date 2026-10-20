@@ -1,6 +1,6 @@
 <h1 align="center">Hi, I'm Juan David Rodríguez Castelblanco 👋</h1>
 <p align="center">
-  <b>Full-Stack Developer</b> · MERN · Next.js · Java & Spring Boot · AWS · DevOps<br/>
+  <b>Software Developer</b> · Java · Spring Boot · React · Node.js · AWS<br/>
   📍 Ontario, Canada · 🇨🇴 Español / English
 </p>
 
@@ -14,16 +14,20 @@
 
 ### 🧑‍💻 About me
 
-- Full-stack developer, strongest in **JavaScript/TypeScript and the MERN stack** (MongoDB, Express, React, Node.js) with **Next.js**, plus **Java and Spring Boot** for backend services.
+- Software developer for enterprise SaaS: **Java and Spring Boot** on the backend, **React and Node.js** across the stack.
 - **AWS Certified Cloud Practitioner.** I ship containerized REST services on AWS with Docker and CI/CD.
-- Day job: **Technical Support Specialist at OpenText**, troubleshooting production incidents on enterprise SaaS platforms and moving from Tier 2 into **Tier 3**.
+- Day job: **Technical Support Specialist at OpenText**, troubleshooting production incidents on enterprise SaaS platforms and moving from Tier 2 into **Tier 3**. I know how real systems fail.
 - I build with AI coding agents every day: **Claude Code, OpenAI Codex and GitHub Copilot**.
-- 🌱 Currently learning: **Kubernetes** and **Terraform**.
+- 🎯 Next build: a **Spring Boot API on AWS** with tests, Docker and CI/CD.
 - 🎓 Advanced Diploma, Computer Programming and Analysis — **Seneca Polytechnic** (President's Honour List).
 
 ### 🛠️ Tech stack
 
-**JavaScript & MERN**
+**Java**
+![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white)
+
+**React & Node.js**
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
@@ -33,11 +37,7 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
 ![Redux](https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=redux&logoColor=white)
 
-**Java**
-![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white)
-
-**AWS, DevOps & data**
+**AWS, delivery & data**
 ![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazonwebservices&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
@@ -56,7 +56,7 @@
 | Project | What it does | Stack |
 |---|---|---|
 | **Enterprise Microservice Platform** | RESTful CRUD microservice on AWS with Cognito auth and S3/DynamoDB storage, deployed to ECS via CI/CD | Node.js, Express, AWS (ECS, ECR, Cognito, S3, DynamoDB), Docker |
-| **[DevOps Toolbox Portfolio](https://jdrcastel.github.io/jdrcastel/)** | JWT/SAML inspector, Dockerfile linter and AWS VPC planner, shipped with tested CI/CD | TypeScript, Vitest, GitHub Actions, Astro |
+| **[Engineering Toolbox Portfolio](https://jdrcastel.github.io/jdrcastel/)** | JWT/SAML inspector, Dockerfile linter and AWS VPC planner, shipped with tested CI/CD | TypeScript, Vitest, GitHub Actions, Astro |
 | **Chronicle App** | Full-stack, multi-tenant social journal | MongoDB, Express, React, Node.js, Next.js, Redux |
 
 ### 💼 Experience
