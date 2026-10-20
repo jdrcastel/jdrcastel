@@ -56,18 +56,19 @@
 | Project | What it does | Stack |
 |---|---|---|
 | **IncidentHub** *(in progress)* | REST API for support incidents with priority-based SLAs and breach detection | Java, Spring Boot, PostgreSQL, Spring Security, JUnit, Docker, AWS |
-| **Enterprise Microservice Platform** | RESTful CRUD microservice on AWS with Cognito auth and S3/DynamoDB storage, deployed to ECS via CI/CD | Node.js, Express, AWS (ECS, ECR, Cognito, S3, DynamoDB), Docker |
+| **Enterprise Microservice Platform** · [API](https://github.com/jdcastel/Microservice-fragments-Cloud-Computing) · [UI](https://github.com/jdcastel/Microservice-fragments-UI) | REST microservice to store and convert text and image fragments; Cognito auth, S3 + DynamoDB, CI/CD to ECS | Node.js, Express, AWS (Cognito, S3, DynamoDB, ECR, ECS), Docker, Jest |
+| **[Timer SaaS Team](https://github.com/jdrcastel/Timer-SaaS-Team)** | Chrome extension that returns agents to Available after breaks in the OpenText SaaS Unified Tool, with countdown, logs and timer recovery | JavaScript, Chrome Extensions (Manifest V3) |
 | **Chronicle App** | Full-stack, multi-tenant social journal | MongoDB, Express, React, Node.js, Next.js, Redux |
 
 ### 💼 Experience
 
 - **Technical Support Specialist — OpenText** · Sep 2025 – Present
-- **Application Developer (Internship) — Government of Ontario** · Sep 2022 – Apr 2023 — internal web page in React with LDAP integration
+- **Application Developer (Internship) — Government of Ontario** · Sep 2022 – Apr 2023 — internal web page in React
 - **Volunteer — Hispanotech** · organized technical workshops and networking sessions for Latin American tech professionals
 
 ### 🎧 Outside of code
 
-🏐 Volleyball · 🏋️ Gym · 🥁 Drums · 🎮 Video games
+⚽ Soccer · 🏋️ Gym · 🥁 Drums · 🎮 Video games
 
 <p align="center"><i>¡Gracias por pasar! Open to collaborating — feel free to reach out.</i></p>
 
