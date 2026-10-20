@@ -13,7 +13,7 @@ export const profile = {
   roles: ["Software developer", "Java & Spring Boot developer", "React & Node.js developer", "AWS-certified engineer"],
   pitch:
     "Software developer for enterprise SaaS: Java and Spring Boot on the backend, React and Node.js across the stack, deployed on AWS with Docker and CI/CD. At OpenText I troubleshoot production incidents on enterprise SaaS platforms and I'm moving into Tier-3 support, so I know how real systems fail and how to fix them. I build with AI coding agents (Claude Code, OpenAI Codex, GitHub Copilot) and verify every change with tests.",
-  hobbies: "volleyball 🏐 · gym 🏋️ · video games 🎮",
+  hobbies: "soccer ⚽ · gym 🏋️ · video games 🎮",
 };
 
 export const stats = [
@@ -94,7 +94,7 @@ export type Project = {
   stack: Skill[];
   tags: Filter[];
   featured?: boolean;
-  link?: { href: string; label: string };
+  links?: { href: string; label: string }[];
 };
 
 export const projects: Project[] = [
@@ -114,21 +114,45 @@ export const projects: Project[] = [
       { name: "JUnit" }, { name: "Docker" }, { name: "GitHub Actions" }, { name: "AWS" },
     ],
     tags: ["backend", "aws"],
-    link: { href: "#building", label: "See the build plan" },
+    links: [{ href: "#building", label: "See the build plan" }],
   },
   {
-    title: "Enterprise Microservice Platform",
+    title: "Enterprise Microservice Platform (Fragments)",
     status: "Shipped",
-    summary: "RESTful CRUD microservice on AWS with authentication, object storage and a containerized CI/CD deployment.",
+    summary: "Cloud REST microservice on AWS to store and convert text and image fragments, with a separate web UI.",
     bullets: [
-      "Node.js/Express REST API with Cognito authentication and S3/DynamoDB storage over HTTPS",
-      "Containerized with Docker, images pushed to ECR and deployed to ECS through a CI/CD pipeline",
+      "Node.js/Express API with Cognito JWT auth; data in S3 and metadata in DynamoDB",
+      "Converts between text, Markdown, HTML and image formats (sharp)",
+      "CI: ESLint, Jest unit tests and Hurl integration tests against LocalStack and DynamoDB Local",
+      "CD: GitHub Actions builds the Docker image, pushes it to ECR and deploys it to ECS",
     ],
     stack: [
-      { name: "Node.js", core: true }, { name: "Express", core: true }, { name: "AWS ECS" }, { name: "ECR" },
-      { name: "Cognito" }, { name: "S3" }, { name: "DynamoDB" }, { name: "Docker", core: true }, { name: "CI/CD" },
+      { name: "Node.js", core: true }, { name: "Express", core: true }, { name: "Cognito" }, { name: "S3" },
+      { name: "DynamoDB" }, { name: "Docker", core: true }, { name: "ECR" }, { name: "ECS" }, { name: "Jest" },
+      { name: "GitHub Actions" },
     ],
     tags: ["backend", "aws"],
+    links: [
+      { href: "https://github.com/jdcastel/Microservice-fragments-Cloud-Computing", label: "API code" },
+      { href: "https://github.com/jdcastel/Microservice-fragments-UI", label: "UI code" },
+    ],
+  },
+  {
+    title: "Timer SaaS Team (Chrome extension)",
+    status: "In use",
+    summary:
+      "Chrome extension for the OpenText SaaS team: after an agent saves a 15-minute break or 1-hour lunch in the Unified Tool, it counts down and sets the agent back to Available automatically.",
+    bullets: [
+      "Countdown, downloadable JSON logs, and timer recovery after a page refresh or Chrome restart",
+      "Fixed a form reset that changed “15 minutes” to “30 minutes” after Save and blocked the automatic return",
+      "Duplicate-write protection, read-only verification and a 30-second test mode",
+    ],
+    stack: [
+      { name: "JavaScript", core: true }, { name: "Chrome Extensions (Manifest V3)" }, { name: "Service worker" },
+      { name: "chrome.alarms / storage" }, { name: "HTML/CSS" },
+    ],
+    tags: ["web"],
+    links: [{ href: "https://github.com/jdrcastel/Timer-SaaS-Team", label: "Code" }],
   },
   {
     title: "Chronicle App (Social Journal)",
@@ -143,15 +167,8 @@ export const projects: Project[] = [
   {
     title: "Ontario Government internal web page",
     status: "Shipped",
-    summary: "Internal web page built with React during my internship, with LDAP directory integration for internal users.",
-    stack: [{ name: "React", core: true }, { name: "JavaScript" }, { name: "LDAP" }],
-    tags: ["web"],
-  },
-  {
-    title: "SaaS case tracker (Chrome extension)",
-    status: "In use",
-    summary: "Internal tool I built in JavaScript for my OpenText SaaS support team to track case status and timing.",
-    stack: [{ name: "JavaScript" }, { name: "Chrome Extensions API" }, { name: "HTML/CSS" }],
+    summary: "Internal web page built with React during my internship, working with developers and designers.",
+    stack: [{ name: "React", core: true }, { name: "JavaScript" }],
     tags: ["web"],
   },
 ];
@@ -191,7 +208,7 @@ export const experience: ExperienceItem[] = [
       "Provide production support to global enterprise customers on OpenText SaaS products (LoadRunner Enterprise, ALM/QC, Octane/ValueEdge), currently moving from Tier-2 into Tier-3 escalations.",
       "Troubleshoot authentication (SAML SSO, LDAP, OAuth 2.0), integration and performance incidents using Linux/Windows, SQL, Jenkins and system logs, and analyze ticket data to find root causes and recurring issues.",
       "Partner with Operations, Engineering and R&D in an SLA-driven environment to resolve complex escalations.",
-      "Built an internal Chrome extension in JavaScript that the SaaS support team uses to track case status and timing.",
+      "Built Timer SaaS Team, a Chrome extension that returns agents to Available after breaks in the SaaS Unified Tool, with countdown, logs and timer recovery.",
     ],
   },
   {
@@ -207,7 +224,7 @@ export const experience: ExperienceItem[] = [
     role: "Application Developer",
     org: "Government of Ontario",
     bullets: [
-      "Built an internal web page with React and worked on LDAP directory integration for internal users.",
+      "Built an internal web page with React.",
       "Worked with developers and designers to fix bugs, deliver new features, and improve user experience.",
     ],
   },
@@ -233,7 +250,7 @@ export const experience: ExperienceItem[] = [
 
 export const roleFit = [
   ["Java backend", "Java and Spring Boot for REST services. Building IncidentHub now: JPA, security, tests, Docker, CI/CD and AWS."],
-  ["Full-stack", "React front ends (Ontario Government, Chronicle) with Node.js/Express REST APIs (Enterprise Microservice Platform)."],
+  ["Full-stack", "React front ends (Ontario Government, Chronicle), Node.js/Express REST APIs (Fragments) and a Chrome extension used by my team (Timer SaaS Team)."],
   ["AWS", "AWS Certified Cloud Practitioner. Deployed a microservice on ECS with ECR, Cognito, S3 and DynamoDB."],
   ["Delivery & quality", "Docker images shipped to AWS through CI/CD; Jenkins daily at OpenText; this site deploys with GitHub Actions."],
   ["Databases", "SQL troubleshooting on SQL Server and PostgreSQL in production support; MongoDB and DynamoDB in projects."],

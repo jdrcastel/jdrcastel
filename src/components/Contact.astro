@@ -15,7 +15,6 @@ const resume = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/Resume_Juan_Caste
       <div class="cta">
         <a class="btn primary" href={`mailto:${profile.email}`}>Email me</a>
         <a class="btn" href={resume} target="_blank" rel="noopener">Resume (PDF)</a>
-        <button class="btn" id="copyEmail" data-email={profile.email}>Copy email</button>
         <a class="btn" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href={profile.github} target="_blank" rel="noopener">GitHub</a>
       </div>
@@ -41,16 +40,3 @@ const resume = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/Resume_Juan_Caste
   .note { margin-top: 28px; }
   footer { padding: 28px 16px 40px; color: var(--muted); font-size: 13px; text-align: center; }
 </style>
-
-<script>
-  const btn = document.getElementById("copyEmail") as HTMLButtonElement;
-  btn.addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(btn.dataset.email!);
-      btn.textContent = "Copied ✓";
-    } catch {
-      btn.textContent = btn.dataset.email!;
-    }
-    setTimeout(() => (btn.textContent = "Copy email"), 2000);
-  });
-</script>

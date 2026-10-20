@@ -32,7 +32,15 @@ const badge = { "In progress": "wip", "In use": "live", Shipped: "live" } as con
           <div class="chips">
             {p.stack.map((s) => <span class:list={["chip", { hl: s.core, learn: s.learning }]}>{s.name}</span>)}
           </div>
-          {p.link && <a class="plink" href={p.link.href}>{p.link.label} →</a>}
+          {p.links && (
+            <div class="plinks">
+              {p.links.map((l) => (
+                <a class="plink" href={l.href} {...(l.href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {})}>
+                  {l.label} →
+                </a>
+              ))}
+            </div>
+          )}
         </article>
       ))}
     </div>
@@ -64,7 +72,8 @@ const badge = { "In progress": "wip", "In use": "live", Shipped: "live" } as con
     border: 1px solid transparent;
   }
   @media (max-width: 640px) { .featured { grid-column: auto; } }
-  .plink { margin-top: 14px; font-weight: 600; font-size: 14.5px; }
+  .plinks { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 14px; }
+  .plink { font-weight: 600; font-size: 14.5px; }
   .hidden { display: none; }
 </style>
 
