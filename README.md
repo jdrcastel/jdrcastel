@@ -71,15 +71,8 @@
 - **Application Developer (Co-op) — Government of Ontario** · Sep 2023 – Apr 2024 — built and deployed a multi-tenant web application; resolved 150+ support tickets.
 - **Technical Support Engineer (Volunteer) — Hispanotech** · Jan 2022 – Aug 2023 — mentored junior engineers supporting Latin American STEM professionals in Canada.
 
-### 📊 GitHub stats
-
-<p align="center">
-  <img height="160" src="https://github-readme-stats.vercel.app/api?username=YOUR_USERNAME&show_icons=true&hide_border=true&count_private=true" alt="GitHub stats"/>
-  <img height="160" src="https://github-readme-stats.vercel.app/api/top-langs/?username=YOUR_USERNAME&layout=compact&hide_border=true" alt="Top languages"/>
-</p>
-
 ### 🎧 Outside of code
 
-🏐 Volleyball · 🏋️ Gym · 🥁 Drums · 🎮 Video games
+⚽ Futbol · 🏋️ Gym · 🥁 Drums · 🎮 Video games
 
 <p align="center"><i>¡Gracias por pasar! Open to collaborating — feel free to reach out.</i></p>
