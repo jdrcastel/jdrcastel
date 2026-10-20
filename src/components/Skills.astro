@@ -8,10 +8,10 @@ import { skillGroups } from "../data/profile";
       <div class="eyebrow">// tech stack</div>
       <h2>What I build with</h2>
       <p class="lead">
-        Organized around enterprise backend work: services, data, cloud runtime and AI integration — with the frontend
-        and support skills that make me useful across the whole system.
+        DevOps and cloud first, backed by backend development and hands-on enterprise troubleshooting. I mark what I'm
+        learning right now, because I'd rather be clear than oversell.
       </p>
-      <div class="legend"><span class="chip hl">highlighted</span> = core for backend / Java roles</div>
+      <div class="legend"><span><span class="chip hl">highlighted</span> strongest</span><span><span class="chip">plain</span> hands-on</span><span><span class="chip learn">dashed</span> learning now</span></div>
     </div>
 
     <div class="grid g3">
@@ -22,7 +22,7 @@ import { skillGroups } from "../data/profile";
             <h3>{g.title}</h3>
           </div>
           <div class="chips">
-            {g.skills.map((s) => <span class:list={["chip", { hl: s.core }]}>{s.name}</span>)}
+            {g.skills.map((s) => <span class:list={["chip", { hl: s.core, learn: s.learning }]}>{s.name}</span>)}
           </div>
         </div>
       ))}
@@ -31,7 +31,7 @@ import { skillGroups } from "../data/profile";
 </section>
 
 <style>
-  .legend { display: flex; gap: 10px; align-items: center; color: var(--muted); font-size: 13px; margin: -16px 0 24px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; color: var(--muted); font-size: 13px; margin: -16px 0 24px; }
   .head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
   .head h3 { margin: 0; }
   .ico {

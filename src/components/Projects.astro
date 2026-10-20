@@ -1,7 +1,7 @@
 ---
 import { projects, filters } from "../data/profile";
 
-const badge = { "In progress": "wip", "In use": "live", Shipped: "live" } as const;
+const badge = { Live: "live", "In use": "live", Shipped: "live", "Learning build": "wip" } as const;
 ---
 
 <section id="projects">
@@ -10,8 +10,7 @@ const badge = { "In progress": "wip", "In use": "live", Shipped: "live" } as con
       <div class="eyebrow">// projects</div>
       <h2>Selected work</h2>
       <p class="lead">
-        Two flagship backend projects built to mirror enterprise Digital Asset Management problems, plus shipped work
-        from school, the Ontario Government and OpenText.
+        Shipped work from OpenText, the Ontario Government and school, plus what I'm building right now to learn.
       </p>
     </div>
 
@@ -31,8 +30,9 @@ const badge = { "In progress": "wip", "In use": "live", Shipped: "live" } as con
           <p>{p.summary}</p>
           {p.bullets && <ul>{p.bullets.map((b) => <li>{b}</li>)}</ul>}
           <div class="chips">
-            {p.stack.map((s) => <span class:list={["chip", { hl: s.core }]}>{s.name}</span>)}
+            {p.stack.map((s) => <span class:list={["chip", { hl: s.core, learn: s.learning }]}>{s.name}</span>)}
           </div>
+          {p.link && <a class="plink" href={p.link.href}>{p.link.label} →</a>}
         </article>
       ))}
     </div>
@@ -64,6 +64,7 @@ const badge = { "In progress": "wip", "In use": "live", Shipped: "live" } as con
     border: 1px solid transparent;
   }
   @media (max-width: 640px) { .featured { grid-column: auto; } }
+  .plink { margin-top: 14px; font-weight: 600; font-size: 14.5px; }
   .hidden { display: none; }
 </style>
 

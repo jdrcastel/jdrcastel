@@ -6,12 +6,12 @@ import { roleFit } from "../data/profile";
   <div class="wrap">
     <div data-reveal>
       <div class="eyebrow">// role fit</div>
-      <h2>Built for an enterprise backend team</h2>
-      <p class="lead">How my experience lines up with what a Java backend team on an enterprise platform needs.</p>
+      <h2>What I bring to a team</h2>
+      <p class="lead">What DevOps, cloud and backend teams usually need, and the evidence I can point to.</p>
     </div>
     <div class="table-wrap" data-reveal>
       <table>
-        <thead><tr><th>What the team needs</th><th>What I bring</th></tr></thead>
+        <thead><tr><th>Area</th><th>Evidence</th></tr></thead>
         <tbody>
           {roleFit.map(([need, have]) => (
             <tr><td><span class="check">✓</span>{need}</td><td>{have}</td></tr>

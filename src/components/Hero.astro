@@ -29,24 +29,24 @@ const marquee = skillGroups.flatMap((g) => g.skills.filter((s) => s.core).map((s
       </div>
     </div>
 
-    <div class="code float" aria-label="Sample Spring Boot controller">
-      <div class="bar"><i></i><i></i><i></i><span>AssetController.java</span></div>
-<pre><span class="a">@RestController</span>
-<span class="a">@RequestMapping</span>(<span class="s">"/api/v1/tenants/&#123;tenantId&#125;/assets"</span>)
-<span class="k">public class</span> <span class="t">AssetController</span> &#123;
+    <div class="code float" aria-label="Excerpt of this site's GitHub Actions pipeline">
+      <div class="bar"><i></i><i></i><i></i><span>.github/workflows/deploy.yml</span></div>
+<pre><span class="c"># The real pipeline that ships this site</span>
+<span class="t">on</span>:
+  <span class="t">push</span>: &#123; <span class="t">branches</span>: [<span class="s">main</span>] &#125;
 
-  <span class="k">private final</span> <span class="t">AssetService</span> assets;
-  <span class="k">private final</span> <span class="t">TaggingClient</span> ai; <span class="c">// FastAPI</span>
-
-  <span class="a">@PostMapping</span>
-  <span class="k">public</span> <span class="t">ResponseEntity</span>&lt;<span class="t">AssetDto</span>&gt; upload(
-      <span class="a">@PathVariable</span> <span class="t">UUID</span> tenantId,
-      <span class="a">@RequestPart</span> <span class="t">MultipartFile</span> file) &#123;
-    <span class="k">var</span> asset = assets.store(tenantId, file);
-    ai.tagAsync(asset.id());      <span class="c">// non-blocking</span>
-    <span class="k">return</span> <span class="t">ResponseEntity</span>.status(<span class="n">201</span>).body(asset);
-  &#125;
-&#125;</pre>
+<span class="t">jobs</span>:
+  <span class="t">build</span>:
+    <span class="t">runs-on</span>: <span class="s">ubuntu-latest</span>
+    <span class="t">steps</span>:
+      - <span class="t">uses</span>: <span class="s">actions/checkout@v4</span>
+      - <span class="t">run</span>: <span class="s">npm ci</span>
+      - <span class="t">run</span>: <span class="s">npm run check</span>  <span class="c"># types</span>
+      - <span class="t">run</span>: <span class="s">npm test</span>       <span class="c"># gate</span>
+      - <span class="t">run</span>: <span class="s">npm run build</span>
+  <span class="t">deploy</span>:
+    <span class="t">needs</span>: <span class="s">build</span>          <span class="c"># no green, no deploy</span>
+    <span class="t">environment</span>: <span class="s">github-pages</span></pre>
     </div>
   </div>
 

@@ -1,0 +1,339 @@
+---
+import { profile } from "../data/profile";
+
+const tabs = [
+  { id: "sso", label: "SSO token inspector", hint: "JWT · SAML" },
+  { id: "docker", label: "Dockerfile linter", hint: "Security · size · cache" },
+  { id: "vpc", label: "AWS VPC planner", hint: "CIDR → Terraform" },
+  { id: "cicd", label: "Live CI/CD", hint: "GitHub Actions API" },
+];
+---
+
+<section id="toolbox">
+  <div class="wrap">
+    <div data-reveal>
+      <div class="eyebrow">// devops toolbox</div>
+      <h2>Tools you can try right now</h2>
+      <p class="lead">
+        Real tools I use or wish I had in my support and DevOps work. They run fully in your browser: nothing you paste
+        leaves this page. Each one is unit-tested and shipped by this site's own CI/CD pipeline.
+      </p>
+    </div>
+
+    <div class="tabs" role="tablist" data-reveal>
+      {tabs.map((t, i) => (
+        <button role="tab" class:list={["tab", { on: i === 0 }]} data-tab={t.id} aria-selected={i === 0 ? "true" : "false"}>
+          <b>{t.label}</b><small>{t.hint}</small>
+        </button>
+      ))}
+    </div>
+
+    <!-- SSO -->
+    <div class="panel on" data-panel="sso">
+      <div class="io">
+        <div>
+          <label for="ssoIn">Paste a JWT or a SAMLResponse (base64 or XML)</label>
+          <textarea id="ssoIn" spellcheck="false" placeholder="eyJhbGciOi…  or  PHNhbWxwOlJlc3BvbnNl…"></textarea>
+          <div class="row">
+            <button class="mini" data-sample="jwt">Sample JWT</button>
+            <button class="mini" data-sample="jwt-bad">Expired JWT</button>
+            <button class="mini" data-sample="saml">Sample SAML</button>
+          </div>
+          <p class="why">Why: SSO tickets (SAML, OAuth 2.0) are a big part of my day at OpenText. This shows in seconds what is wrong with a login: expired token, clock skew, wrong audience, missing signature.</p>
+        </div>
+        <div class="out" id="ssoOut"><p class="empty">Results appear here.</p></div>
+      </div>
+    </div>
+
+    <!-- Docker -->
+    <div class="panel" data-panel="docker">
+      <div class="io">
+        <div>
+          <label for="dfIn">Paste a Dockerfile</label>
+          <textarea id="dfIn" spellcheck="false" class="tall"></textarea>
+          <div class="row">
+            <button class="mini" data-df="bad">Naive Spring Boot</button>
+            <button class="mini" data-df="good">Production-ready</button>
+          </div>
+        </div>
+        <div class="out" id="dfOut"></div>
+      </div>
+    </div>
+
+    <!-- VPC -->
+    <div class="panel" data-panel="vpc">
+      <div class="vpc-form">
+        <label>VPC CIDR <input id="vpcCidr" value="10.0.0.0/16" spellcheck="false" /></label>
+        <label>Region
+          <select id="vpcRegion">
+            {["ca-central-1", "us-east-1", "us-east-2", "us-west-2", "eu-west-1"].map((r) => <option>{r}</option>)}
+          </select>
+        </label>
+        <label>Availability Zones
+          <select id="vpcAz">{[1, 2, 3, 4].map((n) => <option selected={n === 3}>{n}</option>)}</select>
+        </label>
+      </div>
+      <div id="vpcOut"></div>
+    </div>
+
+    <!-- CI/CD -->
+    <div class="panel" data-panel="cicd">
+      <p class="why">
+        Live data from the GitHub API: the latest pipeline runs that tested, built and deployed this site from
+        <a href={`https://github.com/${profile.repo}`} target="_blank" rel="noopener">{profile.repo}</a>.
+      </p>
+      <div class="pipe" aria-hidden="true">
+        {["git push", "npm ci", "astro check", "vitest", "astro build", "deploy to Pages"].map((s) => <span>{s}</span>)}
+      </div>
+      <div id="runs" data-repo={profile.repo}><p class="empty">Loading pipeline runs…</p></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+  @media (max-width: 820px) { .tabs { grid-template-columns: repeat(2, 1fr); } }
+  .tab {
+    text-align: left; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface);
+    color: var(--text); cursor: pointer; display: flex; flex-direction: column; gap: 2px; font: inherit; transition: all 0.15s;
+  }
+  .tab b { font-size: 14.5px; }
+  .tab small { color: var(--muted); font: 12px "JetBrains Mono", monospace; }
+  .tab:hover { border-color: var(--accent); }
+  .tab.on { border-color: var(--accent); background: var(--accent-soft); }
+
+  .panel { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px; }
+  .panel.on { display: block; animation: fade 0.25s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } }
+  .io { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
+  @media (max-width: 820px) { .io { grid-template-columns: minmax(0, 1fr); } }
+  label { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+  textarea, input, select {
+    width: 100%; font: 13px/1.5 "JetBrains Mono", monospace; color: var(--text); background: var(--bg);
+    border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px;
+  }
+  textarea { min-height: 170px; resize: vertical; }
+  textarea.tall { min-height: 300px; }
+  textarea:focus, input:focus, select:focus { outline: 2px solid color-mix(in srgb, var(--accent) 40%, transparent); border-color: var(--accent); }
+  .row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .mini {
+    font: 500 12.5px Inter, sans-serif; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface-2); color: var(--text); cursor: pointer;
+  }
+  .mini:hover { border-color: var(--accent); }
+  .why { font-size: 13.5px; color: var(--muted); margin: 12px 0 0; }
+  .out { min-width: 0; }
+  .vpc-form { display: grid; grid-template-columns: 2fr 1.5fr 1fr; gap: 12px; margin-bottom: 16px; }
+  @media (max-width: 640px) { .vpc-form { grid-template-columns: 1fr; } }
+  .vpc-form label { margin: 0; }
+  .vpc-form input, .vpc-form select { margin-top: 6px; }
+
+  .pipe { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 14px 0 16px; }
+  .pipe span {
+    font: 500 12.5px "JetBrains Mono", monospace; padding: 6px 10px; border-radius: 8px;
+    background: var(--accent-soft); color: var(--accent);
+  }
+  .pipe span:not(:last-child)::after { content: "→"; margin-left: 12px; color: var(--muted); }
+
+  /* Result markup is injected by the script, so it needs :global */
+  .panel :global(.empty) { color: var(--muted); font-size: 14px; margin: 0; }
+  .panel :global(.err) { color: #dc2626; font-size: 14px; margin: 0; }
+  .panel :global(.finding) { display: flex; gap: 8px; font-size: 14px; padding: 7px 0; border-bottom: 1px dashed var(--border); }
+  .panel :global(.finding:last-child) { border-bottom: 0; }
+  .panel :global(.finding .lvl) {
+    flex: none; font: 600 10.5px "JetBrains Mono", monospace; padding: 3px 6px; border-radius: 5px; height: fit-content; text-transform: uppercase;
+  }
+  .panel :global(.lvl.error) { background: #fee2e2; color: #b91c1c; }
+  .panel :global(.lvl.warn) { background: var(--warn-soft); color: var(--warn); }
+  .panel :global(.lvl.ok) { background: var(--ok-soft); color: var(--ok); }
+  .panel :global(.lvl.info) { background: var(--surface-2); color: var(--muted); }
+  .panel :global(.finding small) { display: block; color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+  .panel :global(h4) { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 16px 0 6px; }
+  .panel :global(h4:first-child) { margin-top: 0; }
+  .panel :global(.kv) { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 14px; font-size: 13.5px; }
+  .panel :global(.kv dt) { color: var(--muted); }
+  .panel :global(.kv dd) { margin: 0; font-family: "JetBrains Mono", monospace; font-size: 12.5px; word-break: break-all; }
+  .panel :global(pre.json) {
+    margin: 0; background: var(--code-bg); color: var(--code-text); border-radius: 10px; padding: 12px;
+    font: 12.5px/1.55 "JetBrains Mono", monospace; overflow-x: auto;
+  }
+  .panel :global(pre.tf) { max-height: 340px; overflow: auto; }
+  .panel :global(.score) { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+  .panel :global(.ring) {
+    --p: 0; width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; flex: none;
+    background: conic-gradient(var(--c) calc(var(--p) * 1%), var(--surface-2) 0);
+  }
+  .panel :global(.ring b) { width: 50px; height: 50px; border-radius: 50%; background: var(--surface); display: grid; place-items: center; font-size: 17px; }
+  .panel :global(table) { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .panel :global(th), .panel :global(td) { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  .panel :global(th) { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .panel :global(td.mono) { font-family: "JetBrains Mono", monospace; font-size: 12.5px; }
+  .panel :global(.scroll) { overflow-x: auto; }
+  .panel :global(.pill) { font: 600 11px Inter, sans-serif; padding: 2px 7px; border-radius: 999px; }
+  .panel :global(.pill.public) { background: var(--accent-soft); color: var(--accent); }
+  .panel :global(.pill.private) { background: var(--surface-2); color: var(--muted); }
+  .panel :global(.tf-head) { display: flex; justify-content: space-between; align-items: center; margin: 16px 0 6px; }
+  .panel :global(.run) {
+    display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px;
+  }
+  .panel :global(.run:last-child) { border-bottom: 0; }
+  .panel :global(.dot) { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); }
+  .panel :global(.dot.success) { background: #22c55e; }
+  .panel :global(.dot.failure) { background: #ef4444; }
+  .panel :global(.dot.running) { background: #f59e0b; animation: blinkdot 1s infinite; }
+  @keyframes blinkdot { 50% { opacity: 0.3; } }
+  .panel :global(.run small) { color: var(--muted); display: block; font-size: 12.5px; }
+  .panel :global(.run a) { font-size: 13px; white-space: nowrap; }
+</style>
+
+<script>
+  import { decodeJwt } from "../lib/jwt";
+  import { parseSaml } from "../lib/saml";
+  import { lintDockerfile, SAMPLE_BAD, SAMPLE_GOOD } from "../lib/dockerfile";
+  import { planVpc, toTerraform } from "../lib/cidr";
+
+  const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+  const esc = (s: unknown) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  const findingsHtml = (fs: { level: string; message: string; fix?: string; line?: number }[]) =>
+    fs.map((f) => `<div class="finding"><span class="lvl ${f.level}">${f.level}</span><div>${esc(f.message)}${
+      f.line ? ` <small>line ${f.line}</small>` : ""}${f.fix ? `<small>→ ${esc(f.fix)}</small>` : ""}</div></div>`).join("");
+  const debounce = (fn: () => void, ms = 200) => { let t: ReturnType<typeof setTimeout>; return () => { clearTimeout(t); t = setTimeout(fn, ms); }; };
+
+  // Tabs
+  const tabs = [...document.querySelectorAll<HTMLButtonElement>(".tab")];
+  let ciLoaded = false;
+  tabs.forEach((t) => t.addEventListener("click", () => {
+    tabs.forEach((x) => { x.classList.toggle("on", x === t); x.setAttribute("aria-selected", String(x === t)); });
+    document.querySelectorAll(".panel").forEach((p) => p.classList.toggle("on", (p as HTMLElement).dataset.panel === t.dataset.tab));
+    if (t.dataset.tab === "cicd" && !ciLoaded) { ciLoaded = true; loadRuns(); }
+  }));
+
+  // ---------- SSO inspector ----------
+  const b64url = (o: object) => btoa(JSON.stringify(o)).replace(/=+$/, "").replace(/\+/g, "-").replace(/\//g, "_");
+  const now = () => Math.floor(Date.now() / 1000);
+  const samples: Record<string, () => string> = {
+    jwt: () => `${b64url({ alg: "RS256", typ: "JWT", kid: "k1" })}.${b64url({
+      iss: "https://login.example.com", sub: "juan.castelblanco", aud: "assets-api",
+      scope: "assets:read assets:write", tenant: "acme", iat: now() - 300, exp: now() + 3300 })}.c2lnbmF0dXJl`,
+    "jwt-bad": () => `${b64url({ alg: "HS256", typ: "JWT" })}.${b64url({ sub: "svc-batch", iat: now() - 90000 * 3, exp: now() - 7200 })}.c2ln`,
+    saml: () => {
+      const t = new Date();
+      const iso = (m: number) => new Date(t.getTime() + m * 60000).toISOString();
+      const xml = `<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Destination="https://app.example.com/saml/acs" InResponseTo="_a1b2c3">
+  <saml:Issuer>https://idp.example.com/adfs</saml:Issuer>
+  <samlp:Status><samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/></samlp:Status>
+  <saml:Assertion>
+    <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:SignatureValue>MIIC...</ds:SignatureValue></ds:Signature>
+    <saml:Subject><saml:NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress">juan@example.com</saml:NameID></saml:Subject>
+    <saml:Conditions NotBefore="${iso(-1)}" NotOnOrAfter="${iso(4)}">
+      <saml:AudienceRestriction><saml:Audience>https://app.example.com</saml:Audience></saml:AudienceRestriction>
+    </saml:Conditions>
+    <saml:AttributeStatement>
+      <saml:Attribute Name="email"><saml:AttributeValue>juan@example.com</saml:AttributeValue></saml:Attribute>
+      <saml:Attribute Name="groups"><saml:AttributeValue>qa-admins</saml:AttributeValue><saml:AttributeValue>devops</saml:AttributeValue></saml:Attribute>
+    </saml:AttributeStatement>
+  </saml:Assertion>
+</samlp:Response>`;
+      return btoa(xml);
+    },
+  };
+
+  const ssoIn = $<HTMLTextAreaElement>("ssoIn");
+  const ssoOut = $("ssoOut");
+  function runSso() {
+    const v = ssoIn.value.trim();
+    if (!v) { ssoOut.innerHTML = '<p class="empty">Results appear here.</p>'; return; }
+    try {
+      if (/^(Bearer\s+)?eyJ/.test(v)) {
+        const r = decodeJwt(v);
+        ssoOut.innerHTML = `<h4>JWT checks</h4>${findingsHtml(r.findings)}
+          ${r.dates.length ? `<h4>Timeline (UTC)</h4><dl class="kv">${r.dates.map((d) => `<dt>${d.label}</dt><dd>${esc(d.iso)}</dd>`).join("")}</dl>` : ""}
+          <h4>Header</h4><pre class="json">${esc(JSON.stringify(r.header, null, 2))}</pre>
+          <h4>Payload</h4><pre class="json">${esc(JSON.stringify(r.payload, null, 2))}</pre>`;
+      } else {
+        const r = parseSaml(v, new DOMParser());
+        ssoOut.innerHTML = `<h4>SAML checks</h4>${findingsHtml(r.findings)}
+          <h4>Key fields</h4><dl class="kv">${r.fields.map((f) => `<dt>${esc(f.label)}</dt><dd>${esc(f.value)}</dd>`).join("")}</dl>
+          ${r.attributes.length ? `<h4>Attributes</h4><dl class="kv">${r.attributes.map((a) => `<dt>${esc(a.name)}</dt><dd>${esc(a.values.join(", "))}</dd>`).join("")}</dl>` : ""}`;
+      }
+    } catch (e) {
+      ssoOut.innerHTML = `<p class="err">${esc((e as Error).message)}</p>`;
+    }
+  }
+  ssoIn.addEventListener("input", debounce(runSso));
+  document.querySelectorAll<HTMLButtonElement>("[data-sample]").forEach((b) =>
+    b.addEventListener("click", () => { ssoIn.value = samples[b.dataset.sample!](); runSso(); }));
+
+  // ---------- Dockerfile linter ----------
+  const dfIn = $<HTMLTextAreaElement>("dfIn");
+  const dfOut = $("dfOut");
+  function runDf() {
+    const r = lintDockerfile(dfIn.value);
+    const color = r.score >= 80 ? "#22c55e" : r.score >= 50 ? "#f59e0b" : "#ef4444";
+    dfOut.innerHTML = `<div class="score"><div class="ring" style="--p:${r.score};--c:${color}"><b>${r.score}</b></div>
+        <div><b>${r.issues.length} issue${r.issues.length === 1 ? "" : "s"}</b><br><small style="color:var(--muted)">Score out of 100: errors −15, warnings −7, info −2</small></div></div>
+      ${r.issues.length ? findingsHtml(r.issues) : ""}
+      ${r.passed.length ? `<h4>Passed</h4>${findingsHtml(r.passed.map((m) => ({ level: "ok", message: m })))}` : ""}`;
+  }
+  dfIn.addEventListener("input", debounce(runDf));
+  document.querySelectorAll<HTMLButtonElement>("[data-df]").forEach((b) =>
+    b.addEventListener("click", () => { dfIn.value = b.dataset.df === "good" ? SAMPLE_GOOD : SAMPLE_BAD; runDf(); }));
+  dfIn.value = SAMPLE_BAD;
+  runDf();
+
+  // ---------- VPC planner ----------
+  const vpcOut = $("vpcOut");
+  const cidrIn = $<HTMLInputElement>("vpcCidr");
+  const regionIn = $<HTMLSelectElement>("vpcRegion");
+  const azIn = $<HTMLSelectElement>("vpcAz");
+  function runVpc() {
+    try {
+      const { subnets, warnings, notes } = planVpc(cidrIn.value, Number(azIn.value), regionIn.value);
+      const tf = toTerraform(cidrIn.value, subnets);
+      vpcOut.innerHTML = `<div class="scroll"><table><thead><tr><th>Subnet</th><th>AZ</th><th>CIDR</th><th>Usable range</th><th>Usable IPs</th></tr></thead><tbody>
+        ${subnets.map((s) => `<tr><td><span class="pill ${s.tier}">${s.name}</span></td><td class="mono">${s.az}</td><td class="mono">${s.cidr}</td>
+          <td class="mono">${s.first} – ${s.last}</td><td class="mono">${s.usable.toLocaleString()}</td></tr>`).join("")}
+        </tbody></table></div>
+        ${findingsHtml([...warnings.map((w) => ({ level: "warn", message: w })), ...notes.map((n) => ({ level: "info", message: n }))])}
+        <div class="tf-head"><h4 style="margin:0">Terraform</h4><button class="mini" id="copyTf">Copy</button></div>
+        <pre class="json tf">${esc(tf)}</pre>`;
+      $("copyTf").addEventListener("click", async (e) => {
+        const b = e.currentTarget as HTMLButtonElement;
+        try { await navigator.clipboard.writeText(tf); b.textContent = "Copied ✓"; } catch { b.textContent = "Select and copy"; }
+        setTimeout(() => (b.textContent = "Copy"), 1800);
+      });
+    } catch (e) {
+      vpcOut.innerHTML = `<p class="err">${esc((e as Error).message)}</p>`;
+    }
+  }
+  [cidrIn, regionIn, azIn].forEach((el) => el.addEventListener("input", debounce(runVpc)));
+  runVpc();
+
+  // ---------- Live CI/CD ----------
+  type Run = { name: string; status: string; conclusion: string | null; head_branch: string; event: string;
+    head_sha: string; html_url: string; run_started_at: string; updated_at: string; display_title: string };
+  const ago = (iso: string) => {
+    const s = (Date.now() - new Date(iso).getTime()) / 1000;
+    return s < 3600 ? `${Math.max(1, Math.round(s / 60))} min ago` : s < 86400 ? `${Math.round(s / 3600)} h ago` : `${Math.round(s / 86400)} d ago`;
+  };
+  async function loadRuns() {
+    const box = $("runs");
+    try {
+      const res = await fetch(`https://api.github.com/repos/${box.dataset.repo}/actions/runs?per_page=6`, { headers: { Accept: "application/vnd.github+json" } });
+      if (!res.ok) throw new Error(res.status === 403 ? "GitHub API rate limit reached (60 requests/hour per IP). Try again later." : `GitHub API returned ${res.status}.`);
+      const { workflow_runs: runs } = (await res.json()) as { workflow_runs: Run[] };
+      if (!runs.length) { box.innerHTML = '<p class="empty">No pipeline runs yet.</p>'; return; }
+      box.innerHTML = runs.map((r) => {
+        const state = r.status !== "completed" ? "running" : r.conclusion === "success" ? "success" : "failure";
+        const secs = Math.round((new Date(r.updated_at).getTime() - new Date(r.run_started_at).getTime()) / 1000);
+        return `<div class="run"><span class="dot ${state}" title="${state}"></span>
+          <div><b>${esc(r.name)}</b> · ${esc(r.display_title)}
+          <small>${esc(r.head_branch)} · ${esc(r.event)} · ${r.head_sha.slice(0, 7)} · ${ago(r.run_started_at)}${state !== "running" ? ` · ${secs}s` : ""}</small></div>
+          <a href="${esc(r.html_url)}" target="_blank" rel="noopener">View run ↗</a></div>`;
+      }).join("");
+    } catch (e) {
+      box.innerHTML = `<p class="err">${esc((e as Error).message)}</p>`;
+    }
+  }
+</script>
