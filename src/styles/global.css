@@ -104,6 +104,8 @@ h2 { font-size: clamp(26px, 4vw, 36px); margin: 10px 0 12px; }
   background: var(--surface-2); color: var(--text); border: 1px solid var(--border);
 }
 .chip.hl { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+.chip.learn { background: transparent; border-style: dashed; color: var(--muted); }
+.chip.learn::before { content: "🌱 "; }
 
 /* Code window */
 .code {
