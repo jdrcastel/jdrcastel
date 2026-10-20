@@ -8,24 +8,41 @@ export const profile = {
   github: "https://github.com/jdrcastel",
   repo: "jdrcastel/jdrcastel",
   location: "Toronto, Canada",
-  status: "Open to DevOps, Cloud & Backend roles",
-  roles: ["DevOps & AWS engineer", "Backend developer", "CI/CD automation builder", "SSO & SaaS troubleshooter"],
+  status: "Open to Full-stack, DevOps & Cloud roles",
+  roles: ["MERN stack developer", "Java developer", "DevOps & AWS engineer", "AI integration builder"],
   pitch:
-    "I automate, ship and fix cloud software. AWS Certified Cloud Practitioner with hands-on CI/CD, Docker and Linux, backend experience in Node.js and .NET, and currently going deep on Java/Spring Boot and Kubernetes. By day I support enterprise SaaS at OpenText, so I build for reliability, security and the 3 a.m. incident.",
+    "Full-stack developer working in the MERN stack and Java, with a DevOps and AWS focus. AWS Certified Cloud Practitioner, hands-on with CI/CD, Docker and Linux, and I build with AI every day: LLM integrations and AI-assisted development with GitHub Copilot and Claude Code. At OpenText I support enterprise SaaS customers and I'm moving from Tier 2 to Tier 3.",
   hobbies: "volleyball 🏐 · gym 🏋️ · video games 🎮",
 };
 
 export const stats = [
   { value: "AWS", label: "Certified Cloud Practitioner" },
-  { value: "Tier-2", label: "Enterprise SaaS support at OpenText" },
+  { value: "Tier 2 → 3", label: "Moving to Tier-3 support at OpenText" },
   { value: "5+", label: "OpenText products supported (LRE, ALM, Octane…)" },
-  { value: "4.0", label: "GPA · Seneca Computer Programming & Analysis" },
+  { value: "4", label: "Live DevOps tools on this site" },
 ];
 
 // core: one of my strongest skills (highlighted).
 // learning: something I'm actively learning right now (dashed, with a sprout).
 export type Skill = { name: string; core?: boolean; learning?: boolean };
 export const skillGroups: { icon: string; title: string; skills: Skill[] }[] = [
+  {
+    icon: "⚛️",
+    title: "MERN & JavaScript",
+    skills: [
+      { name: "MongoDB", core: true }, { name: "Express", core: true }, { name: "React", core: true },
+      { name: "Node.js", core: true }, { name: "TypeScript", core: true }, { name: "REST APIs", core: true },
+      { name: "Next.js" }, { name: "Redux" }, { name: "Astro" }, { name: "Vitest" },
+    ],
+  },
+  {
+    icon: "☕",
+    title: "Java",
+    skills: [
+      { name: "Java", core: true }, { name: "OOP & data structures" }, { name: "JUnit" },
+      { name: "Spring Boot", learning: true }, { name: "Maven", learning: true }, { name: "Jakarta EE", learning: true },
+    ],
+  },
   {
     icon: "⚙️",
     title: "DevOps & CI/CD",
@@ -41,42 +58,24 @@ export const skillGroups: { icon: string; title: string; skills: Skill[] }[] = [
     skills: [
       { name: "AWS Cloud Practitioner", core: true }, { name: "EC2" }, { name: "S3" }, { name: "IAM" }, { name: "VPC" },
       { name: "CloudWatch", learning: true }, { name: "Lambda", learning: true }, { name: "Google Cloud" },
-      { name: "Azure", learning: true },
     ],
   },
   {
-    icon: "🧩",
-    title: "Backend & APIs",
+    icon: "🤖",
+    title: "AI integrations",
     skills: [
-      { name: "REST APIs", core: true }, { name: "Node.js", core: true }, { name: "Express" }, { name: "C# / .NET Core" },
-      { name: "ASP.NET" }, { name: "Java" }, { name: "Spring Boot", learning: true }, { name: "Jakarta EE", learning: true },
-      { name: "Python", learning: true }, { name: "FastAPI", learning: true },
-    ],
-  },
-  {
-    icon: "🗄️",
-    title: "Databases",
-    skills: [
-      { name: "SQL", core: true }, { name: "SQL Server", core: true }, { name: "PostgreSQL" }, { name: "MongoDB" },
-      { name: "Query troubleshooting" }, { name: "Oracle", learning: true },
+      { name: "GitHub Copilot", core: true }, { name: "Claude Code", core: true }, { name: "Prompt engineering" },
+      { name: "LLM APIs (OpenAI, Claude)" }, { name: "AI-assisted code review" }, { name: "RAG", learning: true },
+      { name: "MCP", learning: true }, { name: "Python", learning: true }, { name: "FastAPI", learning: true },
     ],
   },
   {
     icon: "🔐",
-    title: "Enterprise SaaS & security",
+    title: "Data & enterprise SaaS",
     skills: [
-      { name: "SAML SSO", core: true }, { name: "OAuth 2.0", core: true }, { name: "LDAP" }, { name: "Multi-tenant SaaS" },
-      { name: "Log analysis", core: true }, { name: "Root-cause analysis" }, { name: "LoadRunner Enterprise" },
-      { name: "Windows Server" },
-    ],
-  },
-  {
-    icon: "🧰",
-    title: "Frontend, testing & tools",
-    skills: [
-      { name: "TypeScript", core: true }, { name: "React" }, { name: "Next.js" }, { name: "Astro" }, { name: "Redux" },
-      { name: "Vitest" }, { name: "TDD" }, { name: "GitHub Copilot" }, { name: "Claude Code" }, { name: "Power Apps" },
-      { name: "Power Automate" }, { name: "Maven", learning: true }, { name: "Gradle", learning: true }, { name: "Jira" },
+      { name: "SQL", core: true }, { name: "SQL Server" }, { name: "PostgreSQL" }, { name: "SAML SSO", core: true },
+      { name: "OAuth 2.0" }, { name: "LDAP" }, { name: "Log analysis", core: true }, { name: "Root-cause analysis" },
+      { name: "Power Apps" }, { name: "Power Automate" }, { name: "Jira" },
     ],
   },
 ];
@@ -189,9 +188,10 @@ export const experience: ExperienceItem[] = [
   {
     kind: "Work",
     when: "Sep 2025 — Present · Waterloo, ON",
-    role: "Technical Support Specialist",
+    role: "Technical Support Specialist (Tier 2 → Tier 3)",
     org: "OpenText",
     bullets: [
+      "Moving from Tier-2 to Tier-3 support, taking on deeper technical escalations.",
       "Production support for global enterprise customers on OpenText SaaS: LoadRunner Enterprise, QC/ALM, Octane/ValueEdge, Digital Lab and MF Connect.",
       "Investigate and reproduce incidents in authentication (SAML SSO, LDAP, OAuth 2.0), integrations, performance, installs, patching and configuration.",
       "Find root causes with Windows/Linux, SQL, Jenkins, WinSCP, system logs and environment data.",
@@ -241,9 +241,9 @@ export const roleFit = [
   ["AWS", "AWS Certified Cloud Practitioner. Deployed Fragments on AWS. The VPC planner shows how I think about subnets, AZs and Terraform."],
   ["Linux & troubleshooting", "Daily root-cause analysis on Windows and Linux with logs, SQL and environment data for enterprise customers."],
   ["Identity & security", "Resolve SAML SSO, OAuth 2.0 and LDAP incidents for enterprise customers. The SSO inspector is the tool I wanted for that job."],
-  ["Backend APIs", "REST APIs in Node.js/Express and .NET. Learning Java and Spring Boot through the AssetVault build."],
+  ["Full-stack (MERN + Java)", "REST APIs with Node.js/Express and MongoDB, React front ends, and Java. Learning Spring Boot through the AssetVault build."],
   ["Databases", "SQL troubleshooting on SQL Server and PostgreSQL in production support; MongoDB in Chronicle."],
   ["Testing & quality", "Unit tests gate every deploy of this site. Comfortable with TDD."],
-  ["AI-assisted development", "Use GitHub Copilot and Claude Code to read, debug, review and generate code faster."],
+  ["AI integrations", "Use GitHub Copilot and Claude Code daily to read, debug, review and generate code. Integrating LLM APIs into apps; learning RAG and MCP."],
   ["Communication", "Lead remote sessions with technical and non-technical customers. Fully bilingual in English and Spanish."],
 ];
