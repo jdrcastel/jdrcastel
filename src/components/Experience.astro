@@ -1,0 +1,39 @@
+---
+import { experience } from "../data/profile";
+---
+
+<section id="experience">
+  <div class="wrap">
+    <div data-reveal>
+      <div class="eyebrow">// experience</div>
+      <h2>Where I've worked</h2>
+      <p class="lead">Support work taught me how enterprise systems fail. Development work is where I fix that for good.</p>
+    </div>
+    <ol class="tl">
+      {experience.map((x) => (
+        <li data-reveal>
+          <div class="when">{x.when}</div>
+          <h3>{x.role}</h3>
+          <div class="org">{x.org}</div>
+          <ul>{x.bullets.map((b) => <li>{b}</li>)}</ul>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .tl { margin: 0; padding: 0; list-style: none; }
+  .tl > li { position: relative; padding: 0 0 36px 30px; margin-left: 7px; border-left: 2px solid var(--border); }
+  .tl > li:last-child { padding-bottom: 0; border-left-color: transparent; }
+  .tl > li::before {
+    content: ""; position: absolute; left: -9px; top: 3px; width: 16px; height: 16px; border-radius: 50%;
+    background: var(--bg); border: 3px solid var(--accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+  .when { font: 500 13px "JetBrains Mono", monospace; color: var(--muted); }
+  h3 { font-size: 19px; margin: 4px 0 2px; }
+  .org { font-weight: 700; font-size: 15px; }
+  ul { color: var(--muted); padding-left: 18px; margin: 10px 0 0; font-size: 15px; }
+  ul li { margin: 4px 0; }
+</style>

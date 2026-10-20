@@ -1,0 +1,144 @@
+---
+import { profile, stats, skillGroups } from "../data/profile";
+
+const marquee = skillGroups.flatMap((g) => g.skills.filter((s) => s.core).map((s) => s.name));
+---
+
+<section class="hero" id="top">
+  <div class="blobs" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <div class="wrap hero-grid">
+    <div>
+      <span class="status">{profile.status}</span>
+      <h1>
+        Hi, I'm Juan.<br />
+        <span class="typed grad-text" id="typed" data-roles={JSON.stringify(profile.roles)}>{profile.roles[0]}</span><span class="caret">|</span>
+      </h1>
+      <p class="pitch">{profile.pitch}</p>
+      <div class="cta">
+        <a class="btn primary" href="#projects">See projects →</a>
+        <a class="btn" href={`mailto:${profile.email}`}>{profile.email}</a>
+        <a class="btn" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href={profile.github} target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <div class="meta">
+        <span>📍 {profile.location}</span>
+        <span>🇨🇴 Spanish · 🇨🇦 English</span>
+        <span>🎓 Seneca · President's Honour List</span>
+      </div>
+    </div>
+
+    <div class="code float" aria-label="Sample Spring Boot controller">
+      <div class="bar"><i></i><i></i><i></i><span>AssetController.java</span></div>
+<pre><span class="a">@RestController</span>
+<span class="a">@RequestMapping</span>(<span class="s">"/api/v1/tenants/&#123;tenantId&#125;/assets"</span>)
+<span class="k">public class</span> <span class="t">AssetController</span> &#123;
+
+  <span class="k">private final</span> <span class="t">AssetService</span> assets;
+  <span class="k">private final</span> <span class="t">TaggingClient</span> ai; <span class="c">// FastAPI</span>
+
+  <span class="a">@PostMapping</span>
+  <span class="k">public</span> <span class="t">ResponseEntity</span>&lt;<span class="t">AssetDto</span>&gt; upload(
+      <span class="a">@PathVariable</span> <span class="t">UUID</span> tenantId,
+      <span class="a">@RequestPart</span> <span class="t">MultipartFile</span> file) &#123;
+    <span class="k">var</span> asset = assets.store(tenantId, file);
+    ai.tagAsync(asset.id());      <span class="c">// non-blocking</span>
+    <span class="k">return</span> <span class="t">ResponseEntity</span>.status(<span class="n">201</span>).body(asset);
+  &#125;
+&#125;</pre>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stats">
+      {stats.map((s, i) => (
+        <div class="stat card" data-reveal style={`transition-delay:${i * 80}ms`}>
+          <b class="grad-text">{s.value}</b>
+          <span>{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      {[...marquee, ...marquee].map((m) => <span>{m}</span>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { padding: 88px 0 0; overflow: hidden; }
+  .blobs { position: absolute; inset: 0; pointer-events: none; filter: blur(70px); opacity: var(--blob-opacity); }
+  .blobs span { position: absolute; width: 420px; height: 420px; border-radius: 50%; animation: drift 18s ease-in-out infinite alternate; }
+  .blobs span:nth-child(1) { background: var(--accent); top: -120px; left: -80px; }
+  .blobs span:nth-child(2) { background: var(--accent-2); top: 40px; right: -120px; animation-delay: -6s; }
+  .blobs span:nth-child(3) { background: var(--accent-3); bottom: -160px; left: 35%; animation-delay: -12s; }
+  @keyframes drift {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(60px, 40px) scale(1.15); }
+    100% { transform: translate(-40px, 20px) scale(0.95); }
+  }
+  .grid-bg {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at 50% 30%, #000 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 0%, transparent 70%);
+  }
+  .wrap { position: relative; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: center; }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 36px; } }
+  h1 { font-size: clamp(34px, 5.6vw, 54px); font-weight: 800; margin: 16px 0 18px; min-height: 2.4em; }
+  .caret { color: var(--accent); font-weight: 400; animation: blink 1s steps(1) infinite; margin-left: 2px; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .pitch { color: var(--muted); font-size: 18px; margin: 0 0 24px; max-width: 560px; }
+  .status {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--ok);
+    background: var(--ok-soft); padding: 5px 12px; border-radius: 999px;
+  }
+  .status::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ok);
+    box-shadow: 0 0 0 0 var(--ok); animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 8px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+  .meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 28px; color: var(--muted); font-size: 14px; }
+  .float { animation: float 6s ease-in-out infinite; }
+  @keyframes float { 50% { transform: translateY(-10px); } }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 56px; }
+  @media (max-width: 760px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  .stat { padding: 16px; }
+  .stat b { display: block; font-size: 26px; letter-spacing: -0.02em; }
+  .stat span { color: var(--muted); font-size: 13px; }
+
+  .marquee {
+    margin-top: 56px; border-top: 1px solid var(--border); padding: 18px 0; overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+  .track { display: flex; gap: 40px; width: max-content; animation: scroll 40s linear infinite; }
+  .track span { font: 500 15px "JetBrains Mono", monospace; color: var(--muted); white-space: nowrap; }
+  .track span::before { content: "◆"; color: var(--accent); margin-right: 40px; font-size: 10px; vertical-align: middle; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+</style>
+
+<script>
+  // Typewriter for the rotating role
+  const el = document.getElementById("typed")!;
+  const roles: string[] = JSON.parse(el.dataset.roles || "[]");
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches && roles.length > 1) {
+    let r = 0, i = roles[0].length, deleting = true;
+    const tick = () => {
+      const word = roles[r];
+      i += deleting ? -1 : 1;
+      el.textContent = word.slice(0, i);
+      let delay = deleting ? 35 : 70;
+      if (!deleting && i === word.length) { deleting = true; delay = 2200; }
+      else if (deleting && i === 0) { deleting = false; r = (r + 1) % roles.length; delay = 300; }
+      setTimeout(tick, delay);
+    };
+    setTimeout(tick, 2600);
+  }
+</script>
