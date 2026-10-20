@@ -18,7 +18,7 @@
 - **AWS Certified Cloud Practitioner.** I ship containerized REST services on AWS with Docker and CI/CD.
 - Day job: **Technical Support Specialist at OpenText**, troubleshooting production incidents on enterprise SaaS platforms and moving from Tier 2 into **Tier 3**. I know how real systems fail.
 - I build with AI coding agents every day: **Claude Code, OpenAI Codex and GitHub Copilot**.
-- 🎯 Next build: a **Spring Boot API on AWS** with tests, Docker and CI/CD.
+- 🎯 Now building: **IncidentHub**, a Spring Boot REST API for support incidents with SLA tracking (JPA, JWT security, JUnit, Docker, GitHub Actions, AWS).
 - 🎓 Advanced Diploma, Computer Programming and Analysis — **Seneca Polytechnic** (President's Honour List).
 
 ### 🛠️ Tech stack
@@ -55,14 +55,14 @@
 
 | Project | What it does | Stack |
 |---|---|---|
+| **IncidentHub** *(in progress)* | REST API for support incidents with priority-based SLAs and breach detection | Java, Spring Boot, PostgreSQL, Spring Security, JUnit, Docker, AWS |
 | **Enterprise Microservice Platform** | RESTful CRUD microservice on AWS with Cognito auth and S3/DynamoDB storage, deployed to ECS via CI/CD | Node.js, Express, AWS (ECS, ECR, Cognito, S3, DynamoDB), Docker |
-| **[Engineering Toolbox Portfolio](https://jdrcastel.github.io/jdrcastel/)** | JWT/SAML inspector, Dockerfile linter and AWS VPC planner, shipped with tested CI/CD | TypeScript, Vitest, GitHub Actions, Astro |
 | **Chronicle App** | Full-stack, multi-tenant social journal | MongoDB, Express, React, Node.js, Next.js, Redux |
 
 ### 💼 Experience
 
 - **Technical Support Specialist — OpenText** · Sep 2025 – Present
-- **Application Developer (Internship) — Government of Ontario** · Sep 2022 – Apr 2023
+- **Application Developer (Internship) — Government of Ontario** · Sep 2022 – Apr 2023 — internal web page in React with LDAP integration
 - **Volunteer — Hispanotech** · organized technical workshops and networking sessions for Latin American tech professionals
 
 ### 🎧 Outside of code

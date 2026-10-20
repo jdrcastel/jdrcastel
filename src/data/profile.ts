@@ -20,7 +20,7 @@ export const stats = [
   { value: "AWS", label: "Certified Cloud Practitioner" },
   { value: "Tier 2 → 3", label: "Moving to Tier-3 support at OpenText" },
   { value: "5+", label: "OpenText products supported (LRE, ALM, Octane…)" },
-  { value: "4", label: "Live engineering tools on this site" },
+  { value: "Java", label: "Building IncidentHub with Spring Boot" },
 ];
 
 // core: one of my strongest skills (highlighted).
@@ -56,7 +56,7 @@ export const skillGroups: { icon: string; title: string; skills: Skill[] }[] = [
     title: "Delivery & quality",
     skills: [
       { name: "Docker", core: true }, { name: "CI/CD", core: true }, { name: "GitHub Actions" }, { name: "Jenkins" },
-      { name: "Unit testing" }, { name: "Vitest" }, { name: "Git" }, { name: "Linux" }, { name: "Bash" },
+      { name: "Git" }, { name: "Linux" }, { name: "Bash" },
     ],
   },
   {
@@ -73,23 +73,22 @@ export const skillGroups: { icon: string; title: string; skills: Skill[] }[] = [
     skills: [
       { name: "SQL", core: true }, { name: "PostgreSQL" }, { name: "SQL Server" }, { name: "MongoDB" }, { name: "DynamoDB" },
       { name: "Root-cause analysis", core: true }, { name: "Log analysis" }, { name: "SAML SSO" }, { name: "OAuth 2.0" },
-      { name: "LDAP" }, { name: "Power Apps" }, { name: "Power Automate" },
+      { name: "LDAP" },
     ],
   },
 ];
 
-export type Filter = "devops" | "backend" | "web" | "automation";
+export type Filter = "backend" | "web" | "aws";
 export const filters: { id: "all" | Filter; label: string }[] = [
   { id: "all", label: "All" },
   { id: "backend", label: "Backend" },
   { id: "web", label: "Full-stack" },
-  { id: "devops", label: "AWS & CI/CD" },
-  { id: "automation", label: "Automation" },
+  { id: "aws", label: "AWS" },
 ];
 
 export type Project = {
   title: string;
-  status: "Live" | "In use" | "Shipped" | "Next build";
+  status: "In progress" | "In use" | "Shipped";
   summary: string;
   bullets?: string[];
   stack: Skill[];
@@ -100,76 +99,79 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "IncidentHub — Spring Boot incident & SLA API",
+    status: "In progress",
+    featured: true,
+    summary:
+      "A REST API to manage support incidents with SLA tracking, based on the problems I see every day in production support.",
+    bullets: [
+      "Tickets with priority-based SLAs, breach detection and a status workflow",
+      "PostgreSQL with Spring Data JPA and Flyway migrations",
+      "JWT security with roles, JUnit/Mockito/Testcontainers tests, Docker and GitHub Actions, deployed on AWS",
+    ],
+    stack: [
+      { name: "Java", core: true }, { name: "Spring Boot", core: true }, { name: "PostgreSQL" }, { name: "Spring Security" },
+      { name: "JUnit" }, { name: "Docker" }, { name: "GitHub Actions" }, { name: "AWS" },
+    ],
+    tags: ["backend", "aws"],
+    link: { href: "#building", label: "See the build plan" },
+  },
+  {
     title: "Enterprise Microservice Platform",
     status: "Shipped",
-    featured: true,
     summary: "RESTful CRUD microservice on AWS with authentication, object storage and a containerized CI/CD deployment.",
     bullets: [
       "Node.js/Express REST API with Cognito authentication and S3/DynamoDB storage over HTTPS",
       "Containerized with Docker, images pushed to ECR and deployed to ECS through a CI/CD pipeline",
-      "Built with performance and security in mind for an enterprise microservice workflow",
     ],
     stack: [
       { name: "Node.js", core: true }, { name: "Express", core: true }, { name: "AWS ECS" }, { name: "ECR" },
       { name: "Cognito" }, { name: "S3" }, { name: "DynamoDB" }, { name: "Docker", core: true }, { name: "CI/CD" },
     ],
-    tags: ["backend", "devops"],
-  },
-  {
-    title: "Engineering Toolbox Portfolio",
-    status: "Live",
-    summary:
-      "The site you are on: browser tools for real engineering tasks, shipped through a tested CI/CD pipeline.",
-    bullets: [
-      "JWT/SAML SSO inspector, Dockerfile linter, and an AWS VPC subnet planner that generates Terraform",
-      "GitHub Actions CI/CD: type check → unit tests → build → deploy; failing tests block the deploy",
-    ],
-    stack: [
-      { name: "TypeScript", core: true }, { name: "Vitest" }, { name: "GitHub Actions", core: true }, { name: "Astro" },
-      { name: "AWS VPC" }, { name: "Terraform" },
-    ],
-    tags: ["devops", "web"],
-    link: { href: "#toolbox", label: "Try the tools" },
+    tags: ["backend", "aws"],
   },
   {
     title: "Chronicle App (Social Journal)",
     status: "Shipped",
     summary: "Full-stack, multi-tenant social journal app with a Node.js and Express REST backend on MongoDB.",
     stack: [
-      { name: "MongoDB", core: true }, { name: "Express", core: true }, { name: "React", core: true },
-      { name: "Node.js", core: true }, { name: "Next.js" }, { name: "Redux" },
+      { name: "React", core: true }, { name: "Next.js" }, { name: "Redux" }, { name: "Node.js", core: true },
+      { name: "Express" }, { name: "MongoDB" },
     ],
     tags: ["web", "backend"],
+  },
+  {
+    title: "Ontario Government internal web page",
+    status: "Shipped",
+    summary: "Internal web page built with React during my internship, with LDAP directory integration for internal users.",
+    stack: [{ name: "React", core: true }, { name: "JavaScript" }, { name: "LDAP" }],
+    tags: ["web"],
   },
   {
     title: "SaaS case tracker (Chrome extension)",
     status: "In use",
     summary: "Internal tool I built in JavaScript for my OpenText SaaS support team to track case status and timing.",
     stack: [{ name: "JavaScript" }, { name: "Chrome Extensions API" }, { name: "HTML/CSS" }],
-    tags: ["automation", "web"],
-  },
-  {
-    title: "Ontario Government internal apps",
-    status: "Shipped",
-    summary: "Internal web apps built with Power Apps and business workflows automated with Power Automate.",
-    stack: [{ name: "Power Apps" }, { name: "Power Automate" }],
-    tags: ["automation"],
-  },
-  {
-    title: "Spring Boot API on AWS",
-    status: "Next build",
-    summary: "My next project: a production-style Spring Boot API with the same AWS and CI/CD setup.",
-    bullets: [
-      "Goal: Spring Boot REST API with PostgreSQL",
-      "Goal: multi-stage Docker image deployed to AWS ECS",
-      "Goal: GitHub Actions pipeline with tests and automated deploy",
-    ],
-    stack: [
-      { name: "Java" }, { name: "Spring Boot" }, { name: "PostgreSQL" }, { name: "Docker" }, { name: "AWS ECS" },
-    ],
-    tags: ["backend", "devops"],
+    tags: ["web"],
   },
 ];
+
+// What I'm building right now, shown in the "Now building" section.
+export const building = {
+  name: "IncidentHub",
+  pitch:
+    "A Spring Boot REST API for support incidents with SLA tracking. It covers what Java job postings ask for most: REST, SQL with JPA, security, tests, Docker, CI/CD and AWS.",
+  why: "I handle enterprise incidents every day at OpenText. This is the tool I would want: it knows each ticket's SLA and flags breaches before customers notice.",
+  phases: [
+    { title: "Core API", detail: "Ticket CRUD, validation, error handling, PostgreSQL with Spring Data JPA and Flyway", status: "in-progress" },
+    { title: "Business rules", detail: "SLA per priority, breach detection, status workflow (open → in progress → resolved)", status: "planned" },
+    { title: "Security", detail: "Spring Security with JWT and roles (agent, admin)", status: "planned" },
+    { title: "Tests", detail: "JUnit 5, Mockito and Testcontainers", status: "planned" },
+    { title: "Delivery", detail: "Docker, GitHub Actions CI/CD, OpenAPI docs", status: "planned" },
+    { title: "AWS", detail: "Deploy to AWS (ECS or EC2) with RDS PostgreSQL", status: "planned" },
+    { title: "React front end", detail: "Dashboard for agents to see tickets and SLA status", status: "planned" },
+  ] as { title: string; detail: string; status: "done" | "in-progress" | "planned" }[],
+};
 
 export type ExperienceItem = {
   kind: "Work" | "Internship" | "Certification" | "Volunteer" | "Education";
@@ -205,7 +207,7 @@ export const experience: ExperienceItem[] = [
     role: "Application Developer",
     org: "Government of Ontario",
     bullets: [
-      "Built internal web apps with Microsoft Power Apps and automated business workflows with Power Automate.",
+      "Built an internal web page with React and worked on LDAP directory integration for internal users.",
       "Worked with developers and designers to fix bugs, deliver new features, and improve user experience.",
     ],
   },
@@ -230,10 +232,10 @@ export const experience: ExperienceItem[] = [
 ];
 
 export const roleFit = [
-  ["Java backend", "Java and Spring Boot for REST services. A Spring Boot API on AWS is my next build, with tests, Docker and CI/CD."],
-  ["Full-stack", "React and Next.js front ends with Node.js/Express REST APIs (Chronicle, Enterprise Microservice Platform)."],
+  ["Java backend", "Java and Spring Boot for REST services. Building IncidentHub now: JPA, security, tests, Docker, CI/CD and AWS."],
+  ["Full-stack", "React front ends (Ontario Government, Chronicle) with Node.js/Express REST APIs (Enterprise Microservice Platform)."],
   ["AWS", "AWS Certified Cloud Practitioner. Deployed a microservice on ECS with ECR, Cognito, S3 and DynamoDB."],
-  ["Delivery & quality", "Docker images shipped through CI/CD. This site deploys through a GitHub Actions pipeline where failing tests block the release."],
+  ["Delivery & quality", "Docker images shipped to AWS through CI/CD; Jenkins daily at OpenText; this site deploys with GitHub Actions."],
   ["Databases", "SQL troubleshooting on SQL Server and PostgreSQL in production support; MongoDB and DynamoDB in projects."],
   ["Production experience", "Root-cause analysis on Linux and Windows with logs and SQL, moving from Tier-2 into Tier-3 escalations at OpenText. I know how real systems fail."],
   ["AI coding agents", "Use Claude Code, OpenAI Codex and GitHub Copilot daily to read, debug, review and generate code, and I verify every change with tests."],
