@@ -1,0 +1,108 @@
+---
+import { endpoints, tenantId } from "../data/profile";
+---
+
+<section id="api">
+  <div class="wrap">
+    <div data-reveal>
+      <div class="eyebrow">// api explorer</div>
+      <h2>AssetVault API, at a glance</h2>
+      <p class="lead">
+        Pick an endpoint to see the request and response contract I design to. Resource-oriented URLs, tenant-scoped
+        paths, pagination, and errors in RFC 7807 format.
+      </p>
+    </div>
+
+    <div class="api" data-reveal>
+      <div>
+        <div class="endpoints" id="endpoints">
+          {endpoints.map((ep, i) => (
+            <button class="ep" data-i={i}>
+              <span class={`verb ${ep.verb}`}>{ep.verb}</span>
+              <span>{ep.path}</span>
+            </button>
+          ))}
+        </div>
+        <p class="ep-desc" id="epDesc"></p>
+      </div>
+      <div class="code">
+        <div class="bar"><i></i><i></i><i></i><span id="reqLine">request</span></div>
+        <pre id="reqBody"></pre>
+        <div class="bar resp-meta">
+          <span id="respStatus">200 OK</span><span id="respTime"></span><span>application/json</span>
+        </div>
+        <pre id="respBody"></pre>
+      </div>
+    </div>
+    <p class="note">Sample responses, generated in your browser. No real backend is called.</p>
+  </div>
+  <script type="application/json" id="epData" set:html={JSON.stringify({ endpoints, tenantId })} />
+</section>
+
+<style>
+  .api { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 16px; }
+  @media (max-width: 820px) { .api { grid-template-columns: minmax(0, 1fr); } }
+  .endpoints { display: flex; flex-direction: column; gap: 6px; }
+  .ep {
+    display: flex; gap: 10px; align-items: center; width: 100%; text-align: left; padding: 10px 12px;
+    border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    cursor: pointer; font: 13px "JetBrains Mono", monospace; transition: all 0.15s;
+  }
+  .ep:hover { border-color: var(--accent); transform: translateX(3px); }
+  .ep.on { border-color: var(--accent); background: var(--accent-soft); }
+  .verb { font-weight: 600; font-size: 11px; padding: 3px 6px; border-radius: 5px; min-width: 52px; text-align: center; color: #fff; flex: none; }
+  .verb.GET { background: #15803d; }
+  .verb.POST { background: #2563eb; }
+  .verb.PATCH { background: #a16207; }
+  .verb.DELETE { background: #b91c1c; }
+  .ep-desc { color: var(--muted); font-size: 13px; margin: 10px 2px 0; }
+  .resp-meta { gap: 12px; }
+  #respStatus { color: #28c840; }
+  #respStatus.err { color: #ff6b6b; }
+  pre { min-height: 3em; }
+</style>
+
+<script>
+  type Ep = { verb: string; path: string; desc: string; status: string; ms: number; req: string | null; res: unknown };
+  const { endpoints, tenantId } = JSON.parse(document.getElementById("epData")!.textContent!) as { endpoints: Ep[]; tenantId: string };
+
+  const $ = (id: string) => document.getElementById(id)!;
+  const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+  // Minimal JSON syntax highlighting
+  const highlight = (obj: unknown) =>
+    esc(JSON.stringify(obj, null, 2)).replace(
+      /("(?:\\.|[^"\\])*")(\s*:)?|\b(-?\d+(?:\.\d+)?)\b/g,
+      (_m, str: string | undefined, colon: string | undefined, num: string | undefined) =>
+        str ? (colon ? `<span class="t">${str}</span>${colon}` : `<span class="s">${str}</span>`) : `<span class="n">${num}</span>`,
+    );
+
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>("#endpoints .ep")];
+  let timer: ReturnType<typeof setTimeout> | undefined;
+
+  function show(i: number) {
+    const ep = endpoints[i];
+    buttons.forEach((b, j) => b.classList.toggle("on", i === j));
+    $("epDesc").textContent = ep.desc;
+    $("reqLine").textContent = `${ep.verb} /api/v1/tenants/${tenantId}${ep.path}`;
+    $("reqBody").innerHTML =
+      '<span class="c">Authorization: Bearer eyJhbGciOi…</span>\n' + (ep.req ? esc(ep.req) : '<span class="c">(no body)</span>');
+
+    // Fake a short network delay so it feels like a real call
+    const status = $("respStatus");
+    status.textContent = "…";
+    status.classList.remove("err");
+    $("respTime").textContent = "";
+    $("respBody").innerHTML = '<span class="c">waiting for response…</span>';
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      status.textContent = ep.status;
+      status.classList.toggle("err", ep.status.startsWith("4"));
+      $("respTime").textContent = `${ep.ms} ms`;
+      $("respBody").innerHTML = ep.res ? highlight(ep.res) : '<span class="c">(empty body)</span>';
+    }, Math.min(ep.ms * 3, 300));
+  }
+
+  buttons.forEach((b) => b.addEventListener("click", () => show(Number(b.dataset.i))));
+  show(0);
+</script>

@@ -1,0 +1,53 @@
+---
+import { profile } from "../data/profile";
+---
+
+<section id="contact">
+  <div class="wrap" data-reveal>
+    <div class="box">
+      <div class="eyebrow">// contact</div>
+      <h2>Let's build something <span class="grad-text">reliable.</span></h2>
+      <p class="lead">
+        I'm looking for Software Developer roles in backend, Java and cloud in Ontario. The fastest way to reach me is email.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href={`mailto:${profile.email}`}>Email me</a>
+        <button class="btn" id="copyEmail" data-email={profile.email}>Copy email</button>
+        <a class="btn" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href={profile.github} target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <p class="note">Off the clock: {profile.hobbies}</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © {new Date().getFullYear()} {profile.name} · Built with Astro
+</footer>
+
+<style>
+  .box {
+    text-align: center; padding: 56px 24px; border-radius: 20px; border: 1px solid transparent;
+    background:
+      radial-gradient(600px 200px at 50% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent) padding-box,
+      linear-gradient(var(--surface), var(--surface)) padding-box,
+      linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent-3)) border-box;
+  }
+  .lead { margin: 0 auto 28px; }
+  .cta { justify-content: center; }
+  .note { margin-top: 28px; }
+  footer { padding: 28px 16px 40px; color: var(--muted); font-size: 13px; text-align: center; }
+</style>
+
+<script>
+  const btn = document.getElementById("copyEmail") as HTMLButtonElement;
+  btn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(btn.dataset.email!);
+      btn.textContent = "Copied ✓";
+    } catch {
+      btn.textContent = btn.dataset.email!;
+    }
+    setTimeout(() => (btn.textContent = "Copy email"), 2000);
+  });
+</script>

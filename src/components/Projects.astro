@@ -1,0 +1,81 @@
+---
+import { projects, filters } from "../data/profile";
+
+const badge = { "In progress": "wip", "In use": "live", Shipped: "live" } as const;
+---
+
+<section id="projects">
+  <div class="wrap">
+    <div data-reveal>
+      <div class="eyebrow">// projects</div>
+      <h2>Selected work</h2>
+      <p class="lead">
+        Two flagship backend projects built to mirror enterprise Digital Asset Management problems, plus shipped work
+        from school, the Ontario Government and OpenText.
+      </p>
+    </div>
+
+    <div class="filters" id="filters" data-reveal>
+      {filters.map((f, i) => (
+        <button class:list={["filter", { on: i === 0 }]} data-f={f.id}>{f.label}</button>
+      ))}
+    </div>
+
+    <div class="grid g3" id="projGrid">
+      {projects.map((p, i) => (
+        <article class:list={["card", "proj", { featured: p.featured }]} data-tags={p.tags.join(" ")} data-reveal style={`transition-delay:${(i % 3) * 80}ms`}>
+          <div class="top">
+            <h3>{p.title}</h3>
+            <span class={`badge ${badge[p.status]}`}>{p.status}</span>
+          </div>
+          <p>{p.summary}</p>
+          {p.bullets && <ul>{p.bullets.map((b) => <li>{b}</li>)}</ul>}
+          <div class="chips">
+            {p.stack.map((s) => <span class:list={["chip", { hl: s.core }]}>{s.name}</span>)}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .filter {
+    border: 1px solid var(--border); background: var(--surface); color: var(--muted); padding: 7px 14px;
+    border-radius: 999px; cursor: pointer; font: 500 13.5px Inter, sans-serif; transition: all 0.15s;
+  }
+  .filter:hover { color: var(--text); border-color: var(--accent); }
+  .filter.on { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .proj { display: flex; flex-direction: column; }
+  .top { display: flex; justify-content: space-between; align-items: start; gap: 10px; margin-bottom: 4px; }
+  .badge { font-size: 11.5px; font-weight: 600; padding: 3px 8px; border-radius: 6px; white-space: nowrap; }
+  .badge.live { color: var(--ok); background: var(--ok-soft); }
+  .badge.wip { color: var(--warn); background: var(--warn-soft); }
+  ul { margin: 0 0 14px; padding-left: 18px; color: var(--muted); font-size: 14.5px; }
+  li { margin: 3px 0; }
+  .chips { margin-top: auto; }
+  .featured {
+    grid-column: span 2;
+    border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+    background:
+      linear-gradient(var(--surface), var(--surface)) padding-box,
+      linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent-3)) border-box;
+    border: 1px solid transparent;
+  }
+  @media (max-width: 640px) { .featured { grid-column: auto; } }
+  .hidden { display: none; }
+</style>
+
+<script>
+  const filters = document.getElementById("filters")!;
+  filters.addEventListener("click", (e) => {
+    const btn = e.target as HTMLElement;
+    const f = btn.dataset.f;
+    if (!f) return;
+    filters.querySelectorAll(".filter").forEach((b) => b.classList.toggle("on", b === btn));
+    document.querySelectorAll<HTMLElement>("#projGrid .proj").forEach((p) => {
+      p.classList.toggle("hidden", f !== "all" && !p.dataset.tags!.split(" ").includes(f));
+    });
+  });
+</script>
