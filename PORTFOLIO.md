@@ -18,3 +18,8 @@ Requires Node 22.22+.
 Import this repo in Vercel. It auto-detects Astro, so no settings are needed.
 To replace the current site, point the existing `juan-castelblanco` Vercel project at this repo
 (Settings → Git → Connected Repository).
+
+## Deploy on GitHub Pages
+`.github/workflows/deploy.yml` builds and publishes the site on every push to `main`
+to https://jdrcastel.github.io/jdrcastel/.
+One-time setup: repo **Settings → Pages → Source: GitHub Actions**.
