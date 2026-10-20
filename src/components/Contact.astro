@@ -1,5 +1,7 @@
 ---
 import { profile } from "../data/profile";
+
+const resume = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/Resume_Juan_Castelblanco.pdf`;
 ---
 
 <section id="contact">
@@ -8,10 +10,11 @@ import { profile } from "../data/profile";
       <div class="eyebrow">// contact</div>
       <h2>Let's build something <span class="grad-text">reliable.</span></h2>
       <p class="lead">
-        I'm looking for full-stack, DevOps and cloud developer roles. The fastest way to reach me is email.
+        I'm looking for full-stack, backend and cloud developer roles. The fastest way to reach me is email.
       </p>
       <div class="cta">
         <a class="btn primary" href={`mailto:${profile.email}`}>Email me</a>
+        <a class="btn" href={resume} target="_blank" rel="noopener">Resume (PDF)</a>
         <button class="btn" id="copyEmail" data-email={profile.email}>Copy email</button>
         <a class="btn" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href={profile.github} target="_blank" rel="noopener">GitHub</a>
