@@ -32,24 +32,26 @@ const marquee = skillGroups.flatMap((g) => g.skills.filter((s) => s.core).map((s
       </div>
     </div>
 
-    <div class="code float" aria-label="Excerpt of this site's GitHub Actions pipeline">
-      <div class="bar"><i></i><i></i><i></i><span>.github/workflows/deploy.yml</span></div>
-<pre><span class="c"># The real pipeline that ships this site</span>
-<span class="t">on</span>:
-  <span class="t">push</span>: &#123; <span class="t">branches</span>: [<span class="s">main</span>] &#125;
+    <div class="code float" aria-label="Excerpt from IncidentHub, a Spring Boot project in progress">
+      <div class="bar"><i></i><i></i><i></i><span>IncidentHub · SlaService.java</span></div>
+<pre><span class="c">// IncidentHub (in progress)</span>
+<span class="a">@Service</span>
+<span class="k">public class</span> <span class="t">SlaService</span> &#123;
 
-<span class="t">jobs</span>:
-  <span class="t">build</span>:
-    <span class="t">runs-on</span>: <span class="s">ubuntu-latest</span>
-    <span class="t">steps</span>:
-      - <span class="t">uses</span>: <span class="s">actions/checkout@v4</span>
-      - <span class="t">run</span>: <span class="s">npm ci</span>
-      - <span class="t">run</span>: <span class="s">npm run check</span>  <span class="c"># types</span>
-      - <span class="t">run</span>: <span class="s">npm test</span>       <span class="c"># gate</span>
-      - <span class="t">run</span>: <span class="s">npm run build</span>
-  <span class="t">deploy</span>:
-    <span class="t">needs</span>: <span class="s">build</span>          <span class="c"># no green, no deploy</span>
-    <span class="t">environment</span>: <span class="s">github-pages</span></pre>
+  <span class="k">private static final</span> <span class="t">Map</span>&lt;<span class="t">Priority</span>, <span class="t">Duration</span>&gt; SLA = <span class="t">Map</span>.of(
+      <span class="t">Priority</span>.CRITICAL, <span class="t">Duration</span>.ofHours(<span class="n">4</span>),
+      <span class="t">Priority</span>.HIGH,     <span class="t">Duration</span>.ofHours(<span class="n">8</span>),
+      <span class="t">Priority</span>.MEDIUM,   <span class="t">Duration</span>.ofDays(<span class="n">2</span>),
+      <span class="t">Priority</span>.LOW,      <span class="t">Duration</span>.ofDays(<span class="n">5</span>));
+
+  <span class="k">public</span> <span class="t">Instant</span> dueAt(<span class="t">Ticket</span> ticket) &#123;
+    <span class="k">return</span> ticket.getCreatedAt().plus(SLA.get(ticket.getPriority()));
+  &#125;
+
+  <span class="k">public boolean</span> isBreached(<span class="t">Ticket</span> ticket, <span class="t">Instant</span> now) &#123;
+    <span class="k">return</span> ticket.isOpen() &amp;&amp; now.isAfter(dueAt(ticket));
+  &#125;
+&#125;</pre>
     </div>
   </div>
 

@@ -1,36 +1,24 @@
 # Portfolio site (Astro)
 
-Single-page portfolio built with [Astro](https://astro.build). Deployed on Vercel.
+Single-page portfolio built with [Astro](https://astro.build), deployed to GitHub Pages.
 
 ## Edit content
-Everything (skills, projects, experience, role fit) lives in `src/data/profile.ts`.
-Each section is a component in `src/components/`.
-Mark a skill with `core: true` (strongest) or `learning: true` (learning now).
+Everything (skills, projects, the "Now building" plan, experience, role fit) lives in `src/data/profile.ts`.
+Each section is a component in `src/components/`. Mark a skill with `core: true` to highlight it.
+To move an IncidentHub phase forward, change its `status` to `"in-progress"` or `"done"`.
 
-## DevOps toolbox
-Logic lives in `src/lib/` as plain TypeScript with unit tests next to it; the UI is `src/components/Toolbox.astro`.
-- `jwt.ts`, `saml.ts`: SSO token inspector
-- `dockerfile.ts`: Dockerfile linter
-- `cidr.ts`: AWS VPC subnet planner + Terraform output
+The resume PDF served by the site is `public/Resume_Juan_Castelblanco.pdf`; replace it when the resume changes.
 
 ## Run locally
 ```bash
 npm install
 npm run dev      # http://localhost:4321
-npm test         # unit tests for the toolbox (Vitest)
 npm run check    # type check
 npm run build    # static output in dist/
 ```
 Requires Node 22.22+.
 
-## Deploy on Vercel
-Import this repo in Vercel. It auto-detects Astro, so no settings are needed.
-To replace the current site, point the existing `juan-castelblanco` Vercel project at this repo
-(Settings → Git → Connected Repository).
-
-## Deploy on GitHub Pages
-`.github/workflows/deploy.yml` builds and publishes the site on every push to `main`
-to https://jdrcastel.github.io/jdrcastel/, after type checks and tests pass.
-`.github/workflows/ci.yml` runs the same checks on every pull request.
-Keep this as the only workflow that deploys to Pages.
-One-time setup: repo **Settings → Pages → Source: GitHub Actions**.
+## Deploy
+`.github/workflows/deploy.yml` type-checks, builds and publishes on every push to `main`
+to https://jdrcastel.github.io/jdrcastel/. `.github/workflows/ci.yml` runs the same checks on pull requests.
+Keep `deploy.yml` as the only workflow that deploys to Pages.
