@@ -10,9 +10,9 @@ export const profile = {
   repo: "jdrcastel/jdrcastel",
   location: "Ontario, Canada",
   status: "Open to Software Developer roles",
-  roles: ["Software developer", "Java & Spring Boot developer", "React & Node.js developer", "AWS-certified engineer"],
+  roles: ["Software developer", "JavaScript & React developer", "Node.js microservices on AWS", "Growing into Java & Spring Boot"],
   pitch:
-    "Software developer for enterprise SaaS: Java and Spring Boot on the backend, React and Node.js across the stack, deployed on AWS with Docker and CI/CD. At OpenText I troubleshoot production incidents on enterprise SaaS platforms and I'm moving into Tier-3 support, so I know how real systems fail and how to fix them. I build with AI coding agents (Claude Code, OpenAI Codex, GitHub Copilot) and verify every change with tests.",
+    "Software developer with strong JavaScript and front-end skills (React, Next.js, TypeScript) who also built a Node.js microservice on AWS with Docker and CI/CD. Now growing into Java and Spring Boot by building IncidentHub. At OpenText I troubleshoot production incidents on enterprise SaaS platforms and I'm moving into Tier-3 support, so I know how real systems fail and how to fix them.",
   hobbies: "soccer ⚽ · gym 🏋️ · video games 🎮",
 };
 
@@ -20,7 +20,7 @@ export const stats = [
   { value: "AWS", label: "Certified Cloud Practitioner" },
   { value: "Tier 2 → 3", label: "Moving to Tier-3 support at OpenText" },
   { value: "5+", label: "OpenText products supported (LRE, ALM, Octane…)" },
-  { value: "Java", label: "Building IncidentHub with Spring Boot" },
+  { value: "Java", label: "Learning Spring Boot by building IncidentHub" },
 ];
 
 // core: one of my strongest skills (highlighted).
@@ -28,19 +28,21 @@ export const stats = [
 export type Skill = { name: string; core?: boolean; learning?: boolean };
 export const skillGroups: { icon: string; title: string; skills: Skill[] }[] = [
   {
-    icon: "☕",
-    title: "Java & Spring Boot",
+    icon: "⚛️",
+    title: "JavaScript & front end",
     skills: [
-      { name: "Java", core: true }, { name: "Spring Boot", core: true }, { name: "REST APIs", core: true },
-      { name: "Microservices" }, { name: "Object-oriented programming" },
+      { name: "JavaScript", core: true }, { name: "TypeScript", core: true }, { name: "React", core: true },
+      { name: "Next.js", core: true }, { name: "Redux", core: true }, { name: "HTML/CSS", core: true },
+      { name: "Responsive UI", core: true },
     ],
   },
   {
-    icon: "⚛️",
-    title: "React & Node.js",
+    icon: "🧩",
+    title: "Backend & Java",
     skills: [
-      { name: "JavaScript", core: true }, { name: "TypeScript", core: true }, { name: "React", core: true },
-      { name: "Node.js", core: true }, { name: "Next.js" }, { name: "Express" }, { name: "Redux" }, { name: "HTML/CSS" },
+      { name: "Node.js", core: true }, { name: "Express", core: true }, { name: "REST APIs", core: true },
+      { name: "Microservices", core: true }, { name: "Java" }, { name: "Object-oriented programming" },
+      { name: "Spring Boot", learning: true }, { name: "Spring Data JPA", learning: true }, { name: "JUnit", learning: true },
     ],
   },
   {
@@ -61,10 +63,10 @@ export const skillGroups: { icon: string; title: string; skills: Skill[] }[] = [
   },
   {
     icon: "🤖",
-    title: "AI coding agents",
+    title: "AI coding tools",
     skills: [
-      { name: "Claude Code", core: true }, { name: "OpenAI Codex", core: true }, { name: "GitHub Copilot", core: true },
-      { name: "AI-assisted code review" },
+      { name: "GitHub Copilot", core: true }, { name: "Claude Code", learning: true }, { name: "OpenAI Codex", learning: true },
+      { name: "AI-assisted code review", learning: true },
     ],
   },
   {
@@ -99,19 +101,19 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "IncidentHub — Spring Boot incident & SLA API",
+    title: "IncidentHub — learning Java & Spring Boot",
     status: "In progress",
     featured: true,
     summary:
-      "A REST API to manage support incidents with SLA tracking, based on the problems I see every day in production support.",
+      "My hands-on project to learn Java and Spring Boot: a REST API for support incidents with SLA tracking, based on what I see every day in production support.",
     bullets: [
-      "Tickets with priority-based SLAs, breach detection and a status workflow",
-      "PostgreSQL with Spring Data JPA and Flyway migrations",
-      "JWT security with roles, JUnit/Mockito/Testcontainers tests, Docker and GitHub Actions, deployed on AWS",
+      "Built phase by phase, starting with a simple ticket API and adding one new skill at a time",
+      "Goal: tickets with priority-based SLAs, breach detection and a status workflow on PostgreSQL",
+      "Later phases: security with JWT, tests, Docker, CI/CD and AWS deployment",
     ],
     stack: [
-      { name: "Java", core: true }, { name: "Spring Boot", core: true }, { name: "PostgreSQL" }, { name: "Spring Security" },
-      { name: "JUnit" }, { name: "Docker" }, { name: "GitHub Actions" }, { name: "AWS" },
+      { name: "Java", learning: true }, { name: "Spring Boot", learning: true }, { name: "PostgreSQL" },
+      { name: "Spring Data JPA", learning: true }, { name: "JUnit", learning: true }, { name: "Docker" }, { name: "AWS" },
     ],
     tags: ["backend", "aws"],
     links: [{ href: "#building", label: "See the build plan" }],
@@ -157,19 +159,17 @@ export const projects: Project[] = [
   {
     title: "Chronicle App (Social Journal)",
     status: "Shipped",
-    summary: "Full-stack, multi-tenant social journal app with a Node.js and Express REST backend on MongoDB.",
+    summary: "Full-stack, multi-tenant social journal for sharing travel experiences, joining community forums and organizing meetups.",
+    bullets: [
+      "React and Next.js front end with Redux for state management and a responsive UI",
+      "Node.js and Express REST backend on MongoDB with user authentication",
+      "Multi-tenant design with performance benchmarking",
+    ],
     stack: [
       { name: "React", core: true }, { name: "Next.js" }, { name: "Redux" }, { name: "Node.js", core: true },
-      { name: "Express" }, { name: "MongoDB" },
+      { name: "Express", core: true }, { name: "MongoDB", core: true },
     ],
     tags: ["web", "backend"],
-  },
-  {
-    title: "Ontario Government internal web page",
-    status: "Shipped",
-    summary: "Internal web page built with React during my internship, working with developers and designers.",
-    stack: [{ name: "React", core: true }, { name: "JavaScript" }],
-    tags: ["web"],
   },
 ];
 
@@ -177,7 +177,7 @@ export const projects: Project[] = [
 export const building = {
   name: "IncidentHub",
   pitch:
-    "A Spring Boot REST API for support incidents with SLA tracking. It covers what Java job postings ask for most: REST, SQL with JPA, security, tests, Docker, CI/CD and AWS.",
+    "My hands-on project to learn Java and Spring Boot. I'm building it one phase at a time, and each phase adds a skill Java job postings ask for: REST, SQL with JPA, security, tests, Docker, CI/CD and AWS.",
   why: "I handle enterprise incidents every day at OpenText. This is the tool I would want: it knows each ticket's SLA and flags breaches before customers notice.",
   phases: [
     { title: "Core API", detail: "Ticket CRUD, validation, error handling, PostgreSQL with Spring Data JPA and Flyway", status: "in-progress" },
@@ -249,12 +249,12 @@ export const experience: ExperienceItem[] = [
 ];
 
 export const roleFit = [
-  ["Java backend", "Java and Spring Boot for REST services. Building IncidentHub now: JPA, security, tests, Docker, CI/CD and AWS."],
+  ["Java backend", "Java from college; learning Spring Boot now by building IncidentHub phase by phase, with JPA, tests, Docker and AWS."],
   ["Full-stack", "React front ends (Ontario Government, Chronicle), Node.js/Express REST APIs (Fragments) and a Chrome extension used by my team (Timer SaaS Team)."],
   ["AWS", "AWS Certified Cloud Practitioner. Deployed a microservice on ECS with ECR, Cognito, S3 and DynamoDB."],
   ["Delivery & quality", "Docker images shipped to AWS through CI/CD; Jenkins daily at OpenText; this site deploys with GitHub Actions."],
   ["Databases", "SQL troubleshooting on SQL Server and PostgreSQL in production support; MongoDB and DynamoDB in projects."],
   ["Production experience", "Root-cause analysis on Linux and Windows with logs and SQL, moving from Tier-2 into Tier-3 escalations at OpenText. I know how real systems fail."],
-  ["AI coding agents", "Use Claude Code, OpenAI Codex and GitHub Copilot daily to read, debug, review and generate code, and I verify every change with tests."],
+  ["AI coding tools", "Use GitHub Copilot daily; learning to work with AI coding agents like Claude Code and OpenAI Codex, always reviewing the changes they make."],
   ["Communication", "Lead remote sessions with technical and non-technical customers. Fully bilingual in English and Spanish."],
 ];

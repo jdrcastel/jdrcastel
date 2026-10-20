@@ -1,6 +1,6 @@
 <h1 align="center">Hi, I'm Juan David Rodríguez Castelblanco 👋</h1>
 <p align="center">
-  <b>Software Developer</b> · Java · Spring Boot · React · Node.js · AWS<br/>
+  <b>Software Developer</b> · JavaScript · React · Node.js · AWS · Java<br/>
   📍 Ontario, Canada · 🇨🇴 Español / English
 </p>
 
@@ -14,20 +14,16 @@
 
 ### 🧑‍💻 About me
 
-- Software developer for enterprise SaaS: **Java and Spring Boot** on the backend, **React and Node.js** across the stack.
+- Software developer with strong **JavaScript and front-end** skills (React, Next.js, TypeScript), plus a **Node.js microservice on AWS**.
 - **AWS Certified Cloud Practitioner.** I ship containerized REST services on AWS with Docker and CI/CD.
 - Day job: **Technical Support Specialist at OpenText**, troubleshooting production incidents on enterprise SaaS platforms and moving from Tier 2 into **Tier 3**. I know how real systems fail.
-- I build with AI coding agents every day: **Claude Code, OpenAI Codex and GitHub Copilot**.
-- 🎯 Now building: **IncidentHub**, a Spring Boot REST API for support incidents with SLA tracking (JPA, JWT security, JUnit, Docker, GitHub Actions, AWS).
+- I use **GitHub Copilot** daily and I'm learning to work with AI coding agents like **Claude Code** and **OpenAI Codex**.
+- 🌱 Now learning **Java and Spring Boot** by building **IncidentHub**, a REST API for support incidents with SLA tracking.
 - 🎓 Advanced Diploma, Computer Programming and Analysis — **Seneca Polytechnic** (President's Honour List).
 
 ### 🛠️ Tech stack
 
-**Java**
-![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white)
-
-**React & Node.js**
+**JavaScript, React & Node.js**
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
@@ -36,6 +32,10 @@
 ![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
 ![Redux](https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=redux&logoColor=white)
+
+**Java** *(learning Spring Boot)*
+![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white)
 
 **AWS, delivery & data**
 ![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazonwebservices&logoColor=white)

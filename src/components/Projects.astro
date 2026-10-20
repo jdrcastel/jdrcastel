@@ -2,6 +2,7 @@
 import { projects, filters } from "../data/profile";
 
 const badge = { "In progress": "wip", "In use": "live", Shipped: "live" } as const;
+const external = (href: string) => (href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {});
 ---
 
 <section id="projects">
@@ -9,9 +10,7 @@ const badge = { "In progress": "wip", "In use": "live", Shipped: "live" } as con
     <div data-reveal>
       <div class="eyebrow">// projects</div>
       <h2>Selected work</h2>
-      <p class="lead">
-        What I'm building now, plus backend, full-stack and AWS work I've shipped.
-      </p>
+      <p class="lead">What I'm building now, plus backend, full-stack and AWS work I've shipped.</p>
     </div>
 
     <div class="filters" id="filters" data-reveal>
@@ -20,25 +19,26 @@ const badge = { "In progress": "wip", "In use": "live", Shipped: "live" } as con
       ))}
     </div>
 
-    <div class="grid g3" id="projGrid">
+    <div class="pgrid" id="projGrid">
       {projects.map((p, i) => (
-        <article class:list={["card", "proj", { featured: p.featured }]} data-tags={p.tags.join(" ")} data-reveal style={`transition-delay:${(i % 3) * 80}ms`}>
+        <article class:list={["card", "proj", { featured: p.featured }]} data-tags={p.tags.join(" ")} data-reveal style={`transition-delay:${(i % 2) * 80}ms`}>
           <div class="top">
             <h3>{p.title}</h3>
             <span class={`badge ${badge[p.status]}`}>{p.status}</span>
           </div>
-          <p>{p.summary}</p>
-          {p.bullets && <ul>{p.bullets.map((b) => <li>{b}</li>)}</ul>}
+          <p class="summary">{p.summary}</p>
           <div class="chips">
             {p.stack.map((s) => <span class:list={["chip", { hl: s.core, learn: s.learning }]}>{s.name}</span>)}
           </div>
+          {p.bullets && (
+            <details>
+              <summary>Learn more</summary>
+              <ul>{p.bullets.map((b) => <li>{b}</li>)}</ul>
+            </details>
+          )}
           {p.links && (
             <div class="plinks">
-              {p.links.map((l) => (
-                <a class="plink" href={l.href} {...(l.href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {})}>
-                  {l.label} →
-                </a>
-              ))}
+              {p.links.map((l) => <a class="plink" href={l.href} {...external(l.href)}>{l.label} →</a>)}
             </div>
           )}
         </article>
@@ -55,25 +55,40 @@ const badge = { "In progress": "wip", "In use": "live", Shipped: "live" } as con
   }
   .filter:hover { color: var(--text); border-color: var(--accent); }
   .filter.on { background: var(--text); color: var(--bg); border-color: var(--text); }
-  .proj { display: flex; flex-direction: column; }
-  .top { display: flex; justify-content: space-between; align-items: start; gap: 10px; margin-bottom: 4px; }
+
+  /* Cards size to their content, so opening "Learn more" never leaves empty space in the neighbour */
+  .pgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+  @media (max-width: 760px) { .pgrid { grid-template-columns: minmax(0, 1fr); } }
+
+  .proj { display: flex; flex-direction: column; gap: 12px; }
+  .top { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
+  .top h3 { margin: 0; }
+  .summary { margin: 0; }
   .badge { font-size: 11.5px; font-weight: 600; padding: 3px 8px; border-radius: 6px; white-space: nowrap; }
   .badge.live { color: var(--ok); background: var(--ok-soft); }
   .badge.wip { color: var(--warn); background: var(--warn-soft); }
-  ul { margin: 0 0 14px; padding-left: 18px; color: var(--muted); font-size: 14.5px; }
-  li { margin: 3px 0; }
-  .chips { margin-top: auto; }
+
+  details { border-top: 1px dashed var(--border); padding-top: 10px; }
+  summary {
+    cursor: pointer; list-style: none; font-weight: 600; font-size: 14px; color: var(--text);
+    display: inline-flex; align-items: center; gap: 6px; user-select: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: "▸"; color: var(--accent); transition: transform 0.15s; }
+  details[open] summary::before { transform: rotate(90deg); }
+  details[open] summary { margin-bottom: 8px; }
+  ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14.5px; }
+  li { margin: 4px 0; }
+
+  .plinks { display: flex; flex-wrap: wrap; gap: 16px; }
+  .plink { font-weight: 600; font-size: 14.5px; }
+
   .featured {
-    grid-column: span 2;
-    border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
     background:
       linear-gradient(var(--surface), var(--surface)) padding-box,
       linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent-3)) border-box;
     border: 1px solid transparent;
   }
-  @media (max-width: 640px) { .featured { grid-column: auto; } }
-  .plinks { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 14px; }
-  .plink { font-weight: 600; font-size: 14.5px; }
   .hidden { display: none; }
 </style>
 
