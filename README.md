@@ -1,7 +1,7 @@
-<h1 align="center">Hi, I'm Juan David Rodr铆guez Castelblanco 馃憢</h1>
+<h1 align="center">Hi, I'm Juan David Rodríguez Castelblanco 👋</h1>
 <p align="center">
-  <b>Software Engineer</b> 路 Full-Stack (React 路 Next.js 路 Node.js 路 TypeScript) 路 Cloud & DevOps<br/>
-  馃搷 Waterloo, Ontario, Canada 路 馃嚚馃嚧 Espa帽ol / English
+  <b>Software Engineer</b> · Full-Stack (React · Next.js · Node.js · TypeScript) · Cloud & DevOps<br/>
+  📍 Waterloo, Ontario, Canada · 🇨🇴 Español / English
 </p>
 
 <p align="center">
@@ -12,16 +12,16 @@
 
 ---
 
-### 馃鈥嶐煉?About me
+### 🧑‍💻 About me
 
 - I build web apps and internal tools that make systems **faster, more reliable, and easier to maintain**.
-- Day job: **Technical Support Specialist at OpenText** (SaaS, Tier 2) 鈥?debugging production issues across Windows, Linux, SQL and Jenkins for enterprise customers.
+- Day job: **Technical Support Specialist at OpenText** (SaaS, Tier 2) — debugging production issues across Windows, Linux, SQL and Jenkins for enterprise customers.
 - I bring a developer mindset to support: I built an **internal Chrome extension** the SaaS team uses to track case status and timing.
-- 馃尡 Currently learning: **Java / Spring Boot**, AWS, and Cloud/DevOps practices.
-- 馃幆 Looking for: **Software Engineer** roles (full-stack, backend, cloud) in Ontario.
-- 馃帗 Advanced Diploma, Computer Programming & Analysis 鈥?**Seneca Polytechnic** (President's Honour List, 4.0 GPA).
+- 🌱 Currently learning: **Java / Spring Boot**, AWS, and Cloud/DevOps practices.
+- 🎯 Looking for: **Software Engineer** roles (full-stack, backend, cloud) in Ontario.
+- 🎓 Advanced Diploma, Computer Programming & Analysis — **Seneca Polytechnic** (President's Honour List, 4.0 GPA).
 
-### 馃洜锔?Tech stack
+### 🛠️ Tech stack
 
 **Languages**
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
@@ -54,7 +54,7 @@
 ![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
 ![Jira](https://img.shields.io/badge/Jira-0052CC?style=flat-square&logo=jira&logoColor=white)
 
-### 馃搧 Featured projects
+### 📁 Featured projects
 
 | Project | What it does | Stack |
 |---|---|---|
@@ -63,23 +63,23 @@
 | **Favorites App** | Mobile app with a Capacitor-based favorites feature | Ionic, Angular, Capacitor |
 | **Portfolio** | My personal site | Next.js, Vercel |
 
-> 馃憠 Pin these repos on your profile so recruiters see them first.
+> 👉 Pin these repos on your profile so recruiters see them first.
 
-### 馃捈 Experience
+### 💼 Experience
 
-- **Technical Support Specialist 鈥?OpenText** 路 Sep 2025 鈥?Present
-- **Application Developer (Co-op) 鈥?Government of Ontario** 路 Sep 2023 鈥?Apr 2024 鈥?built and deployed a multi-tenant web application; resolved 150+ support tickets.
-- **Technical Support Engineer (Volunteer) 鈥?Hispanotech** 路 Jan 2022 鈥?Aug 2023 鈥?mentored junior engineers supporting Latin American STEM professionals in Canada.
+- **Technical Support Specialist — OpenText** · Sep 2025 – Present
+- **Application Developer (Co-op) — Government of Ontario** · Sep 2023 – Apr 2024 — built and deployed a multi-tenant web application; resolved 150+ support tickets.
+- **Technical Support Engineer (Volunteer) — Hispanotech** · Jan 2022 – Aug 2023 — mentored junior engineers supporting Latin American STEM professionals in Canada.
 
-### 馃搳 GitHub stats
+### 📊 GitHub stats
 
 <p align="center">
   <img height="160" src="https://github-readme-stats.vercel.app/api?username=YOUR_USERNAME&show_icons=true&hide_border=true&count_private=true" alt="GitHub stats"/>
   <img height="160" src="https://github-readme-stats.vercel.app/api/top-langs/?username=YOUR_USERNAME&layout=compact&hide_border=true" alt="Top languages"/>
 </p>
 
-### 馃帶 Outside of code
+### 🎧 Outside of code
 
-馃彁 Volleyball 路 馃弸锔?Gym 路 馃 Drums 路 馃幃 Video games
+🏐 Volleyball · 🏋️ Gym · 🥁 Drums · 🎮 Video games
 
-<p align="center"><i>隆Gracias por pasar! Open to collaborating 鈥?feel free to reach out.</i></p>
+<p align="center"><i>¡Gracias por pasar! Open to collaborating — feel free to reach out.</i></p>
