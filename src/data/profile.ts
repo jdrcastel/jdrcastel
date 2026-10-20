@@ -1,4 +1,5 @@
 // All site content lives here. Edit this file to update the portfolio.
+// Keep it in sync with the resume (Resume_Juan_Castelblanco.docx / .pdf).
 
 export const profile = {
   name: "Juan David Rodríguez Castelblanco",
@@ -7,11 +8,11 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/jdcastel/",
   github: "https://github.com/jdrcastel",
   repo: "jdrcastel/jdrcastel",
-  location: "Toronto, Canada",
-  status: "Open to Full-stack, DevOps & Cloud roles",
-  roles: ["MERN stack developer", "Java developer", "DevOps & AWS engineer", "AI integration builder"],
+  location: "Ontario, Canada",
+  status: "Open to Software Developer roles",
+  roles: ["Software developer", "Java & Spring Boot developer", "React & Node.js developer", "AWS-certified engineer"],
   pitch:
-    "Full-stack developer working in the MERN stack and Java, with a DevOps and AWS focus. AWS Certified Cloud Practitioner, hands-on with CI/CD, Docker and Linux, and I build with AI every day: LLM integrations and AI-assisted development with GitHub Copilot and Claude Code. At OpenText I support enterprise SaaS customers and I'm moving from Tier 2 to Tier 3.",
+    "Software developer for enterprise SaaS: Java and Spring Boot on the backend, React and Node.js across the stack, deployed on AWS with Docker and CI/CD. At OpenText I troubleshoot production incidents on enterprise SaaS platforms and I'm moving into Tier-3 support, so I know how real systems fail and how to fix them. I build with AI coding agents (Claude Code, OpenAI Codex, GitHub Copilot) and verify every change with tests.",
   hobbies: "volleyball 🏐 · gym 🏋️ · video games 🎮",
 };
 
@@ -19,7 +20,7 @@ export const stats = [
   { value: "AWS", label: "Certified Cloud Practitioner" },
   { value: "Tier 2 → 3", label: "Moving to Tier-3 support at OpenText" },
   { value: "5+", label: "OpenText products supported (LRE, ALM, Octane…)" },
-  { value: "4", label: "Live DevOps tools on this site" },
+  { value: "4", label: "Live engineering tools on this site" },
 ];
 
 // core: one of my strongest skills (highlighted).
@@ -27,55 +28,52 @@ export const stats = [
 export type Skill = { name: string; core?: boolean; learning?: boolean };
 export const skillGroups: { icon: string; title: string; skills: Skill[] }[] = [
   {
-    icon: "⚛️",
-    title: "MERN & JavaScript",
-    skills: [
-      { name: "MongoDB", core: true }, { name: "Express", core: true }, { name: "React", core: true },
-      { name: "Node.js", core: true }, { name: "TypeScript", core: true }, { name: "REST APIs", core: true },
-      { name: "Next.js" }, { name: "Redux" }, { name: "Astro" }, { name: "Vitest" },
-    ],
-  },
-  {
     icon: "☕",
-    title: "Java",
+    title: "Java & Spring Boot",
     skills: [
-      { name: "Java", core: true }, { name: "OOP & data structures" }, { name: "JUnit" },
-      { name: "Spring Boot", learning: true }, { name: "Maven", learning: true }, { name: "Jakarta EE", learning: true },
+      { name: "Java", core: true }, { name: "Spring Boot", core: true }, { name: "REST APIs", core: true },
+      { name: "Microservices" }, { name: "Object-oriented programming" },
     ],
   },
   {
-    icon: "⚙️",
-    title: "DevOps & CI/CD",
+    icon: "⚛️",
+    title: "React & Node.js",
     skills: [
-      { name: "Docker", core: true }, { name: "GitHub Actions", core: true }, { name: "Jenkins", core: true },
-      { name: "CI/CD pipelines", core: true }, { name: "Linux", core: true }, { name: "Git" }, { name: "Bash" },
-      { name: "Kubernetes", learning: true }, { name: "Terraform", learning: true },
+      { name: "JavaScript", core: true }, { name: "TypeScript", core: true }, { name: "React", core: true },
+      { name: "Node.js", core: true }, { name: "Next.js" }, { name: "Express" }, { name: "Redux" }, { name: "HTML/CSS" },
     ],
   },
   {
     icon: "☁️",
-    title: "AWS & Cloud",
+    title: "AWS",
     skills: [
-      { name: "AWS Cloud Practitioner", core: true }, { name: "EC2" }, { name: "S3" }, { name: "IAM" }, { name: "VPC" },
-      { name: "CloudWatch", learning: true }, { name: "Lambda", learning: true }, { name: "Google Cloud" },
+      { name: "AWS Cloud Practitioner", core: true }, { name: "ECS" }, { name: "ECR" }, { name: "S3" },
+      { name: "DynamoDB" }, { name: "Cognito" }, { name: "Lambda" }, { name: "IAM" }, { name: "VPC" },
+    ],
+  },
+  {
+    icon: "🚀",
+    title: "Delivery & quality",
+    skills: [
+      { name: "Docker", core: true }, { name: "CI/CD", core: true }, { name: "GitHub Actions" }, { name: "Jenkins" },
+      { name: "Unit testing" }, { name: "Vitest" }, { name: "Git" }, { name: "Linux" }, { name: "Bash" },
     ],
   },
   {
     icon: "🤖",
-    title: "AI integrations",
+    title: "AI coding agents",
     skills: [
-      { name: "GitHub Copilot", core: true }, { name: "Claude Code", core: true }, { name: "Prompt engineering" },
-      { name: "LLM APIs (OpenAI, Claude)" }, { name: "AI-assisted code review" }, { name: "RAG", learning: true },
-      { name: "MCP", learning: true }, { name: "Python", learning: true }, { name: "FastAPI", learning: true },
+      { name: "Claude Code", core: true }, { name: "OpenAI Codex", core: true }, { name: "GitHub Copilot", core: true },
+      { name: "AI-assisted code review" },
     ],
   },
   {
-    icon: "🔐",
-    title: "Data & enterprise SaaS",
+    icon: "🗄️",
+    title: "Data & production support",
     skills: [
-      { name: "SQL", core: true }, { name: "SQL Server" }, { name: "PostgreSQL" }, { name: "SAML SSO", core: true },
-      { name: "OAuth 2.0" }, { name: "LDAP" }, { name: "Log analysis", core: true }, { name: "Root-cause analysis" },
-      { name: "Power Apps" }, { name: "Power Automate" }, { name: "Jira" },
+      { name: "SQL", core: true }, { name: "PostgreSQL" }, { name: "SQL Server" }, { name: "MongoDB" }, { name: "DynamoDB" },
+      { name: "Root-cause analysis", core: true }, { name: "Log analysis" }, { name: "SAML SSO" }, { name: "OAuth 2.0" },
+      { name: "LDAP" }, { name: "Power Apps" }, { name: "Power Automate" },
     ],
   },
 ];
@@ -83,15 +81,15 @@ export const skillGroups: { icon: string; title: string; skills: Skill[] }[] = [
 export type Filter = "devops" | "backend" | "web" | "automation";
 export const filters: { id: "all" | Filter; label: string }[] = [
   { id: "all", label: "All" },
-  { id: "devops", label: "DevOps & AWS" },
   { id: "backend", label: "Backend" },
-  { id: "web", label: "Web" },
+  { id: "web", label: "Full-stack" },
+  { id: "devops", label: "AWS & CI/CD" },
   { id: "automation", label: "Automation" },
 ];
 
 export type Project = {
   title: string;
-  status: "Live" | "In use" | "Shipped" | "Learning build";
+  status: "Live" | "In use" | "Shipped" | "Next build";
   summary: string;
   bullets?: string[];
   stack: Skill[];
@@ -102,82 +100,79 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "This portfolio + DevOps toolbox",
-    status: "Live",
+    title: "Enterprise Microservice Platform",
+    status: "Shipped",
     featured: true,
-    summary:
-      "The site you are on. Four browser-based tools (SSO token inspector, Dockerfile linter, AWS VPC planner, live CI/CD feed) shipped through a tested pipeline.",
+    summary: "RESTful CRUD microservice on AWS with authentication, object storage and a containerized CI/CD deployment.",
     bullets: [
-      "Tool logic is plain TypeScript modules, separate from the UI, covered by Vitest unit tests",
-      "GitHub Actions pipeline: npm ci → astro check → vitest → build → deploy to GitHub Pages",
-      "A failing test blocks the deploy, so a broken tool never reaches production",
-      "Static site: no server to patch, zero hosting cost, fast everywhere",
+      "Node.js/Express REST API with Cognito authentication and S3/DynamoDB storage over HTTPS",
+      "Containerized with Docker, images pushed to ECR and deployed to ECS through a CI/CD pipeline",
+      "Built with performance and security in mind for an enterprise microservice workflow",
     ],
     stack: [
-      { name: "GitHub Actions", core: true }, { name: "TypeScript", core: true }, { name: "Vitest" }, { name: "Astro" },
-      { name: "GitHub Pages" }, { name: "Terraform (generated)" },
+      { name: "Node.js", core: true }, { name: "Express", core: true }, { name: "AWS ECS" }, { name: "ECR" },
+      { name: "Cognito" }, { name: "S3" }, { name: "DynamoDB" }, { name: "Docker", core: true }, { name: "CI/CD" },
+    ],
+    tags: ["backend", "devops"],
+  },
+  {
+    title: "Engineering Toolbox Portfolio",
+    status: "Live",
+    summary:
+      "The site you are on: browser tools for real engineering tasks, shipped through a tested CI/CD pipeline.",
+    bullets: [
+      "JWT/SAML SSO inspector, Dockerfile linter, and an AWS VPC subnet planner that generates Terraform",
+      "GitHub Actions CI/CD: type check → unit tests → build → deploy; failing tests block the deploy",
+    ],
+    stack: [
+      { name: "TypeScript", core: true }, { name: "Vitest" }, { name: "GitHub Actions", core: true }, { name: "Astro" },
+      { name: "AWS VPC" }, { name: "Terraform" },
     ],
     tags: ["devops", "web"],
     link: { href: "#toolbox", label: "Try the tools" },
   },
   {
-    title: "Enterprise Microservice Platform (Fragments)",
+    title: "Chronicle App (Social Journal)",
     status: "Shipped",
-    summary: "Cloud-hosted microservice with full CRUD REST endpoints and an automated CI/CD pipeline.",
-    bullets: [
-      "Authenticated REST API that stores and converts text and image fragments",
-      "Containerized with Docker on Linux and deployed on AWS through CI/CD",
-    ],
+    summary: "Full-stack, multi-tenant social journal app with a Node.js and Express REST backend on MongoDB.",
     stack: [
-      { name: "Node.js" }, { name: "Express" }, { name: "REST", core: true }, { name: "Docker", core: true },
-      { name: "AWS", core: true }, { name: "CI/CD" }, { name: "Linux" },
+      { name: "MongoDB", core: true }, { name: "Express", core: true }, { name: "React", core: true },
+      { name: "Node.js", core: true }, { name: "Next.js" }, { name: "Redux" },
     ],
-    tags: ["devops", "backend"],
+    tags: ["web", "backend"],
   },
   {
     title: "SaaS case tracker (Chrome extension)",
     status: "In use",
-    summary: "Internal tool I built for my OpenText SaaS support team to track case status and timing against SLAs.",
-    bullets: ["Adopted by the team for day-to-day case tracking", "Turns a manual process into a glanceable dashboard"],
+    summary: "Internal tool I built in JavaScript for my OpenText SaaS support team to track case status and timing.",
     stack: [{ name: "JavaScript" }, { name: "Chrome Extensions API" }, { name: "HTML/CSS" }],
     tags: ["automation", "web"],
   },
   {
     title: "Ontario Government internal apps",
     status: "Shipped",
-    summary: "Internal business apps and automated workflows that streamlined business processes.",
-    stack: [{ name: "Power Apps", core: true }, { name: "Power Automate", core: true }],
+    summary: "Internal web apps built with Power Apps and business workflows automated with Power Automate.",
+    stack: [{ name: "Power Apps" }, { name: "Power Automate" }],
     tags: ["automation"],
   },
   {
-    title: "Chronicle App",
-    status: "Shipped",
-    summary: "Multi-tenant social journal with real-time state management and a clean, intuitive UI.",
-    stack: [
-      { name: "MongoDB" }, { name: "Express" }, { name: "React" }, { name: "Node.js" },
-      { name: "Next.js" }, { name: "Redux" }, { name: "TypeScript" },
-    ],
-    tags: ["web", "backend"],
-  },
-  {
-    title: "AssetVault — Spring Boot API on Kubernetes",
-    status: "Learning build",
-    summary: "What I'm building now to learn Java/Spring Boot and Kubernetes end to end.",
+    title: "Spring Boot API on AWS",
+    status: "Next build",
+    summary: "My next project: a production-style Spring Boot API with the same AWS and CI/CD setup.",
     bullets: [
-      "Goal: REST API for file assets with Spring Boot 3 and PostgreSQL",
-      "Goal: multi-stage Docker image, deployed to Kubernetes with health probes",
-      "Goal: GitHub Actions pipeline with tests, image build and AWS deploy",
+      "Goal: Spring Boot REST API with PostgreSQL",
+      "Goal: multi-stage Docker image deployed to AWS ECS",
+      "Goal: GitHub Actions pipeline with tests and automated deploy",
     ],
     stack: [
-      { name: "Java", learning: true }, { name: "Spring Boot", learning: true }, { name: "PostgreSQL" },
-      { name: "Docker" }, { name: "Kubernetes", learning: true }, { name: "AWS" },
+      { name: "Java" }, { name: "Spring Boot" }, { name: "PostgreSQL" }, { name: "Docker" }, { name: "AWS ECS" },
     ],
     tags: ["backend", "devops"],
   },
 ];
 
 export type ExperienceItem = {
-  kind: "Work" | "Certification" | "Volunteer" | "Education";
+  kind: "Work" | "Internship" | "Certification" | "Volunteer" | "Education";
   when: string;
   role: string;
   org: string;
@@ -188,15 +183,13 @@ export const experience: ExperienceItem[] = [
   {
     kind: "Work",
     when: "Sep 2025 — Present · Waterloo, ON",
-    role: "Technical Support Specialist (Tier 2 → Tier 3)",
+    role: "Technical Support Specialist",
     org: "OpenText",
     bullets: [
-      "Moving from Tier-2 to Tier-3 support, taking on deeper technical escalations.",
-      "Production support for global enterprise customers on OpenText SaaS: LoadRunner Enterprise, QC/ALM, Octane/ValueEdge, Digital Lab and MF Connect.",
-      "Investigate and reproduce incidents in authentication (SAML SSO, LDAP, OAuth 2.0), integrations, performance, installs, patching and configuration.",
-      "Find root causes with Windows/Linux, SQL, Jenkins, WinSCP, system logs and environment data.",
-      "Work with Operations, Network, L3, Engineering and R&D to escalate and resolve incidents under SLAs.",
-      "Built an internal Chrome extension the SaaS team uses to track case status and timing.",
+      "Provide production support to global enterprise customers on OpenText SaaS products (LoadRunner Enterprise, ALM/QC, Octane/ValueEdge), currently moving from Tier-2 into Tier-3 escalations.",
+      "Troubleshoot authentication (SAML SSO, LDAP, OAuth 2.0), integration and performance incidents using Linux/Windows, SQL, Jenkins and system logs, and analyze ticket data to find root causes and recurring issues.",
+      "Partner with Operations, Engineering and R&D in an SLA-driven environment to resolve complex escalations.",
+      "Built an internal Chrome extension in JavaScript that the SaaS support team uses to track case status and timing.",
     ],
   },
   {
@@ -207,14 +200,13 @@ export const experience: ExperienceItem[] = [
     bullets: ["Core AWS services, global infrastructure, security and the shared responsibility model, pricing and support."],
   },
   {
-    kind: "Work",
+    kind: "Internship",
     when: "Sep 2022 — Apr 2023 · Toronto, ON",
     role: "Application Developer",
-    org: "Ontario Government",
+    org: "Government of Ontario",
     bullets: [
-      "Built internal business apps with Microsoft Power Apps and automated workflows with Power Automate.",
-      "Collaborated with developers and designers to fix bugs, ship features and improve UX.",
-      "Turned business requirements into working low-code solutions used across internal teams.",
+      "Built internal web apps with Microsoft Power Apps and automated business workflows with Power Automate.",
+      "Worked with developers and designers to fix bugs, deliver new features, and improve user experience.",
     ],
   },
   {
@@ -222,28 +214,28 @@ export const experience: ExperienceItem[] = [
     when: "2022 — 2023",
     role: "Technical Support Engineer",
     org: "Hispanotech",
-    bullets: ["Mentored junior engineers supporting Latin American STEM professionals in Canada."],
+    bullets: ["Organized technical workshops and networking sessions for Latin American tech professionals in Canada."],
   },
   {
     kind: "Education",
-    when: "2021 — 2024",
-    role: "Advanced Diploma, Computer Programming & Analysis",
+    when: "Jan 2021 — Jan 2024 · Toronto, ON",
+    role: "Computer Programming and Analysis (Advanced Diploma)",
     org: "Seneca Polytechnic",
     bullets: [
-      "President's Honour List (twice). Certifications: Fundamentals of Software Engineering, Advanced Algorithms (Array & String Patterns).",
+      "Relevant coursework: Java, Object-Oriented Programming, Cloud Infrastructure, Database Systems, Data Structures.",
+      "President's Honour List, Summer and Fall 2023.",
+      "Platzi certificates: Advanced Algorithms, REST API with JavaScript, Object-Oriented Programming.",
     ],
   },
 ];
 
 export const roleFit = [
-  ["CI/CD & automation", "This site ships through a GitHub Actions pipeline I wrote (check → test → build → deploy). I work with Jenkins daily at OpenText."],
-  ["Containers", "Dockerized and deployed the Fragments microservice. The Dockerfile linter above encodes the practices I follow. Learning Kubernetes now."],
-  ["AWS", "AWS Certified Cloud Practitioner. Deployed Fragments on AWS. The VPC planner shows how I think about subnets, AZs and Terraform."],
-  ["Linux & troubleshooting", "Daily root-cause analysis on Windows and Linux with logs, SQL and environment data for enterprise customers."],
-  ["Identity & security", "Resolve SAML SSO, OAuth 2.0 and LDAP incidents for enterprise customers. The SSO inspector is the tool I wanted for that job."],
-  ["Full-stack (MERN + Java)", "REST APIs with Node.js/Express and MongoDB, React front ends, and Java. Learning Spring Boot through the AssetVault build."],
-  ["Databases", "SQL troubleshooting on SQL Server and PostgreSQL in production support; MongoDB in Chronicle."],
-  ["Testing & quality", "Unit tests gate every deploy of this site. Comfortable with TDD."],
-  ["AI integrations", "Use GitHub Copilot and Claude Code daily to read, debug, review and generate code. Integrating LLM APIs into apps; learning RAG and MCP."],
+  ["Java backend", "Java and Spring Boot for REST services. A Spring Boot API on AWS is my next build, with tests, Docker and CI/CD."],
+  ["Full-stack", "React and Next.js front ends with Node.js/Express REST APIs (Chronicle, Enterprise Microservice Platform)."],
+  ["AWS", "AWS Certified Cloud Practitioner. Deployed a microservice on ECS with ECR, Cognito, S3 and DynamoDB."],
+  ["Delivery & quality", "Docker images shipped through CI/CD. This site deploys through a GitHub Actions pipeline where failing tests block the release."],
+  ["Databases", "SQL troubleshooting on SQL Server and PostgreSQL in production support; MongoDB and DynamoDB in projects."],
+  ["Production experience", "Root-cause analysis on Linux and Windows with logs and SQL, moving from Tier-2 into Tier-3 escalations at OpenText. I know how real systems fail."],
+  ["AI coding agents", "Use Claude Code, OpenAI Codex and GitHub Copilot daily to read, debug, review and generate code, and I verify every change with tests."],
   ["Communication", "Lead remote sessions with technical and non-technical customers. Fully bilingual in English and Spanish."],
 ];
