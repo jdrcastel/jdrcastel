@@ -10,9 +10,9 @@ export const profile = {
   repo: "jdrcastel/jdrcastel",
   location: "Ontario, Canada",
   status: "Open to Software Developer roles",
-  roles: ["Software developer", "JavaScript & React developer", "Node.js microservices on AWS", "Growing into Java & Spring Boot"],
+  roles: ["Software developer", "JavaScript & React developer", "Node.js microservices on AWS", "Building IncidentHub in TypeScript"],
   pitch:
-    "Software developer with strong JavaScript and front-end skills (React, Next.js, TypeScript) who also built a Node.js microservice on AWS with Docker and CI/CD. Now growing into Java and Spring Boot by building IncidentHub. At OpenText I troubleshoot production incidents on enterprise SaaS platforms and I'm moving into Tier-3 support, so I know how real systems fail and how to fix them.",
+    "Software developer with strong JavaScript and front-end skills (React, Next.js, TypeScript) who also built a Node.js microservice on AWS with Docker and CI/CD. Now building IncidentHub, an incident and SLA API in TypeScript with PostgreSQL. At OpenText I troubleshoot production incidents on enterprise SaaS platforms and I'm moving into Tier-3 support, so I know how real systems fail and how to fix them.",
   hobbies: "soccer ⚽ · gym 🏋️ · video games 🎮",
 };
 
@@ -20,7 +20,7 @@ export const stats = [
   { value: "AWS", label: "Certified Cloud Practitioner" },
   { value: "Tier 2 → 3", label: "Moving to Tier-3 support at OpenText" },
   { value: "5+", label: "OpenText products supported (LRE, ALM, Octane…)" },
-  { value: "Java", label: "Learning Spring Boot by building IncidentHub" },
+  { value: "SQL", label: "Learning PostgreSQL and Prisma by building IncidentHub" },
 ];
 
 // core: one of my strongest skills (highlighted).
@@ -38,11 +38,11 @@ export const skillGroups: { icon: string; title: string; skills: Skill[] }[] = [
   },
   {
     icon: "🧩",
-    title: "Backend & Java",
+    title: "Backend & data",
     skills: [
       { name: "Node.js", core: true }, { name: "Express", core: true }, { name: "REST APIs", core: true },
-      { name: "Microservices", core: true }, { name: "Java" }, { name: "Object-oriented programming" },
-      { name: "Spring Boot", learning: true }, { name: "Spring Data JPA", learning: true }, { name: "JUnit", learning: true },
+      { name: "Microservices", core: true }, { name: "PostgreSQL", learning: true }, { name: "Prisma", learning: true },
+      { name: "Zod", learning: true }, { name: "Vitest", learning: true }, { name: "Java" }, { name: "Object-oriented programming" },
     ],
   },
   {
@@ -101,22 +101,23 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "IncidentHub — learning Java & Spring Boot",
+    title: "IncidentHub — incident & SLA API",
     status: "In progress",
     featured: true,
     summary:
-      "My hands-on project to learn Java and Spring Boot: a REST API for support incidents with SLA tracking, based on what I see every day in production support.",
+      "A REST API for support incidents with SLA tracking, built in TypeScript, based on what I see every day in production support.",
     bullets: [
       "Built phase by phase, starting with a simple ticket API and adding one new skill at a time",
       "Goal: tickets with priority-based SLAs, breach detection and a status workflow on PostgreSQL",
       "Later phases: security with JWT, tests, Docker, CI/CD and AWS deployment",
     ],
     stack: [
-      { name: "Java", learning: true }, { name: "Spring Boot", learning: true }, { name: "PostgreSQL" },
-      { name: "Spring Data JPA", learning: true }, { name: "JUnit", learning: true }, { name: "Docker" }, { name: "AWS" },
+      { name: "TypeScript", core: true }, { name: "Node.js", core: true }, { name: "Express", core: true },
+      { name: "PostgreSQL", learning: true }, { name: "Prisma", learning: true }, { name: "Vitest", learning: true },
+      { name: "Docker" }, { name: "AWS" },
     ],
     tags: ["backend", "aws"],
-    links: [{ href: "#building", label: "See the build plan" }],
+    links: [{ href: "https://github.com/jdrcastel/incidenthub", label: "Code" }, { href: "#building", label: "See the build plan" }],
   },
   {
     title: "Enterprise Microservice Platform (Fragments)",
@@ -177,13 +178,14 @@ export const projects: Project[] = [
 export const building = {
   name: "IncidentHub",
   pitch:
-    "My hands-on project to learn Java and Spring Boot. I'm building it one phase at a time, and each phase adds a skill Java job postings ask for: REST, SQL with JPA, security, tests, Docker, CI/CD and AWS.",
+    "My hands-on backend project in TypeScript. I'm building it one phase at a time, and each phase adds a skill backend job postings ask for: REST, SQL with PostgreSQL, security, tests, Docker, CI/CD and AWS.",
   why: "I handle enterprise incidents every day at OpenText. This is the tool I would want: it knows each ticket's SLA and flags breaches before customers notice.",
   phases: [
-    { title: "Core API", detail: "Ticket CRUD, validation, error handling, PostgreSQL with Spring Data JPA and Flyway", status: "in-progress" },
+    { title: "Setup", detail: "TypeScript, Express, PostgreSQL in Docker, Prisma, first tests and CI", status: "done" },
+    { title: "Core API", detail: "Ticket CRUD, validation with Zod, error handling, PostgreSQL with Prisma migrations", status: "in-progress" },
     { title: "Business rules", detail: "SLA per priority, breach detection, status workflow (open → in progress → resolved)", status: "planned" },
-    { title: "Security", detail: "Spring Security with JWT and roles (agent, admin)", status: "planned" },
-    { title: "Tests", detail: "JUnit 5, Mockito and Testcontainers", status: "planned" },
+    { title: "Security", detail: "JWT authentication and roles (agent, admin)", status: "planned" },
+    { title: "Tests", detail: "Vitest, Supertest and integration tests against a real PostgreSQL", status: "planned" },
     { title: "Delivery", detail: "Docker, GitHub Actions CI/CD, OpenAPI docs", status: "planned" },
     { title: "AWS", detail: "Deploy to AWS (ECS or EC2) with RDS PostgreSQL", status: "planned" },
     { title: "React front end", detail: "Dashboard for agents to see tickets and SLA status", status: "planned" },
@@ -249,7 +251,7 @@ export const experience: ExperienceItem[] = [
 ];
 
 export const roleFit = [
-  ["Java backend", "Java from college; learning Spring Boot now by building IncidentHub phase by phase, with JPA, tests, Docker and AWS."],
+  ["Backend", "Node.js/Express microservice on AWS (Fragments); building IncidentHub in TypeScript phase by phase, with PostgreSQL, Prisma, tests, Docker and AWS. Java and OOP from college."],
   ["Full-stack", "React front ends (Ontario Government, Chronicle), Node.js/Express REST APIs (Fragments) and a Chrome extension used by my team (Timer SaaS Team)."],
   ["AWS", "AWS Certified Cloud Practitioner. Deployed a microservice on ECS with ECR, Cognito, S3 and DynamoDB."],
   ["Delivery & quality", "Docker images shipped to AWS through CI/CD; Jenkins daily at OpenText; this site deploys with GitHub Actions."],

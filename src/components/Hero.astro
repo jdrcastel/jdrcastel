@@ -31,25 +31,23 @@ const marquee = skillGroups.flatMap((g) => g.skills.filter((s) => s.core).map((s
       </div>
     </div>
 
-    <div class="code float" aria-label="Excerpt from IncidentHub, a Spring Boot project in progress">
-      <div class="bar"><i></i><i></i><i></i><span>IncidentHub · SlaService.java</span></div>
+    <div class="code float" aria-label="Excerpt from IncidentHub, a TypeScript project in progress">
+      <div class="bar"><i></i><i></i><i></i><span>IncidentHub · sla.ts</span></div>
 <pre><span class="c">// IncidentHub: the SLA rule I'm building toward</span>
-<span class="a">@Service</span>
-<span class="k">public class</span> <span class="t">SlaService</span> &#123;
+<span class="k">const</span> SLA_HOURS: <span class="t">Record</span>&lt;<span class="t">Priority</span>, <span class="t">number</span>&gt; = &#123;
+  CRITICAL: <span class="n">4</span>,
+  HIGH:     <span class="n">8</span>,
+  MEDIUM:   <span class="n">48</span>,
+  LOW:      <span class="n">120</span>,
+&#125;;
 
-  <span class="k">private static final</span> <span class="t">Map</span>&lt;<span class="t">Priority</span>, <span class="t">Duration</span>&gt; SLA = <span class="t">Map</span>.of(
-      <span class="t">Priority</span>.CRITICAL, <span class="t">Duration</span>.ofHours(<span class="n">4</span>),
-      <span class="t">Priority</span>.HIGH,     <span class="t">Duration</span>.ofHours(<span class="n">8</span>),
-      <span class="t">Priority</span>.MEDIUM,   <span class="t">Duration</span>.ofDays(<span class="n">2</span>),
-      <span class="t">Priority</span>.LOW,      <span class="t">Duration</span>.ofDays(<span class="n">5</span>));
+<span class="k">export function</span> dueAt(ticket: <span class="t">Ticket</span>): <span class="t">Date</span> &#123;
+  <span class="k">const</span> hours = SLA_HOURS[ticket.priority];
+  <span class="k">return new</span> <span class="t">Date</span>(ticket.createdAt.getTime() + hours * HOUR);
+&#125;
 
-  <span class="k">public</span> <span class="t">Instant</span> dueAt(<span class="t">Ticket</span> ticket) &#123;
-    <span class="k">return</span> ticket.getCreatedAt().plus(SLA.get(ticket.getPriority()));
-  &#125;
-
-  <span class="k">public boolean</span> isBreached(<span class="t">Ticket</span> ticket, <span class="t">Instant</span> now) &#123;
-    <span class="k">return</span> ticket.isOpen() &amp;&amp; now.isAfter(dueAt(ticket));
-  &#125;
+<span class="k">export function</span> isBreached(ticket: <span class="t">Ticket</span>, now = <span class="k">new</span> <span class="t">Date</span>()) &#123;
+  <span class="k">return</span> ticket.status !== <span class="s">"RESOLVED"</span> &amp;&amp; now &gt; dueAt(ticket);
 &#125;</pre>
     </div>
   </div>
