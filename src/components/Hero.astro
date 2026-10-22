@@ -1,5 +1,5 @@
 ---
-import { profile, skillGroups } from "../data/profile";
+import { profile, skillGroups, stats } from "../data/profile";
 
 const resume = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/Resume_Juan_Castelblanco.pdf`;
 
@@ -9,11 +9,14 @@ const marquee = skillGroups.flatMap((g) => g.skills.filter((s) => s.core).map((s
 const payload = {
   name: "Juan Castelblanco",
   role: "Software Developer",
+  job: "Tech Support Specialist @ OpenText",
   location: profile.location,
-  strengths: ["JavaScript", "React", "Next.js", "Node.js"],
-  cloud: "AWS Certified Cloud Practitioner",
-  currentRole: "Technical Support @ OpenText",
+  languages: ["Spanish", "English"],
+  education: "Seneca Polytechnic",
+  aws: "Certified Cloud Practitioner",
+  strengths: ["JavaScript", "React", "Node.js"],
   learning: ["AI agents", "LLM integrations", "Spring Boot"],
+  openTo: ["Front end", "Full-stack", "Backend"],
   openToWork: true,
 };
 const esc = (v: string) => v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -22,7 +25,7 @@ const val = (v: unknown): string =>
 // Short arrays stay on one line; longer ones get one item per line, like a formatter would
 const arr = (k: string, v: unknown[]) => {
   const inline = `[${v.map((x) => `"${x}"`).join(", ")}]`;
-  return k.length + inline.length > 36 ? `[\n${v.map((x) => `    ${val(x)}`).join(",\n")}\n  ]` : `[${v.map(val).join(", ")}]`;
+  return k.length + inline.length > 45 ? `[\n${v.map((x) => `    ${val(x)}`).join(",\n")}\n  ]` : `[${v.map(val).join(", ")}]`;
 };
 const json = `{\n${Object.entries(payload)
   .map(([k, v]) => `  <span class="t">"${k}"</span>: ${Array.isArray(v) ? arr(k, v) : val(v)}`)
@@ -59,6 +62,17 @@ const json = `{\n${Object.entries(payload)
     </div>
   </div>
 
+
+  <div class="wrap">
+    <div class="stats">
+      {stats.map((s, i) => (
+        <div class="stat card" data-reveal style={`transition-delay:${i * 80}ms`}>
+          <b class="grad-text">{s.value}</b>
+          <span>{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
 
   <div class="marquee" aria-hidden="true">
     <div class="track">
@@ -103,6 +117,11 @@ const json = `{\n${Object.entries(payload)
   }
   @keyframes pulse { 70% { box-shadow: 0 0 0 8px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
   .float { animation: float 6s ease-in-out infinite; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 56px; }
+  @media (max-width: 760px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  .stat { padding: 16px; }
+  .stat b { display: block; font-size: 26px; letter-spacing: -0.02em; }
+  .stat span { color: var(--muted); font-size: 13px; }
   .req pre { white-space: pre-wrap; overflow-x: hidden; }
   .resp {
     display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 10px 18px; border-top: 1px solid #1e2632;

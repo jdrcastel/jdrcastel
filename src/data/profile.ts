@@ -18,14 +18,6 @@ export const profile = {
     "At OpenText I support enterprise SaaS customers in production and I'm moving from Tier 2 into Tier 3, so I know how real systems fail and how to fix them. I also built a Chrome extension my team uses every day.",
     "Right now I'm learning Java and Spring Boot, and how to build with AI: coding agents like Claude Code and OpenAI Codex, and LLM integrations inside real apps. I'm putting both into practice in IncidentHub.",
   ],
-  facts: [
-    ["Current role", "Technical Support Specialist, OpenText"],
-    ["Location", "Ontario, Canada"],
-    ["Languages", "Spanish (native) · English (professional)"],
-    ["Education", "Computer Programming and Analysis, Seneca Polytechnic"],
-    ["Certification", "AWS Certified Cloud Practitioner"],
-    ["Open to", "Software Developer roles (front end, full-stack, backend)"],
-  ],
 };
 
 export const stats = [
