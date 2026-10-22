@@ -1,5 +1,5 @@
 ---
-import { profile, stats, skillGroups } from "../data/profile";
+import { profile, skillGroups } from "../data/profile";
 
 const resume = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/Resume_Juan_Castelblanco.pdf`;
 
@@ -17,17 +17,12 @@ const marquee = skillGroups.flatMap((g) => g.skills.filter((s) => s.core).map((s
         Hi, I'm Juan.<br />
         <span class="typed grad-text" id="typed" data-roles={JSON.stringify(profile.roles)}>{profile.roles[0]}</span><span class="caret">|</span>
       </h1>
-      <p class="pitch">{profile.pitch}</p>
+      <p class="pitch">{profile.tagline}</p>
       <div class="cta">
         <a class="btn primary" href="#projects">See projects →</a>
         <a class="btn" href={resume} target="_blank" rel="noopener">Resume (PDF)</a>
         <a class="btn" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href={profile.github} target="_blank" rel="noopener">GitHub</a>
-      </div>
-      <div class="meta">
-        <span>📍 {profile.location}</span>
-        <span>🇨🇴 Spanish · 🇨🇦 English</span>
-        <span>🎓 Seneca · President's Honour List</span>
       </div>
     </div>
 
@@ -54,16 +49,6 @@ const marquee = skillGroups.flatMap((g) => g.skills.filter((s) => s.core).map((s
     </div>
   </div>
 
-  <div class="wrap">
-    <div class="stats">
-      {stats.map((s, i) => (
-        <div class="stat card" data-reveal style={`transition-delay:${i * 80}ms`}>
-          <b class="grad-text">{s.value}</b>
-          <span>{s.label}</span>
-        </div>
-      ))}
-    </div>
-  </div>
 
   <div class="marquee" aria-hidden="true">
     <div class="track">
@@ -107,15 +92,9 @@ const marquee = skillGroups.flatMap((g) => g.skills.filter((s) => s.core).map((s
     box-shadow: 0 0 0 0 var(--ok); animation: pulse 2s infinite;
   }
   @keyframes pulse { 70% { box-shadow: 0 0 0 8px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
-  .meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 28px; color: var(--muted); font-size: 14px; }
   .float { animation: float 6s ease-in-out infinite; }
   @keyframes float { 50% { transform: translateY(-10px); } }
 
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 56px; }
-  @media (max-width: 760px) { .stats { grid-template-columns: repeat(2, 1fr); } }
-  .stat { padding: 16px; }
-  .stat b { display: block; font-size: 26px; letter-spacing: -0.02em; }
-  .stat span { color: var(--muted); font-size: 13px; }
 
   .marquee {
     margin-top: 56px; border-top: 1px solid var(--border); padding: 18px 0; overflow: hidden;
