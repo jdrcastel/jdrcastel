@@ -17,8 +17,8 @@
 - Software developer with strong **JavaScript and front-end** skills (React, Next.js, TypeScript), plus a **Node.js microservice on AWS**.
 - **AWS Certified Cloud Practitioner.** I ship containerized REST services on AWS with Docker and CI/CD.
 - Day job: **Technical Support Specialist at OpenText**, troubleshooting production incidents on enterprise SaaS platforms and moving from Tier 2 into **Tier 3**. I know how real systems fail.
-- I use **GitHub Copilot** daily and I'm learning to work with AI coding agents like **Claude Code** and **OpenAI Codex**.
-- 🌱 Now learning **Java and Spring Boot** by building **IncidentHub**, a REST API for support incidents with SLA tracking.
+- I use **GitHub Copilot** daily.
+- 🌱 **Learning now:** Java and Spring Boot, agentic AI (**Claude Code**, **OpenAI Codex**) and LLM integrations, all applied in **IncidentHub**, a REST API for support incidents with SLA tracking and AI-assisted triage.
 - 🎓 Advanced Diploma, Computer Programming and Analysis — **Seneca Polytechnic** (President's Honour List).
 
 ### 🛠️ Tech stack
@@ -33,9 +33,8 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
 ![Redux](https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=redux&logoColor=white)
 
-**Java** *(learning Spring Boot)*
+**Java**
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white)
 
 **AWS, delivery & data**
 ![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazonwebservices&logoColor=white)
@@ -43,19 +42,23 @@
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
 ![Jenkins](https://img.shields.io/badge/Jenkins-D24939?style=flat-square&logo=jenkins&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
 ![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?style=flat-square&logo=microsoftsqlserver&logoColor=white)
 
-**AI coding agents**
+**Tools**
+![GitHub Copilot](https://img.shields.io/badge/GitHub_Copilot-000000?style=flat-square&logo=githubcopilot&logoColor=white)
+
+**🌱 Learning now**
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
 ![Claude Code](https://img.shields.io/badge/Claude_Code-D97757?style=flat-square&logo=anthropic&logoColor=white)
 ![OpenAI Codex](https://img.shields.io/badge/OpenAI_Codex-412991?style=flat-square&logo=openai&logoColor=white)
-![GitHub Copilot](https://img.shields.io/badge/GitHub_Copilot-000000?style=flat-square&logo=githubcopilot&logoColor=white)
+![LLM integrations](https://img.shields.io/badge/LLM_integrations-6B7280?style=flat-square)
 
 ### 📁 Featured projects
 
 | Project | What it does | Stack |
 |---|---|---|
-| **IncidentHub** *(in progress)* | REST API for support incidents with priority-based SLAs and breach detection | Java, Spring Boot, PostgreSQL, Spring Security, JUnit, Docker, AWS |
+| **IncidentHub** *(in progress)* | REST API for support incidents with SLA breach detection and LLM-based ticket triage | Java, Spring Boot, PostgreSQL, Spring AI, JUnit, Docker, AWS |
 | **Enterprise Microservice Platform** · [API](https://github.com/jdcastel/Microservice-fragments-Cloud-Computing) · [UI](https://github.com/jdcastel/Microservice-fragments-UI) | REST microservice to store and convert text and image fragments; Cognito auth, S3 + DynamoDB, CI/CD to ECS | Node.js, Express, AWS (Cognito, S3, DynamoDB, ECR, ECS), Docker, Jest |
 | **[Timer SaaS Team](https://github.com/jdrcastel/Timer-SaaS-Team)** | Chrome extension that returns agents to Available after breaks in the OpenText SaaS Unified Tool, with countdown, logs and timer recovery | JavaScript, Chrome Extensions (Manifest V3) |
 | **Chronicle App** | Full-stack, multi-tenant social journal | MongoDB, Express, React, Node.js, Next.js, Redux |

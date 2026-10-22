@@ -11,16 +11,28 @@ export const profile = {
   location: "Ontario, Canada",
   status: "Open to Software Developer roles",
   roles: ["Software developer", "JavaScript & React developer", "Node.js microservices on AWS", "Growing into Java & Spring Boot"],
-  pitch:
-    "Software developer with strong JavaScript and front-end skills (React, Next.js, TypeScript) who also built a Node.js microservice on AWS with Docker and CI/CD. Now growing into Java and Spring Boot by building IncidentHub. At OpenText I troubleshoot production incidents on enterprise SaaS platforms and I'm moving into Tier-3 support, so I know how real systems fail and how to fix them.",
   hobbies: "soccer ⚽ · gym 🏋️ · video games 🎮",
+  tagline: "JavaScript & React developer who also ships Node.js services on AWS. Now growing into Java, Spring Boot and AI integrations.",
+  about: [
+    "I'm a software developer with strong JavaScript and front-end skills: React, Next.js, TypeScript and Redux. On the backend I built a Node.js microservice on AWS with Cognito, S3, DynamoDB, Docker and a CI/CD pipeline to ECS.",
+    "At OpenText I support enterprise SaaS customers in production and I'm moving from Tier 2 into Tier 3, so I know how real systems fail and how to fix them. I also built a Chrome extension my team uses every day.",
+    "Right now I'm learning Java and Spring Boot, and how to build with AI: coding agents like Claude Code and OpenAI Codex, and LLM integrations inside real apps. I'm putting both into practice in IncidentHub.",
+  ],
+  facts: [
+    ["Current role", "Technical Support Specialist, OpenText"],
+    ["Location", "Ontario, Canada"],
+    ["Languages", "Spanish (native) · English (professional)"],
+    ["Education", "Computer Programming and Analysis, Seneca Polytechnic"],
+    ["Certification", "AWS Certified Cloud Practitioner"],
+    ["Open to", "Software Developer roles (front end, full-stack, backend)"],
+  ],
 };
 
 export const stats = [
   { value: "AWS", label: "Certified Cloud Practitioner" },
   { value: "Tier 2 → 3", label: "Moving to Tier-3 support at OpenText" },
   { value: "5+", label: "OpenText products supported (LRE, ALM, Octane…)" },
-  { value: "Java", label: "Learning Spring Boot by building IncidentHub" },
+  { value: "AI", label: "Learning agentic AI and LLM integrations" },
 ];
 
 // core: one of my strongest skills (highlighted).
@@ -38,11 +50,10 @@ export const skillGroups: { icon: string; title: string; skills: Skill[] }[] = [
   },
   {
     icon: "🧩",
-    title: "Backend & Java",
+    title: "Backend",
     skills: [
       { name: "Node.js", core: true }, { name: "Express", core: true }, { name: "REST APIs", core: true },
-      { name: "Microservices", core: true }, { name: "Java" }, { name: "Object-oriented programming" },
-      { name: "Spring Boot", learning: true }, { name: "Spring Data JPA", learning: true }, { name: "JUnit", learning: true },
+      { name: "Microservices", core: true }, { name: "OAuth 2.0" }, { name: "Java" }, { name: "Object-oriented programming" },
     ],
   },
   {
@@ -50,33 +61,54 @@ export const skillGroups: { icon: string; title: string; skills: Skill[] }[] = [
     title: "AWS",
     skills: [
       { name: "AWS Cloud Practitioner", core: true }, { name: "ECS" }, { name: "ECR" }, { name: "S3" },
-      { name: "DynamoDB" }, { name: "Cognito" }, { name: "Lambda" }, { name: "IAM" }, { name: "VPC" },
+      { name: "DynamoDB" }, { name: "Cognito" },
     ],
   },
   {
     icon: "🚀",
     title: "Delivery & quality",
     skills: [
-      { name: "Docker", core: true }, { name: "CI/CD", core: true }, { name: "GitHub Actions" }, { name: "Jenkins" },
-      { name: "Git" }, { name: "Linux" }, { name: "Bash" },
-    ],
-  },
-  {
-    icon: "🤖",
-    title: "AI coding tools",
-    skills: [
-      { name: "GitHub Copilot", core: true }, { name: "Claude Code", learning: true }, { name: "OpenAI Codex", learning: true },
-      { name: "AI-assisted code review", learning: true },
+      { name: "Docker", core: true }, { name: "CI/CD", core: true }, { name: "GitHub Actions" }, { name: "Jest" },
+      { name: "Jenkins" }, { name: "Git" },
     ],
   },
   {
     icon: "🗄️",
-    title: "Data & production support",
+    title: "Databases",
+    skills: [{ name: "SQL", core: true }, { name: "MongoDB" }, { name: "SQL Server" }, { name: "DynamoDB" }],
+  },
+  {
+    icon: "🛠️",
+    title: "Production support & tools",
     skills: [
-      { name: "SQL", core: true }, { name: "PostgreSQL" }, { name: "SQL Server" }, { name: "MongoDB" }, { name: "DynamoDB" },
-      { name: "Root-cause analysis", core: true }, { name: "Log analysis" }, { name: "SAML SSO" }, { name: "OAuth 2.0" },
-      { name: "LDAP" },
+      { name: "Root-cause analysis", core: true }, { name: "Log analysis", core: true }, { name: "Linux" },
+      { name: "Bash" }, { name: "GitHub Copilot", core: true },
     ],
+  },
+];
+
+// What I'm learning right now, shown in its own section.
+export const learning = [
+  {
+    icon: "🤖",
+    title: "Agentic AI for coding",
+    summary: "Working with AI coding agents that read, plan, edit and test code, while I review every change.",
+    items: ["Claude Code", "OpenAI Codex", "Agent workflows", "Prompting for code", "Reviewing AI-generated code"],
+    applying: "I use them to build IncidentHub step by step and to understand each change.",
+  },
+  {
+    icon: "🧠",
+    title: "AI integrations",
+    summary: "Calling LLMs from real applications: structured output, tool calling and keeping keys and costs under control.",
+    items: ["LLM APIs (Claude, OpenAI)", "Spring AI", "Structured output (JSON)", "Tool calling", "MCP basics"],
+    applying: "IncidentHub phase 5: AI triage that summarizes a ticket and suggests its priority.",
+  },
+  {
+    icon: "☕",
+    title: "Java & Spring Boot",
+    summary: "Going from college Java to building a real REST API with a database, tests and security.",
+    items: ["Spring Boot", "Spring Data JPA", "PostgreSQL", "JUnit", "Spring Security"],
+    applying: "IncidentHub phases 1 to 4.",
   },
 ];
 
@@ -101,19 +133,21 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "IncidentHub — learning Java & Spring Boot",
+    title: "IncidentHub — Java, Spring Boot & AI",
     status: "In progress",
     featured: true,
     summary:
-      "My hands-on project to learn Java and Spring Boot: a REST API for support incidents with SLA tracking, based on what I see every day in production support.",
+      "My hands-on project to learn Java, Spring Boot and AI integrations: a REST API for support incidents with SLA tracking and AI-assisted triage, based on what I see every day in production support.",
     bullets: [
       "Built phase by phase, starting with a simple ticket API and adding one new skill at a time",
       "Goal: tickets with priority-based SLAs, breach detection and a status workflow on PostgreSQL",
+      "AI triage: an LLM summarizes each new ticket and suggests its priority, with a human confirming",
       "Later phases: security with JWT, tests, Docker, CI/CD and AWS deployment",
     ],
     stack: [
-      { name: "Java", learning: true }, { name: "Spring Boot", learning: true }, { name: "PostgreSQL" },
-      { name: "Spring Data JPA", learning: true }, { name: "JUnit", learning: true }, { name: "Docker" }, { name: "AWS" },
+      { name: "Java", learning: true }, { name: "Spring Boot", learning: true }, { name: "PostgreSQL", learning: true },
+      { name: "Spring Data JPA", learning: true }, { name: "LLM API", learning: true }, { name: "JUnit", learning: true },
+      { name: "Docker" }, { name: "AWS" },
     ],
     tags: ["backend", "aws"],
     links: [{ href: "#building", label: "See the build plan" }],
@@ -177,13 +211,14 @@ export const projects: Project[] = [
 export const building = {
   name: "IncidentHub",
   pitch:
-    "My hands-on project to learn Java and Spring Boot. I'm building it one phase at a time, and each phase adds a skill Java job postings ask for: REST, SQL with JPA, security, tests, Docker, CI/CD and AWS.",
+    "My hands-on project to learn Java, Spring Boot and AI integrations. I'm building it one phase at a time, and each phase adds a skill job postings ask for: REST, SQL with JPA, security, tests, AI, Docker, CI/CD and AWS.",
   why: "I handle enterprise incidents every day at OpenText. This is the tool I would want: it knows each ticket's SLA and flags breaches before customers notice.",
   phases: [
     { title: "Core API", detail: "Ticket CRUD, validation, error handling, PostgreSQL with Spring Data JPA and Flyway", status: "in-progress" },
     { title: "Business rules", detail: "SLA per priority, breach detection, status workflow (open → in progress → resolved)", status: "planned" },
     { title: "Security", detail: "Spring Security with JWT and roles (agent, admin)", status: "planned" },
     { title: "Tests", detail: "JUnit 5, Mockito and Testcontainers", status: "planned" },
+    { title: "AI triage", detail: "An LLM summarizes each new ticket and suggests priority and category (Spring AI); an agent confirms", status: "planned" },
     { title: "Delivery", detail: "Docker, GitHub Actions CI/CD, OpenAPI docs", status: "planned" },
     { title: "AWS", detail: "Deploy to AWS (ECS or EC2) with RDS PostgreSQL", status: "planned" },
     { title: "React front end", detail: "Dashboard for agents to see tickets and SLA status", status: "planned" },
@@ -206,7 +241,7 @@ export const experience: ExperienceItem[] = [
     org: "OpenText",
     bullets: [
       "Provide production support to global enterprise customers on OpenText SaaS products (LoadRunner Enterprise, ALM/QC, Octane/ValueEdge), currently moving from Tier-2 into Tier-3 escalations.",
-      "Troubleshoot authentication (SAML SSO, LDAP, OAuth 2.0), integration and performance incidents using Linux/Windows, SQL, Jenkins and system logs, and analyze ticket data to find root causes and recurring issues.",
+      "Troubleshoot authentication (SSO, OAuth 2.0), integration and performance incidents using Linux/Windows, SQL, Jenkins and system logs, and analyze ticket data to find root causes and recurring issues.",
       "Partner with Operations, Engineering and R&D in an SLA-driven environment to resolve complex escalations.",
       "Built Timer SaaS Team, a Chrome extension that returns agents to Available after breaks in the SaaS Unified Tool, with countdown, logs and timer recovery.",
     ],
@@ -249,12 +284,12 @@ export const experience: ExperienceItem[] = [
 ];
 
 export const roleFit = [
-  ["Java backend", "Java from college; learning Spring Boot now by building IncidentHub phase by phase, with JPA, tests, Docker and AWS."],
+  ["Java backend", "Java from college; learning Spring Boot now by building IncidentHub phase by phase, with PostgreSQL, tests, Docker and AWS."],
   ["Full-stack", "React front ends (Ontario Government, Chronicle), Node.js/Express REST APIs (Fragments) and a Chrome extension used by my team (Timer SaaS Team)."],
   ["AWS", "AWS Certified Cloud Practitioner. Deployed a microservice on ECS with ECR, Cognito, S3 and DynamoDB."],
   ["Delivery & quality", "Docker images shipped to AWS through CI/CD; Jenkins daily at OpenText; this site deploys with GitHub Actions."],
-  ["Databases", "SQL troubleshooting on SQL Server and PostgreSQL in production support; MongoDB and DynamoDB in projects."],
+  ["Databases", "SQL troubleshooting on SQL Server in production support; MongoDB and DynamoDB in projects."],
   ["Production experience", "Root-cause analysis on Linux and Windows with logs and SQL, moving from Tier-2 into Tier-3 escalations at OpenText. I know how real systems fail."],
-  ["AI coding tools", "Use GitHub Copilot daily; learning to work with AI coding agents like Claude Code and OpenAI Codex, always reviewing the changes they make."],
+  ["AI", "Use GitHub Copilot daily. Learning agentic AI (Claude Code, OpenAI Codex) and LLM integrations, applied in IncidentHub's AI triage."],
   ["Communication", "Lead remote sessions with technical and non-technical customers. Fully bilingual in English and Spanish."],
 ];

@@ -1,0 +1,53 @@
+---
+import { profile, stats } from "../data/profile";
+---
+
+<section id="profile">
+  <div class="wrap">
+    <div data-reveal>
+      <div class="eyebrow">// profile</div>
+      <h2>About me</h2>
+    </div>
+
+    <div class="layout">
+      <div class="about" data-reveal>
+        {profile.about.map((para) => <p>{para}</p>)}
+      </div>
+
+      <dl class="card facts" data-reveal>
+        {profile.facts.map(([k, v]) => (
+          <div class="fact">
+            <dt>{k}</dt>
+            <dd>{v}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+
+    <div class="stats">
+      {stats.map((s, i) => (
+        <div class="stat card" data-reveal style={`transition-delay:${i * 80}ms`}>
+          <b class="grad-text">{s.value}</b>
+          <span>{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+  @media (max-width: 820px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+  .about p { color: var(--muted); font-size: 16.5px; margin: 0 0 16px; }
+  .about p:first-child { color: var(--text); font-size: 18px; }
+  .facts { margin: 0; padding: 6px 20px; }
+  .fact { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; padding: 11px 0; border-bottom: 1px dashed var(--border); }
+  .fact:last-child { border-bottom: 0; }
+  dt { color: var(--muted); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; padding-top: 2px; }
+  dd { margin: 0; font-size: 15px; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 32px; }
+  @media (max-width: 760px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  .stat { padding: 16px; }
+  .stat b { display: block; font-size: 26px; letter-spacing: -0.02em; }
+  .stat span { color: var(--muted); font-size: 13px; }
+</style>
