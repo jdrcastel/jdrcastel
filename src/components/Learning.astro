@@ -6,16 +6,17 @@ import { learning } from "../data/profile";
   <div class="wrap">
     <div data-reveal>
       <div class="eyebrow">// learning now</div>
-      <h2>What I'm learning</h2>
+      <h2>Building with <span class="grad-text">AI agents</span> and AI integrations</h2>
       <p class="lead">
-        Kept separate from my skills on purpose: these are things I'm actively learning and putting into practice, not
-        things I claim to master yet.
+        My current focus: working with AI coding agents and putting LLMs inside real apps, plus Java and Spring Boot for
+        the backend. I keep this separate from my skills on purpose: I'm learning it and applying it, not claiming to
+        master it yet.
       </p>
     </div>
 
     <div class="grid g3">
       {learning.map((l, i) => (
-        <div class="card item" data-reveal style={`transition-delay:${i * 80}ms`}>
+        <div class:list={["card", "item", { ai: i < 2 }]} data-reveal style={`transition-delay:${i * 80}ms`}>
           <div class="head">
             <div class="ico">{l.icon}</div>
             <h3>{l.title}</h3>
@@ -36,6 +37,12 @@ import { learning } from "../data/profile";
 
 <style>
   .item { display: flex; flex-direction: column; gap: 12px; }
+  .ai {
+    background:
+      linear-gradient(var(--surface), var(--surface)) padding-box,
+      linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent-3)) border-box;
+    border: 1px solid transparent;
+  }
   .item p { margin: 0; }
   .head { display: flex; align-items: center; gap: 10px; }
   .head h3 { margin: 0; }

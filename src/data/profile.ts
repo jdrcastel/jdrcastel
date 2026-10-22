@@ -18,14 +18,6 @@ export const profile = {
     "At OpenText I support enterprise SaaS customers in production and I'm moving from Tier 2 into Tier 3, so I know how real systems fail and how to fix them. I also built a Chrome extension my team uses every day.",
     "Right now I'm learning Java and Spring Boot, and how to build with AI: coding agents like Claude Code and OpenAI Codex, and LLM integrations inside real apps. I'm putting both into practice in IncidentHub.",
   ],
-  facts: [
-    ["Current role", "Technical Support Specialist, OpenText"],
-    ["Location", "Ontario, Canada"],
-    ["Languages", "Spanish (native) · English (professional)"],
-    ["Education", "Computer Programming and Analysis, Seneca Polytechnic"],
-    ["Certification", "AWS Certified Cloud Practitioner"],
-    ["Open to", "Software Developer roles (front end, full-stack, backend)"],
-  ],
 };
 
 export const stats = [
@@ -101,14 +93,14 @@ export const learning = [
     title: "AI integrations",
     summary: "Calling LLMs from real applications: structured output, tool calling and keeping keys and costs under control.",
     items: ["LLM APIs (Claude, OpenAI)", "Spring AI", "Structured output (JSON)", "Tool calling", "MCP basics"],
-    applying: "IncidentHub phase 5: AI triage that summarizes a ticket and suggests its priority.",
+    applying: "IncidentHub: AI triage that summarizes each ticket and suggests its priority.",
   },
   {
     icon: "☕",
     title: "Java & Spring Boot",
     summary: "Going from college Java to building a real REST API with a database, tests and security.",
     items: ["Spring Boot", "Spring Data JPA", "PostgreSQL", "JUnit", "Spring Security"],
-    applying: "IncidentHub phases 1 to 4.",
+    applying: "IncidentHub: the REST API, database, tests and security.",
   },
 ];
 
@@ -150,7 +142,7 @@ export const projects: Project[] = [
       { name: "Docker" }, { name: "AWS" },
     ],
     tags: ["backend", "aws"],
-    links: [{ href: "#building", label: "See the build plan" }],
+    links: [{ href: "#learning", label: "What I'm learning" }],
   },
   {
     title: "Enterprise Microservice Platform (Fragments)",
@@ -206,24 +198,6 @@ export const projects: Project[] = [
     tags: ["web", "backend"],
   },
 ];
-
-// What I'm building right now, shown in the "Now building" section.
-export const building = {
-  name: "IncidentHub",
-  pitch:
-    "My hands-on project to learn Java, Spring Boot and AI integrations. I'm building it one phase at a time, and each phase adds a skill job postings ask for: REST, SQL with JPA, security, tests, AI, Docker, CI/CD and AWS.",
-  why: "I handle enterprise incidents every day at OpenText. This is the tool I would want: it knows each ticket's SLA and flags breaches before customers notice.",
-  phases: [
-    { title: "Core API", detail: "Ticket CRUD, validation, error handling, PostgreSQL with Spring Data JPA and Flyway", status: "in-progress" },
-    { title: "Business rules", detail: "SLA per priority, breach detection, status workflow (open → in progress → resolved)", status: "planned" },
-    { title: "Security", detail: "Spring Security with JWT and roles (agent, admin)", status: "planned" },
-    { title: "Tests", detail: "JUnit 5, Mockito and Testcontainers", status: "planned" },
-    { title: "AI triage", detail: "An LLM summarizes each new ticket and suggests priority and category (Spring AI); an agent confirms", status: "planned" },
-    { title: "Delivery", detail: "Docker, GitHub Actions CI/CD, OpenAPI docs", status: "planned" },
-    { title: "AWS", detail: "Deploy to AWS (ECS or EC2) with RDS PostgreSQL", status: "planned" },
-    { title: "React front end", detail: "Dashboard for agents to see tickets and SLA status", status: "planned" },
-  ] as { title: string; detail: string; status: "done" | "in-progress" | "planned" }[],
-};
 
 export type ExperienceItem = {
   kind: "Work" | "Internship" | "Certification" | "Volunteer" | "Education";
@@ -284,7 +258,7 @@ export const experience: ExperienceItem[] = [
 ];
 
 export const roleFit = [
-  ["Java backend", "Java from college; learning Spring Boot now by building IncidentHub phase by phase, with PostgreSQL, tests, Docker and AWS."],
+  ["Java backend", "Java from college; learning Spring Boot now by building IncidentHub, with PostgreSQL, tests, Docker and AWS."],
   ["Full-stack", "React front ends (Ontario Government, Chronicle), Node.js/Express REST APIs (Fragments) and a Chrome extension used by my team (Timer SaaS Team)."],
   ["AWS", "AWS Certified Cloud Practitioner. Deployed a microservice on ECS with ECR, Cognito, S3 and DynamoDB."],
   ["Delivery & quality", "Docker images shipped to AWS through CI/CD; Jenkins daily at OpenText; this site deploys with GitHub Actions."],
