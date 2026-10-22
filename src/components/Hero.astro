@@ -4,6 +4,29 @@ import { profile, skillGroups } from "../data/profile";
 const resume = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/Resume_Juan_Castelblanco.pdf`;
 
 const marquee = skillGroups.flatMap((g) => g.skills.filter((s) => s.core).map((s) => s.name));
+
+// Profile shown as a JSON request body in the hero
+const payload = {
+  name: "Juan Castelblanco",
+  role: "Software Developer",
+  location: profile.location,
+  strengths: ["JavaScript", "React", "Next.js", "Node.js"],
+  cloud: "AWS Certified Cloud Practitioner",
+  currentRole: "Technical Support @ OpenText",
+  learning: ["AI agents", "LLM integrations", "Spring Boot"],
+  openToWork: true,
+};
+const esc = (v: string) => v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const val = (v: unknown): string =>
+  typeof v === "string" ? `<span class="s">"${esc(v)}"</span>` : `<span class="n">${String(v)}</span>`;
+// Short arrays stay on one line; longer ones get one item per line, like a formatter would
+const arr = (k: string, v: unknown[]) => {
+  const inline = `[${v.map((x) => `"${x}"`).join(", ")}]`;
+  return k.length + inline.length > 36 ? `[\n${v.map((x) => `    ${val(x)}`).join(",\n")}\n  ]` : `[${v.map(val).join(", ")}]`;
+};
+const json = `{\n${Object.entries(payload)
+  .map(([k, v]) => `  <span class="t">"${k}"</span>: ${Array.isArray(v) ? arr(k, v) : val(v)}`)
+  .join(",\n")}\n}`;
 ---
 
 <section class="hero" id="top">
@@ -26,26 +49,13 @@ const marquee = skillGroups.flatMap((g) => g.skills.filter((s) => s.core).map((s
       </div>
     </div>
 
-    <div class="code float" aria-label="Excerpt from IncidentHub, a Spring Boot project in progress">
-      <div class="bar"><i></i><i></i><i></i><span>IncidentHub · SlaService.java</span></div>
-<pre><span class="c">// IncidentHub: the SLA rule I'm building toward</span>
-<span class="a">@Service</span>
-<span class="k">public class</span> <span class="t">SlaService</span> &#123;
+    <div class="code float req" aria-label="My profile as a JSON request to an API">
+      <div class="bar"><i></i><i></i><i></i><span>request.http</span></div>
+<pre><span class="k">POST</span> <span class="a">/api/v1/candidates</span> HTTP/1.1
+<span class="t">Content-Type</span>: application/json
 
-  <span class="k">private static final</span> <span class="t">Map</span>&lt;<span class="t">Priority</span>, <span class="t">Duration</span>&gt; SLA = <span class="t">Map</span>.of(
-      <span class="t">Priority</span>.CRITICAL, <span class="t">Duration</span>.ofHours(<span class="n">4</span>),
-      <span class="t">Priority</span>.HIGH,     <span class="t">Duration</span>.ofHours(<span class="n">8</span>),
-      <span class="t">Priority</span>.MEDIUM,   <span class="t">Duration</span>.ofDays(<span class="n">2</span>),
-      <span class="t">Priority</span>.LOW,      <span class="t">Duration</span>.ofDays(<span class="n">5</span>));
-
-  <span class="k">public</span> <span class="t">Instant</span> dueAt(<span class="t">Ticket</span> ticket) &#123;
-    <span class="k">return</span> ticket.getCreatedAt().plus(SLA.get(ticket.getPriority()));
-  &#125;
-
-  <span class="k">public boolean</span> isBreached(<span class="t">Ticket</span> ticket, <span class="t">Instant</span> now) &#123;
-    <span class="k">return</span> ticket.isOpen() &amp;&amp; now.isAfter(dueAt(ticket));
-  &#125;
-&#125;</pre>
+<Fragment set:html={json} /></pre>
+      <div class="resp"><span class="ok">HTTP/1.1 201 Created</span><span>Location: /api/v1/candidates/juan</span></div>
     </div>
   </div>
 
@@ -93,6 +103,12 @@ const marquee = skillGroups.flatMap((g) => g.skills.filter((s) => s.core).map((s
   }
   @keyframes pulse { 70% { box-shadow: 0 0 0 8px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
   .float { animation: float 6s ease-in-out infinite; }
+  .req pre { white-space: pre-wrap; overflow-x: hidden; }
+  .resp {
+    display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 10px 18px; border-top: 1px solid #1e2632;
+    background: #0c1117; font: 12.5px "JetBrains Mono", monospace; color: #7d8794;
+  }
+  .resp .ok { color: #28c840; font-weight: 600; }
   @keyframes float { 50% { transform: translateY(-10px); } }
 
 

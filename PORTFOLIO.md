@@ -3,9 +3,9 @@
 Single-page portfolio built with [Astro](https://astro.build), deployed to GitHub Pages.
 
 ## Edit content
-Everything (skills, projects, the "Now building" plan, experience, role fit) lives in `src/data/profile.ts`.
+Everything (profile, skills, the "Learning now" cards, projects, experience, role fit) lives in `src/data/profile.ts`.
 Each section is a component in `src/components/`. Mark a skill with `core: true` to highlight it.
-To move an IncidentHub phase forward, change its `status` to `"in-progress"` or `"done"`.
+The JSON request in the hero is built from the `payload` object in `src/components/Hero.astro`.
 
 The resume PDF served by the site is `public/Resume_Juan_Castelblanco.pdf`; replace it when the resume changes.
 
