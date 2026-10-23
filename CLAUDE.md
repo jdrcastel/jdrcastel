@@ -7,8 +7,8 @@ This repo is also Juan's GitHub profile repo: `README.md` is his profile page, n
 
 1. **Announce before changing.** Before any edit, say what you will change and why. Ask when a decision is his
    (design direction, content, removing things). Always share questions and suggestions so work keeps moving.
-2. **Only the web portfolio.** Never edit the resume (Word or PDF). `public/Resume_Juan_Castelblanco.pdf` is replaced
-   only when Juan provides a new one.
+2. **Resume only when asked.** Edit the resume (Word + PDF) only when Juan asks, with the `update-resume` skill. It is
+   English only and must match the portfolio content. The PDF goes to `public/`; the Word file is sent to Juan in chat.
 3. **Always bilingual.** Every text change goes into both `src/i18n/en.ts` and `src/i18n/es.ts`, same structure.
 4. **Latest stable versions.** Check `npm view <pkg> version` before adding or upgrading anything.
 5. **Minimal and professional.** A recruiter has ~60 seconds: clear hierarchy, no visual noise, fast. Animations only
@@ -23,7 +23,11 @@ This repo is also Juan's GitHub profile repo: `README.md` is his profile page, n
 ## Stack
 
 - Astro 7 (static output, i18n routing: `en` default without prefix, `es` under `/es/`)
-- React 19 islands only where there is interaction (`client:visible`): projects filter + "Learn more", skills/learning tabs. Experience "More details" is a native `<details>` (no JS).
+- React 19 islands only where there is interaction (`client:visible`): projects (filters, "Learn more", Fragments
+  diagram) and skills/learning tabs. Experience "More details" is a native `<details>` (no JS).
+- Animation libraries: **Motion** (`motion/react`, React islands only, `LazyMotion` + `m` with `domMax` loaded on
+  demand from `src/lib/motion-features.ts`), **Lenis** (smooth scroll, `Layout.astro`), **simple-icons** (build time
+  only: logos become one cached sprite at `/tech-icons.svg`). Magic UI patterns are adapted by hand (see below).
 - Tailwind CSS v4 + shadcn/ui (new-york style, neutral base, blue `brand` accent) in `src/components/ui/`
 - Fonts: Geist and Geist Mono through the Astro Fonts API with the local provider, from the
   `@fontsource-variable/geist*` npm packages (self-hosted, no external requests; works in the sandbox and CI)
@@ -47,6 +51,9 @@ src/
   i18n/shared.ts      Language-neutral data: links, tech chips, project metadata.
   i18n/index.ts       getContent(lang), homeUrl(lang), assetUrl(file) (base-path aware).
   components/         Page.astro composes: Nav, Hero, About, Casshy, Projects, Skills, Experience, Contact, Footer.
+                      Hero includes TechMarquee.astro; ProjectsGrid.tsx includes ArchitectureDiagram.tsx (Fragments).
+  lib/tech.ts         Marquee technologies (simple-icons). Never import it from a React island.
+  pages/tech-icons.svg.ts  Builds the logo sprite.
   components/ui/      shadcn/ui components (copied from the registry; don't hand-edit unless needed).
   layouts/Layout.astro  <head>: lang, canonical, hreflang, Open Graph, theme bootstrap.
   pages/index.astro, pages/es/index.astro
@@ -63,16 +70,29 @@ public/               favicon.svg, og.png (1200×630 preview), resume PDF
   visible focus, `prefers-reduced-motion` respected, external links `rel="noopener"`.
 - All URLs to pages/assets go through `homeUrl()` / `assetUrl()` so the `/jdrcastel` base path works.
 
-## Animations (approved by Juan, native browser APIs only, all off with `prefers-reduced-motion`)
+## Animations (approved by Juan; propose new ones and wait for his OK)
 
-- Hero **Send**: button in the JSON window; progress line → `201 Created · N ms` → stat cards light up one by one
-  (`Hero.astro` script, `.send-bar` / `.stat-hit` in `global.css`).
-- **Theme switch**: new theme grows as a circle from the toggle (View Transitions API, `Nav.astro`, `.theme-vt`).
-- **Experience timeline**: line fills and dots light up with scroll (CSS `animation-timeline: view()`, static in
-  browsers without support). Keep `animation-timeline` in its own rule: the minifier folds it into the `animation`
-  shorthand otherwise and browsers drop it.
-- **EN ↔ ES**: cross-page fade with `@view-transition`; the header (`.site-header`) stays in place.
-- **Project cards**: soft glow following the mouse (`.spotlight`, mouse only; position set in `Layout.astro`).
+Principles: off with `prefers-reduced-motion` (static fallbacks), looping animations stop with the pause button in the
+marquee (`html[data-motion="paused"]`, saved in localStorage), loops animate only `transform`/`opacity` or pause when
+off screen, and nothing delays reading for more than ~1 s. Keep `animation-timeline` in its own CSS rule: the minifier
+folds it into the `animation` shorthand otherwise and browsers drop it.
+
+- **Hero entrance:** heading words come into focus (`.hero-word`), the JSON window straightens from a 3D tilt
+  (`.hero-window`), the rest fades up (`.hero-in`, `--d` delays).
+- **Hero Send:** progress line → `201 Created · N ms` → stat cards light up one by one (`Hero.astro` script).
+  A green border beam circles the Send button.
+- **Tech marquee:** two rows of logos in opposite directions under the hero stats; pause on hover/focus; gray → brand
+  color on hover; static and wrapped for reduced motion.
+- **Header progress line:** CSS scroll timeline, JS fallback in `Nav.astro`.
+- **Section titles:** slide up from a mask when the header reveals (`.title-mask` in `Section.astro`).
+- **About:** words light up line by line as you scroll (`.read-word`, CSS view timelines; static where unsupported).
+- **Projects:** filter pill slides between filters (Motion `layoutId`), cards fade/reflow (`AnimatePresence`,
+  `layout="position"`), border beam on the featured Casshy card, Fragments architecture diagram with light pulses
+  (pulses pause off screen), mouse spotlight on cards.
+- **Experience timeline:** line fills and dots light up with scroll.
+- **Theme switch:** circle reveal from the toggle (View Transitions). **EN ↔ ES:** cross-page fade, header fixed,
+  and the other language is prerendered on hover (Speculation Rules).
+- **Smooth scroll:** Lenis runs its frame loop only while gliding; in-page links keep the URL and focus in sync.
 - Also: reveal on scroll (`[data-reveal]`) and card lift (`.lift`).
 
 ## shadcn/ui in the cloud sandbox
@@ -80,6 +100,8 @@ public/               favicon.svg, og.png (1200×630 preview), resume PDF
 `ui.shadcn.com` is blocked by the sandbox proxy, so `npx shadcn add` fails there. Use the `add-shadcn-component`
 skill: copy the component from the `shadcn-ui/ui` GitHub repo (`apps/v4/registry/new-york-v4/ui/`) and change
 `from "cn"` to `from "@/lib/utils"`. On Juan's machine, `npx shadcn add <name>` works with `components.json`.
+Magic UI (`magicui.design`) is blocked too: read components from GitHub (`magicuidesign/magicui`,
+`apps/www/registry/magicui/`), adapt them and credit them in a comment (MIT).
 
 ## Content truth (what Juan knows vs. is learning)
 
@@ -89,9 +111,11 @@ skill: copy the component from the `shadcn-ui/ui` GitHub repo (`apps/v4/registry
   SQL Server, OAuth 2.0, Java (college), OOP.
 - **Learning (only in the Learning tab):** Claude Code, OpenAI Codex, LLM integrations, MCP, Casshy's stack
   (NestJS, Prisma, PostgreSQL, Turborepo, Better Auth, Zod, Rive, k3s), Spring Boot, Spring Data JPA, JUnit.
+- IncidentHub: TypeScript, NestJS, PostgreSQL, Prisma, Zod, LLM API, Docker (support-incident API with SLAs and AI
+  triage). Java and Spring Boot stay in Learning with no project attached.
 - **Never list:** Python, FastAPI, .NET, C++, Kubernetes, Terraform, Lambda, IAM, VPC, SAML, LDAP, Power Apps.
 - Ontario Government internship: a React web page (no LDAP, no Power Apps claims).
-- Timer SaaS Team is a **web extension** (shown under "Web extensions"), not a main project.
+- Timer SaaS Team is a **web extension**: it appears only under the "Extensions" filter, not as a main project.
 - Casshy: Phase 0 done (vision, docs, ADRs), Phase 1 in progress, **no app code yet**. Never present it as live.
 
 ## Decision log
@@ -102,7 +126,7 @@ skill: copy the component from the `shadcn-ui/ui` GitHub repo (`apps/v4/registry
 - 2026-10: Hero shows the profile as a JSON `POST` request; stats cards stay under the hero.
 - 2026-10: Bilingual with two URLs (`/` English, `/es/` Spanish) and an EN|ES switch.
 - 2026-10: shadcn/ui (real React components) + Tailwind v4; removed type-check/CI test steps and Vitest.
-- 2026-10: Minimal visual style: no background blobs, grid, marquee, typing effect or shimmer.
+- 2026-10: No background blobs, grid, typing effect or shimmer. (The marquee came back later with real logos.)
 - 2026-10: Casshy section only explains the project (summary, features, principles, architecture, roadmap).
   No coin, no dashboard or app demo: "it's a portfolio, only to explain". No Rive on the portfolio.
 - 2026-10: The name is "Casshy" (double s). `github.com/jdcastel` is Juan's other GitHub account (Fragments repos).
@@ -111,3 +135,10 @@ skill: copy the component from the `shadcn-ui/ui` GitHub repo (`apps/v4/registry
 - Later: a custom domain (e.g. `juancastelblanco.dev`) for GitHub Pages.
 - 2026-10: Spring Security removed from Learning (not confirmed). Spanish keeps the word "Skills".
   Recruiter-review suggestions declined; project order stays Casshy, IncidentHub, Fragments.
+- 2026-10: Juan found the site too minimal: approved the full animation set above (marquee and header progress line
+  back, hero entrance, border beam, fluid filters, Fragments diagram, Lenis, About highlight, masked titles) and
+  allowed libraries (Motion, Lenis, simple-icons, Magic UI patterns), keeping it professional, not flashy.
+- 2026-10: IncidentHub moved to TypeScript + NestJS + Prisma (same idea). Java and Spring Boot stay in Learning.
+- 2026-10: Timer SaaS Team shows only under the "Extensions" filter (it had too much weight as its own block).
+- 2026-10: Resume updated on Juan's request: English only, IncidentHub stack, Learning synced with the web, spoken
+  languages line. The Word file is sent in chat, not offered on the site.

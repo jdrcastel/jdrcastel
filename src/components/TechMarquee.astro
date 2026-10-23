@@ -1,0 +1,69 @@
+---
+import { Cloud, Pause, Play } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { assetUrl } from "@/i18n";
+import { logoColor, techRows } from "@/lib/tech";
+import { cn } from "@/lib/utils";
+
+interface Props {
+  label: string;
+  pauseLabel: string;
+}
+const { label, pauseLabel } = Astro.props;
+
+const sprite = assetUrl("tech-icons.svg");
+// Enough copies to cover very wide screens while each copy slides by its own width
+const copies = 4;
+---
+
+<div class="relative border-t py-6">
+  <div class="flex flex-col gap-4" role="group" aria-label={label}>
+    {techRows.map((row, r) => (
+      <div class="marquee" data-reverse={r % 2 === 1 ? "" : undefined} style={`--duration:${r % 2 ? 55 : 45}s`}>
+        {Array.from({ length: copies }, (_, copy) => (
+          <ul class="marquee-track" aria-hidden={copy > 0 ? "true" : undefined}>
+            {row.map(({ label: name, icon }) => {
+              const color = icon && logoColor(icon.hex);
+              return (
+                <li class="tech-item text-sm" style={color ? `--logo:${color}` : undefined}>
+                  {icon ? (
+                    <svg aria-hidden="true"><use href={`${sprite}#${icon.slug}`} /></svg>
+                  ) : (
+                    <Cloud aria-hidden="true" />
+                  )}
+                  {name}
+                </li>
+              );
+            })}
+          </ul>
+        ))}
+      </div>
+    ))}
+  </div>
+  <button
+    type="button"
+    data-motion-toggle
+    aria-pressed="false"
+    aria-label={pauseLabel}
+    title={pauseLabel}
+    class={cn(buttonVariants({ variant: "outline", size: "icon-sm" }), "group absolute top-1/2 right-4 -translate-y-1/2 rounded-full bg-background/80 backdrop-blur")}
+  >
+    <Pause className="group-aria-pressed:hidden" aria-hidden="true" />
+    <Play className="hidden group-aria-pressed:block" aria-hidden="true" />
+  </button>
+</div>
+
+<script>
+  // Pause or resume every looping animation on the page (marquee, border beams, diagram pulses)
+  const root = document.documentElement;
+  const toggle = document.querySelector<HTMLButtonElement>("[data-motion-toggle]");
+  const sync = () => toggle?.setAttribute("aria-pressed", String(root.dataset.motion === "paused"));
+  sync();
+  toggle?.addEventListener("click", () => {
+    const paused = root.dataset.motion !== "paused";
+    if (paused) root.dataset.motion = "paused";
+    else delete root.dataset.motion;
+    try { localStorage.setItem("motion", paused ? "paused" : "on"); } catch {}
+    sync();
+  });
+</script>

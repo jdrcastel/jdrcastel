@@ -32,6 +32,8 @@ const es: Content = {
     ctaProjects: "Ver proyectos",
     ctaResume: "CV (PDF, en inglés)",
     send: { label: "Enviar", sending: "Enviando…", hint: "Pulsa Enviar para mandar la solicitud" },
+    techLabel: "Tecnologías con las que trabajo",
+    pauseMotion: "Pausar animaciones",
     payload: {
       name: "Juan Castelblanco",
       role: "Desarrollador de software",
@@ -58,7 +60,7 @@ const es: Content = {
     paragraphs: [
       "Soy desarrollador de software, fuerte en JavaScript y frontend: React, Next.js, TypeScript y Redux. En el backend construí un microservicio en Node.js sobre AWS con Cognito, S3, DynamoDB, Docker y un pipeline de CI/CD hacia ECS.",
       "En OpenText doy soporte en producción a clientes empresariales de SaaS y estoy pasando de Tier 2 a Tier 3, así que sé cómo fallan los sistemas reales y cómo arreglarlos. También construí una extensión web que mi equipo usa todos los días.",
-      "Ahora estoy construyendo Casshy, una app de finanzas personales gamificada para Canadá, e IncidentHub para aprender Java, Spring Boot e integraciones con LLM, trabajando con agentes de IA como Claude Code y OpenAI Codex.",
+      "Ahora estoy construyendo Casshy, una app de finanzas personales gamificada para Canadá, e IncidentHub, una API en TypeScript y NestJS donde aplico integraciones con LLM, trabajando con agentes de IA como Claude Code y OpenAI Codex.",
     ],
   },
   casshy: {
@@ -104,12 +106,16 @@ const es: Content = {
     eyebrow: "Proyectos",
     title: "Trabajo seleccionado",
     lead: "Lo que estoy construyendo ahora, y trabajo full-stack, backend y en AWS que ya entregué.",
-    filters: { all: "Todos", backend: "Backend", web: "Web", aws: "AWS" },
+    filters: { all: "Todos", backend: "Backend", web: "Web", aws: "AWS", extensions: "Extensiones" },
     status: { progress: "En progreso", use: "En uso", shipped: "Entregado" },
     learnMore: "Ver más",
     stackLabel: "Tecnologías",
+    diagram: {
+      alt: "Arquitectura de Fragments: la UI web llama a la API Express, que corre en Docker sobre Amazon ECS, valida los tokens de Cognito (JWT), guarda los datos de los fragmentos en S3 y la metadata en DynamoDB.",
+      ui: "UI web",
+      api: "API Express",
+    },
     links: { casshy: "Ver Casshy", learning: "Qué estoy aprendiendo", api: "Código API", ui: "Código UI", code: "Código" },
-    extensionsTitle: "Extensiones web",
     items: [
       {
         id: "casshy",
@@ -126,14 +132,14 @@ const es: Content = {
       {
         id: "incidenthub",
         status: "progress",
-        title: "IncidentHub — Java, Spring Boot e IA",
+        title: "IncidentHub — TypeScript, NestJS e IA",
         summary:
-          "Mi proyecto práctico para aprender Java, Spring Boot e integraciones con IA: una API REST para incidentes de soporte con seguimiento de SLA y triage asistido por IA.",
+          "Mi proyecto práctico para profundizar en backend con TypeScript e integraciones con IA: una API REST en NestJS para incidentes de soporte con seguimiento de SLA y triage asistido por IA.",
         bullets: [
           "Construido fase por fase: empieza con una API simple de tickets y agrega una habilidad nueva a la vez",
-          "Tickets con SLA según prioridad, detección de incumplimientos y flujo de estados en PostgreSQL",
+          "Tickets con SLA según prioridad, detección de incumplimientos y flujo de estados en PostgreSQL con Prisma",
           "Triage con IA: un LLM resume cada ticket nuevo y sugiere su prioridad, y una persona confirma",
-          "Fases siguientes: seguridad con JWT, pruebas, Docker, CI/CD y despliegue en AWS",
+          "Fases siguientes: seguridad con JWT, pruebas, CI/CD y despliegue en AWS",
         ],
       },
       {
@@ -193,12 +199,12 @@ const es: Content = {
       casshy: {
         title: "El stack de Casshy",
         summary: "Las herramientas que elegí para Casshy y que estoy aprendiendo a fondo mientras lo construyo.",
-        applying: "Casshy Fase 1: base del monorepo, API, base de datos y landing page.",
+        applying: "Casshy Fase 1 (monorepo, API, base de datos, landing page) y la API en NestJS de IncidentHub.",
       },
       java: {
         title: "Java y Spring Boot",
         summary: "Pasar del Java de la universidad a APIs REST con base de datos, pruebas y seguridad.",
-        applying: "IncidentHub: la API REST, la base de datos, las pruebas y la seguridad.",
+        applying: "",
       },
     },
   },
@@ -265,7 +271,7 @@ const es: Content = {
     lead: "Busco roles de desarrollador de software: frontend, full-stack o backend. La forma más rápida de contactarme es por email.",
     email: "Escríbeme",
     offClock: "Fuera del trabajo: fútbol ⚽ · gym 🏋️ · videojuegos 🎮",
-    footer: "Hecho con Astro, React y shadcn/ui",
+    footer: "Hecho con Astro, React, shadcn/ui y Motion",
   },
 };
 

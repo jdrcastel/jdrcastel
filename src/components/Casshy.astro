@@ -39,42 +39,48 @@ const dot = {
   </ul>
 
   <div class="mt-4 grid gap-4 lg:grid-cols-3">
-    <Card data-reveal>
-      <CardHeader><CardTitle>{c.principlesTitle}</CardTitle></CardHeader>
-      <CardContent>
-        <ul class="list-disc space-y-2 pl-5 text-sm text-muted-foreground">
-          {c.principles.map((p) => <li>{p}</li>)}
-        </ul>
-      </CardContent>
-    </Card>
-    <Card data-reveal style={{ "--reveal-delay": "80ms" }}>
-      <CardHeader><CardTitle>{c.archTitle}</CardTitle></CardHeader>
-      <CardContent>
-        <dl class="divide-y text-sm">
-          {c.stack.map(([k, v]) => (
-            <div class="grid grid-cols-[5rem_1fr] gap-3 py-2">
-              <dt class="text-xs font-medium tracking-wide text-muted-foreground uppercase">{k}</dt>
-              <dd>{v}</dd>
-            </div>
-          ))}
-        </dl>
-      </CardContent>
-    </Card>
-    <Card data-reveal style={{ "--reveal-delay": "160ms" }}>
-      <CardHeader><CardTitle>{c.roadmapTitle}</CardTitle></CardHeader>
-      <CardContent>
-        <ol class="space-y-4">
-          {c.roadmap.map((r) => (
-            <li class="flex gap-3">
-              <span class:list={["mt-1.5 size-2.5 shrink-0 rounded-full", dot[r.status]]} aria-hidden="true"></span>
-              <div>
-                <p class="text-sm font-medium">{r.title}</p>
-                <p class="text-xs text-muted-foreground">{c.states[r.status]}</p>
+    <div data-reveal>
+      <Card className="h-full">
+        <CardHeader><CardTitle>{c.principlesTitle}</CardTitle></CardHeader>
+        <CardContent>
+          <ul class="list-disc space-y-2 pl-5 text-sm text-muted-foreground">
+            {c.principles.map((p) => <li>{p}</li>)}
+          </ul>
+        </CardContent>
+      </Card>
+    </div>
+    <div data-reveal style="--reveal-delay:80ms">
+      <Card className="h-full">
+        <CardHeader><CardTitle>{c.archTitle}</CardTitle></CardHeader>
+        <CardContent>
+          <dl class="divide-y text-sm">
+            {c.stack.map(([k, v]) => (
+              <div class="grid grid-cols-[5rem_1fr] gap-3 py-2">
+                <dt class="text-xs font-medium tracking-wide text-muted-foreground uppercase">{k}</dt>
+                <dd>{v}</dd>
               </div>
-            </li>
-          ))}
-        </ol>
-      </CardContent>
-    </Card>
+            ))}
+          </dl>
+        </CardContent>
+      </Card>
+    </div>
+    <div data-reveal style="--reveal-delay:160ms">
+      <Card className="h-full">
+        <CardHeader><CardTitle>{c.roadmapTitle}</CardTitle></CardHeader>
+        <CardContent>
+          <ol class="space-y-4">
+            {c.roadmap.map((r) => (
+              <li class="flex gap-3">
+                <span class:list={["mt-1.5 size-2.5 shrink-0 rounded-full", dot[r.status]]} aria-hidden="true"></span>
+                <div>
+                  <p class="text-sm font-medium">{r.title}</p>
+                  <p class="text-xs text-muted-foreground">{c.states[r.status]}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </CardContent>
+      </Card>
+    </div>
   </div>
 </Section>

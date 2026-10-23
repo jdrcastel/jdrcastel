@@ -1,5 +1,6 @@
 ---
 import "@/styles/global.css";
+import "lenis/dist/lenis.css";
 import { Font } from "astro:assets";
 import { assetUrl, homeUrl, locales, type Lang } from "@/i18n";
 
@@ -14,6 +15,10 @@ const { lang, title, description, skipLabel } = Astro.props;
 const abs = (path: string) => new URL(path, Astro.site).href;
 const canonical = abs(homeUrl(lang));
 const ogImage = abs(assetUrl("og.png"));
+
+// Chrome prerenders the other language when the visitor hovers the EN/ES switch, so it opens instantly
+const otherLang = locales.find((l) => l !== lang) ?? "en";
+const speculation = JSON.stringify({ prerender: [{ source: "list", urls: [homeUrl(otherLang)], eagerness: "moderate" }] });
 ---
 
 <!doctype html>
@@ -40,7 +45,8 @@ const ogImage = abs(assetUrl("og.png"));
     <link rel="icon" type="image/svg+xml" href={assetUrl("favicon.svg")} />
 
     <Font cssVariable="--font-geist" preload />
-    <Font cssVariable="--font-geist-mono" />
+    <Font cssVariable="--font-geist-mono" preload />
+    <script is:inline type="speculationrules" set:html={speculation} />
 
     <script is:inline>
       // Apply the saved or system theme before first paint to avoid a flash.
@@ -51,6 +57,7 @@ const ogImage = abs(assetUrl("og.png"));
         try { saved = localStorage.getItem("theme"); } catch {}
         const dark = saved ? saved === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
         root.classList.toggle("dark", dark);
+        try { if (localStorage.getItem("motion") === "paused") root.dataset.motion = "paused"; } catch {}
       })();
     </script>
   </head>
@@ -63,6 +70,38 @@ const ogImage = abs(assetUrl("og.png"));
     </a>
     <slot />
     <script>
+      import Lenis from "lenis";
+
+      // Smooth scrolling with inertia (wheel and trackpad; touch stays native). Off for reduced motion.
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const lenis = new Lenis();
+        // Run Lenis only while it is gliding, instead of a frame loop that never stops (saves CPU and battery)
+        let frame = 0;
+        const tick = (time: number) => {
+          lenis.raf(time);
+          frame = lenis.isScrolling === "smooth" ? requestAnimationFrame(tick) : 0;
+        };
+        const wake = () => {
+          if (frame) return;
+          lenis.time = 0; // so the first frame doesn't count the idle time as elapsed scroll time
+          frame = requestAnimationFrame(tick);
+        };
+        lenis.on("virtual-scroll", wake);
+        // In-page links glide to their section (Lenis honors scroll-padding-top, so the header never covers it),
+        // then the URL and keyboard focus follow, like a native jump
+        document.addEventListener("click", (e) => {
+          if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+          const link = (e.target as Element).closest<HTMLAnchorElement>('a[href^="#"]');
+          const target = link?.hash && document.getElementById(link.hash.slice(1));
+          if (!link || !target) return;
+          e.preventDefault();
+          history.pushState(null, "", link.hash);
+          if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+          lenis.scrollTo(target, { onComplete: () => target.focus({ preventScroll: true }) });
+          wake();
+        });
+      }
+
       // Fade sections in once as they scroll into view
       const io = new IntersectionObserver(
         (entries) =>
