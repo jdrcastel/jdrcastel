@@ -41,8 +41,8 @@ const en = {
     eyebrow: "About",
     title: "A bit about me",
     paragraphs: [
-      "I like building real products that ship and solve real problems. Front end is where I'm strongest (JavaScript, React, Next.js), but I enjoy owning the whole thing: I built a Node.js microservice on AWS with Docker and CI/CD, and now I'm building Casshy, my own personal-finance app.",
-      "I started coding at 17. Today I work in production support at OpenText, moving into Tier 3, so I know how real systems fail and how to fix them. I build with AI coding agents like Claude Code and Codex, and I'm learning to add AI features to real apps.",
+      "I'm a full-stack developer who likes building real products that ship and solve real problems. I work across the stack, from React and Next.js front ends to Node.js services on AWS, and I bring AI into what I build: LLM integrations and multi-agent workflows with tools like Claude Code and Codex. Right now that's Casshy, my own personal-finance app.",
+      "I started coding at 17. Today I work in production support at OpenText, moving into Tier 3, so I know how real systems fail and how to fix them.",
       "Outside of tech, you'll find me playing soccer, at the gym, playing drums or gaming with friends.",
     ],
   },
@@ -83,6 +83,7 @@ const en = {
           "Accounts, transactions, budgets, goals and investments, plus the Casshy Academy for money lessons",
           "Fair XP from habits and learning evolves the coin: planchet → bronze → silver → gold → diamond → alexandrite",
           "Money as integers, versioned Canadian tax rules, pure domain packages, privacy and WCAG AA",
+          "Built with Claude Code (CLI): ADR-driven plans, custom skills and sub-agents, and a review of every diff",
         ],
       },
       {

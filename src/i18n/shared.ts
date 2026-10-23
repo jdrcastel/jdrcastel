@@ -88,6 +88,7 @@ export const projectMeta: Record<string, ProjectMeta> = {
     stack: [
       { name: "Next.js", core: true }, { name: "TypeScript", core: true }, { name: "NestJS" }, { name: "PostgreSQL" },
       { name: "Prisma" }, { name: "Turborepo" }, { name: "shadcn/ui" }, { name: "Rive" }, { name: "Docker" },
+      { name: "Claude Code" },
     ],
     tags: ["web", "backend"],
     links: [],
