@@ -12,7 +12,7 @@ This repo is also Juan's GitHub profile repo: `README.md` is his profile page, n
 3. **Always bilingual.** Every text change goes into both `src/i18n/en.ts` and `src/i18n/es.ts`, same structure.
 4. **Latest stable versions.** Check `npm view <pkg> version` before adding or upgrading anything.
 5. **Minimal and professional.** A recruiter has ~60 seconds: clear hierarchy, no visual noise, fast. Animations only
-   where they add meaning (subtle reveal on scroll, card lift on hover). Propose new animations and wait for his
+   where they add meaning (see "Animations" below). Propose new animations and wait for his
    approval before building them.
 6. **Honest content.** Never claim skills, features or results that aren't real. See "Content truth" below.
 7. **Keep it essential.** No test suites or extra CI for this site (Juan's decision). Verify by building and checking
@@ -63,6 +63,18 @@ public/               favicon.svg, og.png (1200×630 preview), resume PDF
   visible focus, `prefers-reduced-motion` respected, external links `rel="noopener"`.
 - All URLs to pages/assets go through `homeUrl()` / `assetUrl()` so the `/jdrcastel` base path works.
 
+## Animations (approved by Juan, native browser APIs only, all off with `prefers-reduced-motion`)
+
+- Hero **Send**: button in the JSON window; progress line → `201 Created · N ms` → stat cards light up one by one
+  (`Hero.astro` script, `.send-bar` / `.stat-hit` in `global.css`).
+- **Theme switch**: new theme grows as a circle from the toggle (View Transitions API, `Nav.astro`, `.theme-vt`).
+- **Experience timeline**: line fills and dots light up with scroll (CSS `animation-timeline: view()`, static in
+  browsers without support). Keep `animation-timeline` in its own rule: the minifier folds it into the `animation`
+  shorthand otherwise and browsers drop it.
+- **EN ↔ ES**: cross-page fade with `@view-transition`; the header (`.site-header`) stays in place.
+- **Project cards**: soft glow following the mouse (`.spotlight`, mouse only; position set in `Layout.astro`).
+- Also: reveal on scroll (`[data-reveal]`) and card lift (`.lift`).
+
 ## shadcn/ui in the cloud sandbox
 
 `ui.shadcn.com` is blocked by the sandbox proxy, so `npx shadcn add` fails there. Use the `add-shadcn-component`
@@ -94,6 +106,8 @@ skill: copy the component from the `shadcn-ui/ui` GitHub repo (`apps/v4/registry
 - 2026-10: Casshy section only explains the project (summary, features, principles, architecture, roadmap).
   No coin, no dashboard or app demo: "it's a portfolio, only to explain". No Rive on the portfolio.
 - 2026-10: The name is "Casshy" (double s). `github.com/jdcastel` is Juan's other GitHub account (Fragments repos).
+- 2026-10: Approved animations: hero Send, circular theme switch, scroll-filled timeline, EN↔ES fade, card
+  spotlight. Stats are words, not numbers, so they light up instead of counting.
 - Later: a custom domain (e.g. `juancastelblanco.dev`) for GitHub Pages.
 - 2026-10: Spring Security removed from Learning (not confirmed). Spanish keeps the word "Skills".
   Recruiter-review suggestions declined; project order stays Casshy, IncidentHub, Fragments.

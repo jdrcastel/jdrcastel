@@ -31,6 +31,7 @@ const es: Content = {
       "Desarrollador JavaScript y React que construyó un microservicio Node.js en AWS. Ahora construyo Casshy, una app de finanzas personales gamificada, con agentes de IA.",
     ctaProjects: "Ver proyectos",
     ctaResume: "CV (PDF, en inglés)",
+    send: { label: "Enviar", sending: "Enviando…", hint: "Pulsa Enviar para mandar la solicitud" },
     payload: {
       name: "Juan Castelblanco",
       role: "Desarrollador de software",

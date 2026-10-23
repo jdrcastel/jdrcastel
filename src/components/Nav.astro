@@ -22,7 +22,7 @@ const links = [
 ];
 ---
 
-<header class="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-md">
+<header class="site-header sticky top-0 z-40 border-b bg-background/80 backdrop-blur-md">
   <div class="mx-auto flex h-14 max-w-5xl items-center gap-2 px-4">
     <a
       href={homeUrl(lang)}
@@ -92,10 +92,27 @@ const links = [
   const root = document.documentElement;
   const themeBtn = document.getElementById("themeBtn");
   themeBtn?.setAttribute("aria-pressed", String(root.classList.contains("dark")));
-  themeBtn?.addEventListener("click", () => {
+  const applyTheme = () => {
     const dark = root.classList.toggle("dark");
-    themeBtn.setAttribute("aria-pressed", String(dark));
+    themeBtn?.setAttribute("aria-pressed", String(dark));
     try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch {}
+  };
+  // The new theme grows as a circle from the toggle (View Transitions API)
+  themeBtn?.addEventListener("click", () => {
+    if (!document.startViewTransition || matchMedia("(prefers-reduced-motion: reduce)").matches) return applyTheme();
+    const { left, top, width, height } = themeBtn.getBoundingClientRect();
+    const x = left + width / 2;
+    const y = top + height / 2;
+    const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    root.classList.add("theme-vt");
+    const vt = document.startViewTransition(applyTheme);
+    vt.ready.then(() =>
+      root.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${r}px at ${x}px ${y}px)`] },
+        { duration: 500, easing: "ease-in-out", pseudoElement: "::view-transition-new(root)" },
+      ),
+    );
+    vt.finished.finally(() => root.classList.remove("theme-vt"));
   });
 
   const menuBtn = document.getElementById("menuBtn");

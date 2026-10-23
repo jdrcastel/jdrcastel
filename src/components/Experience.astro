@@ -21,11 +21,12 @@ const kindStyle: Record<ExperienceKind, string> = {
 
 <Section id="experience" eyebrow={e.eyebrow} title={e.title} lead={e.lead}>
   <ol class="relative flex max-w-3xl flex-col gap-8 border-l pl-6">
+    <span class="timeline-fill absolute top-0 -left-px h-full w-px bg-brand" aria-hidden="true"></span>
     {e.items.map((x, i) => {
       const [first, ...rest] = x.bullets;
       return (
         <li class="relative" data-reveal style={`--reveal-delay:${Math.min(i, 3) * 60}ms`}>
-          <span class="absolute top-1.5 -left-[31px] size-3 rounded-full border-2 border-brand bg-background" aria-hidden="true"></span>
+          <span class="timeline-dot absolute top-1.5 -left-[31px] size-3 rounded-full border-2 border-brand bg-background" aria-hidden="true"></span>
           <div class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
             <Badge variant="secondary" className={kindStyle[x.kind]}>{e.kinds[x.kind]}</Badge>
             <span class="font-mono">{x.when}</span>

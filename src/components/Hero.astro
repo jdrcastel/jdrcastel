@@ -1,5 +1,5 @@
 ---
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -57,19 +57,32 @@ const json = `{\n${Object.entries(t.hero.payload)
     </div>
 
     <figure class="code-window overflow-hidden rounded-xl border border-white/10 bg-[#0d1117] font-mono text-[13px] leading-relaxed text-[#d6deeb] shadow-lg">
-      <div class="flex items-center gap-1.5 border-b border-white/10 bg-white/5 px-4 py-2.5 text-xs text-white/50">
-        <span class="size-2.5 rounded-full bg-[#ff5f57]"></span>
-        <span class="size-2.5 rounded-full bg-[#febc2e]"></span>
-        <span class="size-2.5 rounded-full bg-[#28c840]"></span>
+      <div class="relative flex items-center gap-1.5 border-b border-white/10 bg-white/5 px-4 py-2 text-xs text-white/50">
+        <span class="size-2.5 rounded-full bg-[#ff5f57]" aria-hidden="true"></span>
+        <span class="size-2.5 rounded-full bg-[#febc2e]" aria-hidden="true"></span>
+        <span class="size-2.5 rounded-full bg-[#28c840]" aria-hidden="true"></span>
         <span class="ml-2">request.http</span>
+        <button
+          id="sendBtn"
+          type="button"
+          data-sending={t.hero.send.sending}
+          class="ml-auto inline-flex items-center gap-1.5 rounded-md bg-[#28c840]/15 px-2.5 py-1 font-sans font-medium text-[#28c840] transition-colors outline-none hover:bg-[#28c840]/25 focus-visible:ring-2 focus-visible:ring-[#28c840]/60 disabled:cursor-progress"
+        >
+          <Play className="size-3 fill-current" aria-hidden="true" />
+          <span data-label>{t.hero.send.label}</span>
+        </button>
+        <span class="send-bar absolute inset-x-0 -bottom-px h-px origin-left scale-x-0 bg-[#28c840]" aria-hidden="true"></span>
       </div>
       <pre class="overflow-hidden px-4 py-4 whitespace-pre-wrap"><span class="k">POST</span> <span class="a">/api/v1/candidates</span> HTTP/1.1
 <span class="t">Content-Type</span>: application/json
 
 <Fragment set:html={json} /></pre>
-      <figcaption class="flex flex-wrap gap-x-3 border-t border-white/10 bg-black/20 px-4 py-2.5 text-xs text-white/50">
-        <span class="font-semibold text-[#28c840]">HTTP/1.1 201 Created</span>
-        <span>Location: /api/v1/candidates/juan</span>
+      <figcaption class="border-t border-white/10 bg-black/20 px-4 py-2.5 text-xs text-white/50" aria-live="polite">
+        <span data-idle>{t.hero.send.hint}</span>
+        <span data-done hidden class="flex flex-wrap gap-x-3 animate-in fade-in slide-in-from-bottom-1">
+          <span class="font-semibold text-[#28c840]">HTTP/1.1 201 Created <span data-ms></span></span>
+          <span>Location: /api/v1/candidates/juan</span>
+        </span>
       </figcaption>
     </figure>
   </div>
@@ -77,9 +90,9 @@ const json = `{\n${Object.entries(t.hero.payload)
   <ul class="mx-auto grid max-w-5xl grid-cols-2 gap-3 px-4 pb-16 lg:grid-cols-4">
     {t.hero.stats.map((s) => (
       <li>
-        <Card className="lift h-full gap-1 py-4">
+        <Card className="lift stat h-full gap-1 py-4">
           <CardContent className="px-4">
-            <p class="text-2xl font-semibold tracking-tight">{s.value}</p>
+            <p class="stat-value text-2xl font-semibold tracking-tight">{s.value}</p>
             <p class="text-sm text-muted-foreground">{s.label}</p>
           </CardContent>
         </Card>
@@ -87,3 +100,40 @@ const json = `{\n${Object.entries(t.hero.payload)
     ))}
   </ul>
 </section>
+
+<script>
+  // "Send" the profile request: progress line, 201 response, then the stat cards light up one by one
+  const btn = document.getElementById("sendBtn") as HTMLButtonElement | null;
+  const label = btn?.querySelector("[data-label]");
+  const bar = document.querySelector(".send-bar");
+  const idle = document.querySelector<HTMLElement>("[data-idle]");
+  const done = document.querySelector<HTMLElement>("[data-done]");
+  const ms = document.querySelector("[data-ms]");
+  const stats = [...document.querySelectorAll<HTMLElement>(".stat")];
+  const restart = (el: Element, cls: string) => {
+    el.classList.remove(cls);
+    void (el as HTMLElement).offsetWidth; // reflow so the animation can replay
+    el.classList.add(cls);
+  };
+
+  btn?.addEventListener("click", () => {
+    if (!label || !idle || !done || !ms) return;
+    const text = label.textContent;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    btn.disabled = true;
+    label.textContent = btn.dataset.sending ?? "";
+    done.hidden = true;
+    if (bar) restart(bar, "run");
+    setTimeout(() => {
+      ms.textContent = `· ${90 + Math.floor(Math.random() * 90)} ms`;
+      idle.hidden = true;
+      done.hidden = false;
+      stats.forEach((card, i) => {
+        card.style.animationDelay = `${i * 90}ms`;
+        restart(card, "stat-hit");
+      });
+      label.textContent = text;
+      btn.disabled = false;
+    }, reduce ? 0 : 600);
+  });
+</script>

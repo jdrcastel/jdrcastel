@@ -74,6 +74,16 @@ const ogImage = abs(assetUrl("og.png"));
         { threshold: 0.1 },
       );
       document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
+
+      // Feed the mouse position to .spotlight cards (CSS draws the glow)
+      document.addEventListener("pointermove", (e) => {
+        if (e.pointerType !== "mouse") return;
+        const card = (e.target as Element).closest<HTMLElement>(".spotlight");
+        if (!card) return;
+        const box = card.getBoundingClientRect();
+        card.style.setProperty("--mx", `${e.clientX - box.left}px`);
+        card.style.setProperty("--my", `${e.clientY - box.top}px`);
+      });
     </script>
   </body>
 </html>

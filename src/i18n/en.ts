@@ -34,6 +34,7 @@ const en = {
       "JavaScript & React developer who built a Node.js microservice on AWS. Now building Casshy, a gamified personal-finance app, with AI coding agents.",
     ctaProjects: "See projects",
     ctaResume: "Resume (PDF)",
+    send: { label: "Send", sending: "Sending…", hint: "Press Send to submit the request" },
     payload: {
       name: "Juan Castelblanco",
       role: "Software Developer",
