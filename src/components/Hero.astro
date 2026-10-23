@@ -3,9 +3,8 @@ import { ArrowRight, Play } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { assetUrl, type Content } from "@/i18n";
-import { cn } from "@/lib/utils";
-import { person } from "@/i18n/shared";
+import type { Content } from "@/i18n";
+import SocialLinks from "./SocialLinks.astro";
 import TechMarquee from "./TechMarquee.astro";
 
 interface Props {
@@ -47,17 +46,12 @@ const json = `{\n${Object.entries(t.hero.payload)
         <span class="block">{helloWords.map((w, i) => <><span class="hero-word" style={`--i:${i}`}>{w}</span>{" "}</>)}</span>
         <span class="block text-brand">{roleWords.map(({ w, i }) => <><span class="hero-word" style={`--i:${i}`}>{w}</span>{" "}</>)}</span>
       </h1>
-      <p class="hero-in mt-5 max-w-xl text-lg text-pretty text-muted-foreground" style="--d:300ms">{t.hero.tagline}</p>
-      <div class="hero-in mt-7 flex flex-wrap gap-1.5" style="--d:420ms">
+      <div class="hero-in mt-8 flex flex-wrap items-center gap-1.5" style="--d:350ms">
         <a href="#projects" class={buttonVariants({ size: "lg" })}>
           {t.hero.ctaProjects}
           <ArrowRight aria-hidden="true" />
         </a>
-        <a href={assetUrl(person.resume)} target="_blank" rel="noopener" class={buttonVariants({ variant: "outline", size: "lg" })}>
-          {t.hero.ctaResume}
-        </a>
-        <a href={person.linkedin} target="_blank" rel="noopener" class={cn(buttonVariants({ variant: "ghost", size: "lg" }), "px-3")}>LinkedIn</a>
-        <a href={person.github} target="_blank" rel="noopener" class={cn(buttonVariants({ variant: "ghost", size: "lg" }), "px-3")}>GitHub</a>
+        <SocialLinks />
       </div>
     </div>
 

@@ -1,11 +1,9 @@
-// English content. es.ts must keep exactly the same shape.
+// All site text (the site is English only).
 
 export type ProjectStatus = "progress" | "use" | "shipped";
-export type RoadmapStatus = "done" | "inProgress" | "planned";
 export type ExperienceKind = "work" | "certification" | "internship" | "volunteer" | "education";
 
 const en = {
-  lang: "en",
   meta: {
     title: "Juan Castelblanco · Software Developer",
     description:
@@ -13,7 +11,6 @@ const en = {
   },
   nav: {
     about: "About",
-    casshy: "Casshy",
     projects: "Projects",
     skills: "Skills",
     experience: "Experience",
@@ -21,7 +18,6 @@ const en = {
     resume: "Resume",
     menu: "Open menu",
     theme: "Toggle dark mode",
-    language: "Leer en español",
     mainLabel: "Main",
     mobileLabel: "Mobile menu",
     skip: "Skip to content",
@@ -30,10 +26,7 @@ const en = {
     status: "Open to Software Developer roles",
     hello: "Hi, I'm Juan.",
     role: "Software developer",
-    tagline:
-      "JavaScript & React developer who built a Node.js microservice on AWS. Now building Casshy, a gamified personal-finance app, with AI coding agents.",
     ctaProjects: "See projects",
-    ctaResume: "Resume (PDF)",
     send: { label: "Send", sending: "Sending…", hint: "Press Send to submit the request" },
     techLabel: "Technologies I work with",
     pauseMotion: "Pause animations",
@@ -59,51 +52,12 @@ const en = {
   },
   about: {
     eyebrow: "About",
-    title: "Front-end strength, production experience",
+    title: "A bit about me",
     paragraphs: [
-      "I'm a software developer with strong JavaScript and front-end skills: React, Next.js, TypeScript and Redux. On the backend I built a Node.js microservice on AWS with Cognito, S3, DynamoDB, Docker and a CI/CD pipeline to ECS.",
-      "At OpenText I support enterprise SaaS customers in production and I'm moving from Tier 2 into Tier 3, so I know how real systems fail and how to fix them. I also built a web extension my team uses every day.",
-      "Right now I'm building Casshy, a gamified personal-finance app for Canada, and IncidentHub, a TypeScript and NestJS API where I apply LLM integrations, working with AI coding agents like Claude Code and OpenAI Codex.",
+      "I like building real products that ship and solve real problems. Front end is where I'm strongest (JavaScript, React, Next.js), but I enjoy owning the whole thing: I built a Node.js microservice on AWS with Docker and CI/CD, and now I'm building Casshy, my own personal-finance app.",
+      "I started my software journey in 2021 at Seneca Polytechnic. Today I work in production support at OpenText, moving into Tier 3, so I know how real systems fail and how to fix them. I build with AI coding agents like Claude Code and Codex, and I'm learning to add AI features to real apps.",
+      "Outside of tech, you'll find me playing soccer, at the gym, playing drums or gaming with friends.",
     ],
-  },
-  casshy: {
-    eyebrow: "Featured project",
-    status: "Phase 1 · in progress",
-    tagline: "Personal finance you actually want to take care of.",
-    summary:
-      "A personal-finance web app in the spirit of Monarch (accounts, transactions, budgets, goals and investments) whose hero is Casshy: a living cartoon coin, like Pou or Talking Tom, that you look after with good money habits.",
-    features: [
-      { icon: "🏦", title: "Money in one place", text: "Accounts, transactions, budgets, goals and investments." },
-      { icon: "🪙", title: "A coin that's alive", text: "Casshy will react to your habits, animated with Rive." },
-      { icon: "🎓", title: "Casshy Academy", text: "Short money lessons. Casshy educates and never gives investment advice." },
-      { icon: "⚖️", title: "Fair XP", text: "Earned through habits and learning, never by having more money." },
-      { icon: "🍁", title: "Made for Canada", text: "Starts in Ontario, in English, Spanish and French, for users 14+." },
-      { icon: "🔒", title: "Private & accessible", text: "Privacy by design and WCAG AA accessibility from day one." },
-    ],
-    principlesTitle: "Engineering principles",
-    principles: [
-      "Pure domain logic in its own packages, separate from frameworks",
-      "Money stored as integers in minor units, never floats",
-      "Canadian tax rules versioned, each with its source",
-      "Architecture decisions recorded as ADRs",
-    ],
-    archTitle: "Architecture",
-    stack: [
-      ["Monorepo", "Turborepo · pnpm · strict TypeScript"],
-      ["Web", "Next.js · Tailwind · shadcn/ui · Rive"],
-      ["API", "NestJS · Zod · Better Auth"],
-      ["Data", "PostgreSQL 18 · Prisma 7"],
-      ["Infra", "Docker for development · k3s homelab for production"],
-      ["Mobile", "Expo, after the web app"],
-    ],
-    roadmapTitle: "Roadmap",
-    roadmap: [
-      { title: "Phase 0 · Vision, docs & ADRs", status: "done" },
-      { title: "Phase 1 · Robust foundation & landing page", status: "inProgress" },
-      { title: "Next · Web app: finance, Casshy & Academy", status: "planned" },
-      { title: "Last · Mobile app with Expo", status: "planned" },
-    ] satisfies { title: string; status: RoadmapStatus }[],
-    states: { done: "Done", inProgress: "In progress", planned: "Planned" },
   },
   projects: {
     eyebrow: "Projects",
@@ -118,7 +72,7 @@ const en = {
       ui: "Web UI",
       api: "Express API",
     },
-    links: { casshy: "See Casshy", learning: "What I'm learning", api: "API code", ui: "UI code", code: "Code" },
+    links: { learning: "What I'm learning", api: "API code", ui: "UI code", code: "Code" },
     items: [
       {
         id: "casshy",
@@ -174,7 +128,7 @@ const en = {
   skills: {
     eyebrow: "Skills",
     title: "What I use, and what I'm learning",
-    lead: "Highlighted means I've built with it and know it well. Learning is kept separate on purpose: I'm applying it, not claiming to master it yet.",
+    lead: "Highlighted means I've built with it and know it well. Learning is kept separate on purpose: these are skills in progress, not ones I claim to master yet.",
     tabSkills: "Skills",
     tabLearning: "Learning now",
     legendCore: "Built with it",
@@ -197,7 +151,7 @@ const en = {
       integrations: {
         title: "AI integrations",
         summary: "Calling LLMs from real apps: structured output, tool calling, and keeping keys and costs under control.",
-        applying: "IncidentHub: AI triage that summarizes each ticket and suggests its priority.",
+        applying: "IncidentHub: adding AI triage that summarizes each ticket and suggests its priority.",
       },
       casshy: {
         title: "Casshy's stack",
@@ -206,7 +160,7 @@ const en = {
       },
       java: {
         title: "Java & Spring Boot",
-        summary: "Going from college Java to REST APIs with a database, tests and security.",
+        summary: "Going from college Java to REST APIs with a database and tests.",
         // No project uses Java right now (IncidentHub moved to TypeScript), so nothing is shown
         applying: "",
       },
@@ -274,7 +228,7 @@ const en = {
     highlight: "reliable.",
     lead: "I'm looking for Software Developer roles: front end, full-stack or backend. The fastest way to reach me is email.",
     email: "Email me",
-    offClock: "Off the clock: soccer ⚽ · gym 🏋️ · video games 🎮",
+    offClock: "Off the clock: soccer ⚽ · gym 🏋️ · drums 🥁 · video games 🎮",
     footer: "Built with Astro, React, shadcn/ui and Motion",
   },
 };

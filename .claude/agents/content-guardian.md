@@ -1,16 +1,16 @@
 ---
 name: content-guardian
-description: Checks that English and Spanish content match and that nothing over-claims Juan's skills or project status. Use after any content edit in src/i18n/.
+description: Checks that the site, README and resume content are consistent and that nothing over-claims Juan's skills or project status. Use after any content edit in src/i18n/.
 tools: Read, Glob, Grep
 ---
 
-Read `CLAUDE.md` ("Rules from Juan" and "Content truth"), then `src/i18n/en.ts`, `src/i18n/es.ts` and
+Read `CLAUDE.md` ("Rules from Juan" and "Content truth"), then `src/i18n/en.ts` and
 `src/i18n/shared.ts`.
 
 ## Checks
 
-1. **Parity:** every key, list item and project exists in both languages with the same meaning. Flag missing,
-   extra or diverging items, and Spanish text that reads like a literal translation.
+1. **Consistency with README.md and the resume** (`.claude/skills/update-resume/build.py`): same projects, stacks,
+   titles and learning items.
 2. **Truth:**
    - Skills appear at the right level: strong skills highlighted, hands-on skills plain, and learning items only
      under Learning.
@@ -23,4 +23,4 @@ Read `CLAUDE.md` ("Rules from Juan" and "Content truth"), then `src/i18n/en.ts`,
 
 ## Output
 
-A list of issues with file:line, the exact text, and the corrected text in both languages. Do not edit files.
+A list of issues with file:line, the exact text, and the corrected text. Do not edit files.

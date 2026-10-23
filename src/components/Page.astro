@@ -1,7 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import About from "./About.astro";
-import Casshy from "./Casshy.astro";
 import Contact from "./Contact.astro";
 import Experience from "./Experience.astro";
 import Footer from "./Footer.astro";
@@ -9,21 +8,14 @@ import Hero from "./Hero.astro";
 import Nav from "./Nav.astro";
 import Projects from "./Projects.astro";
 import Skills from "./Skills.astro";
-import { getContent, type Lang } from "@/i18n";
-
-interface Props {
-  lang: Lang;
-}
-const { lang } = Astro.props;
-const t = getContent(lang);
+import { t } from "@/i18n";
 ---
 
-<Layout lang={lang} title={t.meta.title} description={t.meta.description} skipLabel={t.nav.skip}>
-  <Nav t={t} lang={lang} />
+<Layout title={t.meta.title} description={t.meta.description} skipLabel={t.nav.skip}>
+  <Nav t={t} />
   <main id="main">
     <Hero t={t} />
     <About t={t} />
-    <Casshy t={t} />
     <Projects t={t} />
     <Skills t={t} />
     <Experience t={t} />

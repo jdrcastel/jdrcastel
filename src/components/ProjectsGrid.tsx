@@ -63,30 +63,33 @@ function ProjectCard({ p, labels }: { p: Project; labels: Labels }) {
           </AccordionItem>
         </Accordion>
       </CardContent>
-      <CardFooter className="mt-auto flex flex-wrap gap-2">
-        {p.links.map((l) => {
-          const external = l.href.startsWith("http");
-          return (
-            <Button key={l.key} variant="link" size="sm" className="h-auto px-0" asChild>
-              <a href={l.href} {...(external ? { target: "_blank", rel: "noopener" } : {})}>
-                {labels.links[l.key]}
-                {external ? <ArrowUpRight aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
-              </a>
-            </Button>
-          );
-        })}
-      </CardFooter>
+      {p.links.length > 0 && (
+        <CardFooter className="mt-auto flex flex-wrap gap-2">
+          {p.links.map((l) => {
+            const external = l.href.startsWith("http");
+            return (
+              <Button key={l.key} variant="link" size="sm" className="h-auto px-0" asChild>
+                <a href={l.href} {...(external ? { target: "_blank", rel: "noopener" } : {})}>
+                  {labels.links[l.key]}
+                  {external ? <ArrowUpRight aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
+                </a>
+              </Button>
+            );
+          })}
+        </CardFooter>
+      )}
     </Card>
   );
 }
 
 export default function ProjectsGrid({ projects, labels }: { projects: Project[]; labels: Labels }) {
   const [filter, setFilter] = useState<Filter>("all");
-  // Web extensions only show under their own filter, so they don't compete with the main projects
-  const visible =
-    filter === "extensions"
-      ? projects.filter((p) => p.group === "extension")
-      : projects.filter((p) => !p.group && (filter === "all" || p.tags.some((tag) => tag === filter)));
+  // "All" shows everything; web extensions also have their own filter
+  const visible = projects.filter((p) => {
+    if (filter === "all") return true;
+    if (filter === "extensions") return p.group === "extension";
+    return !p.group && p.tags.some((tag) => tag === filter);
+  });
 
   return (
     <MotionConfig reducedMotion="user">
