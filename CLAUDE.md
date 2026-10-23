@@ -154,3 +154,7 @@ Magic UI (`magicui.design`) is blocked too: read components from GitHub (`magicu
 - 2026-10: About says "I started coding at 17" (no year).
 - 2026-10: Casshy (featured) shows its details open, with no "Learn more": "What it does" and the roadmap side by
   side, plus the full stack. It has the most information; the other projects keep "Learn more".
+- 2026-10: About opens with "full-stack developer" who brings AI into what he builds (LLM integrations, multi-agent
+  workflows with Claude Code and Codex).
+- 2026-10: Casshy is built with Claude Code (CLI, skills, sub-agents): shown as a stack chip and a bullet. Only
+  Casshy claims this (not IncidentHub).
