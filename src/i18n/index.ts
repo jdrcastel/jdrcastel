@@ -12,4 +12,4 @@ export const homeUrl = () => `${base}/`;
 export const assetUrl = (file: string) => `${base}/${file}`;
 
 export type { Content };
-export type { ExperienceKind, ProjectStatus } from "./en";
+export type { ExperienceKind, ProjectStatus, RoadmapStatus } from "./en";

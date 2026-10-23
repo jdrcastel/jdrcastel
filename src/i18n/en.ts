@@ -1,6 +1,7 @@
 // All site text (the site is English only).
 
 export type ProjectStatus = "progress" | "use" | "shipped";
+export type RoadmapStatus = "done" | "inProgress" | "planned";
 export type ExperienceKind = "work" | "certification" | "internship" | "volunteer" | "education";
 
 const en = {
@@ -53,6 +54,18 @@ const en = {
     status: { progress: "In progress", use: "In use", shipped: "Shipped" },
     learnMore: "Learn more",
     stackLabel: "Tech stack",
+    // The featured project (Casshy) shows everything open instead of "Learn more"
+    featured: {
+      featuresTitle: "What it does",
+      roadmapTitle: "Roadmap",
+      states: { done: "Done", inProgress: "In progress", planned: "Planned" },
+      roadmap: [
+        { title: "Phase 0 · Vision, docs & ADRs", status: "done" },
+        { title: "Phase 1 · Robust foundation & landing page", status: "inProgress" },
+        { title: "Next · Web app: finance, Casshy & Academy", status: "planned" },
+        { title: "Last · Mobile app with Expo", status: "planned" },
+      ] satisfies { title: string; status: RoadmapStatus }[],
+    },
     diagram: {
       alt: "Fragments architecture: the web UI calls the Express API, which runs in Docker on Amazon ECS, checks Cognito tokens (JWT), stores fragment data in S3 and metadata in DynamoDB.",
       ui: "Web UI",
