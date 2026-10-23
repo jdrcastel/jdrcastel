@@ -1,42 +1,41 @@
 ---
-import { profile } from "../data/profile";
+import { Mail } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { assetUrl, type Content } from "@/i18n";
+import { person } from "@/i18n/shared";
 
-const resume = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/Resume_Juan_Castelblanco.pdf`;
+interface Props {
+  t: Content;
+}
+const { t } = Astro.props;
+const c = t.contact;
 ---
 
-<section id="contact">
-  <div class="wrap" data-reveal>
-    <div class="box">
-      <div class="eyebrow">// contact</div>
-      <h2>Let's build something <span class="grad-text">reliable.</span></h2>
-      <p class="lead">
-        I'm looking for Software Developer roles: Java backend or full-stack. The fastest way to reach me is email.
-      </p>
-      <div class="cta">
-        <a class="btn primary" href={`mailto:${profile.email}`}>Email me</a>
-        <a class="btn" href={resume} target="_blank" rel="noopener">Resume (PDF)</a>
-        <a class="btn" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href={profile.github} target="_blank" rel="noopener">GitHub</a>
+<section id="contact" class="py-20" aria-labelledby="contact-title">
+  <div class="mx-auto max-w-5xl px-4">
+    <Card className="items-center gap-0 px-6 py-14 text-center" data-reveal>
+      <p class="font-mono text-xs font-medium tracking-wider text-brand uppercase">{c.eyebrow}</p>
+      <h2 id="contact-title" class="mt-2 text-3xl font-semibold tracking-tight text-balance">
+        {c.title} <span class="text-brand">{c.highlight}</span>
+      </h2>
+      <p class="mx-auto mt-3 max-w-xl text-pretty text-muted-foreground">{c.lead}</p>
+      <div class="mt-7 flex flex-wrap justify-center gap-2">
+        <a href={`mailto:${person.email}`} class={buttonVariants({ size: "lg" })}>
+          <Mail aria-hidden="true" />
+          {c.email}
+        </a>
+        <a href={assetUrl(person.resume)} target="_blank" rel="noopener" class={buttonVariants({ variant: "outline", size: "lg" })}>
+          {t.hero.ctaResume}
+        </a>
+        <a href={person.linkedin} target="_blank" rel="noopener" class={buttonVariants({ variant: "ghost", size: "lg" })}>LinkedIn</a>
+        <a href={person.github} target="_blank" rel="noopener" class={buttonVariants({ variant: "ghost", size: "lg" })}>GitHub</a>
       </div>
-      <p class="note">Off the clock: {profile.hobbies}</p>
-    </div>
+      <p class="mt-8 text-sm text-muted-foreground">{c.offClock}</p>
+    </Card>
   </div>
 </section>
 
-<footer>
-  © {new Date().getFullYear()} {profile.name} · Built with Astro
+<footer class="border-t py-8 text-center text-sm text-muted-foreground">
+  © {new Date().getFullYear()} {person.name} · {c.footer}
 </footer>
-
-<style>
-  .box {
-    text-align: center; padding: 56px 24px; border-radius: 20px; border: 1px solid transparent;
-    background:
-      radial-gradient(600px 200px at 50% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent) padding-box,
-      linear-gradient(var(--surface), var(--surface)) padding-box,
-      linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent-3)) border-box;
-  }
-  .lead { margin: 0 auto 28px; }
-  .cta { justify-content: center; }
-  .note { margin-top: 28px; }
-  footer { padding: 28px 16px 40px; color: var(--muted); font-size: 13px; text-align: center; }
-</style>

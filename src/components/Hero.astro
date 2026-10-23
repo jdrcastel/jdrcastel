@@ -1,163 +1,85 @@
 ---
-import { profile, skillGroups, stats } from "../data/profile";
+import { ArrowRight } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { assetUrl, type Content } from "@/i18n";
+import { person } from "@/i18n/shared";
 
-const resume = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/Resume_Juan_Castelblanco.pdf`;
+interface Props {
+  t: Content;
+}
+const { t } = Astro.props;
 
-const marquee = skillGroups.flatMap((g) => g.skills.filter((s) => s.core).map((s) => s.name));
-
-// Profile shown as a JSON request body in the hero
-const payload = {
-  name: "Juan Castelblanco",
-  role: "Software Developer",
-  job: "Tech Support Specialist @ OpenText",
-  location: profile.location,
-  languages: ["Spanish", "English"],
-  education: "Seneca Polytechnic",
-  aws: "Certified Cloud Practitioner",
-  strengths: ["JavaScript", "React", "Node.js"],
-  building: ["Casshy", "IncidentHub"],
-  learning: ["AI agents", "LLM integrations", "Spring Boot"],
-  openTo: ["Front end", "Full-stack", "Backend"],
-  openToWork: true,
-};
+// Render the profile payload as syntax-highlighted JSON
 const esc = (v: string) => v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-const val = (v: unknown): string =>
+const val = (v: unknown) =>
   typeof v === "string" ? `<span class="s">"${esc(v)}"</span>` : `<span class="n">${String(v)}</span>`;
-// Short arrays stay on one line; longer ones get one item per line, like a formatter would
-const arr = (k: string, v: unknown[]) => {
-  const inline = `[${v.map((x) => `"${x}"`).join(", ")}]`;
-  return k.length + inline.length > 45 ? `[\n${v.map((x) => `    ${val(x)}`).join(",\n")}\n  ]` : `[${v.map(val).join(", ")}]`;
+// Short arrays stay inline; longer ones get one item per line, like a formatter would
+const arr = (key: string, items: unknown[]) => {
+  const inline = `[${items.map((x) => `"${x}"`).join(", ")}]`;
+  return key.length + inline.length > 45
+    ? `[\n${items.map((x) => `    ${val(x)}`).join(",\n")}\n  ]`
+    : `[${items.map(val).join(", ")}]`;
 };
-const json = `{\n${Object.entries(payload)
+const json = `{\n${Object.entries(t.hero.payload)
   .map(([k, v]) => `  <span class="t">"${k}"</span>: ${Array.isArray(v) ? arr(k, v) : val(v)}`)
   .join(",\n")}\n}`;
 ---
 
-<section class="hero" id="top">
-  <div class="blobs" aria-hidden="true"><span></span><span></span><span></span></div>
-  <div class="grid-bg" aria-hidden="true"></div>
-
-  <div class="wrap hero-grid">
+<section id="top" class="border-b">
+  <div class="mx-auto grid max-w-5xl items-center gap-10 px-4 pt-16 pb-12 lg:grid-cols-[1.1fr_1fr] lg:pt-24">
     <div>
-      <span class="status">{profile.status}</span>
-      <h1>
-        Hi, I'm Juan.<br />
-        <span class="typed grad-text" id="typed" data-roles={JSON.stringify(profile.roles)}>{profile.roles[0]}</span><span class="caret">|</span>
+      <Badge variant="outline" className="gap-2 rounded-full px-3 py-1 text-xs font-medium">
+        <span class="size-2 rounded-full bg-success" aria-hidden="true"></span>
+        {t.hero.status}
+      </Badge>
+      <h1 class="mt-5 text-4xl font-bold tracking-tight text-balance sm:text-5xl">
+        {t.hero.hello}
+        <span class="block text-brand">{t.hero.role}</span>
       </h1>
-      <p class="pitch">{profile.tagline}</p>
-      <div class="cta">
-        <a class="btn primary" href="#projects">See projects →</a>
-        <a class="btn" href={resume} target="_blank" rel="noopener">Resume (PDF)</a>
-        <a class="btn" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href={profile.github} target="_blank" rel="noopener">GitHub</a>
+      <p class="mt-5 max-w-xl text-lg text-pretty text-muted-foreground">{t.hero.tagline}</p>
+      <div class="mt-7 flex flex-wrap gap-1.5">
+        <a href="#projects" class={buttonVariants({ size: "lg" })}>
+          {t.hero.ctaProjects}
+          <ArrowRight aria-hidden="true" />
+        </a>
+        <a href={assetUrl(person.resume)} target="_blank" rel="noopener" class={buttonVariants({ variant: "outline", size: "lg" })}>
+          {t.hero.ctaResume}
+        </a>
+        <a href={person.linkedin} target="_blank" rel="noopener" class={buttonVariants({ variant: "ghost", size: "lg" }) + " px-3"}>LinkedIn</a>
+        <a href={person.github} target="_blank" rel="noopener" class={buttonVariants({ variant: "ghost", size: "lg" }) + " px-3"}>GitHub</a>
       </div>
     </div>
 
-    <div class="code float req" aria-label="My profile as a JSON request to an API">
-      <div class="bar"><i></i><i></i><i></i><span>request.http</span></div>
-<pre><span class="k">POST</span> <span class="a">/api/v1/candidates</span> HTTP/1.1
+    <figure class="code-window overflow-hidden rounded-xl border border-white/10 bg-[#0d1117] font-mono text-[13px] leading-relaxed text-[#d6deeb] shadow-lg">
+      <div class="flex items-center gap-1.5 border-b border-white/10 bg-white/5 px-4 py-2.5 text-xs text-white/50">
+        <span class="size-2.5 rounded-full bg-[#ff5f57]"></span>
+        <span class="size-2.5 rounded-full bg-[#febc2e]"></span>
+        <span class="size-2.5 rounded-full bg-[#28c840]"></span>
+        <span class="ml-2">request.http</span>
+      </div>
+      <pre class="overflow-hidden px-4 py-4 whitespace-pre-wrap"><span class="k">POST</span> <span class="a">/api/v1/candidates</span> HTTP/1.1
 <span class="t">Content-Type</span>: application/json
 
 <Fragment set:html={json} /></pre>
-      <div class="resp"><span class="ok">HTTP/1.1 201 Created</span><span>Location: /api/v1/candidates/juan</span></div>
-    </div>
+      <figcaption class="flex flex-wrap gap-x-3 border-t border-white/10 bg-black/20 px-4 py-2.5 text-xs text-white/50">
+        <span class="font-semibold text-[#28c840]">HTTP/1.1 201 Created</span>
+        <span>Location: /api/v1/candidates/juan</span>
+      </figcaption>
+    </figure>
   </div>
 
-
-  <div class="wrap">
-    <div class="stats">
-      {stats.map((s, i) => (
-        <div class="stat card" data-reveal style={`transition-delay:${i * 80}ms`}>
-          <b class="grad-text">{s.value}</b>
-          <span>{s.label}</span>
-        </div>
-      ))}
-    </div>
-  </div>
-
-  <div class="marquee" aria-hidden="true">
-    <div class="track">
-      {[...marquee, ...marquee].map((m) => <span>{m}</span>)}
-    </div>
-  </div>
+  <ul class="mx-auto grid max-w-5xl grid-cols-2 gap-3 px-4 pb-16 lg:grid-cols-4">
+    {t.hero.stats.map((s) => (
+      <li>
+        <Card className="h-full gap-1 py-4">
+          <CardContent className="px-4">
+            <p class="text-2xl font-semibold tracking-tight">{s.value}</p>
+            <p class="text-sm text-muted-foreground">{s.label}</p>
+          </CardContent>
+        </Card>
+      </li>
+    ))}
+  </ul>
 </section>
-
-<style>
-  .hero { padding: 88px 0 0; overflow: hidden; }
-  .blobs { position: absolute; inset: 0; pointer-events: none; filter: blur(70px); opacity: var(--blob-opacity); }
-  .blobs span { position: absolute; width: 420px; height: 420px; border-radius: 50%; animation: drift 18s ease-in-out infinite alternate; }
-  .blobs span:nth-child(1) { background: var(--accent); top: -120px; left: -80px; }
-  .blobs span:nth-child(2) { background: var(--accent-2); top: 40px; right: -120px; animation-delay: -6s; }
-  .blobs span:nth-child(3) { background: var(--accent-3); bottom: -160px; left: 35%; animation-delay: -12s; }
-  @keyframes drift {
-    0% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(60px, 40px) scale(1.15); }
-    100% { transform: translate(-40px, 20px) scale(0.95); }
-  }
-  .grid-bg {
-    position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
-    background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 44px 44px;
-    mask-image: radial-gradient(ellipse at 50% 30%, #000 0%, transparent 70%);
-    -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 0%, transparent 70%);
-  }
-  .wrap { position: relative; }
-  .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: center; }
-  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 36px; } }
-  h1 { font-size: clamp(34px, 5.6vw, 54px); font-weight: 800; margin: 16px 0 18px; min-height: 2.4em; }
-  .caret { color: var(--accent); font-weight: 400; animation: blink 1s steps(1) infinite; margin-left: 2px; }
-  @keyframes blink { 50% { opacity: 0; } }
-  .pitch { color: var(--muted); font-size: 18px; margin: 0 0 24px; max-width: 560px; }
-  .status {
-    display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--ok);
-    background: var(--ok-soft); padding: 5px 12px; border-radius: 999px;
-  }
-  .status::before {
-    content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ok);
-    box-shadow: 0 0 0 0 var(--ok); animation: pulse 2s infinite;
-  }
-  @keyframes pulse { 70% { box-shadow: 0 0 0 8px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
-  .float { animation: float 6s ease-in-out infinite; }
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 56px; }
-  @media (max-width: 760px) { .stats { grid-template-columns: repeat(2, 1fr); } }
-  .stat { padding: 16px; }
-  .stat b { display: block; font-size: 26px; letter-spacing: -0.02em; }
-  .stat span { color: var(--muted); font-size: 13px; }
-  .req pre { white-space: pre-wrap; overflow-x: hidden; }
-  .resp {
-    display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 10px 18px; border-top: 1px solid #1e2632;
-    background: #0c1117; font: 12.5px "JetBrains Mono", monospace; color: #7d8794;
-  }
-  .resp .ok { color: #28c840; font-weight: 600; }
-  @keyframes float { 50% { transform: translateY(-10px); } }
-
-
-  .marquee {
-    margin-top: 56px; border-top: 1px solid var(--border); padding: 18px 0; overflow: hidden;
-    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-  }
-  .track { display: flex; gap: 40px; width: max-content; animation: scroll 40s linear infinite; }
-  .track span { font: 500 15px "JetBrains Mono", monospace; color: var(--muted); white-space: nowrap; }
-  .track span::before { content: "◆"; color: var(--accent); margin-right: 40px; font-size: 10px; vertical-align: middle; }
-  @keyframes scroll { to { transform: translateX(-50%); } }
-</style>
-
-<script>
-  // Typewriter for the rotating role
-  const el = document.getElementById("typed")!;
-  const roles: string[] = JSON.parse(el.dataset.roles || "[]");
-  if (!matchMedia("(prefers-reduced-motion: reduce)").matches && roles.length > 1) {
-    let r = 0, i = roles[0].length, deleting = true;
-    const tick = () => {
-      const word = roles[r];
-      i += deleting ? -1 : 1;
-      el.textContent = word.slice(0, i);
-      let delay = deleting ? 35 : 70;
-      if (!deleting && i === word.length) { deleting = true; delay = 2200; }
-      else if (deleting && i === 0) { deleting = false; r = (r + 1) % roles.length; delay = 300; }
-      setTimeout(tick, delay);
-    };
-    setTimeout(tick, 2600);
-  }
-</script>

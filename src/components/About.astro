@@ -1,0 +1,17 @@
+---
+import Section from "./Section.astro";
+import type { Content } from "@/i18n";
+
+interface Props {
+  t: Content;
+}
+const { t } = Astro.props;
+---
+
+<Section id="about" eyebrow={t.about.eyebrow} title={t.about.title}>
+  <div class="max-w-3xl space-y-4 text-pretty" data-reveal>
+    {t.about.paragraphs.map((p, i) => (
+      <p class={i === 0 ? "text-lg" : "text-muted-foreground"}>{p}</p>
+    ))}
+  </div>
+</Section>
