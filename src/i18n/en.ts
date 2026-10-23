@@ -69,36 +69,6 @@ const en = {
     tagline: "Personal finance you actually want to take care of.",
     summary:
       "A personal-finance web app in the spirit of Monarch (accounts, transactions, budgets, goals and investments) whose hero is Casshy: a living cartoon coin, like Pou or Talking Tom, that you look after with good money habits.",
-    dashboard: {
-      window: "Casshy · Overview",
-      sample: "Sample data · design preview",
-      greeting: "Good morning, Juan",
-      subtitle: "Let's make room for your future.",
-      mood: "Casshy is happy",
-      toneLabel: "Casshy's tone",
-      tones: {
-        gentle: { label: "Gentle", message: "You're doing great. Maybe cook at home one more night this week?" },
-        honest: { label: "Honest", message: "You're on track this month. Keep dining out under $120 this week." },
-        savage: { label: "Savage", message: "Third takeout this week? Your budget noticed. So did I." },
-      },
-      stats: { budget: "Monthly budget", spent: "Spent so far", left: "Left to spend" },
-      spendingTitle: "Where your money goes",
-      spendingPeriod: "This month",
-      categories: [
-        { name: "Housing", pct: 38 },
-        { name: "Groceries", pct: 24 },
-        { name: "Transport", pct: 16 },
-        { name: "Dining", pct: 12 },
-      ],
-      checklistTitle: "Your first 90 days in Canada",
-      checklist: [
-        { label: "Open a bank account", done: true },
-        { label: "Get your SIN", done: true },
-        { label: "Set up CRA My Account", done: false },
-        { label: "Build your credit, step by step", done: false },
-      ],
-      progressLabel: "steps done",
-    },
     features: [
       { icon: "🏦", title: "Money in one place", text: "Accounts, transactions, budgets, goals and investments." },
       { icon: "🪙", title: "A coin that's alive", text: "Casshy will react to your habits, animated with Rive." },

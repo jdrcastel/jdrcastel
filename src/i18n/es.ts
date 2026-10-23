@@ -66,36 +66,6 @@ const es: Content = {
     tagline: "Finanzas personales que de verdad quieres cuidar.",
     summary:
       "Una app web de finanzas personales al estilo de Monarch (cuentas, transacciones, presupuestos, metas e inversiones) cuya protagonista es Casshy: una moneda de caricatura viva, como Pou o Talking Tom, que cuidas con buenos hábitos de dinero.",
-    dashboard: {
-      window: "Casshy · Resumen",
-      sample: "Datos de ejemplo · vista de diseño",
-      greeting: "Buenos días, Juan",
-      subtitle: "Hagamos espacio para tu futuro.",
-      mood: "Casshy está feliz",
-      toneLabel: "Tono de Casshy",
-      tones: {
-        gentle: { label: "Amable", message: "Vas muy bien. ¿Y si esta semana cocinas en casa una noche más?" },
-        honest: { label: "Honesto", message: "Vas bien este mes. Mantén las salidas a comer por debajo de $120 esta semana." },
-        savage: { label: "Sin filtro", message: "¿Tercer pedido a domicilio esta semana? Tu presupuesto lo notó. Y yo también." },
-      },
-      stats: { budget: "Presupuesto mensual", spent: "Gastado", left: "Disponible" },
-      spendingTitle: "En qué se va tu dinero",
-      spendingPeriod: "Este mes",
-      categories: [
-        { name: "Vivienda", pct: 38 },
-        { name: "Mercado", pct: 24 },
-        { name: "Transporte", pct: 16 },
-        { name: "Comer fuera", pct: 12 },
-      ],
-      checklistTitle: "Tus primeros 90 días en Canadá",
-      checklist: [
-        { label: "Abrir una cuenta bancaria", done: true },
-        { label: "Obtener tu SIN", done: true },
-        { label: "Crear tu cuenta CRA My Account", done: false },
-        { label: "Construir tu crédito, paso a paso", done: false },
-      ],
-      progressLabel: "pasos hechos",
-    },
     features: [
       { icon: "🏦", title: "Tu dinero en un lugar", text: "Cuentas, transacciones, presupuestos, metas e inversiones." },
       { icon: "🪙", title: "Una moneda viva", text: "Casshy reaccionará a tus hábitos, animada con Rive." },

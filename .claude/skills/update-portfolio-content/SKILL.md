@@ -9,7 +9,7 @@ description: Edit portfolio text, projects, skills or experience in both English
 2. Find where the content lives:
    - Text: `src/i18n/en.ts` and `src/i18n/es.ts`. They have the same shape, and `es.ts` is typed as `Content`.
    - Language-neutral data: `src/i18n/shared.ts`. This holds links, technology chips (`core: true` = strongest),
-     project metadata (`featured`, `group: "extension"`, `tags`, `links`) and the Casshy sample budget.
+     project metadata (`featured`, `group: "extension"`, `tags`, `links`).
 3. Edit both languages in the same change. Write natural Spanish (Canadian/Latin American), not word-for-word.
 4. Respect "Content truth" in `CLAUDE.md`. New skills go to the right level. Learning items go only in
    `learningChips` plus `skills.learning`.

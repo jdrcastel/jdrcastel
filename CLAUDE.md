@@ -12,7 +12,8 @@ This repo is also Juan's GitHub profile repo: `README.md` is his profile page, n
 3. **Always bilingual.** Every text change goes into both `src/i18n/en.ts` and `src/i18n/es.ts`, same structure.
 4. **Latest stable versions.** Check `npm view <pkg> version` before adding or upgrading anything.
 5. **Minimal and professional.** A recruiter has ~60 seconds: clear hierarchy, no visual noise, fast. Animations only
-   where they add meaning (Casshy dashboard interactions, subtle reveal on scroll, card lift on hover).
+   where they add meaning (subtle reveal on scroll, card lift on hover). Propose new animations and wait for his
+   approval before building them.
 6. **Honest content.** Never claim skills, features or results that aren't real. See "Content truth" below.
 7. **Keep it essential.** No test suites or extra CI for this site (Juan's decision). Verify by building and checking
    both languages in a browser.
@@ -22,8 +23,7 @@ This repo is also Juan's GitHub profile repo: `README.md` is his profile page, n
 ## Stack
 
 - Astro 7 (static output, i18n routing: `en` default without prefix, `es` under `/es/`)
-- React 19 islands only where there is interaction (`client:visible`): Casshy dashboard (tone toggle, checklist),
-  projects filter + "Learn more", skills/learning tabs. Experience "More details" is a native `<details>` (no JS).
+- React 19 islands only where there is interaction (`client:visible`): projects filter + "Learn more", skills/learning tabs. Experience "More details" is a native `<details>` (no JS).
 - Tailwind CSS v4 + shadcn/ui (new-york style, neutral base, blue `brand` accent) in `src/components/ui/`
 - Fonts: Geist and Geist Mono through the Astro Fonts API with the local provider, from the
   `@fontsource-variable/geist*` npm packages (self-hosted, no external requests; works in the sandbox and CI)
@@ -44,10 +44,9 @@ npm run preview
 ```
 src/
   i18n/en.ts, es.ts   All text. es.ts is typed as `Content` from en.ts, so shapes must match.
-  i18n/shared.ts      Language-neutral data: links, tech chips, project metadata, Casshy sample budget.
+  i18n/shared.ts      Language-neutral data: links, tech chips, project metadata.
   i18n/index.ts       getContent(lang), homeUrl(lang), assetUrl(file) (base-path aware).
   components/         Page.astro composes: Nav, Hero, About, Casshy, Projects, Skills, Experience, Contact, Footer.
-                      CasshyDashboard.tsx is the interactive finance-dashboard preview (sample data).
   components/ui/      shadcn/ui components (copied from the registry; don't hand-edit unless needed).
   layouts/Layout.astro  <head>: lang, canonical, hreflang, Open Graph, theme bootstrap.
   pages/index.astro, pages/es/index.astro
@@ -92,9 +91,9 @@ skill: copy the component from the `shadcn-ui/ui` GitHub repo (`apps/v4/registry
 - 2026-10: Bilingual with two URLs (`/` English, `/es/` Spanish) and an EN|ES switch.
 - 2026-10: shadcn/ui (real React components) + Tailwind v4; removed type-check/CI test steps and Vitest.
 - 2026-10: Minimal visual style: no background blobs, grid, marquee, typing effect or shimmer.
-- 2026-10: The animated coin was replaced by an interactive Casshy dashboard preview (based on Juan's mockup):
-  Casshy's mood with Gentle/Honest/Savage tones, budget stats, spending bars, "first 90 days" checklist.
-  Always labelled "Sample data · design preview".
-- 2026-10: Rive: will be added (`@rive-app/react-canvas`) once Juan exports a `.riv` of Casshy from the Rive editor.
+- 2026-10: Casshy section only explains the project (summary, features, principles, architecture, roadmap).
+  No coin, no dashboard or app demo: "it's a portfolio, only to explain". No Rive on the portfolio.
+- 2026-10: The name is "Casshy" (double s). `github.com/jdcastel` is Juan's other GitHub account (Fragments repos).
+- Later: a custom domain (e.g. `juancastelblanco.dev`) for GitHub Pages.
 - 2026-10: Spring Security removed from Learning (not confirmed). Spanish keeps the word "Skills".
   Recruiter-review suggestions declined; project order stays Casshy, IncidentHub, Fragments.

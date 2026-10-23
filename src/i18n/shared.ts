@@ -122,6 +122,3 @@ export const projectMeta: Record<string, ProjectMeta> = {
     links: [{ key: "code", href: "https://github.com/jdrcastel/Timer-SaaS-Team" }],
   },
 };
-
-// Sample amounts for the Casshy dashboard preview, in cents (Casshy stores money as integers)
-export const sampleBudget = { budget: 320000, spent: 184000 };
