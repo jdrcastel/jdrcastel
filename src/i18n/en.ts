@@ -1,6 +1,7 @@
 // All site text (the site is English only).
 
 export type ProjectStatus = "progress" | "use" | "shipped";
+export type RoadmapStatus = "done" | "inProgress" | "planned";
 export type ExperienceKind = "work" | "certification" | "internship" | "volunteer" | "education";
 
 const en = {
@@ -27,22 +28,8 @@ const en = {
     hello: "Hi, I'm Juan.",
     role: "Software developer",
     ctaProjects: "See projects",
-    send: { label: "Send", sending: "Sending…", hint: "Press Send to submit the request" },
     techLabel: "Technologies I work with",
     pauseMotion: "Pause animations",
-    payload: {
-      name: "Juan Castelblanco",
-      role: "Software Developer",
-      job: "Technical Support Specialist @ OpenText",
-      location: "Ontario, Canada",
-      languages: ["Spanish", "English"],
-      education: "Seneca Polytechnic",
-      aws: "Certified Cloud Practitioner",
-      strengths: ["JavaScript", "React", "Node.js"],
-      building: ["Casshy", "IncidentHub"],
-      learning: ["AI agents", "LLM integrations", "Spring Boot"],
-      openToWork: true,
-    },
     stats: [
       { value: "AWS", label: "Certified Cloud Practitioner" },
       { value: "Tier 2 → 3", label: "Moving to Tier-3 support at OpenText" },
@@ -55,7 +42,7 @@ const en = {
     title: "A bit about me",
     paragraphs: [
       "I like building real products that ship and solve real problems. Front end is where I'm strongest (JavaScript, React, Next.js), but I enjoy owning the whole thing: I built a Node.js microservice on AWS with Docker and CI/CD, and now I'm building Casshy, my own personal-finance app.",
-      "I started my software journey in 2021 at Seneca Polytechnic. Today I work in production support at OpenText, moving into Tier 3, so I know how real systems fail and how to fix them. I build with AI coding agents like Claude Code and Codex, and I'm learning to add AI features to real apps.",
+      "I started coding at 17. Today I work in production support at OpenText, moving into Tier 3, so I know how real systems fail and how to fix them. I build with AI coding agents like Claude Code and Codex, and I'm learning to add AI features to real apps.",
       "Outside of tech, you'll find me playing soccer, at the gym, playing drums or gaming with friends.",
     ],
   },
@@ -67,6 +54,18 @@ const en = {
     status: { progress: "In progress", use: "In use", shipped: "Shipped" },
     learnMore: "Learn more",
     stackLabel: "Tech stack",
+    // The featured project (Casshy) shows everything open instead of "Learn more"
+    featured: {
+      featuresTitle: "What it does",
+      roadmapTitle: "Roadmap",
+      states: { done: "Done", inProgress: "In progress", planned: "Planned" },
+      roadmap: [
+        { title: "Phase 0 · Vision, docs & ADRs", status: "done" },
+        { title: "Phase 1 · Robust foundation & landing page", status: "inProgress" },
+        { title: "Next · Web app: finance, Casshy & Academy", status: "planned" },
+        { title: "Last · Mobile app with Expo", status: "planned" },
+      ] satisfies { title: string; status: RoadmapStatus }[],
+    },
     diagram: {
       alt: "Fragments architecture: the web UI calls the Express API, which runs in Docker on Amazon ECS, checks Cognito tokens (JWT), stores fragment data in S3 and metadata in DynamoDB.",
       ui: "Web UI",
@@ -89,7 +88,7 @@ const en = {
       {
         id: "incidenthub",
         status: "progress" as ProjectStatus,
-        title: "IncidentHub — TypeScript, NestJS & AI",
+        title: "IncidentHub",
         summary:
           "My hands-on project to go deeper into backend TypeScript and AI integrations: a NestJS REST API for support incidents with SLA tracking and AI-assisted triage.",
         bullets: [
@@ -102,7 +101,7 @@ const en = {
       {
         id: "fragments",
         status: "shipped" as ProjectStatus,
-        title: "Enterprise Microservice Platform (Fragments)",
+        title: "Fragments — AWS microservice",
         summary: "Cloud REST microservice on AWS to store and convert text and image fragments, with a separate web UI.",
         bullets: [
           "Node.js/Express API with Cognito JWT auth; data in S3 and metadata in DynamoDB",

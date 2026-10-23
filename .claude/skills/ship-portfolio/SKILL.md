@@ -18,7 +18,7 @@ description: Build, check in a browser, commit and open a PR for portfolio chang
    - Page `/jdrcastel/`, at 1280 and 390 wide, light and dark.
    - No console errors or 404s, and no horizontal scroll.
    - Filters (pill slides, "All" shows every project, "Extensions" only Timer), "Learn more", tabs, experience
-     details, the theme circle, the mobile menu, the hero Send button, the resume download and in-page links (smooth
+     details, the theme circle, the mobile menu, the resume download and in-page links (smooth
      scroll lands below the header and moves focus) all work.
    - Animations from CLAUDE.md "Animations" run: hero entrance, logo marquee + pause button (persists on reload),
      header progress line, masked titles, About highlight, border beams, Fragments diagram pulses, timeline fill.

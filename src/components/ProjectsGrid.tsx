@@ -7,12 +7,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import type { Content, ProjectStatus } from "@/i18n";
+import type { Content, ProjectStatus, RoadmapStatus } from "@/i18n";
 import type { ProjectMeta } from "@/i18n/shared";
 import ArchitectureDiagram from "./ArchitectureDiagram";
 
 type ProjectsContent = Content["projects"];
-export type Labels = Pick<ProjectsContent, "title" | "filters" | "status" | "learnMore" | "stackLabel" | "links" | "diagram">;
+export type Labels = Pick<ProjectsContent, "title" | "filters" | "status" | "learnMore" | "stackLabel" | "links" | "diagram" | "featured">;
 type Filter = keyof Labels["filters"];
 export type Project = ProjectsContent["items"][number] & ProjectMeta;
 
@@ -21,6 +21,42 @@ const statusStyle: Record<ProjectStatus, string> = {
   use: "bg-success/15 text-success",
   shipped: "bg-success/15 text-success",
 };
+
+const roadmapDot: Record<RoadmapStatus, string> = {
+  done: "bg-success",
+  inProgress: "bg-warning ring-4 ring-warning/20 motion-safe:animate-pulse",
+  planned: "bg-muted-foreground/30",
+};
+
+/** The featured project shows its details open: what it does and the roadmap, side by side on wide screens. */
+function FeaturedDetails({ p, labels }: { p: Project; labels: Labels }) {
+  const f = labels.featured;
+  return (
+    <div className="grid gap-6 border-t pt-4 md:grid-cols-2">
+      <div>
+        <h4 className="mb-2 text-xs font-medium tracking-wide text-brand uppercase">{f.featuresTitle}</h4>
+        <ul className="list-disc space-y-1.5 pl-5 text-sm text-muted-foreground">
+          {p.bullets.map((b) => (
+            <li key={b}>{b}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h4 className="mb-2 text-xs font-medium tracking-wide text-brand uppercase">{f.roadmapTitle}</h4>
+        <ol className="space-y-2.5">
+          {f.roadmap.map((r) => (
+            <li key={r.title} className="flex items-start gap-3 text-sm">
+              <span className={cn("mt-1.5 size-2.5 shrink-0 rounded-full", roadmapDot[r.status])} aria-hidden="true" />
+              <span>
+                {r.title} <span className="text-xs text-muted-foreground">· {f.states[r.status]}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  );
+}
 
 // Motion's layout features download after the first render
 const loadFeatures = () => import("@/lib/motion-features").then((mod) => mod.default);
@@ -39,7 +75,7 @@ function ProjectCard({ p, labels }: { p: Project; labels: Labels }) {
         </div>
         <p className="text-sm text-pretty text-muted-foreground">{p.summary}</p>
       </CardHeader>
-      <CardContent className="flex flex-col gap-3">
+      <CardContent className="flex flex-1 flex-col gap-3">
         {p.id === "fragments" && <ArchitectureDiagram labels={labels.diagram} />}
         <ul className="flex flex-wrap gap-1.5" aria-label={labels.stackLabel}>
           {p.stack.map((s) => (
@@ -50,21 +86,25 @@ function ProjectCard({ p, labels }: { p: Project; labels: Labels }) {
             </li>
           ))}
         </ul>
-        <Accordion type="single" collapsible>
-          <AccordionItem value="more" className="border-t border-b-0">
-            <AccordionTrigger className="py-3">{labels.learnMore}</AccordionTrigger>
-            <AccordionContent>
-              <ul className="list-disc space-y-1.5 pl-5 text-muted-foreground">
-                {p.bullets.map((b) => (
-                  <li key={b}>{b}</li>
-                ))}
-              </ul>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
+        {p.featured ? (
+          <FeaturedDetails p={p} labels={labels} />
+        ) : (
+          <Accordion type="single" collapsible className="mt-auto">
+            <AccordionItem value="more" className="border-t border-b-0">
+              <AccordionTrigger className="py-3">{labels.learnMore}</AccordionTrigger>
+              <AccordionContent>
+                <ul className="list-disc space-y-1.5 pl-5 text-muted-foreground">
+                  {p.bullets.map((b) => (
+                    <li key={b}>{b}</li>
+                  ))}
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        )}
       </CardContent>
       {p.links.length > 0 && (
-        <CardFooter className="mt-auto flex flex-wrap gap-2">
+        <CardFooter className="flex flex-wrap gap-2">
           {p.links.map((l) => {
             const external = l.href.startsWith("http");
             return (
@@ -124,7 +164,7 @@ export default function ProjectsGrid({ projects, labels }: { projects: Project[]
               );
             })}
           </div>
-          <ul className="relative grid items-start gap-4 md:grid-cols-2">
+          <ul className="relative grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <AnimatePresence mode="popLayout" initial={false}>
               {visible.map((p) => (
                 <m.li
@@ -134,7 +174,7 @@ export default function ProjectsGrid({ projects, labels }: { projects: Project[]
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.4, ease }}
-                  className={cn(p.featured && "md:col-span-2")}
+                  className={cn(p.featured && "md:col-span-2 lg:col-span-3")}
                 >
                   <ProjectCard p={p} labels={labels} />
                 </m.li>

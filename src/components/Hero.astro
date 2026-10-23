@@ -1,5 +1,5 @@
 ---
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,87 +12,39 @@ interface Props {
 }
 const { t } = Astro.props;
 
-// Render the profile payload as syntax-highlighted JSON
-const esc = (v: string) => v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-const val = (v: unknown) =>
-  typeof v === "string" ? `<span class="s">"${esc(v)}"</span>` : `<span class="n">${String(v)}</span>`;
-// Short arrays stay inline; longer ones get one item per line, like a formatter would
-const arr = (key: string, items: unknown[]) => {
-  const inline = `[${items.map((x) => `"${x}"`).join(", ")}]`;
-  return key.length + inline.length > 45
-    ? `[\n${items.map((x) => `    ${val(x)}`).join(",\n")}\n  ]`
-    : `[${items.map(val).join(", ")}]`;
-};
 // Each word of the heading comes into focus in turn (see .hero-word)
 const helloWords = t.hero.hello.split(" ");
 const roleWords = t.hero.role.split(" ").map((w, i) => ({ w, i: i + helloWords.length }));
-
-const json = `{\n${Object.entries(t.hero.payload)
-  .map(([k, v]) => `  <span class="t">"${k}"</span>: ${Array.isArray(v) ? arr(k, v) : val(v)}`)
-  .join(",\n")}\n}`;
 ---
 
 <section id="top" class="border-b">
-  <div class="mx-auto grid max-w-5xl items-center gap-10 px-4 pt-16 pb-12 lg:grid-cols-[1.1fr_1fr] lg:pt-24">
-    <div>
-      <Badge variant="outline" className="hero-in gap-2 rounded-full px-3 py-1 text-xs font-medium">
-        <span class="relative flex size-2" aria-hidden="true">
-          <span class="absolute inline-flex size-full rounded-full bg-success opacity-60 motion-safe:animate-ping"></span>
-          <span class="relative inline-flex size-2 rounded-full bg-success"></span>
-        </span>
-        {t.hero.status}
-      </Badge>
-      <h1 class="mt-5 text-4xl font-bold tracking-tight text-balance sm:text-5xl">
-        <span class="block">{helloWords.map((w, i) => <><span class="hero-word" style={`--i:${i}`}>{w}</span>{" "}</>)}</span>
-        <span class="block text-brand">{roleWords.map(({ w, i }) => <><span class="hero-word" style={`--i:${i}`}>{w}</span>{" "}</>)}</span>
-      </h1>
-      <div class="hero-in mt-8 flex flex-wrap items-center gap-1.5" style="--d:350ms">
-        <a href="#projects" class={buttonVariants({ size: "lg" })}>
-          {t.hero.ctaProjects}
-          <ArrowRight aria-hidden="true" />
-        </a>
-        <SocialLinks />
-      </div>
+  <div class="mx-auto flex max-w-5xl flex-col items-center px-4 pt-24 pb-14 text-center sm:pt-32">
+    <Badge variant="outline" className="hero-in gap-2 rounded-full px-3 py-1 text-xs font-medium">
+      <span class="relative flex size-2" aria-hidden="true">
+        <span class="absolute inline-flex size-full rounded-full bg-success opacity-60 motion-safe:animate-ping"></span>
+        <span class="relative inline-flex size-2 rounded-full bg-success"></span>
+      </span>
+      {t.hero.status}
+    </Badge>
+    <h1 class="mt-6 text-5xl font-bold tracking-tight text-balance sm:text-7xl">
+      <span class="block">{helloWords.map((w, i) => <><span class="hero-word" style={`--i:${i}`}>{w}</span>{" "}</>)}</span>
+      <span class="block text-brand">{roleWords.map(({ w, i }) => <><span class="hero-word" style={`--i:${i}`}>{w}</span>{" "}</>)}</span>
+    </h1>
+    <div class="hero-in mt-10 flex flex-wrap items-center justify-center gap-1.5" style="--d:350ms">
+      <a href="#projects" class={buttonVariants({ size: "lg" })}>
+        {t.hero.ctaProjects}
+        <ArrowRight aria-hidden="true" />
+      </a>
+      <SocialLinks />
     </div>
-
-    <figure class="code-window hero-window overflow-hidden rounded-xl border border-white/10 bg-[#0d1117] font-mono text-[13px] leading-relaxed text-[#d6deeb] shadow-lg">
-      <div class="relative flex items-center gap-1.5 border-b border-white/10 bg-white/5 px-4 py-2 text-xs text-white/50">
-        <span class="size-2.5 rounded-full bg-[#ff5f57]" aria-hidden="true"></span>
-        <span class="size-2.5 rounded-full bg-[#febc2e]" aria-hidden="true"></span>
-        <span class="size-2.5 rounded-full bg-[#28c840]" aria-hidden="true"></span>
-        <span class="ml-2">request.http</span>
-        <button
-          id="sendBtn"
-          type="button"
-          data-sending={t.hero.send.sending}
-          class="relative ml-auto inline-flex items-center gap-1.5 rounded-md bg-[#28c840]/15 px-2.5 py-1 font-sans font-medium text-[#28c840] transition-colors outline-none hover:bg-[#28c840]/25 focus-visible:ring-2 focus-visible:ring-[#28c840]/60 disabled:cursor-progress"
-        >
-          <Play className="size-3 fill-current" aria-hidden="true" />
-          <span data-label>{t.hero.send.label}</span>
-          <span class="beam" style="--beam-from:#28c840;--beam-to:#b9f6c9;--beam-duration:3.5s" aria-hidden="true"></span>
-        </button>
-        <span class="send-bar absolute inset-x-0 -bottom-px h-px origin-left scale-x-0 bg-[#28c840]" aria-hidden="true"></span>
-      </div>
-      <pre class="overflow-hidden px-4 py-4 whitespace-pre-wrap"><span class="k">POST</span> <span class="a">/api/v1/candidates</span> HTTP/1.1
-<span class="t">Content-Type</span>: application/json
-
-<Fragment set:html={json} /></pre>
-      <figcaption class="border-t border-white/10 bg-black/20 px-4 py-2.5 text-xs text-white/50" aria-live="polite">
-        <span data-idle>{t.hero.send.hint}</span>
-        <span data-done hidden class="flex flex-wrap gap-x-3 animate-in fade-in slide-in-from-bottom-1">
-          <span class="font-semibold text-[#28c840]">HTTP/1.1 201 Created <span data-ms></span></span>
-          <span>Location: /api/v1/candidates/juan</span>
-        </span>
-      </figcaption>
-    </figure>
   </div>
 
   <ul class="mx-auto grid max-w-5xl grid-cols-2 gap-3 px-4 pb-12 lg:grid-cols-4">
     {t.hero.stats.map((s, i) => (
-      <li class="hero-in" style={`--d:${560 + i * 70}ms`}>
-        <Card className="lift stat h-full gap-1 py-4">
+      <li class="hero-in" style={`--d:${500 + i * 70}ms`}>
+        <Card className="lift h-full gap-1 py-4">
           <CardContent className="px-4">
-            <p class="stat-value text-2xl font-semibold tracking-tight">{s.value}</p>
+            <p class="text-2xl font-semibold tracking-tight">{s.value}</p>
             <p class="text-sm text-muted-foreground">{s.label}</p>
           </CardContent>
         </Card>
@@ -100,44 +52,7 @@ const json = `{\n${Object.entries(t.hero.payload)
     ))}
   </ul>
 
-  <div class="hero-in" style="--d:850ms">
+  <div class="hero-in" style="--d:800ms">
     <TechMarquee label={t.hero.techLabel} pauseLabel={t.hero.pauseMotion} />
   </div>
 </section>
-
-<script>
-  // "Send" the profile request: progress line, 201 response, then the stat cards light up one by one
-  const btn = document.getElementById("sendBtn") as HTMLButtonElement | null;
-  const label = btn?.querySelector("[data-label]");
-  const bar = document.querySelector(".send-bar");
-  const idle = document.querySelector<HTMLElement>("[data-idle]");
-  const done = document.querySelector<HTMLElement>("[data-done]");
-  const ms = document.querySelector("[data-ms]");
-  const stats = [...document.querySelectorAll<HTMLElement>(".stat")];
-  const restart = (el: Element, cls: string) => {
-    el.classList.remove(cls);
-    void (el as HTMLElement).offsetWidth; // reflow so the animation can replay
-    el.classList.add(cls);
-  };
-
-  btn?.addEventListener("click", () => {
-    if (!label || !idle || !done || !ms) return;
-    const text = label.textContent;
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    btn.disabled = true;
-    label.textContent = btn.dataset.sending ?? "";
-    done.hidden = true;
-    if (bar) restart(bar, "run");
-    setTimeout(() => {
-      ms.textContent = `· ${90 + Math.floor(Math.random() * 90)} ms`;
-      idle.hidden = true;
-      done.hidden = false;
-      stats.forEach((card, i) => {
-        card.style.animationDelay = `${i * 90}ms`;
-        restart(card, "stat-hit");
-      });
-      label.textContent = text;
-      btn.disabled = false;
-    }, reduce ? 0 : 600);
-  });
-</script>
