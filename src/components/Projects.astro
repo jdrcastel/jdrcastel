@@ -3,6 +3,8 @@ import { projects, filters } from "../data/profile";
 
 const badge = { "In progress": "wip", "In use": "live", Shipped: "live" } as const;
 const external = (href: string) => (href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {});
+const main = projects.filter((p) => !p.group);
+const extensions = projects.filter((p) => p.group === "extension");
 ---
 
 <section id="projects">
@@ -10,7 +12,7 @@ const external = (href: string) => (href.startsWith("http") ? { target: "_blank"
     <div data-reveal>
       <div class="eyebrow">// projects</div>
       <h2>Selected work</h2>
-      <p class="lead">Full-stack, backend and AWS work I've shipped, plus what I'm building now.</p>
+      <p class="lead">What I'm building now, plus full-stack, backend and AWS work I've shipped.</p>
     </div>
 
     <div class="filters" id="filters" data-reveal>
@@ -20,7 +22,7 @@ const external = (href: string) => (href.startsWith("http") ? { target: "_blank"
     </div>
 
     <div class="pgrid" id="projGrid">
-      {projects.map((p, i) => (
+      {main.map((p, i) => (
         <article class:list={["card", "proj", { featured: p.featured }]} data-tags={p.tags.join(" ")} data-reveal style={`transition-delay:${(i % 2) * 80}ms`}>
           <div class="top">
             <h3>{p.title}</h3>
@@ -44,6 +46,39 @@ const external = (href: string) => (href.startsWith("http") ? { target: "_blank"
         </article>
       ))}
     </div>
+
+    {extensions.length > 0 && (
+      <div class="side" data-reveal>
+        <h3 class="side-title">Web extensions</h3>
+        {extensions.map((p) => (
+          <article class="card ext">
+            <div class="ext-main">
+              <div class="top">
+                <h3>{p.title}</h3>
+                <span class={`badge ${badge[p.status]}`}>{p.status}</span>
+              </div>
+              <p class="summary">{p.summary}</p>
+              {p.bullets && (
+                <details>
+                  <summary>Learn more</summary>
+                  <ul>{p.bullets.map((b) => <li>{b}</li>)}</ul>
+                </details>
+              )}
+            </div>
+            <div class="ext-side">
+              <div class="chips">
+                {p.stack.map((s) => <span class:list={["chip", { hl: s.core }]}>{s.name}</span>)}
+              </div>
+              {p.links && (
+                <div class="plinks">
+                  {p.links.map((l) => <a class="plink" href={l.href} {...external(l.href)}>{l.label} →</a>)}
+                </div>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
   </div>
 </section>
 
@@ -84,12 +119,22 @@ const external = (href: string) => (href.startsWith("http") ? { target: "_blank"
   .plink { font-weight: 600; font-size: 14.5px; }
 
   .featured {
+    grid-column: 1 / -1;
     background:
       linear-gradient(var(--surface), var(--surface)) padding-box,
       linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent-3)) border-box;
     border: 1px solid transparent;
   }
   .hidden { display: none; }
+
+  .side { margin-top: 32px; }
+  .side-title {
+    font: 600 12.5px "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--muted); margin: 0 0 12px;
+  }
+  .ext { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 20px; }
+  @media (max-width: 760px) { .ext { grid-template-columns: minmax(0, 1fr); } }
+  .ext-main, .ext-side { display: flex; flex-direction: column; gap: 12px; }
 </style>
 
 <script>

@@ -1,0 +1,207 @@
+---
+import { casshy } from "../data/profile";
+
+const first = casshy.evolution[0];
+const state = { done: "Done", "in-progress": "In progress", planned: "Planned" } as const;
+---
+
+<section id="casshy">
+  <div class="wrap">
+    <div class="intro" data-reveal>
+      <div class="eyebrow">// featured project</div>
+      <div class="title-row">
+        <h2>{casshy.name}</h2>
+        <span class="status">{casshy.status}</span>
+      </div>
+      <p class="tagline grad-text">{casshy.tagline}</p>
+      <p class="lead">{casshy.summary}</p>
+    </div>
+
+    <div class="top">
+      <div class="stage card" data-reveal style={`--c1:${first.from};--c2:${first.to}`} id="coinStage">
+        <svg class="coin" viewBox="0 0 200 200" role="img" aria-label="Casshy, the coin mascot">
+          <defs>
+            <radialGradient id="coinFill" cx="35%" cy="30%" r="75%">
+              <stop offset="0%" style="stop-color: var(--c1)" />
+              <stop offset="100%" style="stop-color: var(--c2)" />
+            </radialGradient>
+          </defs>
+          <ellipse cx="100" cy="188" rx="52" ry="7" class="shadow" />
+          <circle cx="100" cy="96" r="82" fill="url(#coinFill)" />
+          <circle cx="100" cy="96" r="68" fill="none" class="rim" />
+          <ellipse cx="62" cy="58" rx="14" ry="8" transform="rotate(-35 62 58)" class="shine" />
+          <g class="eyes">
+            <ellipse cx="78" cy="92" rx="8" ry="11" />
+            <ellipse cx="122" cy="92" rx="8" ry="11" />
+          </g>
+          <circle cx="81" cy="88" r="3" class="glint" />
+          <circle cx="125" cy="88" r="3" class="glint" />
+          <path d="M82 118 Q100 134 118 118" class="smile" />
+          <circle cx="66" cy="114" r="7" class="cheek" />
+          <circle cx="134" cy="114" r="7" class="cheek" />
+        </svg>
+        <div class="tier" id="tierName">{first.name}</div>
+        <div class="track" role="group" aria-label="Casshy's evolution">
+          {casshy.evolution.map((t, i) => (
+            <button
+              class:list={["step", { on: i === 0 }]}
+              data-i={i}
+              data-from={t.from}
+              data-to={t.to}
+              data-name={t.name}
+              aria-label={t.name}
+              style={`background: radial-gradient(circle at 35% 30%, ${t.from}, ${t.to})`}
+            ></button>
+          ))}
+        </div>
+        <p class="hint">XP from good habits and learning evolves Casshy. Tap a stage.</p>
+      </div>
+
+      <div class="features">
+        {casshy.features.map((f, i) => (
+          <div class="feature card" data-reveal style={`transition-delay:${(i % 2) * 80}ms`}>
+            <div class="f-ico">{f.icon}</div>
+            <div>
+              <h3>{f.title}</h3>
+              <p>{f.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="bottom">
+      <div class="card" data-reveal>
+        <h3>Engineering principles</h3>
+        <ul class="principles">
+          {casshy.principles.map((p) => <li>{p}</li>)}
+        </ul>
+      </div>
+      <div class="card" data-reveal>
+        <h3>Architecture</h3>
+        <dl class="stack">
+          {casshy.stack.map(([k, v]) => (
+            <div><dt>{k}</dt><dd>{v}</dd></div>
+          ))}
+        </dl>
+      </div>
+      <div class="card" data-reveal>
+        <h3>Roadmap</h3>
+        <ol class="roadmap">
+          {casshy.roadmap.map((r) => (
+            <li class={r.status}>
+              <span class="dot"></span>
+              <div>
+                <b>{r.title}</b>
+                <small>{state[r.status]}</small>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #casshy {
+    background:
+      radial-gradient(700px 300px at 85% 10%, color-mix(in srgb, var(--accent-2) 12%, transparent), transparent),
+      radial-gradient(600px 300px at 10% 90%, color-mix(in srgb, var(--accent-3) 10%, transparent), transparent);
+  }
+  .title-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .title-row h2 { font-size: clamp(34px, 5vw, 48px); margin: 10px 0 6px; }
+  .status {
+    font: 600 12px Inter, sans-serif; padding: 5px 10px; border-radius: 999px; background: var(--warn-soft); color: var(--warn);
+  }
+  .tagline { font-size: clamp(19px, 2.4vw, 24px); font-weight: 700; margin: 0 0 12px; letter-spacing: -0.01em; }
+
+  .top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 16px; align-items: stretch; }
+  @media (max-width: 900px) { .top { grid-template-columns: minmax(0, 1fr); } }
+
+  .stage { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 10px; padding: 28px 20px; }
+  .coin { width: min(220px, 60vw); height: auto; animation: hop 3.2s ease-in-out infinite; overflow: visible; }
+  @keyframes hop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  .coin circle[fill^="url"] { transition: fill 0.4s; }
+  .rim { stroke: rgba(0, 0, 0, 0.12); stroke-width: 4; stroke-dasharray: 4 6; }
+  .shine { fill: rgba(255, 255, 255, 0.55); }
+  .shadow { fill: rgba(0, 0, 0, 0.18); animation: shade 3.2s ease-in-out infinite; transform-origin: 100px 188px; }
+  @keyframes shade { 50% { transform: scaleX(0.8); opacity: 0.6; } }
+  .eyes ellipse { fill: #1f2328; transform-origin: center 92px; animation: blink 4.5s infinite; }
+  @keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
+  .glint { fill: #fff; }
+  .smile { fill: none; stroke: #1f2328; stroke-width: 5; stroke-linecap: round; }
+  .cheek { fill: rgba(255, 120, 120, 0.35); }
+  .tier { font: 700 20px Inter, sans-serif; letter-spacing: -0.01em; }
+  .track { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .step {
+    width: 30px; height: 30px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; padding: 0;
+    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.12); transition: transform 0.15s;
+  }
+  .step:hover { transform: scale(1.12); }
+  .step.on { border-color: var(--accent); transform: scale(1.15); }
+  .hint { color: var(--muted); font-size: 13px; margin: 4px 0 0; max-width: 300px; }
+
+  .features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  @media (max-width: 560px) { .features { grid-template-columns: minmax(0, 1fr); } }
+  .feature { display: flex; gap: 12px; padding: 16px; }
+  .feature h3 { font-size: 15.5px; margin: 0 0 4px; }
+  .feature p { margin: 0; font-size: 14px; }
+  .f-ico {
+    width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; flex: none;
+    background: var(--accent-soft); font-size: 18px;
+  }
+
+  .bottom { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+  @media (max-width: 900px) { .bottom { grid-template-columns: minmax(0, 1fr); } }
+  .bottom h3 { margin-bottom: 12px; }
+  .principles { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14.5px; }
+  .principles li { margin: 6px 0; }
+  .stack { margin: 0; }
+  .stack div { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 10px; padding: 7px 0; border-bottom: 1px dashed var(--border); }
+  .stack div:last-child { border-bottom: 0; }
+  .stack dt { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); padding-top: 2px; }
+  .stack dd { margin: 0; font-size: 14px; }
+  .roadmap { list-style: none; margin: 0; padding: 0; }
+  .roadmap li { display: flex; gap: 12px; padding: 8px 0; position: relative; }
+  .roadmap li:not(:last-child)::after {
+    content: ""; position: absolute; left: 6px; top: 26px; bottom: -6px; width: 2px; background: var(--border);
+  }
+  .dot { flex: none; width: 14px; height: 14px; border-radius: 50%; margin-top: 3px; background: var(--surface-2); border: 2px solid var(--border); }
+  .done .dot { background: var(--ok); border-color: var(--ok); }
+  .in-progress .dot { background: var(--warn); border-color: var(--warn); box-shadow: 0 0 0 4px var(--warn-soft); }
+  .roadmap b { display: block; font-size: 14.5px; }
+  .roadmap small { color: var(--muted); font-size: 12.5px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .coin, .shadow, .eyes ellipse { animation: none; }
+  }
+</style>
+
+<script>
+  // Cycle through Casshy's evolution until the visitor picks a stage
+  const stage = document.getElementById("coinStage")!;
+  const name = document.getElementById("tierName")!;
+  const steps = [...stage.querySelectorAll<HTMLButtonElement>(".step")];
+  let current = 0;
+
+  const show = (i: number) => {
+    current = i;
+    const s = steps[i];
+    stage.style.setProperty("--c1", s.dataset.from!);
+    stage.style.setProperty("--c2", s.dataset.to!);
+    name.textContent = s.dataset.name!;
+    steps.forEach((b, j) => b.classList.toggle("on", j === i));
+  };
+
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let timer = reduce ? undefined : setInterval(() => show((current + 1) % steps.length), 2200);
+
+  steps.forEach((b, i) =>
+    b.addEventListener("click", () => {
+      clearInterval(timer);
+      timer = undefined;
+      show(i);
+    }),
+  );
+</script>

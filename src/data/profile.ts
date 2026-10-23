@@ -12,18 +12,18 @@ export const profile = {
   status: "Open to Software Developer roles",
   roles: ["Software developer", "JavaScript & React developer", "Node.js microservices on AWS", "Growing into Java & Spring Boot"],
   hobbies: "soccer ⚽ · gym 🏋️ · video games 🎮",
-  tagline: "JavaScript & React developer who also ships Node.js services on AWS. Now growing into Java, Spring Boot and AI integrations.",
+  tagline: "JavaScript & React developer who ships Node.js services on AWS. Now building Casshy, a gamified personal-finance app, with AI coding agents.",
   about: [
     "I'm a software developer with strong JavaScript and front-end skills: React, Next.js, TypeScript and Redux. On the backend I built a Node.js microservice on AWS with Cognito, S3, DynamoDB, Docker and a CI/CD pipeline to ECS.",
-    "At OpenText I support enterprise SaaS customers in production and I'm moving from Tier 2 into Tier 3, so I know how real systems fail and how to fix them. I also built a Chrome extension my team uses every day.",
-    "Right now I'm learning Java and Spring Boot, and how to build with AI: coding agents like Claude Code and OpenAI Codex, and LLM integrations inside real apps. I'm putting both into practice in IncidentHub.",
+    "At OpenText I support enterprise SaaS customers in production and I'm moving from Tier 2 into Tier 3, so I know how real systems fail and how to fix them. I also built a web extension my team uses every day.",
+    "Right now I'm designing and building Casshy, a gamified personal-finance web app for Canada, with a TypeScript monorepo (Next.js, NestJS, PostgreSQL). I'm also building IncidentHub to learn Java, Spring Boot and LLM integrations, and I work with AI coding agents like Claude Code and OpenAI Codex.",
   ],
 };
 
 export const stats = [
   { value: "AWS", label: "Certified Cloud Practitioner" },
   { value: "Tier 2 → 3", label: "Moving to Tier-3 support at OpenText" },
-  { value: "5+", label: "OpenText products supported (LRE, ALM, Octane…)" },
+  { value: "Casshy", label: "Building a gamified personal-finance app" },
   { value: "AI", label: "Learning agentic AI and LLM integrations" },
 ];
 
@@ -86,20 +86,27 @@ export const learning = [
     title: "Agentic AI for coding",
     summary: "Working with AI coding agents that read, plan, edit and test code, while I review every change.",
     items: ["Claude Code", "OpenAI Codex", "Agent workflows", "Prompting for code", "Reviewing AI-generated code"],
-    applying: "I use them to build IncidentHub step by step and to understand each change.",
+    applying: "Casshy: I plan with ADRs and build with agents, reviewing each diff.",
   },
   {
     icon: "🧠",
     title: "AI integrations",
     summary: "Calling LLMs from real applications: structured output, tool calling and keeping keys and costs under control.",
-    items: ["LLM APIs (Claude, OpenAI)", "Spring AI", "Structured output (JSON)", "Tool calling", "MCP basics"],
+    items: ["LLM APIs (Claude, OpenAI)", "Structured output (JSON)", "Tool calling", "MCP basics"],
     applying: "IncidentHub: AI triage that summarizes each ticket and suggests its priority.",
+  },
+  {
+    icon: "🏗️",
+    title: "Casshy's stack",
+    summary: "The tools I chose for Casshy and am learning in depth as I build it.",
+    items: ["Turborepo + pnpm", "NestJS", "Prisma", "PostgreSQL", "Better Auth", "Zod", "shadcn/ui", "Rive", "k3s"],
+    applying: "Casshy Phase 1: monorepo foundation, API, database and landing page.",
   },
   {
     icon: "☕",
     title: "Java & Spring Boot",
-    summary: "Going from college Java to building a real REST API with a database, tests and security.",
-    items: ["Spring Boot", "Spring Data JPA", "PostgreSQL", "JUnit", "Spring Security"],
+    summary: "Going from college Java to building REST APIs with a database, tests and security.",
+    items: ["Spring Boot", "Spring Data JPA", "JUnit", "Spring Security"],
     applying: "IncidentHub: the REST API, database, tests and security.",
   },
 ];
@@ -120,14 +127,33 @@ export type Project = {
   stack: Skill[];
   tags: Filter[];
   featured?: boolean;
+  // Smaller side projects shown under "Web extensions" instead of the main grid
+  group?: "extension";
   links?: { href: string; label: string }[];
 };
 
 export const projects: Project[] = [
   {
-    title: "IncidentHub — Java, Spring Boot & AI",
+    title: "Casshy — gamified personal finance",
     status: "In progress",
     featured: true,
+    summary:
+      "A personal-finance web app for Canada where you take care of Casshy, a living cartoon coin, with good money habits. Designed end to end: vision, ADRs, domain rules and a TypeScript monorepo.",
+    bullets: [
+      "Accounts, transactions, budgets, goals and investments, plus the Casshy Academy for money lessons",
+      "Fair XP from habits and learning evolves the coin: planchet → bronze → silver → gold → diamond → alexandrite",
+      "Money as integers, versioned Canadian tax rules, pure domain packages, privacy and WCAG AA",
+    ],
+    stack: [
+      { name: "Next.js", core: true }, { name: "TypeScript", core: true }, { name: "NestJS" }, { name: "PostgreSQL" },
+      { name: "Prisma" }, { name: "Turborepo" }, { name: "Rive" }, { name: "Docker" },
+    ],
+    tags: ["web", "backend"],
+    links: [{ href: "#casshy", label: "See Casshy" }],
+  },
+  {
+    title: "IncidentHub — Java, Spring Boot & AI",
+    status: "In progress",
     summary:
       "My hands-on project to learn Java, Spring Boot and AI integrations: a REST API for support incidents with SLA tracking and AI-assisted triage, based on what I see every day in production support.",
     bullets: [
@@ -166,10 +192,11 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "Timer SaaS Team (Chrome extension)",
+    title: "Timer SaaS Team",
+    group: "extension",
     status: "In use",
     summary:
-      "Chrome extension for the OpenText SaaS team: after an agent saves a 15-minute break or 1-hour lunch in the Unified Tool, it counts down and sets the agent back to Available automatically.",
+      "Web extension for the OpenText SaaS team: after an agent saves a 15-minute break or 1-hour lunch in the Unified Tool, it counts down and sets the agent back to Available automatically.",
     bullets: [
       "Countdown, downloadable JSON logs, and timer recovery after a page refresh or Chrome restart",
       "Fixed a form reset that changed “15 minutes” to “30 minutes” after Save and blocked the automatic return",
@@ -182,22 +209,52 @@ export const projects: Project[] = [
     tags: ["web"],
     links: [{ href: "https://github.com/jdrcastel/Timer-SaaS-Team", label: "Code" }],
   },
-  {
-    title: "Chronicle App (Social Journal)",
-    status: "Shipped",
-    summary: "Full-stack, multi-tenant social journal for sharing travel experiences, joining community forums and organizing meetups.",
-    bullets: [
-      "React and Next.js front end with Redux for state management and a responsive UI",
-      "Node.js and Express REST backend on MongoDB with user authentication",
-      "Multi-tenant design with performance benchmarking",
-    ],
-    stack: [
-      { name: "React", core: true }, { name: "Next.js" }, { name: "Redux" }, { name: "Node.js", core: true },
-      { name: "Express", core: true }, { name: "MongoDB", core: true },
-    ],
-    tags: ["web", "backend"],
-  },
 ];
+
+// Featured project, shown in its own section.
+export const casshy = {
+  name: "Casshy",
+  status: "Phase 1 · in progress",
+  tagline: "Personal finance you actually want to take care of.",
+  summary:
+    "A personal-finance web app in the spirit of Monarch (accounts, transactions, budgets, goals and investments) whose hero is Casshy: a living cartoon coin, like Pou or Talking Tom, that you look after with good money habits.",
+  evolution: [
+    { name: "Planchet", from: "#d9d4c7", to: "#a8a293" },
+    { name: "Bronze", from: "#e3a46b", to: "#9c5a2a" },
+    { name: "Silver", from: "#f1f4f7", to: "#9aa5b1" },
+    { name: "Gold", from: "#ffe27a", to: "#d49b14" },
+    { name: "Diamond", from: "#d8f6ff", to: "#5fb8e6" },
+    { name: "Alexandrite", from: "#7fe0c4", to: "#8a4fbf" },
+  ],
+  features: [
+    { icon: "🏦", title: "Money in one place", text: "Accounts, transactions, budgets, goals and investments." },
+    { icon: "🪙", title: "A coin that's alive", text: "Casshy reacts to your habits, animated with Rive." },
+    { icon: "🎓", title: "Casshy Academy", text: "Short money lessons. Casshy educates and never gives investment advice." },
+    { icon: "⚖️", title: "Fair XP", text: "Earned through habits and learning, never by having more money." },
+    { icon: "🍁", title: "Made for Canada", text: "Starts in Ontario, in English, Spanish and French, for users 14+." },
+    { icon: "🔒", title: "Private & accessible", text: "Privacy by design and WCAG AA accessibility from day one." },
+  ],
+  principles: [
+    "Pure domain logic in its own packages, separate from frameworks",
+    "Money stored as integers in minor units, never floats",
+    "Canadian tax rules versioned, each with its source",
+    "Architecture decisions recorded as ADRs",
+  ],
+  stack: [
+    ["Monorepo", "Turborepo · pnpm · strict TypeScript"],
+    ["Web", "Next.js · Tailwind · shadcn/ui · Rive"],
+    ["API", "NestJS · Zod · Better Auth"],
+    ["Data", "PostgreSQL 18 · Prisma 7"],
+    ["Infra", "Docker for development · k3s homelab for production"],
+    ["Mobile", "Expo, after the web app"],
+  ],
+  roadmap: [
+    { title: "Phase 0 · Vision, docs & ADRs", status: "done" },
+    { title: "Phase 1 · Robust foundation & landing page", status: "in-progress" },
+    { title: "Next · Web app: finance, Casshy & Academy", status: "planned" },
+    { title: "Last · Mobile app with Expo", status: "planned" },
+  ] as { title: string; status: "done" | "in-progress" | "planned" }[],
+};
 
 export type ExperienceItem = {
   kind: "Work" | "Internship" | "Certification" | "Volunteer" | "Education";
@@ -217,7 +274,7 @@ export const experience: ExperienceItem[] = [
       "Provide production support to global enterprise customers on OpenText SaaS products (LoadRunner Enterprise, ALM/QC, Octane/ValueEdge), currently moving from Tier-2 into Tier-3 escalations.",
       "Troubleshoot authentication (SSO, OAuth 2.0), integration and performance incidents using Linux/Windows, SQL, Jenkins and system logs, and analyze ticket data to find root causes and recurring issues.",
       "Partner with Operations, Engineering and R&D in an SLA-driven environment to resolve complex escalations.",
-      "Built Timer SaaS Team, a Chrome extension that returns agents to Available after breaks in the SaaS Unified Tool, with countdown, logs and timer recovery.",
+      "Built Timer SaaS Team, a web extension that returns agents to Available after breaks in the SaaS Unified Tool, with countdown, logs and timer recovery.",
     ],
   },
   {
@@ -258,12 +315,13 @@ export const experience: ExperienceItem[] = [
 ];
 
 export const roleFit = [
-  ["Java backend", "Java from college; learning Spring Boot now by building IncidentHub, with PostgreSQL, tests, Docker and AWS."],
-  ["Full-stack", "React front ends (Ontario Government, Chronicle), Node.js/Express REST APIs (Fragments) and a Chrome extension used by my team (Timer SaaS Team)."],
+  ["Product & architecture", "Designing Casshy end to end: vision, ADRs, domain rules, a TypeScript monorepo, privacy and accessibility from day one."],
+  ["Full-stack", "React and Next.js front ends, Node.js/Express and NestJS APIs, and a web extension used by my team (Timer SaaS Team)."],
+  ["Java backend", "Java from college; learning Spring Boot by building IncidentHub, with PostgreSQL, tests, Docker and AWS."],
   ["AWS", "AWS Certified Cloud Practitioner. Deployed a microservice on ECS with ECR, Cognito, S3 and DynamoDB."],
   ["Delivery & quality", "Docker images shipped to AWS through CI/CD; Jenkins daily at OpenText; this site deploys with GitHub Actions."],
   ["Databases", "SQL troubleshooting on SQL Server in production support; MongoDB and DynamoDB in projects."],
   ["Production experience", "Root-cause analysis on Linux and Windows with logs and SQL, moving from Tier-2 into Tier-3 escalations at OpenText. I know how real systems fail."],
-  ["AI", "Use GitHub Copilot daily. Learning agentic AI (Claude Code, OpenAI Codex) and LLM integrations, applied in IncidentHub's AI triage."],
+  ["AI", "Use GitHub Copilot daily. Building Casshy with AI coding agents (Claude Code, OpenAI Codex) and learning LLM integrations."],
   ["Communication", "Lead remote sessions with technical and non-technical customers. Fully bilingual in English and Spanish."],
 ];
