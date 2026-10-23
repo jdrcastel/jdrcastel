@@ -24,7 +24,7 @@ const statusStyle: Record<ProjectStatus, string> = {
 
 function ProjectCard({ p, labels }: { p: Project; labels: Labels }) {
   return (
-    <Card className={cn("lift h-full", p.featured && "border-brand/40 md:col-span-2")}>
+    <Card className={cn("lift spotlight relative h-full", p.featured && "border-brand/40 md:col-span-2")}>
       <CardHeader>
         <div className="flex items-start justify-between gap-3">
           <h3 className="text-lg leading-snug font-semibold">{p.title}</h3>

@@ -140,6 +140,109 @@
   box-shadow: 0 8px 24px -12px color-mix(in oklab, var(--brand) 35%, transparent);
 }
 
+/* EN ↔ ES: cross-page fade, the header stays in place */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+.site-header {
+  view-transition-name: site-header;
+}
+
+/* Theme switch: Nav.astro animates the new theme as a circle; turn off the default fade */
+.theme-vt::view-transition-old(root),
+.theme-vt::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+.theme-vt .site-header {
+  view-transition-name: none;
+}
+
+/* Experience timeline: the line fills and the dots light up as you scroll (no JS) */
+.timeline-fill {
+  display: none;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .timeline-fill {
+      display: block;
+      transform-origin: top;
+      animation: timeline-fill linear both;
+    }
+    .timeline-dot {
+      animation: timeline-dot linear both;
+    }
+    /* Separate rule: the minifier would otherwise fold animation-timeline into the shorthand, which browsers ignore */
+    ol > .timeline-fill,
+    li > .timeline-dot {
+      animation-timeline: view(block 45%);
+    }
+    li > .timeline-dot {
+      animation-range: cover 0% cover 40%;
+    }
+  }
+}
+@keyframes timeline-fill {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@keyframes timeline-dot {
+  from { background-color: var(--background); box-shadow: 0 0 0 0 transparent; }
+  to { background-color: var(--brand); box-shadow: 0 0 0 4px color-mix(in oklab, var(--brand) 20%, transparent); }
+}
+
+/* Project cards: soft glow that follows the mouse (position set in Layout.astro) */
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    360px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in oklab, var(--brand) 12%, transparent),
+    transparent 70%
+  );
+}
+@media (hover: hover) and (pointer: fine) {
+  .spotlight:hover::before {
+    opacity: 1;
+  }
+}
+
+/* Hero "Send": progress line, then the stat cards light up one by one */
+.send-bar.run {
+  animation: send-bar 0.6s ease-out both;
+}
+@keyframes send-bar {
+  from { transform: scaleX(0); opacity: 1; }
+  80% { transform: scaleX(1); opacity: 1; }
+  to { transform: scaleX(1); opacity: 0; }
+}
+.stat-hit {
+  animation: stat-hit 0.9s ease both;
+}
+.stat-hit .stat-value {
+  animation: stat-value 0.45s ease both;
+  animation-delay: inherit;
+}
+@keyframes stat-hit {
+  0% { box-shadow: 0 0 0 0 transparent; }
+  35% {
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand) 22%, transparent);
+  }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+@keyframes stat-value {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

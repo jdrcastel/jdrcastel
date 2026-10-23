@@ -17,8 +17,8 @@ description: Build, check in a browser, commit and open a PR for portfolio chang
    Playwright from `/opt/node-tools/node_modules/playwright/index.mjs`):
    - Pages `/jdrcastel/` and `/jdrcastel/es/`, at 1280 and 390 wide, light and dark.
    - No console errors or 404s, and no horizontal scroll.
-   - Filters, "Learn more", tabs, experience details, the EN↔ES switch, the theme toggle, the mobile menu and the
-     Casshy dashboard (tone toggle, checklist progress, spending bars) all work.
+   - Filters, "Learn more", tabs, experience details, the EN↔ES switch, the theme toggle, the mobile menu, the hero
+     Send button, the circular theme switch and the scroll-filled timeline all work.
    - Look at the screenshots yourself before calling it done.
 3. **Optional reviews** for bigger changes: run the `recruiter-60s-reviewer`, `web-quality-auditor` and
    `content-guardian` agents. Fix what Juan agrees with.
