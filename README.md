@@ -18,7 +18,7 @@
 - **AWS Certified Cloud Practitioner.** I ship containerized REST services on AWS with Docker and CI/CD.
 - Day job: **Technical Support Specialist at OpenText**, troubleshooting production incidents on enterprise SaaS platforms and moving from Tier 2 into **Tier 3**. I know how real systems fail.
 - I use **GitHub Copilot** daily.
-- 🌱 **Learning now:** Java and Spring Boot, agentic AI (**Claude Code**, **OpenAI Codex**) and LLM integrations, applied in **IncidentHub**, a REST API for support incidents with SLA tracking and AI-assisted triage.
+- 🌱 **Learning now:** agentic AI (**Claude Code**, **OpenAI Codex**) and LLM integrations, applied in **IncidentHub**, a TypeScript/NestJS REST API for support incidents with SLA tracking and AI-assisted triage. Also learning Java and Spring Boot.
 - 🪙 Building **Casshy**, a gamified personal-finance app where you take care of a living coin with good money habits.
 - 🎓 Advanced Diploma, Computer Programming and Analysis — **Seneca Polytechnic** (President's Honour List).
 
@@ -51,6 +51,8 @@
 **🌱 Learning now**
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
+![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=flat-square&logo=nestjs&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=flat-square&logo=prisma&logoColor=white)
 ![Claude Code](https://img.shields.io/badge/Claude_Code-D97757?style=flat-square&logo=anthropic&logoColor=white)
 ![OpenAI Codex](https://img.shields.io/badge/OpenAI_Codex-412991?style=flat-square&logo=openai&logoColor=white)
 ![LLM integrations](https://img.shields.io/badge/LLM_integrations-6B7280?style=flat-square)
@@ -60,7 +62,7 @@
 | Project | What it does | Stack |
 |---|---|---|
 | **Casshy** *(in progress)* | Gamified personal-finance web app for Canada: accounts, budgets, goals and investments, with Casshy, a living coin that evolves with fair XP from good money habits | TypeScript, Next.js, NestJS, PostgreSQL, Prisma, Turborepo, Rive, Docker |
-| **IncidentHub** *(in progress)* | REST API for support incidents with SLA breach detection and LLM-based ticket triage | Java, Spring Boot, PostgreSQL, Spring AI, JUnit, Docker, AWS |
+| **IncidentHub** *(in progress)* | REST API for support incidents with SLA breach detection and LLM-based ticket triage | TypeScript, NestJS, PostgreSQL, Prisma, Zod, LLM API, Docker |
 | **Enterprise Microservice Platform** · [API](https://github.com/jdcastel/Microservice-fragments-Cloud-Computing) · [UI](https://github.com/jdcastel/Microservice-fragments-UI) | REST microservice to store and convert text and image fragments; Cognito auth, S3 + DynamoDB, CI/CD to ECS | Node.js, Express, AWS (Cognito, S3, DynamoDB, ECR, ECS), Docker, Jest |
 
 **Web extensions:** [Timer SaaS Team](https://github.com/jdrcastel/Timer-SaaS-Team): returns agents to Available after breaks in the OpenText SaaS Unified Tool, with countdown, logs and timer recovery (JavaScript, Manifest V3).

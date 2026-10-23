@@ -94,8 +94,8 @@ export const projectMeta: Record<string, ProjectMeta> = {
   },
   incidenthub: {
     stack: [
-      { name: "Java" }, { name: "Spring Boot" }, { name: "PostgreSQL" }, { name: "Spring Data JPA" },
-      { name: "LLM API" }, { name: "JUnit" }, { name: "Docker" },
+      { name: "TypeScript", core: true }, { name: "NestJS" }, { name: "PostgreSQL" }, { name: "Prisma" },
+      { name: "Zod" }, { name: "LLM API" }, { name: "Docker", core: true },
     ],
     tags: ["backend"],
     links: [{ key: "learning", href: "#skills" }],

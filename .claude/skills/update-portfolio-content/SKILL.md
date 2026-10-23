@@ -9,7 +9,8 @@ description: Edit portfolio text, projects, skills or experience in both English
 2. Find where the content lives:
    - Text: `src/i18n/en.ts` and `src/i18n/es.ts`. They have the same shape, and `es.ts` is typed as `Content`.
    - Language-neutral data: `src/i18n/shared.ts`. This holds links, technology chips (`core: true` = strongest),
-     project metadata (`featured`, `group: "extension"`, `tags`, `links`).
+     project metadata (`featured`, `group: "extension"` = shown only under the Extensions filter, `tags`, `links`).
+   - Hero logo marquee: `src/lib/tech.ts` (only Strong / Hands-on technologies).
 3. Edit both languages in the same change. Write natural Spanish (Canadian/Latin American), not word-for-word.
 4. Respect "Content truth" in `CLAUDE.md`. New skills go to the right level. Learning items go only in
    `learningChips` plus `skills.learning`.
@@ -19,3 +20,5 @@ description: Edit portfolio text, projects, skills or experience in both English
 6. Hero JSON: edit `hero.payload` in both files. Keep values short (the code window wraps around 50 characters).
 7. Build and check both `/jdrcastel/` and `/jdrcastel/es/` (see the `ship-portfolio` skill).
 8. If Juan states a new preference, add it to "Decision log" in `CLAUDE.md`.
+9. If the change affects the resume (projects, stack, learning), ask Juan whether to update it too
+   (`update-resume` skill), and check `README.md` (his GitHub profile) for the same text.

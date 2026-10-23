@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { assetUrl, type Content } from "@/i18n";
 import { cn } from "@/lib/utils";
 import { person } from "@/i18n/shared";
+import TechMarquee from "./TechMarquee.astro";
 
 interface Props {
   t: Content;
@@ -23,6 +24,10 @@ const arr = (key: string, items: unknown[]) => {
     ? `[\n${items.map((x) => `    ${val(x)}`).join(",\n")}\n  ]`
     : `[${items.map(val).join(", ")}]`;
 };
+// Each word of the heading comes into focus in turn (see .hero-word)
+const helloWords = t.hero.hello.split(" ");
+const roleWords = t.hero.role.split(" ").map((w, i) => ({ w, i: i + helloWords.length }));
+
 const json = `{\n${Object.entries(t.hero.payload)
   .map(([k, v]) => `  <span class="t">"${k}"</span>: ${Array.isArray(v) ? arr(k, v) : val(v)}`)
   .join(",\n")}\n}`;
@@ -31,7 +36,7 @@ const json = `{\n${Object.entries(t.hero.payload)
 <section id="top" class="border-b">
   <div class="mx-auto grid max-w-5xl items-center gap-10 px-4 pt-16 pb-12 lg:grid-cols-[1.1fr_1fr] lg:pt-24">
     <div>
-      <Badge variant="outline" className="gap-2 rounded-full px-3 py-1 text-xs font-medium">
+      <Badge variant="outline" className="hero-in gap-2 rounded-full px-3 py-1 text-xs font-medium">
         <span class="relative flex size-2" aria-hidden="true">
           <span class="absolute inline-flex size-full rounded-full bg-success opacity-60 motion-safe:animate-ping"></span>
           <span class="relative inline-flex size-2 rounded-full bg-success"></span>
@@ -39,11 +44,11 @@ const json = `{\n${Object.entries(t.hero.payload)
         {t.hero.status}
       </Badge>
       <h1 class="mt-5 text-4xl font-bold tracking-tight text-balance sm:text-5xl">
-        {t.hero.hello}
-        <span class="block text-brand">{t.hero.role}</span>
+        <span class="block">{helloWords.map((w, i) => <><span class="hero-word" style={`--i:${i}`}>{w}</span>{" "}</>)}</span>
+        <span class="block text-brand">{roleWords.map(({ w, i }) => <><span class="hero-word" style={`--i:${i}`}>{w}</span>{" "}</>)}</span>
       </h1>
-      <p class="mt-5 max-w-xl text-lg text-pretty text-muted-foreground">{t.hero.tagline}</p>
-      <div class="mt-7 flex flex-wrap gap-1.5">
+      <p class="hero-in mt-5 max-w-xl text-lg text-pretty text-muted-foreground" style="--d:300ms">{t.hero.tagline}</p>
+      <div class="hero-in mt-7 flex flex-wrap gap-1.5" style="--d:420ms">
         <a href="#projects" class={buttonVariants({ size: "lg" })}>
           {t.hero.ctaProjects}
           <ArrowRight aria-hidden="true" />
@@ -56,7 +61,7 @@ const json = `{\n${Object.entries(t.hero.payload)
       </div>
     </div>
 
-    <figure class="code-window overflow-hidden rounded-xl border border-white/10 bg-[#0d1117] font-mono text-[13px] leading-relaxed text-[#d6deeb] shadow-lg">
+    <figure class="code-window hero-window overflow-hidden rounded-xl border border-white/10 bg-[#0d1117] font-mono text-[13px] leading-relaxed text-[#d6deeb] shadow-lg">
       <div class="relative flex items-center gap-1.5 border-b border-white/10 bg-white/5 px-4 py-2 text-xs text-white/50">
         <span class="size-2.5 rounded-full bg-[#ff5f57]" aria-hidden="true"></span>
         <span class="size-2.5 rounded-full bg-[#febc2e]" aria-hidden="true"></span>
@@ -66,10 +71,11 @@ const json = `{\n${Object.entries(t.hero.payload)
           id="sendBtn"
           type="button"
           data-sending={t.hero.send.sending}
-          class="ml-auto inline-flex items-center gap-1.5 rounded-md bg-[#28c840]/15 px-2.5 py-1 font-sans font-medium text-[#28c840] transition-colors outline-none hover:bg-[#28c840]/25 focus-visible:ring-2 focus-visible:ring-[#28c840]/60 disabled:cursor-progress"
+          class="relative ml-auto inline-flex items-center gap-1.5 rounded-md bg-[#28c840]/15 px-2.5 py-1 font-sans font-medium text-[#28c840] transition-colors outline-none hover:bg-[#28c840]/25 focus-visible:ring-2 focus-visible:ring-[#28c840]/60 disabled:cursor-progress"
         >
           <Play className="size-3 fill-current" aria-hidden="true" />
           <span data-label>{t.hero.send.label}</span>
+          <span class="beam" style="--beam-from:#28c840;--beam-to:#b9f6c9;--beam-duration:3.5s" aria-hidden="true"></span>
         </button>
         <span class="send-bar absolute inset-x-0 -bottom-px h-px origin-left scale-x-0 bg-[#28c840]" aria-hidden="true"></span>
       </div>
@@ -87,9 +93,9 @@ const json = `{\n${Object.entries(t.hero.payload)
     </figure>
   </div>
 
-  <ul class="mx-auto grid max-w-5xl grid-cols-2 gap-3 px-4 pb-16 lg:grid-cols-4">
-    {t.hero.stats.map((s) => (
-      <li>
+  <ul class="mx-auto grid max-w-5xl grid-cols-2 gap-3 px-4 pb-12 lg:grid-cols-4">
+    {t.hero.stats.map((s, i) => (
+      <li class="hero-in" style={`--d:${560 + i * 70}ms`}>
         <Card className="lift stat h-full gap-1 py-4">
           <CardContent className="px-4">
             <p class="stat-value text-2xl font-semibold tracking-tight">{s.value}</p>
@@ -99,6 +105,10 @@ const json = `{\n${Object.entries(t.hero.payload)
       </li>
     ))}
   </ul>
+
+  <div class="hero-in" style="--d:850ms">
+    <TechMarquee label={t.hero.techLabel} pauseLabel={t.hero.pauseMotion} />
+  </div>
 </section>
 
 <script>

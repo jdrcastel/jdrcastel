@@ -1,18 +1,18 @@
 import { useState } from "react";
+import { AnimatePresence, LazyMotion, MotionConfig } from "motion/react";
+import * as m from "motion/react-m";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import type { Content, ProjectStatus } from "@/i18n";
 import type { ProjectMeta } from "@/i18n/shared";
+import ArchitectureDiagram from "./ArchitectureDiagram";
 
 type ProjectsContent = Content["projects"];
-export type Labels = Pick<
-  ProjectsContent,
-  "title" | "filters" | "status" | "learnMore" | "stackLabel" | "links" | "extensionsTitle"
->;
+export type Labels = Pick<ProjectsContent, "title" | "filters" | "status" | "learnMore" | "stackLabel" | "links" | "diagram">;
 type Filter = keyof Labels["filters"];
 export type Project = ProjectsContent["items"][number] & ProjectMeta;
 
@@ -22,9 +22,14 @@ const statusStyle: Record<ProjectStatus, string> = {
   shipped: "bg-success/15 text-success",
 };
 
+// Motion's layout features download after the first render
+const loadFeatures = () => import("@/lib/motion-features").then((mod) => mod.default);
+const ease = [0.2, 0.7, 0.2, 1] as const;
+
 function ProjectCard({ p, labels }: { p: Project; labels: Labels }) {
   return (
-    <Card className={cn("lift spotlight relative h-full", p.featured && "border-brand/40 md:col-span-2")}>
+    <Card className={cn("lift spotlight relative h-full", p.featured && "border-brand/40")}>
+      {p.featured && <span className="beam" aria-hidden="true" />}
       <CardHeader>
         <div className="flex items-start justify-between gap-3">
           <h3 className="text-lg leading-snug font-semibold">{p.title}</h3>
@@ -35,6 +40,7 @@ function ProjectCard({ p, labels }: { p: Project; labels: Labels }) {
         <p className="text-sm text-pretty text-muted-foreground">{p.summary}</p>
       </CardHeader>
       <CardContent className="flex flex-col gap-3">
+        {p.id === "fragments" && <ArchitectureDiagram labels={labels.diagram} />}
         <ul className="flex flex-wrap gap-1.5" aria-label={labels.stackLabel}>
           {p.stack.map((s) => (
             <li key={s.name}>
@@ -76,46 +82,64 @@ function ProjectCard({ p, labels }: { p: Project; labels: Labels }) {
 
 export default function ProjectsGrid({ projects, labels }: { projects: Project[]; labels: Labels }) {
   const [filter, setFilter] = useState<Filter>("all");
-  const main = projects.filter((p) => !p.group);
-  const extensions = projects.filter((p) => p.group === "extension");
-  const visible = main.filter((p) => filter === "all" || p.tags.some((tag) => tag === filter));
+  // Web extensions only show under their own filter, so they don't compete with the main projects
+  const visible =
+    filter === "extensions"
+      ? projects.filter((p) => p.group === "extension")
+      : projects.filter((p) => !p.group && (filter === "all" || p.tags.some((tag) => tag === filter)));
 
   return (
-    <div className="flex flex-col gap-10">
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-wrap gap-2" role="group" aria-label={labels.title}>
-          {(Object.keys(labels.filters) as Filter[]).map((f) => (
-            <Button
-              key={f}
-              size="sm"
-              variant={filter === f ? "default" : "outline"}
-              className="rounded-full"
-              aria-pressed={filter === f}
-              onClick={() => setFilter(f)}
-            >
-              {labels.filters[f]}
-            </Button>
-          ))}
-        </div>
-        <div className="grid items-start gap-4 md:grid-cols-2">
-          {visible.map((p) => (
-            <ProjectCard key={p.id} p={p} labels={labels} />
-          ))}
-        </div>
-      </div>
-
-      {extensions.length > 0 && (
-        <div className="flex flex-col gap-3">
-          <h3 className="font-mono text-xs font-medium tracking-wider text-muted-foreground uppercase">
-            {labels.extensionsTitle}
-          </h3>
-          <div className="grid gap-4 md:grid-cols-2">
-            {extensions.map((p) => (
-              <ProjectCard key={p.id} p={p} labels={labels} />
-            ))}
+    <MotionConfig reducedMotion="user">
+      <LazyMotion features={loadFeatures} strict>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-wrap gap-2" role="group" aria-label={labels.title}>
+            {(Object.keys(labels.filters) as Filter[]).map((f) => {
+              const active = filter === f;
+              return (
+                <button
+                  key={f}
+                  type="button"
+                  aria-pressed={active}
+                  onClick={() => setFilter(f)}
+                  className={cn(
+                    buttonVariants({ variant: "outline", size: "sm" }),
+                    "relative isolate rounded-full",
+                    active &&
+                      "border-transparent bg-transparent text-primary-foreground shadow-none hover:bg-transparent hover:text-primary-foreground dark:border-transparent dark:bg-transparent dark:hover:bg-transparent",
+                  )}
+                >
+                  {/* One pill shared by all filters: it slides to the active one */}
+                  {active && (
+                    <m.span
+                      layoutId="active-filter"
+                      className="absolute inset-0 -z-10 rounded-full bg-primary"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                    />
+                  )}
+                  {labels.filters[f]}
+                </button>
+              );
+            })}
           </div>
+          <ul className="relative grid items-start gap-4 md:grid-cols-2">
+            <AnimatePresence mode="popLayout" initial={false}>
+              {visible.map((p) => (
+                <m.li
+                  key={p.id}
+                  layout="position"
+                  initial={{ opacity: 0, scale: 0.96, y: 12 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.4, ease }}
+                  className={cn(p.featured && "md:col-span-2")}
+                >
+                  <ProjectCard p={p} labels={labels} />
+                </m.li>
+              ))}
+            </AnimatePresence>
+          </ul>
         </div>
-      )}
-    </div>
+      </LazyMotion>
+    </MotionConfig>
   );
 }

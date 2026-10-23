@@ -35,6 +35,8 @@ const en = {
     ctaProjects: "See projects",
     ctaResume: "Resume (PDF)",
     send: { label: "Send", sending: "Sending…", hint: "Press Send to submit the request" },
+    techLabel: "Technologies I work with",
+    pauseMotion: "Pause animations",
     payload: {
       name: "Juan Castelblanco",
       role: "Software Developer",
@@ -61,7 +63,7 @@ const en = {
     paragraphs: [
       "I'm a software developer with strong JavaScript and front-end skills: React, Next.js, TypeScript and Redux. On the backend I built a Node.js microservice on AWS with Cognito, S3, DynamoDB, Docker and a CI/CD pipeline to ECS.",
       "At OpenText I support enterprise SaaS customers in production and I'm moving from Tier 2 into Tier 3, so I know how real systems fail and how to fix them. I also built a web extension my team uses every day.",
-      "Right now I'm building Casshy, a gamified personal-finance app for Canada, and IncidentHub to learn Java, Spring Boot and LLM integrations, working with AI coding agents like Claude Code and OpenAI Codex.",
+      "Right now I'm building Casshy, a gamified personal-finance app for Canada, and IncidentHub, a TypeScript and NestJS API where I apply LLM integrations, working with AI coding agents like Claude Code and OpenAI Codex.",
     ],
   },
   casshy: {
@@ -107,12 +109,16 @@ const en = {
     eyebrow: "Projects",
     title: "Selected work",
     lead: "What I'm building now, plus full-stack, backend and AWS work I've shipped.",
-    filters: { all: "All", backend: "Backend", web: "Web", aws: "AWS" },
+    filters: { all: "All", backend: "Backend", web: "Web", aws: "AWS", extensions: "Extensions" },
     status: { progress: "In progress", use: "In use", shipped: "Shipped" },
     learnMore: "Learn more",
     stackLabel: "Tech stack",
+    diagram: {
+      alt: "Fragments architecture: the web UI calls the Express API, which runs in Docker on Amazon ECS, checks Cognito tokens (JWT), stores fragment data in S3 and metadata in DynamoDB.",
+      ui: "Web UI",
+      api: "Express API",
+    },
     links: { casshy: "See Casshy", learning: "What I'm learning", api: "API code", ui: "UI code", code: "Code" },
-    extensionsTitle: "Web extensions",
     items: [
       {
         id: "casshy",
@@ -129,14 +135,14 @@ const en = {
       {
         id: "incidenthub",
         status: "progress" as ProjectStatus,
-        title: "IncidentHub — Java, Spring Boot & AI",
+        title: "IncidentHub — TypeScript, NestJS & AI",
         summary:
-          "My hands-on project to learn Java, Spring Boot and AI integrations: a REST API for support incidents with SLA tracking and AI-assisted triage.",
+          "My hands-on project to go deeper into backend TypeScript and AI integrations: a NestJS REST API for support incidents with SLA tracking and AI-assisted triage.",
         bullets: [
           "Built phase by phase, starting with a simple ticket API and adding one new skill at a time",
-          "Tickets with priority-based SLAs, breach detection and a status workflow on PostgreSQL",
+          "Tickets with priority-based SLAs, breach detection and a status workflow on PostgreSQL with Prisma",
           "AI triage: an LLM summarizes each new ticket and suggests its priority, with a human confirming",
-          "Later phases: security with JWT, tests, Docker, CI/CD and AWS deployment",
+          "Later phases: JWT security, tests, CI/CD and AWS deployment",
         ],
       },
       {
@@ -196,12 +202,13 @@ const en = {
       casshy: {
         title: "Casshy's stack",
         summary: "The tools I chose for Casshy and am learning in depth as I build it.",
-        applying: "Casshy Phase 1: monorepo foundation, API, database and landing page.",
+        applying: "Casshy Phase 1 (monorepo, API, database, landing page) and the IncidentHub NestJS API.",
       },
       java: {
         title: "Java & Spring Boot",
         summary: "Going from college Java to REST APIs with a database, tests and security.",
-        applying: "IncidentHub: the REST API, database, tests and security.",
+        // No project uses Java right now (IncidentHub moved to TypeScript), so nothing is shown
+        applying: "",
       },
     },
   },
@@ -268,7 +275,7 @@ const en = {
     lead: "I'm looking for Software Developer roles: front end, full-stack or backend. The fastest way to reach me is email.",
     email: "Email me",
     offClock: "Off the clock: soccer ⚽ · gym 🏋️ · video games 🎮",
-    footer: "Built with Astro, React and shadcn/ui",
+    footer: "Built with Astro, React, shadcn/ui and Motion",
   },
 };
 

@@ -77,6 +77,7 @@ const links = [
       <Menu aria-hidden="true" />
     </button>
   </div>
+  <div class="scroll-progress" aria-hidden="true"></div>
 
   <nav id="mobileMenu" aria-label={t.nav.mobileLabel} class="hidden border-t md:hidden">
     <ul class="mx-auto flex max-w-5xl flex-col px-4 py-2">
@@ -131,6 +132,27 @@ const links = [
       menuBtn?.focus();
     }
   });
+
+  // Reading progress line: CSS scroll timelines drive it; this fallback covers browsers without them
+  const progress = document.querySelector<HTMLElement>(".scroll-progress");
+  if (progress && !CSS.supports("animation-timeline: scroll()")) {
+    let queued = false;
+    const update = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      progress.style.setProperty("--progress", String(max > 0 ? scrollY / max : 0));
+      queued = false;
+    };
+    addEventListener(
+      "scroll",
+      () => {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(update);
+      },
+      { passive: true },
+    );
+    update();
+  }
 
   // Mark the link of the section in view
   const links = [...document.querySelectorAll<HTMLAnchorElement>("#navLinks a")];

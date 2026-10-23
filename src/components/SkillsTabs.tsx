@@ -82,12 +82,14 @@ export default function SkillsTabs({ groups, learning, labels }: Props) {
                       </li>
                     ))}
                   </ul>
-                  <p className="border-t pt-3 text-sm">
-                    <span className="block text-xs font-medium tracking-wide text-brand uppercase">
-                      {labels.applyingLabel}
-                    </span>
-                    {l.applying}
-                  </p>
+                  {l.applying && (
+                    <p className="border-t pt-3 text-sm">
+                      <span className="block text-xs font-medium tracking-wide text-brand uppercase">
+                        {labels.applyingLabel}
+                      </span>
+                      {l.applying}
+                    </p>
+                  )}
                 </CardContent>
               </Card>
             </li>
