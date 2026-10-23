@@ -13,12 +13,11 @@ The resume PDF served by the site is `public/Resume_Juan_Castelblanco.pdf`; repl
 ```bash
 npm install
 npm run dev      # http://localhost:4321
-npm run check    # type check
 npm run build    # static output in dist/
 ```
 Requires Node 22.22+.
 
 ## Deploy
-`.github/workflows/deploy.yml` type-checks, builds and publishes on every push to `main`
-to https://jdrcastel.github.io/jdrcastel/. `.github/workflows/ci.yml` runs the same checks on pull requests.
+`.github/workflows/deploy.yml` builds and publishes on every push to `main`
+to https://jdrcastel.github.io/jdrcastel/.
 Keep `deploy.yml` as the only workflow that deploys to Pages.
