@@ -1,0 +1,270 @@
+// Contenido en español. Debe mantener exactamente la misma estructura que en.ts.
+import type { Content } from "./en";
+
+const es: Content = {
+  lang: "es",
+  meta: {
+    title: "Juan Castelblanco · Desarrollador de software",
+    description:
+      "Juan David Rodríguez Castelblanco: desarrollador de software fuerte en JavaScript y React, con Node.js en AWS. Construyendo Casshy, una app de finanzas personales gamificada.",
+  },
+  nav: {
+    about: "Sobre mí",
+    casshy: "Casshy",
+    projects: "Proyectos",
+    skills: "Skills",
+    experience: "Experiencia",
+    contact: "Contacto",
+    resume: "CV",
+    menu: "Abrir menú",
+    theme: "Cambiar modo oscuro",
+    language: "Read in English",
+  },
+  hero: {
+    status: "Disponible para roles de desarrollador de software",
+    hello: "Hola, soy Juan.",
+    role: "Desarrollador de software",
+    tagline:
+      "Desarrollador JavaScript y React que despliega servicios Node.js en AWS. Ahora construyo Casshy, una app de finanzas personales gamificada, con agentes de IA.",
+    ctaProjects: "Ver proyectos",
+    ctaResume: "CV (PDF, en inglés)",
+    payload: {
+      name: "Juan Castelblanco",
+      role: "Desarrollador de software",
+      job: "Soporte técnico @ OpenText",
+      location: "Ontario, Canadá",
+      languages: ["Español", "Inglés"],
+      education: "Seneca Polytechnic",
+      aws: "Certified Cloud Practitioner",
+      strengths: ["JavaScript", "React", "Node.js"],
+      building: ["Casshy", "IncidentHub"],
+      learning: ["Agentes de IA", "Integraciones LLM", "Spring Boot"],
+      openToWork: true,
+    },
+    stats: [
+      { value: "AWS", label: "Certified Cloud Practitioner" },
+      { value: "Tier 2 → 3", label: "Pasando a soporte Tier 3 en OpenText" },
+      { value: "Casshy", label: "Construyendo una app de finanzas gamificada" },
+      { value: "IA", label: "Aprendiendo IA agéntica e integraciones LLM" },
+    ],
+  },
+  about: {
+    eyebrow: "Sobre mí",
+    title: "Fuerte en frontend, con experiencia en producción",
+    paragraphs: [
+      "Soy desarrollador de software, fuerte en JavaScript y frontend: React, Next.js, TypeScript y Redux. En el backend construí un microservicio en Node.js sobre AWS con Cognito, S3, DynamoDB, Docker y un pipeline de CI/CD hacia ECS.",
+      "En OpenText doy soporte en producción a clientes empresariales de SaaS y estoy pasando de Tier 2 a Tier 3, así que sé cómo fallan los sistemas reales y cómo arreglarlos. También construí una extensión web que mi equipo usa todos los días.",
+      "Ahora estoy construyendo Casshy, una app de finanzas personales gamificada para Canadá, e IncidentHub para aprender Java, Spring Boot e integraciones con LLM, trabajando con agentes de IA como Claude Code y OpenAI Codex.",
+    ],
+  },
+  casshy: {
+    eyebrow: "Proyecto destacado",
+    status: "Fase 1 · en progreso",
+    tagline: "Finanzas personales que de verdad quieres cuidar.",
+    summary:
+      "Una app web de finanzas personales al estilo de Monarch (cuentas, transacciones, presupuestos, metas e inversiones) cuya protagonista es Casshy: una moneda de caricatura viva, como Pou o Talking Tom, que cuidas con buenos hábitos de dinero.",
+    coinLabel: "Casshy, la moneda mascota",
+    hint: "El XP de buenos hábitos y aprendizaje hace evolucionar a Casshy. Toca una etapa.",
+    evolution: ["Planchet", "Bronce", "Plata", "Oro", "Diamante", "Alejandrita"],
+    features: [
+      { icon: "🏦", title: "Tu dinero en un lugar", text: "Cuentas, transacciones, presupuestos, metas e inversiones." },
+      { icon: "🪙", title: "Una moneda viva", text: "Casshy reacciona a tus hábitos, animada con Rive." },
+      { icon: "🎓", title: "Casshy Academy", text: "Lecciones cortas de dinero. Casshy educa y nunca da consejos de inversión." },
+      { icon: "⚖️", title: "XP justo", text: "Se gana con hábitos y aprendizaje, nunca por tener más dinero." },
+      { icon: "🍁", title: "Hecha para Canadá", text: "Empieza en Ontario, en inglés, español y francés, desde los 14 años." },
+      { icon: "🔒", title: "Privada y accesible", text: "Privacidad desde el diseño y accesibilidad WCAG AA desde el día uno." },
+    ],
+    principlesTitle: "Principios de ingeniería",
+    principles: [
+      "Lógica de dominio pura en paquetes propios, separada de los frameworks",
+      "El dinero se guarda en enteros (unidades menores), nunca en decimales",
+      "Reglas fiscales canadienses versionadas, cada una con su fuente",
+      "Decisiones de arquitectura registradas como ADRs",
+    ],
+    archTitle: "Arquitectura",
+    stack: [
+      ["Monorepo", "Turborepo · pnpm · TypeScript estricto"],
+      ["Web", "Next.js · Tailwind · shadcn/ui · Rive"],
+      ["API", "NestJS · Zod · Better Auth"],
+      ["Datos", "PostgreSQL 18 · Prisma 7"],
+      ["Infra", "Docker para desarrollo · k3s en homelab para producción"],
+      ["Móvil", "Expo, después de la web"],
+    ],
+    roadmapTitle: "Roadmap",
+    roadmap: [
+      { title: "Fase 0 · Visión, documentación y ADRs", status: "done" },
+      { title: "Fase 1 · Base robusta y landing page", status: "inProgress" },
+      { title: "Después · Web app: finanzas, Casshy y Academy", status: "planned" },
+      { title: "Al final · App móvil con Expo", status: "planned" },
+    ],
+    states: { done: "Hecho", inProgress: "En progreso", planned: "Planeado" },
+  },
+  projects: {
+    eyebrow: "Proyectos",
+    title: "Trabajo seleccionado",
+    lead: "Lo que estoy construyendo ahora, y trabajo full-stack, backend y en AWS que ya entregué.",
+    filters: { all: "Todos", backend: "Backend", web: "Full-stack", aws: "AWS" },
+    status: { progress: "En progreso", use: "En uso", shipped: "Entregado" },
+    learnMore: "Ver más",
+    links: { casshy: "Ver Casshy", learning: "Qué estoy aprendiendo", api: "Código API", ui: "Código UI", code: "Código" },
+    extensionsTitle: "Extensiones web",
+    items: [
+      {
+        id: "casshy",
+        status: "progress",
+        title: "Casshy — finanzas personales gamificadas",
+        summary:
+          "Una app web de finanzas personales para Canadá donde cuidas a Casshy, una moneda de caricatura viva, con buenos hábitos de dinero. Diseñada de punta a punta: visión, ADRs, reglas de dominio y un monorepo en TypeScript.",
+        bullets: [
+          "Cuentas, transacciones, presupuestos, metas e inversiones, más la Casshy Academy con lecciones de dinero",
+          "XP justo por hábitos y aprendizaje hace evolucionar la moneda: planchet → bronce → plata → oro → diamante → alejandrita",
+          "Dinero en enteros, reglas fiscales canadienses versionadas, paquetes de dominio puros, privacidad y WCAG AA",
+        ],
+      },
+      {
+        id: "incidenthub",
+        status: "progress",
+        title: "IncidentHub — Java, Spring Boot e IA",
+        summary:
+          "Mi proyecto práctico para aprender Java, Spring Boot e integraciones con IA: una API REST para incidentes de soporte con seguimiento de SLA y triage asistido por IA.",
+        bullets: [
+          "Construido fase por fase: empieza con una API simple de tickets y agrega una habilidad nueva a la vez",
+          "Tickets con SLA según prioridad, detección de incumplimientos y flujo de estados en PostgreSQL",
+          "Triage con IA: un LLM resume cada ticket nuevo y sugiere su prioridad, y una persona confirma",
+          "Fases siguientes: seguridad con JWT, pruebas, Docker, CI/CD y despliegue en AWS",
+        ],
+      },
+      {
+        id: "fragments",
+        status: "shipped",
+        title: "Enterprise Microservice Platform (Fragments)",
+        summary: "Microservicio REST en AWS para guardar y convertir fragmentos de texto e imágenes, con una interfaz web aparte.",
+        bullets: [
+          "API en Node.js/Express con autenticación JWT de Cognito; datos en S3 y metadata en DynamoDB",
+          "Convierte entre texto, Markdown, HTML y formatos de imagen (sharp)",
+          "CI: ESLint, pruebas unitarias con Jest y pruebas de integración con Hurl sobre LocalStack y DynamoDB Local",
+          "CD: GitHub Actions construye la imagen Docker, la sube a ECR y la despliega en ECS",
+        ],
+      },
+      {
+        id: "timer",
+        status: "use",
+        title: "Timer SaaS Team",
+        summary:
+          "Extensión web para el equipo SaaS de OpenText: cuando un agente guarda un break de 15 minutos o un almuerzo de 1 hora en el Unified Tool, cuenta el tiempo y lo vuelve a poner en Available automáticamente.",
+        bullets: [
+          "Cuenta regresiva, logs descargables en JSON y recuperación del temporizador al recargar la página o reiniciar el navegador",
+          "Corregí un reset del formulario que cambiaba “15 minutes” a “30 minutes” después de guardar y bloqueaba el regreso automático",
+          "Protección contra escrituras duplicadas, verificación de solo lectura y un modo de prueba de 30 segundos",
+        ],
+      },
+    ],
+  },
+  skills: {
+    eyebrow: "Skills",
+    title: "Lo que uso y lo que estoy aprendiendo",
+    lead: "Lo resaltado significa que he construido con eso y lo domino. Lo que estoy aprendiendo va aparte a propósito: lo estoy aplicando, no digo que ya lo domino.",
+    tabSkills: "Skills",
+    tabLearning: "Aprendiendo ahora",
+    legendCore: "He construido con esto",
+    legendUsed: "Lo he usado",
+    groups: {
+      frontend: "JavaScript y frontend",
+      backend: "Backend",
+      aws: "AWS",
+      delivery: "Entrega y calidad",
+      data: "Bases de datos",
+      support: "Soporte en producción y herramientas",
+    },
+    applyingLabel: "Lo aplico en",
+    learning: {
+      agentic: {
+        title: "IA agéntica para programar",
+        summary: "Trabajo con agentes de IA que leen, planean, editan y prueban código, mientras yo reviso cada cambio.",
+        applying: "Casshy: planeo con ADRs y construyo con agentes, revisando cada diff.",
+      },
+      integrations: {
+        title: "Integraciones con IA",
+        summary: "Llamar LLMs desde apps reales: respuestas estructuradas, tool calling y control de llaves y costos.",
+        applying: "IncidentHub: triage con IA que resume cada ticket y sugiere su prioridad.",
+      },
+      casshy: {
+        title: "El stack de Casshy",
+        summary: "Las herramientas que elegí para Casshy y que estoy aprendiendo a fondo mientras lo construyo.",
+        applying: "Casshy Fase 1: base del monorepo, API, base de datos y landing page.",
+      },
+      java: {
+        title: "Java y Spring Boot",
+        summary: "Pasar del Java de la universidad a APIs REST con base de datos, pruebas y seguridad.",
+        applying: "IncidentHub: la API REST, la base de datos, las pruebas y la seguridad.",
+      },
+    },
+  },
+  experience: {
+    eyebrow: "Experiencia",
+    title: "Experiencia y educación",
+    lead: "El soporte me enseñó cómo fallan los sistemas empresariales. El desarrollo es donde lo arreglo de verdad.",
+    more: "Más detalles",
+    kinds: { work: "Trabajo", certification: "Certificación", internship: "Práctica", volunteer: "Voluntariado", education: "Educación" },
+    items: [
+      {
+        kind: "work",
+        when: "Sep 2025 — Actualidad · Waterloo, ON",
+        role: "Technical Support Specialist",
+        org: "OpenText",
+        bullets: [
+          "Soporte en producción a clientes empresariales globales en SaaS de OpenText (LoadRunner Enterprise, ALM/QC, Octane/ValueEdge), pasando de Tier 2 a escalaciones Tier 3.",
+          "Resuelvo incidentes de autenticación (SSO, OAuth 2.0), integraciones y rendimiento con Linux/Windows, SQL, Jenkins y logs del sistema, y analizo datos de tickets para encontrar causas raíz y problemas recurrentes.",
+          "Trabajo con Operaciones, Ingeniería y R&D en un entorno con SLA para resolver escalaciones complejas.",
+          "Construí Timer SaaS Team, una extensión web que devuelve a los agentes a Available después de sus breaks, con cuenta regresiva, logs y recuperación del temporizador.",
+        ],
+      },
+      {
+        kind: "certification",
+        when: "Amazon Web Services",
+        role: "AWS Certified Cloud Practitioner",
+        org: "AWS",
+        bullets: ["Servicios principales de AWS, infraestructura global, seguridad y modelo de responsabilidad compartida, precios y soporte."],
+      },
+      {
+        kind: "internship",
+        when: "Sep 2022 — Abr 2023 · Toronto, ON",
+        role: "Application Developer",
+        org: "Gobierno de Ontario",
+        bullets: [
+          "Construí una página web interna con React.",
+          "Trabajé con desarrolladores y diseñadores para corregir bugs, entregar funcionalidades nuevas y mejorar la experiencia de usuario.",
+        ],
+      },
+      {
+        kind: "volunteer",
+        when: "2022 — 2023",
+        role: "Technical Support Engineer",
+        org: "Hispanotech",
+        bullets: ["Organicé talleres técnicos y sesiones de networking para profesionales latinoamericanos de tecnología en Canadá."],
+      },
+      {
+        kind: "education",
+        when: "Ene 2021 — Ene 2024 · Toronto, ON",
+        role: "Computer Programming and Analysis (Advanced Diploma)",
+        org: "Seneca Polytechnic",
+        bullets: [
+          "Cursos relevantes: Java, Programación Orientada a Objetos, Infraestructura Cloud, Bases de Datos, Estructuras de Datos.",
+          "President's Honour List, verano y otoño de 2023.",
+          "Certificados de Platzi: Algoritmos Avanzados, API REST con JavaScript, Programación Orientada a Objetos.",
+        ],
+      },
+    ],
+  },
+  contact: {
+    eyebrow: "Contacto",
+    title: "Construyamos algo",
+    highlight: "confiable.",
+    lead: "Busco roles de desarrollador de software: frontend, full-stack o backend. La forma más rápida de contactarme es por email.",
+    email: "Escríbeme",
+    offClock: "Fuera del trabajo: fútbol ⚽ · gym 🏋️ · videojuegos 🎮",
+    footer: "Hecho con Astro, React y shadcn/ui",
+  },
+};
+
+export default es;

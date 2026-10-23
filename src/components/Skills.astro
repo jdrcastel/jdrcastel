@@ -1,41 +1,38 @@
 ---
-import { skillGroups } from "../data/profile";
+import Section from "./Section.astro";
+import SkillsTabs, { type LearningCard, type SkillGroup } from "./SkillsTabs";
+import type { Content } from "@/i18n";
+import { learningChips, skillChips } from "@/i18n/shared";
+
+interface Props {
+  t: Content;
+}
+const { t } = Astro.props;
+const s = t.skills;
+
+const groups: SkillGroup[] = Object.entries(skillChips).map(([id, g]) => ({
+  id,
+  ...g,
+  title: s.groups[id as keyof typeof s.groups],
+}));
+const learning: LearningCard[] = Object.entries(learningChips).map(([id, l]) => ({
+  id,
+  ...l,
+  ...s.learning[id as keyof typeof s.learning],
+}));
 ---
 
-<section id="skills">
-  <div class="wrap">
-    <div data-reveal>
-      <div class="eyebrow">// tech stack</div>
-      <h2>What I build with</h2>
-      <p class="lead">
-        Only what I've actually used. Highlighted means I've built with it and know it well. What I'm still learning
-        has its own section below.
-      </p>
-      <div class="legend"><span><span class="chip hl">highlighted</span> done it, know it well</span><span><span class="chip">plain</span> hands-on</span></div>
-    </div>
-
-    <div class="grid g3">
-      {skillGroups.map((g, i) => (
-        <div class="card" data-reveal style={`transition-delay:${(i % 3) * 80}ms`}>
-          <div class="head">
-            <div class="ico">{g.icon}</div>
-            <h3>{g.title}</h3>
-          </div>
-          <div class="chips">
-            {g.skills.map((s) => <span class:list={["chip", { hl: s.core, learn: s.learning }]}>{s.name}</span>)}
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
-
-<style>
-  .legend { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; color: var(--muted); font-size: 13px; margin: -16px 0 24px; }
-  .head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-  .head h3 { margin: 0; }
-  .ico {
-    width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; flex: none;
-    background: var(--accent-soft); font-size: 18px;
-  }
-</style>
+<Section id="skills" eyebrow={s.eyebrow} title={s.title} lead={s.lead}>
+  <SkillsTabs
+    client:visible
+    groups={groups}
+    learning={learning}
+    labels={{
+      tabSkills: s.tabSkills,
+      tabLearning: s.tabLearning,
+      legendCore: s.legendCore,
+      legendUsed: s.legendUsed,
+      applyingLabel: s.applyingLabel,
+    }}
+  />
+</Section>

@@ -18,7 +18,8 @@
 - **AWS Certified Cloud Practitioner.** I ship containerized REST services on AWS with Docker and CI/CD.
 - Day job: **Technical Support Specialist at OpenText**, troubleshooting production incidents on enterprise SaaS platforms and moving from Tier 2 into **Tier 3**. I know how real systems fail.
 - I use **GitHub Copilot** daily.
-- 🌱 **Learning now:** Java and Spring Boot, agentic AI (**Claude Code**, **OpenAI Codex**) and LLM integrations, all applied in **IncidentHub**, a REST API for support incidents with SLA tracking and AI-assisted triage.
+- 🌱 **Learning now:** Java and Spring Boot, agentic AI (**Claude Code**, **OpenAI Codex**) and LLM integrations, applied in **IncidentHub**, a REST API for support incidents with SLA tracking and AI-assisted triage.
+- 🪙 Building **Casshy**, a gamified personal-finance app where you take care of a living coin with good money habits.
 - 🎓 Advanced Diploma, Computer Programming and Analysis — **Seneca Polytechnic** (President's Honour List).
 
 ### 🛠️ Tech stack
@@ -58,10 +59,11 @@
 
 | Project | What it does | Stack |
 |---|---|---|
+| **Casshy** *(in progress)* | Gamified personal-finance web app for Canada: accounts, budgets, goals and investments, with Casshy, a living coin that evolves with fair XP from good money habits | TypeScript, Next.js, NestJS, PostgreSQL, Prisma, Turborepo, Rive, Docker |
 | **IncidentHub** *(in progress)* | REST API for support incidents with SLA breach detection and LLM-based ticket triage | Java, Spring Boot, PostgreSQL, Spring AI, JUnit, Docker, AWS |
 | **Enterprise Microservice Platform** · [API](https://github.com/jdcastel/Microservice-fragments-Cloud-Computing) · [UI](https://github.com/jdcastel/Microservice-fragments-UI) | REST microservice to store and convert text and image fragments; Cognito auth, S3 + DynamoDB, CI/CD to ECS | Node.js, Express, AWS (Cognito, S3, DynamoDB, ECR, ECS), Docker, Jest |
-| **[Timer SaaS Team](https://github.com/jdrcastel/Timer-SaaS-Team)** | Chrome extension that returns agents to Available after breaks in the OpenText SaaS Unified Tool, with countdown, logs and timer recovery | JavaScript, Chrome Extensions (Manifest V3) |
-| **Chronicle App** | Full-stack, multi-tenant social journal | MongoDB, Express, React, Node.js, Next.js, Redux |
+
+**Web extensions:** [Timer SaaS Team](https://github.com/jdrcastel/Timer-SaaS-Team): returns agents to Available after breaks in the OpenText SaaS Unified Tool, with countdown, logs and timer recovery (JavaScript, Manifest V3).
 
 ### 💼 Experience
 

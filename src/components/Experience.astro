@@ -1,45 +1,16 @@
 ---
-import { experience } from "../data/profile";
+import Section from "./Section.astro";
+import ExperienceList from "./ExperienceList";
+import type { Content } from "@/i18n";
+
+interface Props {
+  t: Content;
+}
+const { t } = Astro.props;
 ---
 
-<section id="experience">
-  <div class="wrap">
-    <div data-reveal>
-      <div class="eyebrow">// experience</div>
-      <h2>Experience &amp; education</h2>
-      <p class="lead">Support work taught me how enterprise systems fail. Development work is where I fix that for good.</p>
-    </div>
-    <ol class="tl">
-      {experience.map((x) => (
-        <li data-reveal>
-          <div class="when"><span class={`kind ${x.kind.toLowerCase()}`}>{x.kind}</span>{x.when}</div>
-          <h3>{x.role}</h3>
-          <div class="org">{x.org}</div>
-          <ul>{x.bullets.map((b) => <li>{b}</li>)}</ul>
-        </li>
-      ))}
-    </ol>
+<Section id="experience" eyebrow={t.experience.eyebrow} title={t.experience.title} lead={t.experience.lead}>
+  <div class="max-w-3xl">
+    <ExperienceList client:visible labels={t.experience} />
   </div>
-</section>
-
-<style>
-  .tl { margin: 0; padding: 0; list-style: none; }
-  .tl > li { position: relative; padding: 0 0 36px 30px; margin-left: 7px; border-left: 2px solid var(--border); }
-  .tl > li:last-child { padding-bottom: 0; border-left-color: transparent; }
-  .tl > li::before {
-    content: ""; position: absolute; left: -9px; top: 3px; width: 16px; height: 16px; border-radius: 50%;
-    background: var(--bg); border: 3px solid var(--accent);
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
-  }
-  .when { font: 500 13px "JetBrains Mono", monospace; color: var(--muted); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .kind { font: 600 11px Inter, sans-serif; text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 8px; border-radius: 6px; }
-  .kind.work { background: var(--accent-soft); color: var(--accent); }
-  .kind.internship { background: var(--accent-soft); color: var(--accent-2); }
-  .kind.certification { background: var(--warn-soft); color: var(--warn); }
-  .kind.education { background: var(--ok-soft); color: var(--ok); }
-  .kind.volunteer { background: var(--surface-2); color: var(--muted); }
-  h3 { font-size: 19px; margin: 4px 0 2px; }
-  .org { font-weight: 700; font-size: 15px; }
-  ul { color: var(--muted); padding-left: 18px; margin: 10px 0 0; font-size: 15px; }
-  ul li { margin: 4px 0; }
-</style>
+</Section>

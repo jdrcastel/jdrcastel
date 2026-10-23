@@ -1,95 +1,116 @@
 ---
+import { Menu, Moon, Sun } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { assetUrl, homeUrl, type Content, type Lang } from "@/i18n";
+import { person } from "@/i18n/shared";
+
+interface Props {
+  t: Content;
+  lang: Lang;
+}
+const { t, lang } = Astro.props;
+
+const other: Lang = lang === "en" ? "es" : "en";
 const links = [
-  ["#profile", "Profile"],
-  ["#skills", "Stack"],
-  ["#learning", "Learning"],
-  ["#projects", "Projects"],
-  ["#experience", "Experience"],
-  ["#contact", "Contact"],
+  ["#about", t.nav.about],
+  ["#casshy", t.nav.casshy],
+  ["#projects", t.nav.projects],
+  ["#skills", t.nav.skills],
+  ["#experience", t.nav.experience],
+  ["#contact", t.nav.contact],
 ];
 ---
 
-<header class="nav">
-  <div class="wrap">
-    <a class="brand" href="#top">juan<span>.</span>castelblanco</a>
-    <ul id="menu">
-      {links.map(([href, label]) => <li><a href={href}>{label}</a></li>)}
-    </ul>
-    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+<header class="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-md">
+  <div class="mx-auto flex h-14 max-w-5xl items-center gap-2 px-4">
+    <a href={homeUrl(lang)} class="mr-auto font-semibold tracking-tight" aria-label={person.short}>
+      juan<span class="text-brand">.</span>castelblanco
+    </a>
+
+    <nav aria-label="Main" class="hidden md:block">
+      <ul id="navLinks" class="flex items-center gap-1 text-sm">
+        {links.map(([href, label]) => (
+          <li><a href={href} class={buttonVariants({ variant: "ghost", size: "sm" })}>{label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <a
+      href={homeUrl(other)}
+      hreflang={other}
+      lang={other}
+      class={buttonVariants({ variant: "outline", size: "sm" }) + " font-mono uppercase"}
+      aria-label={t.nav.language}
+      title={t.nav.language}
+    >
+      {other}
+    </a>
+    <a
+      href={assetUrl(person.resume)}
+      target="_blank"
+      rel="noopener"
+      class={buttonVariants({ size: "sm" }) + " hidden sm:inline-flex"}
+    >
+      {t.nav.resume}
+    </a>
+    <button id="themeBtn" type="button" class={buttonVariants({ variant: "ghost", size: "icon-sm" })} aria-label={t.nav.theme}>
+      <Sun className="hidden dark:block" aria-hidden="true" />
+      <Moon className="dark:hidden" aria-hidden="true" />
     </button>
-    <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+    <button
+      id="menuBtn"
+      type="button"
+      class={buttonVariants({ variant: "ghost", size: "icon-sm" }) + " md:hidden"}
+      aria-label={t.nav.menu}
+      aria-expanded="false"
+      aria-controls="mobileMenu"
+    >
+      <Menu aria-hidden="true" />
     </button>
   </div>
-  <div class="progress" id="progress"></div>
-</header>
 
-<style>
-  .nav {
-    position: sticky; top: 0; z-index: 10;
-    background: color-mix(in srgb, var(--bg) 82%, transparent);
-    backdrop-filter: saturate(160%) blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .wrap { display: flex; align-items: center; gap: 16px; height: 60px; }
-  .brand { font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
-  .brand:hover { text-decoration: none; }
-  .brand span { color: var(--accent); }
-  ul { list-style: none; display: flex; gap: 4px; margin: 0 0 0 auto; padding: 0; }
-  ul a { color: var(--muted); padding: 6px 10px; border-radius: 8px; font-size: 14px; font-weight: 500; }
-  ul a:hover, ul a.active { color: var(--text); background: var(--surface-2); text-decoration: none; }
-  .icon-btn {
-    border: 1px solid var(--border); background: var(--surface); color: var(--text);
-    width: 36px; height: 36px; border-radius: 10px; cursor: pointer; display: grid; place-items: center; flex: none;
-  }
-  .menu-btn { display: none; }
-  .progress {
-    position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; transform-origin: 0 50%; transform: scaleX(0);
-    background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
-  }
-  @media (max-width: 760px) {
-    .menu-btn { display: grid; margin-left: auto; }
-    ul {
-      display: none; position: absolute; top: 60px; left: 0; right: 0; flex-direction: column;
-      background: var(--surface); border-bottom: 1px solid var(--border); padding: 8px 16px 12px;
-    }
-    ul.open { display: flex; }
-  }
-</style>
+  <nav id="mobileMenu" aria-label="Mobile" class="hidden border-t md:hidden">
+    <ul class="mx-auto flex max-w-5xl flex-col px-4 py-2">
+      {links.map(([href, label]) => (
+        <li><a href={href} class="block rounded-md px-2 py-2 text-sm hover:bg-accent">{label}</a></li>
+      ))}
+      <li><a href={assetUrl(person.resume)} target="_blank" rel="noopener" class="block rounded-md px-2 py-2 text-sm hover:bg-accent">{t.nav.resume}</a></li>
+    </ul>
+  </nav>
+</header>
 
 <script>
   const root = document.documentElement;
-  document.getElementById("themeBtn")!.addEventListener("click", () => {
-    const dark = root.dataset.theme
-      ? root.dataset.theme === "dark"
-      : matchMedia("(prefers-color-scheme: dark)").matches;
-    root.dataset.theme = dark ? "light" : "dark";
-    try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+  document.getElementById("themeBtn")?.addEventListener("click", () => {
+    const dark = root.classList.toggle("dark");
+    try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch {}
   });
 
-  const menu = document.getElementById("menu")!;
-  document.getElementById("menuBtn")!.addEventListener("click", () => menu.classList.toggle("open"));
-  menu.addEventListener("click", (e) => {
-    if ((e.target as HTMLElement).tagName === "A") menu.classList.remove("open");
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const setMenu = (open: boolean) => {
+    mobileMenu?.classList.toggle("hidden", !open);
+    menuBtn?.setAttribute("aria-expanded", String(open));
+  };
+  menuBtn?.addEventListener("click", () => setMenu(mobileMenu?.classList.contains("hidden") ?? false));
+  mobileMenu?.addEventListener("click", (e) => {
+    if ((e.target as HTMLElement).closest("a")) setMenu(false);
   });
 
-  // Highlight the link of the section in view
-  const links = [...menu.querySelectorAll("a")];
-  const obs = new IntersectionObserver(
-    (entries) => entries.forEach((en) => {
-      if (en.isIntersecting) links.forEach((l) => l.classList.toggle("active", l.getAttribute("href") === "#" + en.target.id));
-    }),
+  // Mark the link of the section in view
+  const links = [...document.querySelectorAll<HTMLAnchorElement>("#navLinks a")];
+  const observer = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        links.forEach((l) => {
+          const active = l.getAttribute("href") === `#${entry.target.id}`;
+          l.classList.toggle("bg-accent", active);
+          if (active) l.setAttribute("aria-current", "true");
+          else l.removeAttribute("aria-current");
+        });
+      }),
     { rootMargin: "-45% 0px -50% 0px" },
   );
-  document.querySelectorAll("section[id]").forEach((s) => obs.observe(s));
-
-  // Reading progress bar
-  const bar = document.getElementById("progress")!;
-  const onScroll = () => {
-    const max = document.documentElement.scrollHeight - innerHeight;
-    bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
-  };
-  addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  document.querySelectorAll("main section[id]").forEach((s) => observer.observe(s));
 </script>

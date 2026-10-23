@@ -1,106 +1,17 @@
 ---
-import { projects, filters } from "../data/profile";
+import Section from "./Section.astro";
+import ProjectsGrid, { type Project } from "./ProjectsGrid";
+import type { Content } from "@/i18n";
+import { projectMeta } from "@/i18n/shared";
 
-const badge = { "In progress": "wip", "In use": "live", Shipped: "live" } as const;
-const external = (href: string) => (href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {});
+interface Props {
+  t: Content;
+}
+const { t } = Astro.props;
+
+const projects: Project[] = t.projects.items.map((item) => ({ ...item, ...projectMeta[item.id] }));
 ---
 
-<section id="projects">
-  <div class="wrap">
-    <div data-reveal>
-      <div class="eyebrow">// projects</div>
-      <h2>Selected work</h2>
-      <p class="lead">Full-stack, backend and AWS work I've shipped, plus what I'm building now.</p>
-    </div>
-
-    <div class="filters" id="filters" data-reveal>
-      {filters.map((f, i) => (
-        <button class:list={["filter", { on: i === 0 }]} data-f={f.id}>{f.label}</button>
-      ))}
-    </div>
-
-    <div class="pgrid" id="projGrid">
-      {projects.map((p, i) => (
-        <article class:list={["card", "proj", { featured: p.featured }]} data-tags={p.tags.join(" ")} data-reveal style={`transition-delay:${(i % 2) * 80}ms`}>
-          <div class="top">
-            <h3>{p.title}</h3>
-            <span class={`badge ${badge[p.status]}`}>{p.status}</span>
-          </div>
-          <p class="summary">{p.summary}</p>
-          <div class="chips">
-            {p.stack.map((s) => <span class:list={["chip", { hl: s.core, learn: s.learning }]}>{s.name}</span>)}
-          </div>
-          {p.bullets && (
-            <details>
-              <summary>Learn more</summary>
-              <ul>{p.bullets.map((b) => <li>{b}</li>)}</ul>
-            </details>
-          )}
-          {p.links && (
-            <div class="plinks">
-              {p.links.map((l) => <a class="plink" href={l.href} {...external(l.href)}>{l.label} →</a>)}
-            </div>
-          )}
-        </article>
-      ))}
-    </div>
-  </div>
-</section>
-
-<style>
-  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-  .filter {
-    border: 1px solid var(--border); background: var(--surface); color: var(--muted); padding: 7px 14px;
-    border-radius: 999px; cursor: pointer; font: 500 13.5px Inter, sans-serif; transition: all 0.15s;
-  }
-  .filter:hover { color: var(--text); border-color: var(--accent); }
-  .filter.on { background: var(--text); color: var(--bg); border-color: var(--text); }
-
-  /* Cards size to their content, so opening "Learn more" never leaves empty space in the neighbour */
-  .pgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
-  @media (max-width: 760px) { .pgrid { grid-template-columns: minmax(0, 1fr); } }
-
-  .proj { display: flex; flex-direction: column; gap: 12px; }
-  .top { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
-  .top h3 { margin: 0; }
-  .summary { margin: 0; }
-  .badge { font-size: 11.5px; font-weight: 600; padding: 3px 8px; border-radius: 6px; white-space: nowrap; }
-  .badge.live { color: var(--ok); background: var(--ok-soft); }
-  .badge.wip { color: var(--warn); background: var(--warn-soft); }
-
-  details { border-top: 1px dashed var(--border); padding-top: 10px; }
-  summary {
-    cursor: pointer; list-style: none; font-weight: 600; font-size: 14px; color: var(--text);
-    display: inline-flex; align-items: center; gap: 6px; user-select: none;
-  }
-  summary::-webkit-details-marker { display: none; }
-  summary::before { content: "▸"; color: var(--accent); transition: transform 0.15s; }
-  details[open] summary::before { transform: rotate(90deg); }
-  details[open] summary { margin-bottom: 8px; }
-  ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14.5px; }
-  li { margin: 4px 0; }
-
-  .plinks { display: flex; flex-wrap: wrap; gap: 16px; }
-  .plink { font-weight: 600; font-size: 14.5px; }
-
-  .featured {
-    background:
-      linear-gradient(var(--surface), var(--surface)) padding-box,
-      linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent-3)) border-box;
-    border: 1px solid transparent;
-  }
-  .hidden { display: none; }
-</style>
-
-<script>
-  const filters = document.getElementById("filters")!;
-  filters.addEventListener("click", (e) => {
-    const btn = e.target as HTMLElement;
-    const f = btn.dataset.f;
-    if (!f) return;
-    filters.querySelectorAll(".filter").forEach((b) => b.classList.toggle("on", b === btn));
-    document.querySelectorAll<HTMLElement>("#projGrid .proj").forEach((p) => {
-      p.classList.toggle("hidden", f !== "all" && !p.dataset.tags!.split(" ").includes(f));
-    });
-  });
-</script>
+<Section id="projects" eyebrow={t.projects.eyebrow} title={t.projects.title} lead={t.projects.lead}>
+  <ProjectsGrid client:visible projects={projects} labels={t.projects} />
+</Section>
