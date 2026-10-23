@@ -3,16 +3,20 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import type { Content } from "@/i18n";
+import type { Content, ProjectStatus } from "@/i18n";
 import type { ProjectMeta } from "@/i18n/shared";
 
-type Labels = Content["projects"];
+type ProjectsContent = Content["projects"];
+export type Labels = Pick<
+  ProjectsContent,
+  "title" | "filters" | "status" | "learnMore" | "stackLabel" | "links" | "extensionsTitle"
+>;
 type Filter = keyof Labels["filters"];
-export type Project = Labels["items"][number] & ProjectMeta;
+export type Project = ProjectsContent["items"][number] & ProjectMeta;
 
-const statusStyle: Record<string, string> = {
+const statusStyle: Record<ProjectStatus, string> = {
   progress: "bg-warning/15 text-warning",
   use: "bg-success/15 text-success",
   shipped: "bg-success/15 text-success",
@@ -20,18 +24,18 @@ const statusStyle: Record<string, string> = {
 
 function ProjectCard({ p, labels }: { p: Project; labels: Labels }) {
   return (
-    <Card className={cn("h-full", p.featured && "border-brand/40 md:col-span-2")}>
+    <Card className={cn("lift h-full", p.featured && "border-brand/40 md:col-span-2")}>
       <CardHeader>
         <div className="flex items-start justify-between gap-3">
-          <CardTitle className="text-lg leading-snug">{p.title}</CardTitle>
+          <h3 className="text-lg leading-snug font-semibold">{p.title}</h3>
           <Badge variant="secondary" className={cn("shrink-0", statusStyle[p.status])}>
-            {labels.status[p.status as keyof Labels["status"]]}
+            {labels.status[p.status]}
           </Badge>
         </div>
         <p className="text-sm text-pretty text-muted-foreground">{p.summary}</p>
       </CardHeader>
       <CardContent className="flex flex-col gap-3">
-        <ul className="flex flex-wrap gap-1.5" aria-label="Tech stack">
+        <ul className="flex flex-wrap gap-1.5" aria-label={labels.stackLabel}>
           {p.stack.map((s) => (
             <li key={s.name}>
               <Badge variant={s.core ? "default" : "outline"} className="font-mono font-normal">
@@ -74,7 +78,7 @@ export default function ProjectsGrid({ projects, labels }: { projects: Project[]
   const [filter, setFilter] = useState<Filter>("all");
   const main = projects.filter((p) => !p.group);
   const extensions = projects.filter((p) => p.group === "extension");
-  const visible = main.filter((p) => filter === "all" || p.tags.includes(filter as Project["tags"][number]));
+  const visible = main.filter((p) => filter === "all" || p.tags.some((tag) => tag === filter));
 
   return (
     <div className="flex flex-col gap-10">

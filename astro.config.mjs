@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 
@@ -9,6 +9,29 @@ export default defineConfig({
   base: process.env.BASE_PATH ?? "/",
   integrations: [react()],
   vite: { plugins: [tailwindcss()] },
+  // Fonts come from the @fontsource-variable npm packages and are served from the site itself
+  fonts: [
+    {
+      provider: fontProviders.local(),
+      name: "Geist",
+      cssVariable: "--font-geist",
+      options: {
+        variants: [
+          { src: ["./node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2"], weight: "100 900", style: "normal" },
+        ],
+      },
+    },
+    {
+      provider: fontProviders.local(),
+      name: "Geist Mono",
+      cssVariable: "--font-geist-mono",
+      options: {
+        variants: [
+          { src: ["./node_modules/@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2"], weight: "100 900", style: "normal" },
+        ],
+      },
+    },
+  ],
   i18n: {
     locales: ["en", "es"],
     defaultLocale: "en",

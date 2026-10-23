@@ -1,11 +1,15 @@
 // English content. es.ts must keep exactly the same shape.
 
+export type ProjectStatus = "progress" | "use" | "shipped";
+export type RoadmapStatus = "done" | "inProgress" | "planned";
+export type ExperienceKind = "work" | "certification" | "internship" | "volunteer" | "education";
+
 const en = {
   lang: "en",
   meta: {
     title: "Juan Castelblanco · Software Developer",
     description:
-      "Juan David Rodríguez Castelblanco: software developer with strong JavaScript and React skills and Node.js on AWS. Building Casshy, a gamified personal-finance app.",
+      "Juan David Rodríguez Castelblanco: software developer strong in JavaScript and React, with Node.js experience on AWS. Building Casshy, a gamified personal-finance app.",
   },
   nav: {
     about: "About",
@@ -18,19 +22,22 @@ const en = {
     menu: "Open menu",
     theme: "Toggle dark mode",
     language: "Leer en español",
+    mainLabel: "Main",
+    mobileLabel: "Mobile menu",
+    skip: "Skip to content",
   },
   hero: {
     status: "Open to Software Developer roles",
     hello: "Hi, I'm Juan.",
     role: "Software developer",
     tagline:
-      "JavaScript & React developer who ships Node.js services on AWS. Now building Casshy, a gamified personal-finance app, with AI coding agents.",
+      "JavaScript & React developer who built a Node.js microservice on AWS. Now building Casshy, a gamified personal-finance app, with AI coding agents.",
     ctaProjects: "See projects",
     ctaResume: "Resume (PDF)",
     payload: {
       name: "Juan Castelblanco",
       role: "Software Developer",
-      job: "Tech Support Specialist @ OpenText",
+      job: "Technical Support Specialist @ OpenText",
       location: "Ontario, Canada",
       languages: ["Spanish", "English"],
       education: "Seneca Polytechnic",
@@ -62,12 +69,39 @@ const en = {
     tagline: "Personal finance you actually want to take care of.",
     summary:
       "A personal-finance web app in the spirit of Monarch (accounts, transactions, budgets, goals and investments) whose hero is Casshy: a living cartoon coin, like Pou or Talking Tom, that you look after with good money habits.",
-    coinLabel: "Casshy, the coin mascot",
-    hint: "XP from good habits and learning evolves Casshy. Tap a stage.",
-    evolution: ["Planchet", "Bronze", "Silver", "Gold", "Diamond", "Alexandrite"],
+    dashboard: {
+      window: "Casshy · Overview",
+      sample: "Sample data · design preview",
+      greeting: "Good morning, Juan",
+      subtitle: "Let's make room for your future.",
+      mood: "Casshy is happy",
+      toneLabel: "Casshy's tone",
+      tones: {
+        gentle: { label: "Gentle", message: "You're doing great. Maybe cook at home one more night this week?" },
+        honest: { label: "Honest", message: "You're on track this month. Keep dining out under $120 this week." },
+        savage: { label: "Savage", message: "Third takeout this week? Your budget noticed. So did I." },
+      },
+      stats: { budget: "Monthly budget", spent: "Spent so far", left: "Left to spend" },
+      spendingTitle: "Where your money goes",
+      spendingPeriod: "This month",
+      categories: [
+        { name: "Housing", pct: 38 },
+        { name: "Groceries", pct: 24 },
+        { name: "Transport", pct: 16 },
+        { name: "Dining", pct: 12 },
+      ],
+      checklistTitle: "Your first 90 days in Canada",
+      checklist: [
+        { label: "Open a bank account", done: true },
+        { label: "Get your SIN", done: true },
+        { label: "Set up CRA My Account", done: false },
+        { label: "Build your credit, step by step", done: false },
+      ],
+      progressLabel: "steps done",
+    },
     features: [
       { icon: "🏦", title: "Money in one place", text: "Accounts, transactions, budgets, goals and investments." },
-      { icon: "🪙", title: "A coin that's alive", text: "Casshy reacts to your habits, animated with Rive." },
+      { icon: "🪙", title: "A coin that's alive", text: "Casshy will react to your habits, animated with Rive." },
       { icon: "🎓", title: "Casshy Academy", text: "Short money lessons. Casshy educates and never gives investment advice." },
       { icon: "⚖️", title: "Fair XP", text: "Earned through habits and learning, never by having more money." },
       { icon: "🍁", title: "Made for Canada", text: "Starts in Ontario, in English, Spanish and French, for users 14+." },
@@ -95,22 +129,23 @@ const en = {
       { title: "Phase 1 · Robust foundation & landing page", status: "inProgress" },
       { title: "Next · Web app: finance, Casshy & Academy", status: "planned" },
       { title: "Last · Mobile app with Expo", status: "planned" },
-    ],
+    ] satisfies { title: string; status: RoadmapStatus }[],
     states: { done: "Done", inProgress: "In progress", planned: "Planned" },
   },
   projects: {
     eyebrow: "Projects",
     title: "Selected work",
     lead: "What I'm building now, plus full-stack, backend and AWS work I've shipped.",
-    filters: { all: "All", backend: "Backend", web: "Full-stack", aws: "AWS" },
+    filters: { all: "All", backend: "Backend", web: "Web", aws: "AWS" },
     status: { progress: "In progress", use: "In use", shipped: "Shipped" },
     learnMore: "Learn more",
+    stackLabel: "Tech stack",
     links: { casshy: "See Casshy", learning: "What I'm learning", api: "API code", ui: "UI code", code: "Code" },
     extensionsTitle: "Web extensions",
     items: [
       {
         id: "casshy",
-        status: "progress",
+        status: "progress" as ProjectStatus,
         title: "Casshy — gamified personal finance",
         summary:
           "A personal-finance web app for Canada where you take care of Casshy, a living cartoon coin, with good money habits. Designed end to end: vision, ADRs, domain rules and a TypeScript monorepo.",
@@ -122,7 +157,7 @@ const en = {
       },
       {
         id: "incidenthub",
-        status: "progress",
+        status: "progress" as ProjectStatus,
         title: "IncidentHub — Java, Spring Boot & AI",
         summary:
           "My hands-on project to learn Java, Spring Boot and AI integrations: a REST API for support incidents with SLA tracking and AI-assisted triage.",
@@ -135,7 +170,7 @@ const en = {
       },
       {
         id: "fragments",
-        status: "shipped",
+        status: "shipped" as ProjectStatus,
         title: "Enterprise Microservice Platform (Fragments)",
         summary: "Cloud REST microservice on AWS to store and convert text and image fragments, with a separate web UI.",
         bullets: [
@@ -147,7 +182,7 @@ const en = {
       },
       {
         id: "timer",
-        status: "use",
+        status: "use" as ProjectStatus,
         title: "Timer SaaS Team",
         summary:
           "Web extension for the OpenText SaaS team: after an agent saves a 15-minute break or 1-hour lunch in the Unified Tool, it counts down and sets the agent back to Available automatically.",
@@ -207,7 +242,7 @@ const en = {
     kinds: { work: "Work", certification: "Certification", internship: "Internship", volunteer: "Volunteer", education: "Education" },
     items: [
       {
-        kind: "work",
+        kind: "work" as ExperienceKind,
         when: "Sep 2025 — Present · Waterloo, ON",
         role: "Technical Support Specialist",
         org: "OpenText",
@@ -219,31 +254,31 @@ const en = {
         ],
       },
       {
-        kind: "certification",
+        kind: "certification" as ExperienceKind,
         when: "Amazon Web Services",
         role: "AWS Certified Cloud Practitioner",
         org: "AWS",
         bullets: ["Core AWS services, global infrastructure, security and the shared responsibility model, pricing and support."],
       },
       {
-        kind: "internship",
+        kind: "internship" as ExperienceKind,
         when: "Sep 2022 — Apr 2023 · Toronto, ON",
         role: "Application Developer",
         org: "Government of Ontario",
         bullets: [
           "Built an internal web page with React.",
-          "Worked with developers and designers to fix bugs, deliver new features, and improve user experience.",
+          "Worked with developers and designers on that page to fix bugs, add features and improve the user experience.",
         ],
       },
       {
-        kind: "volunteer",
+        kind: "volunteer" as ExperienceKind,
         when: "2022 — 2023",
         role: "Technical Support Engineer",
         org: "Hispanotech",
         bullets: ["Organized technical workshops and networking sessions for Latin American tech professionals in Canada."],
       },
       {
-        kind: "education",
+        kind: "education" as ExperienceKind,
         when: "Jan 2021 — Jan 2024 · Toronto, ON",
         role: "Computer Programming and Analysis (Advanced Diploma)",
         org: "Seneca Polytechnic",

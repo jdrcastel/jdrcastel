@@ -13,11 +13,12 @@ description: Build, check in a browser, commit and open a PR for portfolio chang
    SITE=https://jdrcastel.github.io BASE_PATH=/jdrcastel npx astro build
    SITE=https://jdrcastel.github.io BASE_PATH=/jdrcastel npx astro preview --port 4321
    ```
-2. **Check in a browser** with Playwright (Chromium at `/opt/pw-browsers/chromium`):
+2. **Check in a browser** with Playwright (Chromium at `/opt/pw-browsers/chromium`; in the cloud sandbox import
+   Playwright from `/opt/node-tools/node_modules/playwright/index.mjs`):
    - Pages `/jdrcastel/` and `/jdrcastel/es/`, at 1280 and 390 wide, light and dark.
    - No console errors or 404s, and no horizontal scroll.
    - Filters, "Learn more", tabs, experience details, the EN↔ES switch, the theme toggle, the mobile menu and the
-     Casshy coin all work.
+     Casshy dashboard (tone toggle, checklist progress, spending bars) all work.
    - Look at the screenshots yourself before calling it done.
 3. **Optional reviews** for bigger changes: run the `recruiter-60s-reviewer`, `web-quality-auditor` and
    `content-guardian` agents. Fix what Juan agrees with.

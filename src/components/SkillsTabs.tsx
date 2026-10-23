@@ -36,11 +36,11 @@ export default function SkillsTabs({ groups, learning, labels }: Props) {
         </div>
       </div>
 
-      <TabsContent value="skills">
+      <TabsContent value="skills" className="rounded-md focus-visible:ring-[3px] focus-visible:ring-ring/50">
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {groups.map((g) => (
             <li key={g.id}>
-              <Card className="h-full gap-4 py-5">
+              <Card className="lift h-full gap-4 py-5">
                 <CardHeader className="flex-row items-center gap-3 px-5">
                   <Icon>{g.icon}</Icon>
                   <CardTitle>{g.title}</CardTitle>
@@ -62,11 +62,11 @@ export default function SkillsTabs({ groups, learning, labels }: Props) {
         </ul>
       </TabsContent>
 
-      <TabsContent value="learning">
+      <TabsContent value="learning" className="rounded-md focus-visible:ring-[3px] focus-visible:ring-ring/50">
         <ul className="grid gap-4 md:grid-cols-2">
           {learning.map((l) => (
             <li key={l.id}>
-              <Card className="h-full gap-4 py-5">
+              <Card className="lift h-full gap-4 py-5">
                 <CardHeader className="flex-row items-center gap-3 px-5">
                   <Icon>{l.icon}</Icon>
                   <CardTitle>{l.title}</CardTitle>

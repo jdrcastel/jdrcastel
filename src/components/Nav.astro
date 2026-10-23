@@ -1,6 +1,7 @@
 ---
 import { Menu, Moon, Sun } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { assetUrl, homeUrl, type Content, type Lang } from "@/i18n";
 import { person } from "@/i18n/shared";
 
@@ -23,11 +24,14 @@ const links = [
 
 <header class="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-md">
   <div class="mx-auto flex h-14 max-w-5xl items-center gap-2 px-4">
-    <a href={homeUrl(lang)} class="mr-auto font-semibold tracking-tight" aria-label={person.short}>
+    <a
+      href={homeUrl(lang)}
+      class="mr-auto rounded-md font-semibold tracking-tight outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+    >
       juan<span class="text-brand">.</span>castelblanco
     </a>
 
-    <nav aria-label="Main" class="hidden md:block">
+    <nav aria-label={t.nav.mainLabel} class="hidden md:block">
       <ul id="navLinks" class="flex items-center gap-1 text-sm">
         {links.map(([href, label]) => (
           <li><a href={href} class={buttonVariants({ variant: "ghost", size: "sm" })}>{label}</a></li>
@@ -39,28 +43,33 @@ const links = [
       href={homeUrl(other)}
       hreflang={other}
       lang={other}
-      class={buttonVariants({ variant: "outline", size: "sm" }) + " font-mono uppercase"}
-      aria-label={t.nav.language}
+      class={cn(buttonVariants({ variant: "outline", size: "sm" }), "font-mono uppercase")}
       title={t.nav.language}
     >
-      {other}
+      {other}<span class="sr-only"> · {t.nav.language}</span>
     </a>
     <a
       href={assetUrl(person.resume)}
       target="_blank"
       rel="noopener"
-      class={buttonVariants({ size: "sm" }) + " hidden sm:inline-flex"}
+      class={cn(buttonVariants({ size: "sm" }), "hidden sm:inline-flex")}
     >
       {t.nav.resume}
     </a>
-    <button id="themeBtn" type="button" class={buttonVariants({ variant: "ghost", size: "icon-sm" })} aria-label={t.nav.theme}>
+    <button
+      id="themeBtn"
+      type="button"
+      class={buttonVariants({ variant: "ghost", size: "icon-sm" })}
+      aria-label={t.nav.theme}
+      aria-pressed="false"
+    >
       <Sun className="hidden dark:block" aria-hidden="true" />
       <Moon className="dark:hidden" aria-hidden="true" />
     </button>
     <button
       id="menuBtn"
       type="button"
-      class={buttonVariants({ variant: "ghost", size: "icon-sm" }) + " md:hidden"}
+      class={cn(buttonVariants({ variant: "ghost", size: "icon-sm" }), "md:hidden")}
       aria-label={t.nav.menu}
       aria-expanded="false"
       aria-controls="mobileMenu"
@@ -69,7 +78,7 @@ const links = [
     </button>
   </div>
 
-  <nav id="mobileMenu" aria-label="Mobile" class="hidden border-t md:hidden">
+  <nav id="mobileMenu" aria-label={t.nav.mobileLabel} class="hidden border-t md:hidden">
     <ul class="mx-auto flex max-w-5xl flex-col px-4 py-2">
       {links.map(([href, label]) => (
         <li><a href={href} class="block rounded-md px-2 py-2 text-sm hover:bg-accent">{label}</a></li>
@@ -81,8 +90,11 @@ const links = [
 
 <script>
   const root = document.documentElement;
-  document.getElementById("themeBtn")?.addEventListener("click", () => {
+  const themeBtn = document.getElementById("themeBtn");
+  themeBtn?.setAttribute("aria-pressed", String(root.classList.contains("dark")));
+  themeBtn?.addEventListener("click", () => {
     const dark = root.classList.toggle("dark");
+    themeBtn.setAttribute("aria-pressed", String(dark));
     try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch {}
   });
 
@@ -95,6 +107,12 @@ const links = [
   menuBtn?.addEventListener("click", () => setMenu(mobileMenu?.classList.contains("hidden") ?? false));
   mobileMenu?.addEventListener("click", (e) => {
     if ((e.target as HTMLElement).closest("a")) setMenu(false);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !mobileMenu?.classList.contains("hidden")) {
+      setMenu(false);
+      menuBtn?.focus();
+    }
   });
 
   // Mark the link of the section in view

@@ -1,13 +1,15 @@
 ---
 import "@/styles/global.css";
+import { Font } from "astro:assets";
 import { assetUrl, homeUrl, locales, type Lang } from "@/i18n";
 
 interface Props {
   lang: Lang;
   title: string;
   description: string;
+  skipLabel: string;
 }
-const { lang, title, description } = Astro.props;
+const { lang, title, description, skipLabel } = Astro.props;
 
 const abs = (path: string) => new URL(path, Astro.site).href;
 const canonical = abs(homeUrl(lang));
@@ -37,12 +39,8 @@ const ogImage = abs(assetUrl("og.png"));
     <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
     <link rel="icon" type="image/svg+xml" href={assetUrl("favicon.svg")} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
-    />
+    <Font cssVariable="--font-geist" preload />
+    <Font cssVariable="--font-geist-mono" />
 
     <script is:inline>
       // Apply the saved or system theme before first paint to avoid a flash.
@@ -61,7 +59,7 @@ const ogImage = abs(assetUrl("og.png"));
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-background focus:px-3 focus:py-2 focus:shadow"
     >
-      {lang === "es" ? "Saltar al contenido" : "Skip to content"}
+      {skipLabel}
     </a>
     <slot />
     <script>

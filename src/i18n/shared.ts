@@ -70,7 +70,7 @@ export const learningChips: Record<string, { icon: string; items: string[] }> = 
   },
   java: {
     icon: "☕",
-    items: ["Spring Boot", "Spring Data JPA", "JUnit", "Spring Security"],
+    items: ["Spring Boot", "Spring Data JPA", "JUnit"],
   },
 };
 
@@ -95,9 +95,9 @@ export const projectMeta: Record<string, ProjectMeta> = {
   incidenthub: {
     stack: [
       { name: "Java" }, { name: "Spring Boot" }, { name: "PostgreSQL" }, { name: "Spring Data JPA" },
-      { name: "LLM API" }, { name: "JUnit" }, { name: "Docker" }, { name: "AWS" },
+      { name: "LLM API" }, { name: "JUnit" }, { name: "Docker" },
     ],
-    tags: ["backend", "aws"],
+    tags: ["backend"],
     links: [{ key: "learning", href: "#skills" }],
   },
   fragments: {
@@ -123,12 +123,5 @@ export const projectMeta: Record<string, ProjectMeta> = {
   },
 };
 
-// Casshy's evolution, from planchet to alexandrite
-export const coinColors = [
-  { from: "#d9d4c7", to: "#a8a293" },
-  { from: "#e3a46b", to: "#9c5a2a" },
-  { from: "#f1f4f7", to: "#9aa5b1" },
-  { from: "#ffe27a", to: "#d49b14" },
-  { from: "#d8f6ff", to: "#5fb8e6" },
-  { from: "#7fe0c4", to: "#8a4fbf" },
-];
+// Sample amounts for the Casshy dashboard preview, in cents (Casshy stores money as integers)
+export const sampleBudget = { budget: 320000, spent: 184000 };
