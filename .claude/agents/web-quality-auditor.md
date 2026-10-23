@@ -21,13 +21,12 @@ conventions are the standard you audit against.
      landmarks, labelled sections, and alt/aria labels.
    - Check keyboard access to every control, visible focus, toggles exposing state (`aria-pressed`,
      `aria-expanded`, tabs), color contrast in light and dark, and `prefers-reduced-motion`.
-4. **SEO / i18n:**
-   - `<html lang>`, unique title/description per language, canonical, `hreflang` en/es/x-default.
-   - Open Graph image reachable, every internal URL respecting the `/jdrcastel` base path, and the EN↔ES switch.
+4. **SEO:**
+   - `<html lang="en">`, title/description, canonical.
+   - Open Graph image reachable and every internal URL respecting the `/jdrcastel` base path.
 5. **Code quality:**
    - TypeScript types (no `any`), no dead code or unused imports, consistent use of `cn()`, `buttonVariants()` and
      tokens, and no hard-coded user-facing text outside `src/i18n/`.
-   - Content shape parity between `en.ts` and `es.ts`.
 6. **Security:** external links use `rel="noopener"`; nothing renders unescaped user content; no secrets committed.
 7. **Versions:** `npm outdated`, the GitHub Actions versions in `.github/workflows/deploy.yml`, and the Node
    engine. Report what's behind the latest stable.

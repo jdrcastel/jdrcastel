@@ -1,6 +1,6 @@
 # Juan Castelblanco · Portfolio
 
-Bilingual (EN/ES) single-page portfolio, published at https://jdrcastel.github.io/jdrcastel/ (Spanish at `/es/`).
+Single-page portfolio in English, published at https://jdrcastel.github.io/jdrcastel/.
 This repo is also Juan's GitHub profile repo: `README.md` is his profile page, not project docs.
 
 ## Rules from Juan (always follow)
@@ -9,20 +9,20 @@ This repo is also Juan's GitHub profile repo: `README.md` is his profile page, n
    (design direction, content, removing things). Always share questions and suggestions so work keeps moving.
 2. **Resume only when asked.** Edit the resume (Word + PDF) only when Juan asks, with the `update-resume` skill. It is
    English only and must match the portfolio content. The PDF goes to `public/`; the Word file is sent to Juan in chat.
-3. **Always bilingual.** Every text change goes into both `src/i18n/en.ts` and `src/i18n/es.ts`, same structure.
+3. **English only.** All text lives in `src/i18n/en.ts` (Juan removed the Spanish version). Talk to Juan in Spanish.
 4. **Latest stable versions.** Check `npm view <pkg> version` before adding or upgrading anything.
 5. **Minimal and professional.** A recruiter has ~60 seconds: clear hierarchy, no visual noise, fast. Animations only
    where they add meaning (see "Animations" below). Propose new animations and wait for his
    approval before building them.
 6. **Honest content.** Never claim skills, features or results that aren't real. See "Content truth" below.
 7. **Keep it essential.** No test suites or extra CI for this site (Juan's decision). Verify by building and checking
-   both languages in a browser.
+   the page in a browser.
 8. **Work through PRs.** Develop on a branch, open a PR, Juan merges. Deploy runs on push to `main`.
 9. Save Juan's new preferences and decisions in this file (section "Decision log").
 
 ## Stack
 
-- Astro 7 (static output, i18n routing: `en` default without prefix, `es` under `/es/`)
+- Astro 7 (static output, one page)
 - React 19 islands only where there is interaction (`client:visible`): projects (filters, "Learn more", Fragments
   diagram) and skills/learning tabs. Experience "More details" is a native `<details>` (no JS).
 - Animation libraries: **Motion** (`motion/react`, React islands only, `LazyMotion` + `m` with `domMax` loaded on
@@ -47,16 +47,16 @@ npm run preview
 
 ```
 src/
-  i18n/en.ts, es.ts   All text. es.ts is typed as `Content` from en.ts, so shapes must match.
+  i18n/en.ts          All text (English).
   i18n/shared.ts      Language-neutral data: links, tech chips, project metadata.
-  i18n/index.ts       getContent(lang), homeUrl(lang), assetUrl(file) (base-path aware).
-  components/         Page.astro composes: Nav, Hero, About, Casshy, Projects, Skills, Experience, Contact, Footer.
+  i18n/index.ts       t (the content), homeUrl(), assetUrl(file) (base-path aware).
+  components/         Page.astro composes: Nav, Hero, About, Projects, Skills, Experience, Contact, Footer.
                       Hero includes TechMarquee.astro; ProjectsGrid.tsx includes ArchitectureDiagram.tsx (Fragments).
   lib/tech.ts         Marquee technologies (simple-icons). Never import it from a React island.
   pages/tech-icons.svg.ts  Builds the logo sprite.
   components/ui/      shadcn/ui components (copied from the registry; don't hand-edit unless needed).
-  layouts/Layout.astro  <head>: lang, canonical, hreflang, Open Graph, theme bootstrap.
-  pages/index.astro, pages/es/index.astro
+  layouts/Layout.astro  <head>: canonical, Open Graph, theme bootstrap, Lenis.
+  pages/index.astro
 public/               favicon.svg, og.png (1200×630 preview), resume PDF
 ```
 
@@ -81,8 +81,8 @@ folds it into the `animation` shorthand otherwise and browsers drop it.
   (`.hero-window`), the rest fades up (`.hero-in`, `--d` delays).
 - **Hero Send:** progress line → `201 Created · N ms` → stat cards light up one by one (`Hero.astro` script).
   A green border beam circles the Send button.
-- **Tech marquee:** two rows of logos in opposite directions under the hero stats; pause on hover/focus; gray → brand
-  color on hover; static and wrapped for reduced motion.
+- **Tech marquee:** two rows of logos (only "Strong" technologies) in opposite directions, centered to the content
+  width under the hero stats; pause on hover/focus; gray → brand color on hover; static and wrapped for reduced motion.
 - **Header progress line:** CSS scroll timeline, JS fallback in `Nav.astro`.
 - **Section titles:** slide up from a mask when the header reveals (`.title-mask` in `Section.astro`).
 - **About:** words light up line by line as you scroll (`.read-word`, CSS view timelines; static where unsupported).
@@ -90,8 +90,8 @@ folds it into the `animation` shorthand otherwise and browsers drop it.
   `layout="position"`), border beam on the featured Casshy card, Fragments architecture diagram with light pulses
   (pulses pause off screen), mouse spotlight on cards.
 - **Experience timeline:** line fills and dots light up with scroll.
-- **Theme switch:** circle reveal from the toggle (View Transitions). **EN ↔ ES:** cross-page fade, header fixed,
-  and the other language is prerendered on hover (Speculation Rules).
+- **Theme switch:** circle reveal from the toggle (View Transitions).
+- **Logo:** "Juan Castelblanco" turns brand blue on hover.
 - **Smooth scroll:** Lenis runs its frame loop only while gliding; in-page links keep the URL and focus in sync.
 - Also: reveal on scroll (`[data-reveal]`) and card lift (`.lift`).
 
@@ -115,7 +115,7 @@ Magic UI (`magicui.design`) is blocked too: read components from GitHub (`magicu
   triage). Java and Spring Boot stay in Learning with no project attached.
 - **Never list:** Python, FastAPI, .NET, C++, Kubernetes, Terraform, Lambda, IAM, VPC, SAML, LDAP, Power Apps.
 - Ontario Government internship: a React web page (no LDAP, no Power Apps claims).
-- Timer SaaS Team is a **web extension**: it appears only under the "Extensions" filter, not as a main project.
+- Timer SaaS Team is a **web extension**: it shows under "All" (last) and under its own "Extensions" filter.
 - Casshy: Phase 0 done (vision, docs, ADRs), Phase 1 in progress, **no app code yet**. Never present it as live.
 
 ## Decision log
@@ -124,21 +124,28 @@ Magic UI (`magicui.design`) is blocked too: read components from GitHub (`magicu
   Chronicle removed.
 - 2026-10: Skills and Learning share one section with tabs; "What I bring to a team" table removed.
 - 2026-10: Hero shows the profile as a JSON `POST` request; stats cards stay under the hero.
-- 2026-10: Bilingual with two URLs (`/` English, `/es/` Spanish) and an EN|ES switch.
+- 2026-10: (Replaced) The site was bilingual EN/ES; Juan later removed Spanish. English only now.
 - 2026-10: shadcn/ui (real React components) + Tailwind v4; removed type-check/CI test steps and Vitest.
 - 2026-10: No background blobs, grid, typing effect or shimmer. (The marquee came back later with real logos.)
-- 2026-10: Casshy section only explains the project (summary, features, principles, architecture, roadmap).
-  No coin, no dashboard or app demo: "it's a portfolio, only to explain". No Rive on the portfolio.
+- 2026-10: No coin, no dashboard or app demo for Casshy: "it's a portfolio, only to explain". No Rive on the portfolio.
 - 2026-10: The name is "Casshy" (double s). `github.com/jdcastel` is Juan's other GitHub account (Fragments repos).
 - 2026-10: Approved animations: hero Send, circular theme switch, scroll-filled timeline, EN↔ES fade, card
   spotlight. Stats are words, not numbers, so they light up instead of counting.
 - Later: a custom domain (e.g. `juancastelblanco.dev`) for GitHub Pages.
-- 2026-10: Spring Security removed from Learning (not confirmed). Spanish keeps the word "Skills".
+- 2026-10: Spring Security removed from Learning (not confirmed).
   Recruiter-review suggestions declined; project order stays Casshy, IncidentHub, Fragments.
 - 2026-10: Juan found the site too minimal: approved the full animation set above (marquee and header progress line
   back, hero entrance, border beam, fluid filters, Fragments diagram, Lenis, About highlight, masked titles) and
   allowed libraries (Motion, Lenis, simple-icons, Magic UI patterns), keeping it professional, not flashy.
 - 2026-10: IncidentHub moved to TypeScript + NestJS + Prisma (same idea). Java and Spring Boot stay in Learning.
-- 2026-10: Timer SaaS Team shows only under the "Extensions" filter (it had too much weight as its own block).
+- 2026-10: Timer SaaS Team is no longer its own block; it has an "Extensions" filter and also shows under "All".
 - 2026-10: Resume updated on Juan's request: English only, IncidentHub stack, Learning synced with the web, spoken
   languages line. The Word file is sent in chat, not offered on the site.
+- 2026-10: Juan's redesign round:
+  - Logo reads "Juan Castelblanco" (brand blue on hover).
+  - Hero shows only "Hi, I'm Juan. / Software developer", the "See projects" button and LinkedIn/GitHub icons. The
+    resume downloads from the header button only.
+  - English only (Spanish version deleted).
+  - Casshy lives inside Projects as the featured card; there is no separate Casshy section.
+  - About is personal: building real products, journey since 2021, AI agents, hobbies (soccer, gym, drums, games).
+  - The marquee shows only "Strong" technologies, centered.

@@ -348,24 +348,11 @@ figure:not([data-active]) .beam-pulse,
   box-shadow: 0 8px 24px -12px color-mix(in oklab, var(--brand) 35%, transparent);
 }
 
-/* EN ↔ ES: cross-page fade, the header stays in place */
-@media (prefers-reduced-motion: no-preference) {
-  @view-transition {
-    navigation: auto;
-  }
-}
-.site-header {
-  view-transition-name: site-header;
-}
-
 /* Theme switch: Nav.astro animates the new theme as a circle; turn off the default fade */
 .theme-vt::view-transition-old(root),
 .theme-vt::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
-}
-.theme-vt .site-header {
-  view-transition-name: none;
 }
 
 /* Experience timeline: the line fills and the dots light up as you scroll (no JS) */

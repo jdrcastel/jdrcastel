@@ -15,11 +15,11 @@ description: Build, check in a browser, commit and open a PR for portfolio chang
    ```
 2. **Check in a browser** with Playwright (Chromium at `/opt/pw-browsers/chromium`; in the cloud sandbox import
    Playwright from `/opt/node-tools/node_modules/playwright/index.mjs`):
-   - Pages `/jdrcastel/` and `/jdrcastel/es/`, at 1280 and 390 wide, light and dark.
+   - Page `/jdrcastel/`, at 1280 and 390 wide, light and dark.
    - No console errors or 404s, and no horizontal scroll.
-   - Filters (pill slides, "Extensions" shows only Timer), "Learn more", tabs, experience details, the EN↔ES switch,
-     the theme circle, the mobile menu, the hero Send button and in-page links (smooth scroll lands below the header
-     and moves focus) all work.
+   - Filters (pill slides, "All" shows every project, "Extensions" only Timer), "Learn more", tabs, experience
+     details, the theme circle, the mobile menu, the hero Send button, the resume download and in-page links (smooth
+     scroll lands below the header and moves focus) all work.
    - Animations from CLAUDE.md "Animations" run: hero entrance, logo marquee + pause button (persists on reload),
      header progress line, masked titles, About highlight, border beams, Fragments diagram pulses, timeline fill.
    - Repeat once with `reducedMotion: "reduce"`: everything static and readable, no duplicates in the marquee.

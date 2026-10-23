@@ -1,4 +1,4 @@
-// Language-neutral data: links, technology names and colors. Text lives in en.ts / es.ts.
+// Data that isn't prose: links, technology names, project metadata. Text lives in en.ts.
 
 export const person = {
   name: "Juan David Rodríguez Castelblanco",
@@ -77,9 +77,9 @@ export const learningChips: Record<string, { icon: string; items: string[] }> = 
 export type ProjectMeta = {
   stack: Skill[];
   tags: ("backend" | "web" | "aws")[];
-  links: { key: "casshy" | "learning" | "api" | "ui" | "code"; href: string }[];
+  links: { key: "learning" | "api" | "ui" | "code"; href: string }[];
   featured?: boolean;
-  group?: "extension";
+  group?: "extension"; // shown under "All" and the Extensions filter
 };
 
 export const projectMeta: Record<string, ProjectMeta> = {
@@ -87,10 +87,10 @@ export const projectMeta: Record<string, ProjectMeta> = {
     featured: true,
     stack: [
       { name: "Next.js", core: true }, { name: "TypeScript", core: true }, { name: "NestJS" }, { name: "PostgreSQL" },
-      { name: "Prisma" }, { name: "Turborepo" }, { name: "shadcn/ui" }, { name: "Rive" }, { name: "Docker" },
+      { name: "Prisma" },
     ],
     tags: ["web", "backend"],
-    links: [{ key: "casshy", href: "#casshy" }],
+    links: [],
   },
   incidenthub: {
     stack: [

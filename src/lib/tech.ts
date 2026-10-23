@@ -1,19 +1,12 @@
 // Logos for the hero marquee (build time only: never import this from a React island).
-// Only technologies Juan knows well or has used hands-on; see "Content truth" in CLAUDE.md.
+// Only Juan's strongest technologies ("Strong" in CLAUDE.md "Content truth").
 import {
   siCss,
   siDocker,
   siExpress,
-  siGit,
-  siGithubactions,
   siGithubcopilot,
-  siGnubash,
   siHtml5,
   siJavascript,
-  siJenkins,
-  siJest,
-  siLinux,
-  siMongodb,
   siNextdotjs,
   siNodedotjs,
   siReact,
@@ -34,20 +27,13 @@ export const techRows: Tech[][] = [
     { label: "Redux", icon: siRedux },
     { label: "HTML5", icon: siHtml5 },
     { label: "CSS", icon: siCss },
-    { label: "GitHub Copilot", icon: siGithubcopilot },
   ],
   [
     { label: "Node.js", icon: siNodedotjs },
     { label: "Express", icon: siExpress },
     { label: "Docker", icon: siDocker },
     { label: "AWS" },
-    { label: "GitHub Actions", icon: siGithubactions },
-    { label: "MongoDB", icon: siMongodb },
-    { label: "Jest", icon: siJest },
-    { label: "Jenkins", icon: siJenkins },
-    { label: "Git", icon: siGit },
-    { label: "Linux", icon: siLinux },
-    { label: "Bash", icon: siGnubash },
+    { label: "GitHub Copilot", icon: siGithubcopilot },
   ],
 ];
 

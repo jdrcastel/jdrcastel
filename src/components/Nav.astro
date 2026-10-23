@@ -1,20 +1,17 @@
 ---
-import { Menu, Moon, Sun } from "lucide-react";
+import { Download, Menu, Moon, Sun } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { assetUrl, homeUrl, type Content, type Lang } from "@/i18n";
+import { assetUrl, homeUrl, type Content } from "@/i18n";
 import { person } from "@/i18n/shared";
 
 interface Props {
   t: Content;
-  lang: Lang;
 }
-const { t, lang } = Astro.props;
+const { t } = Astro.props;
 
-const other: Lang = lang === "en" ? "es" : "en";
 const links = [
   ["#about", t.nav.about],
-  ["#casshy", t.nav.casshy],
   ["#projects", t.nav.projects],
   ["#skills", t.nav.skills],
   ["#experience", t.nav.experience],
@@ -25,10 +22,10 @@ const links = [
 <header class="site-header sticky top-0 z-40 border-b bg-background/80 backdrop-blur-md">
   <div class="mx-auto flex h-14 max-w-5xl items-center gap-2 px-4">
     <a
-      href={homeUrl(lang)}
-      class="mr-auto rounded-md font-semibold tracking-tight outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+      href={homeUrl()}
+      class="mr-auto rounded-md font-semibold tracking-tight transition-colors duration-300 outline-none hover:text-brand focus-visible:ring-[3px] focus-visible:ring-ring/50"
     >
-      juan<span class="text-brand">.</span>castelblanco
+      Juan Castelblanco
     </a>
 
     <nav aria-label={t.nav.mainLabel} class="hidden md:block">
@@ -39,21 +36,8 @@ const links = [
       </ul>
     </nav>
 
-    <a
-      href={homeUrl(other)}
-      hreflang={other}
-      lang={other}
-      class={cn(buttonVariants({ variant: "outline", size: "sm" }), "font-mono uppercase")}
-      title={t.nav.language}
-    >
-      {other}<span class="sr-only"> · {t.nav.language}</span>
-    </a>
-    <a
-      href={assetUrl(person.resume)}
-      target="_blank"
-      rel="noopener"
-      class={cn(buttonVariants({ size: "sm" }), "hidden sm:inline-flex")}
-    >
+    <a href={assetUrl(person.resume)} download class={cn(buttonVariants({ size: "sm" }), "hidden sm:inline-flex")}>
+      <Download aria-hidden="true" />
       {t.nav.resume}
     </a>
     <button
@@ -84,7 +68,7 @@ const links = [
       {links.map(([href, label]) => (
         <li><a href={href} class="block rounded-md px-2 py-2 text-sm hover:bg-accent">{label}</a></li>
       ))}
-      <li><a href={assetUrl(person.resume)} target="_blank" rel="noopener" class="block rounded-md px-2 py-2 text-sm hover:bg-accent">{t.nav.resume}</a></li>
+      <li><a href={assetUrl(person.resume)} download class="block rounded-md px-2 py-2 text-sm hover:bg-accent">{t.nav.resume}</a></li>
     </ul>
   </nav>
 </header>
