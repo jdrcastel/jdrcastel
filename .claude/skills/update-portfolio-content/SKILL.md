@@ -17,7 +17,7 @@ description: Edit portfolio text, projects, skills or experience (English). Use 
 5. Adding a project:
    - Add an item to `projects.items` (`id`, `status`: `progress` | `use` | `shipped`).
    - Add its metadata to `projectMeta` in `shared.ts`. New link keys also need labels in `projects.links`.
-6. Hero JSON: edit `hero.payload`. Keep values short (the code window wraps around 50 characters).
+6. Hero: `hero.hello`, `hero.role` and the stat cards (`hero.stats`).
 7. Build and check `/jdrcastel/` (see the `ship-portfolio` skill).
 8. If Juan states a new preference, add it to "Decision log" in `CLAUDE.md`.
 9. If the change affects the resume (projects, stack, learning), ask Juan whether to update it too

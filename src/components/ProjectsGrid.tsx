@@ -39,7 +39,7 @@ function ProjectCard({ p, labels }: { p: Project; labels: Labels }) {
         </div>
         <p className="text-sm text-pretty text-muted-foreground">{p.summary}</p>
       </CardHeader>
-      <CardContent className="flex flex-col gap-3">
+      <CardContent className="flex flex-1 flex-col gap-3">
         {p.id === "fragments" && <ArchitectureDiagram labels={labels.diagram} />}
         <ul className="flex flex-wrap gap-1.5" aria-label={labels.stackLabel}>
           {p.stack.map((s) => (
@@ -50,7 +50,7 @@ function ProjectCard({ p, labels }: { p: Project; labels: Labels }) {
             </li>
           ))}
         </ul>
-        <Accordion type="single" collapsible>
+        <Accordion type="single" collapsible className="mt-auto">
           <AccordionItem value="more" className="border-t border-b-0">
             <AccordionTrigger className="py-3">{labels.learnMore}</AccordionTrigger>
             <AccordionContent>
@@ -64,7 +64,7 @@ function ProjectCard({ p, labels }: { p: Project; labels: Labels }) {
         </Accordion>
       </CardContent>
       {p.links.length > 0 && (
-        <CardFooter className="mt-auto flex flex-wrap gap-2">
+        <CardFooter className="flex flex-wrap gap-2">
           {p.links.map((l) => {
             const external = l.href.startsWith("http");
             return (
@@ -124,7 +124,7 @@ export default function ProjectsGrid({ projects, labels }: { projects: Project[]
               );
             })}
           </div>
-          <ul className="relative grid items-start gap-4 md:grid-cols-2">
+          <ul className="relative grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <AnimatePresence mode="popLayout" initial={false}>
               {visible.map((p) => (
                 <m.li
@@ -134,7 +134,7 @@ export default function ProjectsGrid({ projects, labels }: { projects: Project[]
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.4, ease }}
-                  className={cn(p.featured && "md:col-span-2")}
+                  className={cn(p.featured && "md:col-span-2 lg:col-span-3")}
                 >
                   <ProjectCard p={p} labels={labels} />
                 </m.li>

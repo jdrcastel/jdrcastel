@@ -77,10 +77,7 @@ marquee (`html[data-motion="paused"]`, saved in localStorage), loops animate onl
 off screen, and nothing delays reading for more than ~1 s. Keep `animation-timeline` in its own CSS rule: the minifier
 folds it into the `animation` shorthand otherwise and browsers drop it.
 
-- **Hero entrance:** heading words come into focus (`.hero-word`), the JSON window straightens from a 3D tilt
-  (`.hero-window`), the rest fades up (`.hero-in`, `--d` delays).
-- **Hero Send:** progress line → `201 Created · N ms` → stat cards light up one by one (`Hero.astro` script).
-  A green border beam circles the Send button.
+- **Hero entrance:** heading words come into focus (`.hero-word`), the rest fades up (`.hero-in`, `--d` delays).
 - **Tech marquee:** two rows of logos (only "Strong" technologies) in opposite directions, centered to the content
   width under the hero stats; pause on hover/focus; gray → brand color on hover; static and wrapped for reduced motion.
 - **Header progress line:** CSS scroll timeline, JS fallback in `Nav.astro`.
@@ -123,7 +120,7 @@ Magic UI (`magicui.design`) is blocked too: read components from GitHub (`magicu
 - 2026-10: Main projects are Casshy, IncidentHub and Fragments (microservices). Timer goes under Web extensions.
   Chronicle removed.
 - 2026-10: Skills and Learning share one section with tabs; "What I bring to a team" table removed.
-- 2026-10: Hero shows the profile as a JSON `POST` request; stats cards stay under the hero.
+- 2026-10: (Replaced) The hero JSON request + Send button were removed; the hero is now typographic and centered.
 - 2026-10: (Replaced) The site was bilingual EN/ES; Juan later removed Spanish. English only now.
 - 2026-10: shadcn/ui (real React components) + Tailwind v4; removed type-check/CI test steps and Vitest.
 - 2026-10: No background blobs, grid, typing effect or shimmer. (The marquee came back later with real logos.)
@@ -149,3 +146,9 @@ Magic UI (`magicui.design`) is blocked too: read components from GitHub (`magicu
   - Casshy lives inside Projects as the featured card; there is no separate Casshy section.
   - About is personal: building real products, journey since 2021, AI agents, hobbies (soccer, gym, drums, games).
   - The marquee shows only "Strong" technologies, centered.
+- 2026-10: Hero is typographic and centered (badge, "Hi, I'm Juan. / Software developer", See projects + icons), then
+  the stat cards and the marquee. No JSON, no code window.
+- 2026-10: Projects layout: featured Casshy full width, the other projects in equal-height columns below (3 on
+  desktop) with "Learn more" and links aligned at the bottom. Short titles ("IncidentHub", "Fragments — AWS
+  microservice").
+- 2026-10: About says "I started coding at 17" (no year).

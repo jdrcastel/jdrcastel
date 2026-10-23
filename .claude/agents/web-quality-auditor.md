@@ -12,7 +12,7 @@ conventions are the standard you audit against.
 1. **Build:** run the production build (CLAUDE.md → Commands). It must succeed with no warnings you can fix.
 2. **Performance:**
    - List `dist/_astro/*` sizes. JavaScript should only come from islands that need interaction, plus the small
-     page-wide scripts in CLAUDE.md "Animations" (Lenis, reveal, Send, theme). Motion's `domMax` must stay lazy.
+     page-wide scripts in CLAUDE.md "Animations" (Lenis, reveal, theme). Motion's `domMax` must stay lazy.
    - Looping animations: transform/opacity only, or paused off screen; all stop with the pause button.
    - Flag any island that could be static, props that serialize more data than needed, unused dependencies,
      and render-blocking resources.
