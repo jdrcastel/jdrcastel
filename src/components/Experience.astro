@@ -1,16 +1,51 @@
 ---
+import { ChevronDown } from "lucide-react";
 import Section from "./Section.astro";
-import ExperienceList from "./ExperienceList";
-import type { Content } from "@/i18n";
+import { Badge } from "@/components/ui/badge";
+import type { Content, ExperienceKind } from "@/i18n";
 
 interface Props {
   t: Content;
 }
 const { t } = Astro.props;
+const e = t.experience;
+
+const kindStyle: Record<ExperienceKind, string> = {
+  work: "bg-brand-soft text-brand",
+  internship: "bg-brand-soft text-brand",
+  certification: "bg-warning/15 text-warning",
+  education: "bg-success/15 text-success",
+  volunteer: "",
+};
 ---
 
-<Section id="experience" eyebrow={t.experience.eyebrow} title={t.experience.title} lead={t.experience.lead}>
-  <div class="max-w-3xl">
-    <ExperienceList client:visible labels={t.experience} />
-  </div>
+<Section id="experience" eyebrow={e.eyebrow} title={e.title} lead={e.lead}>
+  <ol class="relative flex max-w-3xl flex-col gap-8 border-l pl-6">
+    {e.items.map((x, i) => {
+      const [first, ...rest] = x.bullets;
+      return (
+        <li class="relative" data-reveal style={`--reveal-delay:${Math.min(i, 3) * 60}ms`}>
+          <span class="absolute top-1.5 -left-[31px] size-3 rounded-full border-2 border-brand bg-background" aria-hidden="true"></span>
+          <div class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+            <Badge variant="secondary" className={kindStyle[x.kind]}>{e.kinds[x.kind]}</Badge>
+            <span class="font-mono">{x.when}</span>
+          </div>
+          <h3 class="mt-2 text-lg font-semibold">{x.role}</h3>
+          <p class="text-sm font-medium text-muted-foreground">{x.org}</p>
+          <p class="mt-2 text-sm text-pretty text-muted-foreground">{first}</p>
+          {rest.length > 0 && (
+            <details class="group mt-1">
+              <summary class="inline-flex cursor-pointer list-none items-center gap-1 rounded-md py-2 text-sm font-medium outline-none hover:underline focus-visible:ring-[3px] focus-visible:ring-ring/50 [&::-webkit-details-marker]:hidden">
+                {e.more}
+                <ChevronDown className="size-4 text-muted-foreground transition-transform duration-200 group-open:rotate-180" aria-hidden="true" />
+              </summary>
+              <ul class="list-disc space-y-1.5 pb-2 pl-5 text-sm text-muted-foreground">
+                {rest.map((b) => <li>{b}</li>)}
+              </ul>
+            </details>
+          )}
+        </li>
+      );
+    })}
+  </ol>
 </Section>

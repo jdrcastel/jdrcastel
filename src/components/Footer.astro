@@ -1,0 +1,13 @@
+---
+import type { Content } from "@/i18n";
+import { person } from "@/i18n/shared";
+
+interface Props {
+  t: Content;
+}
+const { t } = Astro.props;
+---
+
+<footer class="border-t py-8 text-center text-sm text-muted-foreground">
+  © {new Date().getFullYear()} {person.name} · {t.contact.footer}
+</footer>

@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { assetUrl, type Content } from "@/i18n";
+import { cn } from "@/lib/utils";
 import { person } from "@/i18n/shared";
 
 interface Props {
@@ -31,7 +32,10 @@ const json = `{\n${Object.entries(t.hero.payload)
   <div class="mx-auto grid max-w-5xl items-center gap-10 px-4 pt-16 pb-12 lg:grid-cols-[1.1fr_1fr] lg:pt-24">
     <div>
       <Badge variant="outline" className="gap-2 rounded-full px-3 py-1 text-xs font-medium">
-        <span class="size-2 rounded-full bg-success" aria-hidden="true"></span>
+        <span class="relative flex size-2" aria-hidden="true">
+          <span class="absolute inline-flex size-full rounded-full bg-success opacity-60 motion-safe:animate-ping"></span>
+          <span class="relative inline-flex size-2 rounded-full bg-success"></span>
+        </span>
         {t.hero.status}
       </Badge>
       <h1 class="mt-5 text-4xl font-bold tracking-tight text-balance sm:text-5xl">
@@ -47,8 +51,8 @@ const json = `{\n${Object.entries(t.hero.payload)
         <a href={assetUrl(person.resume)} target="_blank" rel="noopener" class={buttonVariants({ variant: "outline", size: "lg" })}>
           {t.hero.ctaResume}
         </a>
-        <a href={person.linkedin} target="_blank" rel="noopener" class={buttonVariants({ variant: "ghost", size: "lg" }) + " px-3"}>LinkedIn</a>
-        <a href={person.github} target="_blank" rel="noopener" class={buttonVariants({ variant: "ghost", size: "lg" }) + " px-3"}>GitHub</a>
+        <a href={person.linkedin} target="_blank" rel="noopener" class={cn(buttonVariants({ variant: "ghost", size: "lg" }), "px-3")}>LinkedIn</a>
+        <a href={person.github} target="_blank" rel="noopener" class={cn(buttonVariants({ variant: "ghost", size: "lg" }), "px-3")}>GitHub</a>
       </div>
     </div>
 
@@ -73,7 +77,7 @@ const json = `{\n${Object.entries(t.hero.payload)
   <ul class="mx-auto grid max-w-5xl grid-cols-2 gap-3 px-4 pb-16 lg:grid-cols-4">
     {t.hero.stats.map((s) => (
       <li>
-        <Card className="h-full gap-1 py-4">
+        <Card className="lift h-full gap-1 py-4">
           <CardContent className="px-4">
             <p class="text-2xl font-semibold tracking-tight">{s.value}</p>
             <p class="text-sm text-muted-foreground">{s.label}</p>

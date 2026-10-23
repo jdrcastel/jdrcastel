@@ -17,3 +17,4 @@ export const homeUrl = (lang: Lang) => `${base}/${lang === "en" ? "" : `${lang}/
 export const assetUrl = (file: string) => `${base}/${file}`;
 
 export type { Content };
+export type { ExperienceKind, ProjectStatus, RoadmapStatus } from "./en";

@@ -1,17 +1,20 @@
 ---
 import Section from "./Section.astro";
+import CasshyDashboard from "./CasshyDashboard";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Content } from "@/i18n";
-import { coinColors } from "@/i18n/shared";
 
 interface Props {
   t: Content;
 }
 const { t } = Astro.props;
 const c = t.casshy;
-const stages = c.evolution.map((name, i) => ({ name, ...coinColors[i] }));
-const dot = { done: "bg-success", inProgress: "bg-warning ring-4 ring-warning/20", planned: "bg-muted-foreground/30" };
+const dot = {
+  done: "bg-success",
+  inProgress: "bg-warning ring-4 ring-warning/20 motion-safe:animate-pulse",
+  planned: "bg-muted-foreground/30",
+} as const;
 ---
 
 <Section id="casshy" eyebrow={c.eyebrow} title="Casshy">
@@ -22,63 +25,23 @@ const dot = { done: "bg-success", inProgress: "bg-warning ring-4 ring-warning/20
   <p class="-mt-6 mb-3 text-xl font-semibold tracking-tight text-brand" data-reveal>{c.tagline}</p>
   <p class="mb-10 max-w-3xl text-pretty text-muted-foreground" data-reveal>{c.summary}</p>
 
-  <div class="grid gap-4 lg:grid-cols-[1fr_1.4fr]">
-    <Card className="items-center justify-center gap-3 py-8 text-center" data-reveal>
-      <div id="coinStage" class="flex flex-col items-center gap-3" style={`--c1:${stages[0].from};--c2:${stages[0].to}`}>
-        <svg class="coin w-48 overflow-visible" viewBox="0 0 200 200" role="img" aria-label={c.coinLabel}>
-          <defs>
-            <radialGradient id="coinFill" cx="35%" cy="30%" r="75%">
-              <stop offset="0%" style="stop-color: var(--c1)"></stop>
-              <stop offset="100%" style="stop-color: var(--c2)"></stop>
-            </radialGradient>
-          </defs>
-          <ellipse class="coin-shadow" cx="100" cy="188" rx="52" ry="7" fill="rgb(0 0 0 / 0.15)"></ellipse>
-          <circle cx="100" cy="96" r="82" fill="url(#coinFill)"></circle>
-          <circle cx="100" cy="96" r="68" fill="none" stroke="rgb(0 0 0 / 0.12)" stroke-width="4" stroke-dasharray="4 6"></circle>
-          <ellipse cx="62" cy="58" rx="14" ry="8" transform="rotate(-35 62 58)" fill="rgb(255 255 255 / 0.55)"></ellipse>
-          <g class="coin-eyes" fill="#1f2328">
-            <ellipse cx="78" cy="92" rx="8" ry="11"></ellipse>
-            <ellipse cx="122" cy="92" rx="8" ry="11"></ellipse>
-          </g>
-          <circle cx="81" cy="88" r="3" fill="#fff"></circle>
-          <circle cx="125" cy="88" r="3" fill="#fff"></circle>
-          <path d="M82 118 Q100 134 118 118" fill="none" stroke="#1f2328" stroke-width="5" stroke-linecap="round"></path>
-          <circle cx="66" cy="114" r="7" fill="rgb(255 120 120 / 0.35)"></circle>
-          <circle cx="134" cy="114" r="7" fill="rgb(255 120 120 / 0.35)"></circle>
-        </svg>
-        <p id="tierName" class="text-lg font-semibold">{stages[0].name}</p>
-        <div class="flex flex-wrap justify-center gap-2" role="group" aria-label={c.coinLabel}>
-          {stages.map((s, i) => (
-            <button
-              type="button"
-              class="step size-8 cursor-pointer rounded-full ring-offset-2 ring-offset-card transition-transform hover:scale-110 focus-visible:ring-2 focus-visible:ring-ring aria-pressed:scale-110 aria-pressed:ring-2 aria-pressed:ring-brand"
-              style={`background: radial-gradient(circle at 35% 30%, ${s.from}, ${s.to})`}
-              data-from={s.from}
-              data-to={s.to}
-              data-name={s.name}
-              aria-label={s.name}
-              aria-pressed={i === 0 ? "true" : "false"}
-            ></button>
-          ))}
-        </div>
-        <p class="max-w-xs text-sm text-muted-foreground">{c.hint}</p>
-      </div>
-    </Card>
-
-    <ul class="grid gap-3 sm:grid-cols-2">
-      {c.features.map((f) => (
-        <li data-reveal>
-          <Card className="h-full flex-row gap-3 p-4">
-            <span class="grid size-9 shrink-0 place-items-center rounded-lg bg-brand-soft text-lg" aria-hidden="true">{f.icon}</span>
-            <div>
-              <h3 class="font-medium">{f.title}</h3>
-              <p class="text-sm text-muted-foreground">{f.text}</p>
-            </div>
-          </Card>
-        </li>
-      ))}
-    </ul>
+  <div data-reveal>
+    <CasshyDashboard client:visible labels={c.dashboard} />
   </div>
+
+  <ul class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    {c.features.map((f, i) => (
+      <li data-reveal style={`--reveal-delay:${(i % 3) * 80}ms`}>
+        <Card className="lift h-full flex-row gap-3 p-4">
+          <span class="grid size-9 shrink-0 place-items-center rounded-lg bg-brand-soft text-lg" aria-hidden="true">{f.icon}</span>
+          <div>
+            <h3 class="font-medium">{f.title}</h3>
+            <p class="text-sm text-muted-foreground">{f.text}</p>
+          </div>
+        </Card>
+      </li>
+    ))}
+  </ul>
 
   <div class="mt-4 grid gap-4 lg:grid-cols-3">
     <Card data-reveal>
@@ -89,7 +52,7 @@ const dot = { done: "bg-success", inProgress: "bg-warning ring-4 ring-warning/20
         </ul>
       </CardContent>
     </Card>
-    <Card data-reveal>
+    <Card data-reveal style={{ "--reveal-delay": "80ms" }}>
       <CardHeader><CardTitle>{c.archTitle}</CardTitle></CardHeader>
       <CardContent>
         <dl class="divide-y text-sm">
@@ -102,16 +65,16 @@ const dot = { done: "bg-success", inProgress: "bg-warning ring-4 ring-warning/20
         </dl>
       </CardContent>
     </Card>
-    <Card data-reveal>
+    <Card data-reveal style={{ "--reveal-delay": "160ms" }}>
       <CardHeader><CardTitle>{c.roadmapTitle}</CardTitle></CardHeader>
       <CardContent>
         <ol class="space-y-4">
           {c.roadmap.map((r) => (
             <li class="flex gap-3">
-              <span class:list={["mt-1.5 size-2.5 shrink-0 rounded-full", dot[r.status as keyof typeof dot]]} aria-hidden="true"></span>
+              <span class:list={["mt-1.5 size-2.5 shrink-0 rounded-full", dot[r.status]]} aria-hidden="true"></span>
               <div>
                 <p class="text-sm font-medium">{r.title}</p>
-                <p class="text-xs text-muted-foreground">{c.states[r.status as keyof typeof c.states]}</p>
+                <p class="text-xs text-muted-foreground">{c.states[r.status]}</p>
               </div>
             </li>
           ))}
@@ -120,40 +83,3 @@ const dot = { done: "bg-success", inProgress: "bg-warning ring-4 ring-warning/20
     </Card>
   </div>
 </Section>
-
-<style>
-  .coin { animation: hop 3.2s ease-in-out infinite; }
-  .coin-shadow { transform-origin: 100px 188px; animation: shade 3.2s ease-in-out infinite; }
-  .coin-eyes ellipse { transform-origin: center 92px; animation: blink 4.5s infinite; }
-  @keyframes hop { 50% { transform: translateY(-12px); } }
-  @keyframes shade { 50% { transform: scaleX(0.8); opacity: 0.6; } }
-  @keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
-</style>
-
-<script>
-  // Cycle through Casshy's evolution until the visitor picks a stage
-  const stage = document.getElementById("coinStage");
-  const label = document.getElementById("tierName");
-  const steps = [...document.querySelectorAll<HTMLButtonElement>("#coinStage .step")];
-  let current = 0;
-
-  const show = (i: number) => {
-    current = i;
-    const { from, to, name } = steps[i].dataset;
-    stage?.style.setProperty("--c1", from ?? "");
-    stage?.style.setProperty("--c2", to ?? "");
-    if (label) label.textContent = name ?? "";
-    steps.forEach((b, j) => b.setAttribute("aria-pressed", String(j === i)));
-  };
-
-  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let timer = reduceMotion ? undefined : window.setInterval(() => show((current + 1) % steps.length), 2200);
-
-  steps.forEach((b, i) =>
-    b.addEventListener("click", () => {
-      window.clearInterval(timer);
-      timer = undefined;
-      show(i);
-    }),
-  );
-</script>

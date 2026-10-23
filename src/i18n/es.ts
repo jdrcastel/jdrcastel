@@ -6,7 +6,7 @@ const es: Content = {
   meta: {
     title: "Juan Castelblanco · Desarrollador de software",
     description:
-      "Juan David Rodríguez Castelblanco: desarrollador de software fuerte en JavaScript y React, con Node.js en AWS. Construyendo Casshy, una app de finanzas personales gamificada.",
+      "Juan David Rodríguez Castelblanco: desarrollador de software fuerte en JavaScript y React, con experiencia en Node.js sobre AWS. Construyendo Casshy, una app de finanzas personales gamificada.",
   },
   nav: {
     about: "Sobre mí",
@@ -19,19 +19,22 @@ const es: Content = {
     menu: "Abrir menú",
     theme: "Cambiar modo oscuro",
     language: "Read in English",
+    mainLabel: "Principal",
+    mobileLabel: "Menú móvil",
+    skip: "Saltar al contenido",
   },
   hero: {
     status: "Disponible para roles de desarrollador de software",
     hello: "Hola, soy Juan.",
     role: "Desarrollador de software",
     tagline:
-      "Desarrollador JavaScript y React que despliega servicios Node.js en AWS. Ahora construyo Casshy, una app de finanzas personales gamificada, con agentes de IA.",
+      "Desarrollador JavaScript y React que construyó un microservicio Node.js en AWS. Ahora construyo Casshy, una app de finanzas personales gamificada, con agentes de IA.",
     ctaProjects: "Ver proyectos",
     ctaResume: "CV (PDF, en inglés)",
     payload: {
       name: "Juan Castelblanco",
       role: "Desarrollador de software",
-      job: "Soporte técnico @ OpenText",
+      job: "Especialista de soporte técnico @ OpenText",
       location: "Ontario, Canadá",
       languages: ["Español", "Inglés"],
       education: "Seneca Polytechnic",
@@ -44,7 +47,7 @@ const es: Content = {
     stats: [
       { value: "AWS", label: "Certified Cloud Practitioner" },
       { value: "Tier 2 → 3", label: "Pasando a soporte Tier 3 en OpenText" },
-      { value: "Casshy", label: "Construyendo una app de finanzas gamificada" },
+      { value: "Casshy", label: "Construyendo una app de finanzas personales gamificada" },
       { value: "IA", label: "Aprendiendo IA agéntica e integraciones LLM" },
     ],
   },
@@ -63,12 +66,39 @@ const es: Content = {
     tagline: "Finanzas personales que de verdad quieres cuidar.",
     summary:
       "Una app web de finanzas personales al estilo de Monarch (cuentas, transacciones, presupuestos, metas e inversiones) cuya protagonista es Casshy: una moneda de caricatura viva, como Pou o Talking Tom, que cuidas con buenos hábitos de dinero.",
-    coinLabel: "Casshy, la moneda mascota",
-    hint: "El XP de buenos hábitos y aprendizaje hace evolucionar a Casshy. Toca una etapa.",
-    evolution: ["Planchet", "Bronce", "Plata", "Oro", "Diamante", "Alejandrita"],
+    dashboard: {
+      window: "Casshy · Resumen",
+      sample: "Datos de ejemplo · vista de diseño",
+      greeting: "Buenos días, Juan",
+      subtitle: "Hagamos espacio para tu futuro.",
+      mood: "Casshy está feliz",
+      toneLabel: "Tono de Casshy",
+      tones: {
+        gentle: { label: "Amable", message: "Vas muy bien. ¿Y si esta semana cocinas en casa una noche más?" },
+        honest: { label: "Honesto", message: "Vas bien este mes. Mantén las salidas a comer por debajo de $120 esta semana." },
+        savage: { label: "Sin filtro", message: "¿Tercer pedido a domicilio esta semana? Tu presupuesto lo notó. Y yo también." },
+      },
+      stats: { budget: "Presupuesto mensual", spent: "Gastado", left: "Disponible" },
+      spendingTitle: "En qué se va tu dinero",
+      spendingPeriod: "Este mes",
+      categories: [
+        { name: "Vivienda", pct: 38 },
+        { name: "Mercado", pct: 24 },
+        { name: "Transporte", pct: 16 },
+        { name: "Comer fuera", pct: 12 },
+      ],
+      checklistTitle: "Tus primeros 90 días en Canadá",
+      checklist: [
+        { label: "Abrir una cuenta bancaria", done: true },
+        { label: "Obtener tu SIN", done: true },
+        { label: "Crear tu cuenta CRA My Account", done: false },
+        { label: "Construir tu crédito, paso a paso", done: false },
+      ],
+      progressLabel: "pasos hechos",
+    },
     features: [
       { icon: "🏦", title: "Tu dinero en un lugar", text: "Cuentas, transacciones, presupuestos, metas e inversiones." },
-      { icon: "🪙", title: "Una moneda viva", text: "Casshy reacciona a tus hábitos, animada con Rive." },
+      { icon: "🪙", title: "Una moneda viva", text: "Casshy reaccionará a tus hábitos, animada con Rive." },
       { icon: "🎓", title: "Casshy Academy", text: "Lecciones cortas de dinero. Casshy educa y nunca da consejos de inversión." },
       { icon: "⚖️", title: "XP justo", text: "Se gana con hábitos y aprendizaje, nunca por tener más dinero." },
       { icon: "🍁", title: "Hecha para Canadá", text: "Empieza en Ontario, en inglés, español y francés, desde los 14 años." },
@@ -103,9 +133,10 @@ const es: Content = {
     eyebrow: "Proyectos",
     title: "Trabajo seleccionado",
     lead: "Lo que estoy construyendo ahora, y trabajo full-stack, backend y en AWS que ya entregué.",
-    filters: { all: "Todos", backend: "Backend", web: "Full-stack", aws: "AWS" },
+    filters: { all: "Todos", backend: "Backend", web: "Web", aws: "AWS" },
     status: { progress: "En progreso", use: "En uso", shipped: "Entregado" },
     learnMore: "Ver más",
+    stackLabel: "Tecnologías",
     links: { casshy: "Ver Casshy", learning: "Qué estoy aprendiendo", api: "Código API", ui: "Código UI", code: "Código" },
     extensionsTitle: "Extensiones web",
     items: [
@@ -151,7 +182,7 @@ const es: Content = {
         status: "use",
         title: "Timer SaaS Team",
         summary:
-          "Extensión web para el equipo SaaS de OpenText: cuando un agente guarda un break de 15 minutos o un almuerzo de 1 hora en el Unified Tool, cuenta el tiempo y lo vuelve a poner en Available automáticamente.",
+          "Extensión web para el equipo SaaS de OpenText: cuando un agente guarda una pausa de 15 minutos o un almuerzo de 1 hora en el Unified Tool, cuenta el tiempo y lo vuelve a poner en Available automáticamente.",
         bullets: [
           "Cuenta regresiva, logs descargables en JSON y recuperación del temporizador al recargar la página o reiniciar el navegador",
           "Corregí un reset del formulario que cambiaba “15 minutes” a “30 minutes” después de guardar y bloqueaba el regreso automático",
@@ -163,7 +194,7 @@ const es: Content = {
   skills: {
     eyebrow: "Skills",
     title: "Lo que uso y lo que estoy aprendiendo",
-    lead: "Lo resaltado significa que he construido con eso y lo domino. Lo que estoy aprendiendo va aparte a propósito: lo estoy aplicando, no digo que ya lo domino.",
+    lead: "Lo resaltado significa que he construido con eso y lo conozco bien. Lo que estoy aprendiendo va aparte a propósito: lo estoy aplicando, sin decir que ya lo domine.",
     tabSkills: "Skills",
     tabLearning: "Aprendiendo ahora",
     legendCore: "He construido con esto",
@@ -185,7 +216,7 @@ const es: Content = {
       },
       integrations: {
         title: "Integraciones con IA",
-        summary: "Llamar LLMs desde apps reales: respuestas estructuradas, tool calling y control de llaves y costos.",
+        summary: "Llamar LLMs desde apps reales: respuestas estructuradas, tool calling y control de claves de API y costos.",
         applying: "IncidentHub: triage con IA que resume cada ticket y sugiere su prioridad.",
       },
       casshy: {
@@ -216,7 +247,7 @@ const es: Content = {
           "Soporte en producción a clientes empresariales globales en SaaS de OpenText (LoadRunner Enterprise, ALM/QC, Octane/ValueEdge), pasando de Tier 2 a escalaciones Tier 3.",
           "Resuelvo incidentes de autenticación (SSO, OAuth 2.0), integraciones y rendimiento con Linux/Windows, SQL, Jenkins y logs del sistema, y analizo datos de tickets para encontrar causas raíz y problemas recurrentes.",
           "Trabajo con Operaciones, Ingeniería y R&D en un entorno con SLA para resolver escalaciones complejas.",
-          "Construí Timer SaaS Team, una extensión web que devuelve a los agentes a Available después de sus breaks, con cuenta regresiva, logs y recuperación del temporizador.",
+          "Construí Timer SaaS Team, una extensión web que devuelve a los agentes a Available después de sus pausas, con cuenta regresiva, logs y recuperación del temporizador.",
         ],
       },
       {
@@ -233,7 +264,7 @@ const es: Content = {
         org: "Gobierno de Ontario",
         bullets: [
           "Construí una página web interna con React.",
-          "Trabajé con desarrolladores y diseñadores para corregir bugs, entregar funcionalidades nuevas y mejorar la experiencia de usuario.",
+          "Trabajé con desarrolladores y diseñadores en esa página para corregir bugs, agregar funcionalidades y mejorar la experiencia de usuario.",
         ],
       },
       {
