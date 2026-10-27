@@ -8,7 +8,7 @@ const en = {
   meta: {
     title: "Juan Castelblanco · Software Developer",
     description:
-      "Juan David Rodríguez Castelblanco: software developer strong in JavaScript and React, with Node.js experience on AWS. Building Casshy, a gamified personal-finance app.",
+      "Juan David Rodriguez Castelblanco: software developer strong in JavaScript and React, with Node.js experience on AWS. Building Casshy, a gamified personal-finance app.",
   },
   nav: {
     about: "About",
@@ -41,7 +41,7 @@ const en = {
     eyebrow: "About",
     title: "A bit about me",
     paragraphs: [
-      "I'm a full-stack developer who likes building real products that ship and solve real problems. I work across the stack, from React and Next.js front ends to Node.js services on AWS, and I bring AI into what I build: LLM integrations and multi-agent workflows with tools like Claude Code and Codex. Right now that's Casshy, my own personal-finance app.",
+      "I'm a software developer who likes building real products that ship and solve real problems. I work across the stack, from React and Next.js front ends to Node.js services on AWS, and I bring AI into what I build: LLM integrations and multi-agent workflows with tools like Claude Code and Codex. Right now that's Casshy, my own personal-finance app.",
       "I started coding at 17. Today I work in production support at OpenText, moving into Tier 3, so I know how real systems fail and how to fix them.",
       "Outside of tech, you'll find me playing soccer, at the gym, playing drums or gaming with friends.",
     ],
@@ -102,7 +102,7 @@ const en = {
       {
         id: "fragments",
         status: "shipped" as ProjectStatus,
-        title: "Fragments — AWS microservice",
+        title: "Fragments — Cloud REST API on AWS",
         summary: "Cloud REST microservice on AWS to store and convert text and image fragments, with a separate web UI.",
         bullets: [
           "Node.js/Express API with Cognito JWT auth; data in S3 and metadata in DynamoDB",
