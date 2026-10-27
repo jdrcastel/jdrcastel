@@ -1,7 +1,7 @@
 // Data that isn't prose: links, technology names, project metadata. Text lives in en.ts.
 
 export const person = {
-  name: "Juan David Rodríguez Castelblanco",
+  name: "Juan David Rodriguez Castelblanco",
   short: "Juan Castelblanco",
   email: "jdrcastel@gmail.com",
   linkedin: "https://www.linkedin.com/in/jdcastel/",
@@ -50,7 +50,7 @@ export const skillChips: Record<string, { icon: string; skills: Skill[] }> = {
     icon: "🛠️",
     skills: [
       { name: "Root-cause analysis", core: true }, { name: "Log analysis", core: true }, { name: "Linux" },
-      { name: "Bash" }, { name: "GitHub Copilot", core: true },
+      { name: "Bash" }, { name: "GitHub Copilot", core: true }, { name: "Claude Code", core: true },
     ],
   },
 };
@@ -58,7 +58,7 @@ export const skillChips: Record<string, { icon: string; skills: Skill[] }> = {
 export const learningChips: Record<string, { icon: string; items: string[] }> = {
   agentic: {
     icon: "🤖",
-    items: ["Claude Code", "OpenAI Codex", "Agent workflows", "Prompting for code", "Reviewing AI code"],
+    items: ["OpenAI Codex", "Agent workflows", "Prompting for code", "Reviewing AI code"],
   },
   integrations: {
     icon: "🧠",
@@ -88,7 +88,7 @@ export const projectMeta: Record<string, ProjectMeta> = {
     stack: [
       { name: "Next.js", core: true }, { name: "TypeScript", core: true }, { name: "NestJS" }, { name: "PostgreSQL" },
       { name: "Prisma" }, { name: "Turborepo" }, { name: "shadcn/ui" }, { name: "Rive" }, { name: "Docker" },
-      { name: "Claude Code" },
+      { name: "Claude Code", core: true },
     ],
     tags: ["web", "backend"],
     links: [],

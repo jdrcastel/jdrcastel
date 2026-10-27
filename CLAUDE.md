@@ -103,10 +103,10 @@ Magic UI (`magicui.design`) is blocked too: read components from GitHub (`magicu
 ## Content truth (what Juan knows vs. is learning)
 
 - **Strong:** JavaScript, TypeScript, React, Next.js, Redux, HTML/CSS, Node.js, Express, REST, microservices,
-  Docker, CI/CD, SQL, root-cause/log analysis, GitHub Copilot, AWS Cloud Practitioner.
+  Docker, CI/CD, SQL, root-cause/log analysis, GitHub Copilot, Claude Code, AWS Cloud Practitioner.
 - **Hands-on:** ECS, ECR, S3, DynamoDB, Cognito, GitHub Actions, Jest, Jenkins, Git, Linux, Bash, MongoDB,
   SQL Server, OAuth 2.0, Java (college), OOP.
-- **Learning (only in the Learning tab):** Claude Code, OpenAI Codex, LLM integrations, MCP, Casshy's stack
+- **Learning (only in the Learning tab):** OpenAI Codex, LLM integrations, MCP, Casshy's stack
   (NestJS, Prisma, PostgreSQL, Turborepo, Better Auth, Zod, Rive, k3s), Spring Boot, Spring Data JPA, JUnit.
 - IncidentHub: TypeScript, NestJS, PostgreSQL, Prisma, Zod, LLM API, Docker (support-incident API with SLAs and AI
   triage). Java and Spring Boot stay in Learning with no project attached.
@@ -158,3 +158,7 @@ Magic UI (`magicui.design`) is blocked too: read components from GitHub (`magicu
   workflows with Claude Code and Codex).
 - 2026-10: Casshy is built with Claude Code (CLI, skills, sub-agents): shown as a stack chip and a bullet. Only
   Casshy claims this (not IncidentHub).
+- 2026-10: Title stays "Software Developer" everywhere (site, About, resume, README); About says "software developer".
+- 2026-10: Claude Code is a Strong skill (Juan masters it): Skills tab and resume Tools, not Learning.
+- 2026-10: Fragments is named "Fragments — Cloud REST API on AWS" on the site, resume and README.
+- 2026-10: Name without accent everywhere: "Rodriguez".
